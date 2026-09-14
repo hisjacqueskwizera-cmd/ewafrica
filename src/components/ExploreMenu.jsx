@@ -10,10 +10,21 @@ import { HashLink } from './HashLink.jsx'
 // positioned with no gap beneath its trigger so the mouse never crosses
 // empty space between the two — the classic way a CSS-only (no JS state)
 // hover dropdown avoids closing prematurely.
-export function ExploreMenu({ countries }) {
+//
+// Opening/closing itself stays pure CSS (group-hover/group-focus-within) —
+// but closing on a *click* can't be, because a client-side route change
+// doesn't move the mouse or necessarily blur the link, so :hover/:focus-within
+// would otherwise stay true and leave the panel sitting over the new page.
+// `forceClosed` (driven by Header's click/mouse-leave state) overrides the
+// hover/focus classes to snap the panel shut immediately on click.
+export function ExploreMenu({ countries, forceClosed, onNavigate }) {
   return (
     <div
-      className="invisible fixed inset-x-0 top-[84px] z-[99] opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+      className={`fixed inset-x-0 top-[84px] z-[99] transition-[opacity,visibility] duration-200 ${
+        forceClosed
+          ? 'invisible opacity-0'
+          : 'invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100'
+      }`}
       role="menu"
     >
       <div className="border-t border-border bg-background shadow-[0_24px_40px_-24px_rgba(20,14,8,0.35)]">
@@ -26,6 +37,7 @@ export function ExploreMenu({ countries }) {
                 key={country.slug}
                 to={country.to}
                 role="menuitem"
+                onClick={onNavigate}
                 className="group/card relative block aspect-[3/4] overflow-hidden bg-cocoa"
               >
                 <img
@@ -57,6 +69,7 @@ export function ExploreMenu({ countries }) {
             <HashLink
               to="/#explore"
               role="menuitem"
+              onClick={onNavigate}
               className="group/cta inline-flex items-center gap-2 text-sm font-bold text-copper hover:underline"
             >
               Explore All Destinations

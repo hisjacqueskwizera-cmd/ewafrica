@@ -33,6 +33,10 @@ export function Header() {
   const hasTransparentHero = TRANSPARENT_HERO_ROUTES.includes(location.pathname)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 12)
   const [menuOpen, setMenuOpen] = useState(false)
+  // Forces the Explore mega-menu shut the instant a country card (or its
+  // CTA) is clicked — see the comment on ExploreMenu's `forceClosed` prop.
+  // Resets on mouse-leave so hovering the trigger again opens it normally.
+  const [exploreForceClosed, setExploreForceClosed] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -86,11 +90,22 @@ export function Header() {
               // against the header's bottom edge with no gap, so the
               // pointer never has to cross empty space between them.
               return (
-                <div key={link.label} className="group relative">
+                <div
+                  key={link.label}
+                  className="group relative"
+                  onMouseLeave={() => setExploreForceClosed(false)}
+                >
                   <HashLink to={link.to} className={navLinkClass}>
                     {link.label}
                   </HashLink>
-                  <ExploreMenu countries={EXPLORE_MENU_COUNTRIES} />
+                  <ExploreMenu
+                    countries={EXPLORE_MENU_COUNTRIES}
+                    forceClosed={exploreForceClosed}
+                    onNavigate={(event) => {
+                      setExploreForceClosed(true)
+                      event.currentTarget.blur()
+                    }}
+                  />
                 </div>
               )
             }

@@ -1,9 +1,14 @@
 import { ArrowRight, CheckCircle2, Umbrella } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { SERVICES, TRAVEL_PLANNER_UMBRELLA } from '../data/siteContent.js'
 import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
 import { SectionMark } from './SectionMark.jsx'
+
+// Advance to the next group of 3 every this many seconds.
+const PAGE_SECONDS = 3
+const PAGE_SIZE = 3
 
 // A landscape, full-bleed photo card: image fills the frame, a bottom-up
 // gradient carries the title so it stays legible over any photo, corners
@@ -27,7 +32,7 @@ function PhotoCard({ to, image, hidden, children }) {
       to={to}
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
-      className="group relative block h-[300px] w-[420px] shrink-0 overflow-hidden bg-cocoa sm:h-[340px] sm:w-[500px]"
+      className="group relative block h-[300px] w-full overflow-hidden bg-cocoa sm:h-[340px]"
     >
       <img
         src={image}
@@ -130,7 +135,51 @@ function UmbrellaCard({ hidden }) {
   )
 }
 
+// Every card, in order — the 5 services plus the Travel Planner umbrella —
+// each wrapped as a render function so ServiceCard/UmbrellaCard's own props
+// (notably `hidden`) can be applied per-page below without re-deriving this
+// list on every render.
+const CARD_ITEMS = [
+  ...SERVICES.map((s) => ({ key: s.title, render: (hidden) => <ServiceCard s={s} hidden={hidden} /> })),
+  { key: 'umbrella', render: (hidden) => <UmbrellaCard hidden={hidden} /> },
+]
+
+// Grouped into pages of 3 — with 6 cards total that's an even 2 pages, but
+// this stays correct if a card is ever added or removed (a trailing page
+// just ends up with fewer than 3).
+const PAGES = Array.from({ length: Math.ceil(CARD_ITEMS.length / PAGE_SIZE) }, (_, i) =>
+  CARD_ITEMS.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
+)
+
 export function Services() {
+  const [page, setPage] = useState(0)
+  const [paused, setPaused] = useState(false)
+  // Captured lazily at mount so the initial render already reflects the OS
+  // setting (no extra render just to sync it) — the effect below only wires
+  // up the listener for later changes.
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handler = (event) => setReduceMotion(event.matches)
+    query.addEventListener('change', handler)
+    return () => query.removeEventListener('change', handler)
+  }, [])
+
+  // Advances one page every PAGE_SECONDS, looping back to the start —
+  // paused on hover/focus (so a card can actually be read) and skipped
+  // entirely for prefers-reduced-motion, same as the rest of the site's
+  // autoplaying elements (see HeroVideoBackground).
+  useEffect(() => {
+    if (paused || reduceMotion || PAGES.length <= 1) return
+    const id = setInterval(() => {
+      setPage((p) => (p + 1) % PAGES.length)
+    }, PAGE_SECONDS * 1000)
+    return () => clearInterval(id)
+  }, [paused, reduceMotion])
+
   return (
     <section id="services" className="overflow-hidden bg-cream pb-16 lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -153,23 +202,52 @@ export function Services() {
         </Reveal>
       </div>
 
-      {/* Same auto-scrolling marquee as the Explore our Destinations ticker
-          above it: the row is rendered twice back to back and slides by
-          continuously (pausing on hover/focus) rather than waiting on a
-          manual horizontal scroll. */}
-      <div className="relative mt-10" role="group" aria-label="How we can help you">
-        <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.title} s={s} />
+      {/* 3 cards at a time: every page sits full-width side by side and the
+          whole strip slides left by one page width on each advance, so the
+          next group of 3 enters from the right while the current group
+          exits to the left. Full-bleed to both screen edges — same pattern
+          as Tanzania's Popular Overland Routes cards — with a small lg:px-3
+          gutter rather than lg:px-0 so the row doesn't read like it's been
+          cut off flush against the edge. */}
+      <div
+        className="relative mt-10 px-4 sm:px-6 lg:px-3"
+        role="group"
+        aria-label="How we can help you"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+      >
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${page * 100}%)` }}
+        >
+          {PAGES.map((group, i) => (
+            <div key={i} className="grid w-full shrink-0 grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+              {group.map((item) => (
+                <div key={item.key}>{item.render(i !== page)}</div>
+              ))}
+            </div>
           ))}
-          <UmbrellaCard />
-
-          {SERVICES.map((s) => (
-            <ServiceCard key={`${s.title}-dup`} s={s} hidden />
-          ))}
-          <UmbrellaCard hidden />
         </div>
       </div>
+
+      {PAGES.length > 1 && (
+        <div className="mt-6 flex justify-center gap-2">
+          {PAGES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Show services group ${i + 1} of ${PAGES.length}`}
+              aria-current={i === page}
+              onClick={() => setPage(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === page ? 'w-6 bg-copper' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

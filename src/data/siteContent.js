@@ -815,6 +815,48 @@ export const TRAVEL_PLANNER_FLOW = {
     'Not sure — I need guidance',
   ],
   bookedStatusOptions: ['No', 'Yes, partially', 'Yes, most of the trip'],
+
+  // Fixed-choice option lists for the request form's 1/2/3-country
+  // question set (RequestForm's PdfRequestSections) — wording lifted
+  // verbatim from the reference "Travel Planner Questions" document, kept
+  // separate from the option lists above (which remain the 4-country
+  // flow's own, differently-worded lists, left as-is).
+  experienceOptionsPdf: [
+    'Culture and history',
+    'Wildlife',
+    'Beaches',
+    'Nature',
+    'Food',
+    'Nightlife',
+    'Local communities',
+    'Markets',
+    'Hiking',
+    'Relaxation',
+  ],
+  travelStyleOptionsPdf: ['Budget', 'Mid-range', 'Comfortable', 'Higher-end', 'A mixture'],
+  accommodationTypeOptionsPdf: [
+    'Hotels',
+    'Guesthouses',
+    'Apartments',
+    'Lodges',
+    'Hostels',
+    'A mixture',
+  ],
+  gettingAroundOptionsPdf: [
+    'Private driver',
+    'Public transportation',
+    'Domestic flights where appropriate',
+    'Taxis / ride-hailing',
+    'Rental vehicle',
+    'A mixture',
+  ],
+  // Keyed by country count (2 or 3) — the 2-country wording says "regional
+  // flight" (singular) and the 3-country wording says "regional flights"
+  // plus "a mixture", matching the source document exactly.
+  betweenCountriesOptionsPdf: {
+    2: ['Overland travel', 'Regional flight', 'Not sure — please recommend'],
+    3: ['Overland travel', 'Regional flights', 'A mixture', 'Not sure — please recommend'],
+  },
 }
 
 export const PLACEHOLDER_PAGES = {

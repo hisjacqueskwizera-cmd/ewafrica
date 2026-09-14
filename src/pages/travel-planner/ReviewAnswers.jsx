@@ -10,7 +10,7 @@ import { useTravelPlannerFlow } from '../../context/TravelPlannerFlowContext.jsx
 
 function countryNames(slugs) {
   const names = slugs.filter(Boolean).map((slug) => COUNTRIES.find((c) => c.slug === slug)?.name)
-  return names.filter(Boolean).join(', ') || 'Not provided'
+  return names.filter(Boolean)
 }
 
 function ReviewRow({ label, value }) {
@@ -47,6 +47,159 @@ function ReviewSection({ number, title, editTo, children }) {
   )
 }
 
+// Mirrors RequestForm's PdfRequestSections — same fields, same 1/2/3-country
+// wording differences, read-only.
+function PdfReviewSections({ request, names, count, editTo }) {
+  const interests = [...request.interests.filter((i) => i !== 'Other'), request.otherInterest]
+    .filter(Boolean)
+    .join(', ')
+
+  const destinationLabel =
+    count === 1
+      ? 'Which country are you traveling to?'
+      : count === 2
+        ? 'Which two countries are you planning to visit?'
+        : 'Which three countries are you planning to visit?'
+
+  const dates =
+    request.arrivalDate && request.departureDate
+      ? `${request.arrivalDate} – ${request.departureDate}`
+      : ''
+
+  const daysPerCountry = request.destinationSlugs
+    .map((slug) => {
+      const name = COUNTRIES.find((c) => c.slug === slug)?.name ?? slug
+      const days = request.daysPerCountry[slug]
+      return days ? `${name}: ${days}` : null
+    })
+    .filter(Boolean)
+    .join(', ')
+
+  const travellers = [
+    request.adults && `${request.adults} adult${request.adults === '1' ? '' : 's'}`,
+    request.children && `${request.children} child${request.children === '1' ? '' : 'ren'}`,
+  ]
+    .filter(Boolean)
+    .join(', ')
+
+  return (
+    <>
+      <ReviewSection number={2} title="Your Trip" editTo={editTo}>
+        <ReviewRow label={destinationLabel} value={names.join(', ')} />
+        <ReviewRow label="When are you travelling" value={dates} />
+        <ReviewRow label="Dates are flexible" value={request.datesFlexible ? 'Yes' : 'No'} />
+        {request.datesFlexible && (
+          <ReviewRow label="Approximate travel period" value={request.datesApproxPeriod} />
+        )}
+        {count > 1 && <ReviewRow label="Days in each country" value={daysPerCountry} />}
+        {count === 2 && <ReviewRow label="Which country first" value={request.visitOrder} />}
+        {count === 3 && (
+          <ReviewRow
+            label="Planned order / route"
+            value={
+              request.visitOrderUnsure
+                ? "Not sure — please recommend the best route"
+                : request.visitOrder
+            }
+          />
+        )}
+        <ReviewRow label="How many people" value={travellers} />
+        <ReviewRow label="Main purpose of trip" value={request.purpose} />
+        <ReviewRow
+          label={
+            count === 1
+              ? 'Places interested in visiting'
+              : 'Places interested in visiting (each country)'
+          }
+          value={request.placesConsidering}
+        />
+      </ReviewSection>
+
+      <ReviewSection number={3} title="Your Travel Interests" editTo={editTo}>
+        <ReviewRow label="Selected experiences" value={interests} />
+      </ReviewSection>
+
+      <ReviewSection number={4} title="Your Travel Style & Budget" editTo={editTo}>
+        <ReviewRow label="Preferred travel style" value={request.travelStylePdf} />
+        <ReviewRow label="Approximate budget" value={request.budget} />
+        <ReviewRow label="Preferred accommodation type" value={request.accommodationTypePdf} />
+      </ReviewSection>
+
+      <ReviewSection number={5} title="Getting Around" editTo={editTo}>
+        <ReviewRow label="Travel within country/countries" value={request.gettingAroundPdf} />
+        {count > 1 && (
+          <ReviewRow label="Travel between countries" value={request.betweenCountriesTravel} />
+        )}
+      </ReviewSection>
+
+      <ReviewSection number={6} title="Your Preferences" editTo={editTo}>
+        <ReviewRow label="Must-include activities" value={request.mustInclude} />
+        <ReviewRow label="Activities/places to avoid" value={request.avoid} />
+        <ReviewRow label="Accessibility / dietary needs" value={request.accessibilityNeeds} />
+      </ReviewSection>
+
+      <ReviewSection number={7} title="Your Current Plans" editTo={editTo}>
+        <ReviewRow label="Already booked" value={request.bookedStatus} />
+        <ReviewRow label="Details already arranged" value={request.alreadyArranged} />
+      </ReviewSection>
+
+      <ReviewSection number={8} title="Anything Else" editTo={editTo}>
+        <ReviewRow label="Anything else" value={request.additionalNotes} />
+      </ReviewSection>
+    </>
+  )
+}
+
+// Mirrors RequestForm's LegacyRequestSections — unchanged 4-country flow.
+function LegacyReviewSections({ request, names, editTo }) {
+  const interests = [...request.interests.filter((i) => i !== 'Other'), request.otherInterest]
+    .filter(Boolean)
+    .join(', ')
+
+  return (
+    <>
+      <ReviewSection number={2} title="Your Trip" editTo={editTo}>
+        <ReviewRow label="Your destination(s)" value={names.join(', ')} />
+        <ReviewRow
+          label="When are you travelling"
+          value={
+            request.arrivalDate && request.departureDate
+              ? `${request.arrivalDate} – ${request.departureDate}`
+              : ''
+          }
+        />
+        <ReviewRow label="Dates are flexible" value={request.datesFlexible ? 'Yes' : 'No'} />
+        <ReviewRow label="How many people" value={request.travellerCount} />
+        <ReviewRow label="Places already considering" value={request.placesConsidering} />
+      </ReviewSection>
+
+      <ReviewSection number={3} title="Your Travel Interests" editTo={editTo}>
+        <ReviewRow label="Selected interests" value={interests} />
+      </ReviewSection>
+
+      <ReviewSection number={4} title="Your Travel Style" editTo={editTo}>
+        <ReviewRow label="Preferred way of travelling" value={request.travelStyle} />
+        <ReviewRow label="Accommodation preference" value={request.accommodation} />
+      </ReviewSection>
+
+      <ReviewSection number={5} title="Getting Around" editTo={editTo}>
+        <ReviewRow label="Expected transportation" value={request.gettingAround.join(', ')} />
+      </ReviewSection>
+
+      <ReviewSection number={6} title="Your Current Plans" editTo={editTo}>
+        <ReviewRow label="Already booked or paid" value={request.bookedStatus} />
+        <ReviewRow label="What's already arranged" value={request.alreadyArranged} />
+        <ReviewRow label="Rough itinerary" value={request.roughItinerary} />
+      </ReviewSection>
+
+      <ReviewSection number={7} title="What Do You Need Help With?" editTo={editTo}>
+        <ReviewRow label="Main help needed" value={request.helpWith} />
+        <ReviewRow label="Anything else" value={request.additionalNotes} />
+      </ReviewSection>
+    </>
+  )
+}
+
 export function ReviewAnswers() {
   useEffect(() => {
     document.title = 'Review Your Answers | East-West Africa Link'
@@ -56,10 +209,8 @@ export function ReviewAnswers() {
   const { request, tier } = useTravelPlannerFlow()
   const copy = TRAVEL_PLANNER_FLOW.steps.review
   const editTo = '/travel-planner/request'
-
-  const interests = [...request.interests.filter((i) => i !== 'Other'), request.otherInterest]
-    .filter(Boolean)
-    .join(', ')
+  const count = request.destinationSlugs.length
+  const names = countryNames(request.destinationSlugs)
 
   return (
     <>
@@ -85,44 +236,11 @@ export function ReviewAnswers() {
                 <ReviewRow label="Phone / WhatsApp Number" value={request.phone} />
               </ReviewSection>
 
-              <ReviewSection number={2} title="Your Trip" editTo={editTo}>
-                <ReviewRow label="Your destination(s)" value={countryNames(request.destinationSlugs)} />
-                <ReviewRow
-                  label="When are you travelling"
-                  value={
-                    request.arrivalDate && request.departureDate
-                      ? `${request.arrivalDate} – ${request.departureDate}`
-                      : ''
-                  }
-                />
-                <ReviewRow label="Dates are flexible" value={request.datesFlexible ? 'Yes' : 'No'} />
-                <ReviewRow label="How many people" value={request.travellerCount} />
-                <ReviewRow label="Places already considering" value={request.placesConsidering} />
-              </ReviewSection>
-
-              <ReviewSection number={3} title="Your Travel Interests" editTo={editTo}>
-                <ReviewRow label="Selected interests" value={interests} />
-              </ReviewSection>
-
-              <ReviewSection number={4} title="Your Travel Style" editTo={editTo}>
-                <ReviewRow label="Preferred way of travelling" value={request.travelStyle} />
-                <ReviewRow label="Accommodation preference" value={request.accommodation} />
-              </ReviewSection>
-
-              <ReviewSection number={5} title="Getting Around" editTo={editTo}>
-                <ReviewRow label="Expected transportation" value={request.gettingAround.join(', ')} />
-              </ReviewSection>
-
-              <ReviewSection number={6} title="Your Current Plans" editTo={editTo}>
-                <ReviewRow label="Already booked or paid" value={request.bookedStatus} />
-                <ReviewRow label="What's already arranged" value={request.alreadyArranged} />
-                <ReviewRow label="Rough itinerary" value={request.roughItinerary} />
-              </ReviewSection>
-
-              <ReviewSection number={7} title="What Do You Need Help With?" editTo={editTo}>
-                <ReviewRow label="Main help needed" value={request.helpWith} />
-                <ReviewRow label="Anything else" value={request.additionalNotes} />
-              </ReviewSection>
+              {count <= 3 ? (
+                <PdfReviewSections request={request} names={names} count={count} editTo={editTo} />
+              ) : (
+                <LegacyReviewSections request={request} names={names} editTo={editTo} />
+              )}
 
               <div className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
                 <Link

@@ -16,22 +16,46 @@ const DEFAULT_REQUEST = {
   arrivalDate: '',
   departureDate: '',
   datesFlexible: false,
-  travellerCount: '',
+  datesApproxPeriod: '',
   placesConsidering: '',
+  // Legacy fields — only rendered by the 4-country flow's own pre-existing
+  // question set (RequestForm's LegacyRequestSections), left untouched.
+  // The 1/2/3-country PDF-matching question set (PdfRequestSections) below
+  // uses its own, differently-shaped fields instead.
+  travellerCount: '',
+  travelStyle: '',
+  accommodation: '',
+  gettingAround: [],
+  helpWith: '',
+  roughItinerary: '',
   // Your Travel Interests
   interests: [],
   otherInterest: '',
-  // Your Travel Style
-  travelStyle: '',
-  accommodation: '',
-  // Getting Around
-  gettingAround: [],
+  // 1/2/3-country question set (see PdfRequestSections) — mirrors the
+  // reference "Travel Planner Questions" document.
+  adults: '',
+  children: '',
+  purpose: '',
+  budget: '',
+  // Keyed by destination slug, e.g. { ghana: '4' } — only meaningful for
+  // 2/3-country trips ("how many days in each country").
+  daysPerCountry: {},
+  // 2-country: which of the two to visit first (a country name, or the
+  // "not sure" option's own label). 3-country: free text describing the
+  // planned order/route instead — see visitOrderUnsure.
+  visitOrder: '',
+  visitOrderUnsure: false,
+  betweenCountriesTravel: '',
+  travelStylePdf: '',
+  accommodationTypePdf: '',
+  gettingAroundPdf: '',
+  mustInclude: '',
+  avoid: '',
+  accessibilityNeeds: '',
   // Your Current Plans
   bookedStatus: '',
   alreadyArranged: '',
-  roughItinerary: '',
-  // What Do You Need Help With?
-  helpWith: '',
+  // Is there anything else you would like us to know?
   additionalNotes: '',
 }
 
@@ -69,6 +93,13 @@ export function TravelPlannerFlowProvider({ children }) {
     })
   }
 
+  // "How many days do you plan to spend in each country?" (2/3-country
+  // question set) — one field per selected destination, so this merges
+  // into daysPerCountry rather than replacing the whole object.
+  const setDaysForCountry = (slug, value) => {
+    setRequest((prev) => ({ ...prev, daysPerCountry: { ...prev.daysPerCountry, [slug]: value } }))
+  }
+
   const resetRequest = () => {
     setRequest(DEFAULT_REQUEST)
     setPaid(false)
@@ -87,6 +118,7 @@ export function TravelPlannerFlowProvider({ children }) {
     request,
     updateRequest,
     toggleListValue,
+    setDaysForCountry,
     resetRequest,
     tier,
     paid,

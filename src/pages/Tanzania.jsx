@@ -18,6 +18,48 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 
+// Same card language as the homepage's "Explore our Destinations" ticker
+// (DestinationsTicker's DestinationCard): full-bleed photo, square corners,
+// a bottom-up black gradient, serif-weight title, and an uppercase
+// "Explore" line that lifts + golds on hover, rather than this card's old
+// rounded-corner/white-panel-below-the-photo treatment. Sized with
+// aspect-[3/4] instead of DestinationCard's fixed pixel width/height, since
+// this card sits in a regular grid column (which already controls width)
+// rather than a fixed-width marquee track.
+function RouteCard({ route }) {
+  return (
+    <HashLink
+      to="/#contact"
+      className="group relative block aspect-[3/4] overflow-hidden bg-cocoa"
+    >
+      <img
+        src={route.image}
+        alt={`Landscape along the route between Tanzania and ${route.to}`}
+        loading="lazy"
+        className="size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
+      />
+      <div
+        className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-black opacity-0 transition-opacity duration-[450ms] ease-out group-hover:opacity-[0.45]"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-x-0 bottom-0 p-6">
+        <h3 className="truncate text-2xl font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
+          Tanzania → {route.to}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-sm text-primary-foreground/80">{route.text}</p>
+        <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
+          Explore Route
+          <ArrowRight className="size-3.5" aria-hidden="true" />
+        </span>
+      </div>
+    </HashLink>
+  )
+}
+
 const ICONS = {
   FileText,
   Bus,
@@ -145,7 +187,7 @@ export function Tanzania() {
       {/* Popular overland routes — placed directly under Travel Services
           (home of the Border Crossing Guide card) so overland routing and
           border-crossing guidance read together. */}
-      <section className="py-16 lg:py-20">
+      <section className="overflow-hidden py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
@@ -156,36 +198,22 @@ export function Tanzania() {
               neighbouring countries.
             </p>
           </Reveal>
+        </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {routes.map((route, i) => (
-              <Reveal key={route.to} delay={i * 90}>
-                <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-card shadow-card">
-                  <div className="aspect-4/3 overflow-hidden">
-                    <img
-                      src={route.image}
-                      alt={`Landscape along the route between Tanzania and ${route.to}`}
-                      loading="lazy"
-                      className="size-full object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-sm font-bold text-primary">Tanzania → {route.to}</h3>
-                    <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">
-                      {route.text}
-                    </p>
-                    <HashLink
-                      to="/#contact"
-                      className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-copper hover:underline"
-                    >
-                      Explore Route
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </HashLink>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+        {/* Breaks out of the max-w-7xl container above (much smaller side
+            padding at lg, not the container's usual px-8) so all 4 cards
+            sit in one row that reaches close to both edges of the actual
+            screen, not just the container's own bounds — the same
+            full-bleed treatment as the homepage's Explore our Destinations
+            row. A small lg:px-3 gutter stays rather than px-0, so the
+            outer cards' photos don't run flush into the edge, which read
+            as if the image were cut off rather than a deliberate bleed. */}
+        <div className="mt-10 grid grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:gap-5 lg:px-3">
+          {routes.map((route, i) => (
+            <Reveal key={route.to} delay={i * 90}>
+              <RouteCard route={route} />
+            </Reveal>
+          ))}
         </div>
       </section>
 

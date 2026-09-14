@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-cream: #fcf6ec;
+  --color-background: #fcf6ec;
+  --color-foreground: #241a10;
+  --color-primary: #241a10;
+  --color-primary-foreground: #ffffff;
+  --color-card: #fbf7ee;
+  --color-card-foreground: #241a10;
+  --color-muted-foreground: #5b4c3c;
+  --color-border: rgba(36, 26, 16, 0.12);
+
+  --color-copper: #d07936;
+  --color-copper-foreground: #ffffff;
+  --color-cocoa: #582403;
+  --color-sand: #efe1c4;
+  --color-gold: #e9c789;
+  --color-forest: #1f3d2b;
+  --color-navy: #16243b;
+
+  /* Type — an editorial serif for display copy paired with a clean sans for
+     everything else, the same two-font system luxury safari/travel sites
+     (e.g. Rothschild Safaris' Amandine + Nunito Sans) run: Fraunces stands
+     in for their paid Amandine since that font isn't freely licensable. */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Elevation */
+  --shadow-card: 0 18px 40px -22px rgba(20, 14, 8, 0.4);
+  --shadow-lift: 0 30px 70px -24px rgba(20, 14, 8, 0.55);
+
+  /* Motion */
+  /* 54s (not 36s) — the ticker row grew from 6 to 9 cards, so the duration
+     scales up by the same 1.5x to keep the scroll speed (not just the
+     duration) the same as before. */
+  --animate-marquee: marquee 54s linear infinite;
+
+  /* A slow, gentle bob for small decorative graphics floating over a photo
+     (e.g. the Ghana map) — not tied to scroll, just a bit of ambient life. */
+  --animate-float: float 5s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .btn-copper {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-copper px-7 py-3.5 text-sm font-bold text-copper-foreground shadow-card transition-transform hover:-translate-y-0.5;
+  }
+
+  /* Outline pills — the one button shape the reference site uses for every
+     secondary/tertiary action: thin border, no fill, uppercase, tracked.
+     btn-copper stays our one solid-fill accent for the single most-wanted
+     action per view; everything else runs through these. */
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary-foreground/45 px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary-foreground/10;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-copper;
+  }
+}

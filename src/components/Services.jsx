@@ -32,7 +32,7 @@ function PhotoCard({ to, image, hidden, children }) {
       to={to}
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
-      className="group relative block h-[300px] w-full overflow-hidden bg-cocoa sm:h-[340px]"
+      className="group relative block h-[350px] w-full overflow-hidden bg-cocoa sm:h-[390px]"
     >
       <img
         src={image}

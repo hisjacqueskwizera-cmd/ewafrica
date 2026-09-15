@@ -40,11 +40,38 @@
   /* A slow, gentle bob for small decorative graphics floating over a photo
      (e.g. the Ghana map) — not tied to scroll, just a bit of ambient life. */
   --animate-float: float 5s ease-in-out infinite;
+
+  /* ImageSlideshow's crossfade — the incoming slide fades in on top while the
+     outgoing one fades out underneath it, both over 2s (keep in sync with
+     FADE_MS there). Opposite easing on purpose: the incoming slide rises
+     early (ease-out) while the outgoing one lets go late (ease-in), so the
+     two overlap and the middle of the fade doesn't darken to the background.
+     The fade-out holds at opacity 0 until the slide is removed. */
+  --animate-slide-fade-in: slide-fade-in 2s ease-out;
+  --animate-slide-fade-out: slide-fade-out 2s ease-in forwards;
 }
 
 @keyframes marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

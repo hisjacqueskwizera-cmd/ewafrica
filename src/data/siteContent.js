@@ -214,11 +214,15 @@ export const HOW_IT_WORKS = [
   },
 ]
 
-// `video` isn't footage verified to be of that specific region — it's two
-// clips borrowed from the same generic Hero_section rotation the homepage
-// hero uses (there's no East/West-Africa-tagged footage yet). `image` stays
-// on each entry as the <video>'s poster, so the accurate regional photo is
-// still what paints first and what shows for prefers-reduced-motion.
+// `slides` are web-sized copies (max 1920px, WebP) of the photos in
+// public/Explore_regions/<Region>/ — the originals run up to 8K and 5.5MB
+// each, far more than a card needs. Listed by their original file numbers,
+// which is also the order each card's background slideshow plays them in
+// (the first slide is also the still shown for prefers-reduced-motion).
+// `image` is only a fallback for an entry without slides.
+const regionSlides = (folder, numbers) =>
+  numbers.map((n) => `/Explore_regions/optimized/${folder}/${n}.webp`)
+
 export const REGIONS = [
   {
     id: 'east-africa',
@@ -226,7 +230,7 @@ export const REGIONS = [
     tone: 'forest',
     to: '/travel-planner',
     image: '/Pictures/countries/Tanzania.jpg',
-    video: encodeURI('/Videos/Hero_section (1).mp4'),
+    slides: regionSlides('east-africa', [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
     countries: COUNTRIES.filter((c) => c.region === 'east').map((c) => ({
       name: c.displayName ?? c.name,
       featured: c.featured,
@@ -240,7 +244,7 @@ export const REGIONS = [
     tone: 'copper',
     to: '/travel-planner',
     image: '/Pictures/countries/Ghana.jpg',
-    video: encodeURI('/Videos/Hero_section (2).mp4'),
+    slides: regionSlides('west-africa', [1, 2, 3, 4, 5, 6, 7, 8]),
     countries: COUNTRIES.filter((c) => c.region === 'west').map((c) => ({
       name: c.displayName ?? c.name,
       featured: c.featured,

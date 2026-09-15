@@ -3,14 +3,15 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { REGIONS } from '../data/siteContent.js'
 import { HashLink } from './HashLink.jsx'
+import { ImageSlideshow } from './ImageSlideshow.jsx'
 import { PlaceholderArt } from './PlaceholderArt.jsx'
 import { Reveal } from './Reveal.jsx'
 import { CenteredSectionTitle } from './section-heading.jsx'
 
 export function ExploreRegions() {
-  // Captured once at mount, same as Reveal — a looping background video is
-  // exactly the kind of motion prefers-reduced-motion asks us to skip, so
-  // those viewers get the still `image` instead.
+  // Captured once at mount, same as Reveal — a cycling background slideshow
+  // is exactly the kind of motion prefers-reduced-motion asks us to skip, so
+  // those viewers get the first slide as a still image instead.
   const [reducedMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
@@ -27,21 +28,14 @@ export function ExploreRegions() {
           {REGIONS.map((region, i) => (
             <Reveal key={region.id} delay={i * 100}>
               <article className="group relative isolate h-full overflow-hidden shadow-card">
-                {region.video && !reducedMotion ? (
-                  <video
-                    src={region.video}
-                    poster={region.image}
-                    muted
-                    loop
-                    autoPlay
-                    playsInline
-                    preload="none"
-                    aria-hidden="true"
-                    className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
+                {region.slides?.length > 0 && !reducedMotion ? (
+                  <ImageSlideshow
+                    images={region.slides}
+                    className="transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
                   />
-                ) : region.image ? (
+                ) : region.slides?.[0] ?? region.image ? (
                   <img
-                    src={region.image}
+                    src={region.slides?.[0] ?? region.image}
                     alt=""
                     aria-hidden="true"
                     className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"

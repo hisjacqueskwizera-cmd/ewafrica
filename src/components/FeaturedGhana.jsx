@@ -31,19 +31,18 @@ export function FeaturedGhana() {
         aria-hidden="true"
       />
 
-      {/* The country outline, floating over the photo on the open right
-          side of the card — a slow, continuous bob (not scroll-tied) once
-          it's scrolled/faded into view. Desktop only: there's no clear
-          space for it once the content column takes the full width. */}
+      {/* Oversized Ghana flag used as a subtle right-side background. It is
+          intentionally cropped by the section bounds so only a partial edge is
+          visible with reduced opacity, keeping the content readable. */}
       <div
-        className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 lg:block lg:right-12 xl:right-20"
+        className="pointer-events-none absolute right-[-12%] top-1/2 hidden w-[62%] max-w-[760px] -translate-y-1/2 opacity-30 lg:block"
         aria-hidden="true"
       >
         <Reveal big delay={300}>
           <img
             src="/Pictures/Flag-map_of_Ghana.png"
             alt=""
-            className="w-44 animate-float drop-shadow-2xl xl:w-56"
+            className="h-auto w-full scale-[1.35] object-contain drop-shadow-2xl"
           />
         </Reveal>
       </div>

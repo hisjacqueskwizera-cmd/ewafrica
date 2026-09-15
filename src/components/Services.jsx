@@ -252,9 +252,7 @@ export function Services() {
               />
             </div>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-right sm:text-base">
-            One team, every practical detail — explore how we support your journey across Africa.
-          </p>
+          
         </Reveal>
       </div>
 

@@ -1,13 +1,16 @@
 import { ArrowRight, CheckCircle2, Umbrella } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SERVICES, TRAVEL_PLANNER_UMBRELLA } from '../data/siteContent.js'
 import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
 import { SectionMark } from './SectionMark.jsx'
 
-// Advance to the next group of 3 every this many seconds.
-const PAGE_SECONDS = 3
+// Each group of 3 stays fully in place for STAY_MS, then the next group
+// slides in over SLIDE_MS — keep SLIDE_MS in sync with the strip's
+// duration-700 class below.
+const STAY_MS = 3000
+const SLIDE_MS = 700
 const PAGE_SIZE = 3
 
 // A landscape, full-bleed photo card: image fills the frame, a bottom-up
@@ -22,10 +25,10 @@ const PAGE_SIZE = 3
 // opacity + a small rise (~.4s). `group-focus-within` mirrors it for
 // keyboard focus, since `:hover` alone would leave it keyboard-inaccessible.
 //
-// `hidden` marks the duplicated second copy of the row (rendered so the
-// marquee has a full width to slide by before looping — exactly the Explore
-// our Destinations ticker's approach) so assistive tech only ever hears
-// each card once, and its link drops out of the tab order.
+// `hidden` marks every card that isn't in the group currently on screen
+// (including the strip's duplicate copy of each group — see SLIDES below)
+// so assistive tech only ever hears the visible cards, and their links drop
+// out of the tab order.
 function PhotoCard({ to, image, hidden, children }) {
   return (
     <HashLink
@@ -137,7 +140,7 @@ function UmbrellaCard({ hidden }) {
 
 // Every card, in order — the 5 services plus the Travel Planner umbrella —
 // each wrapped as a render function so ServiceCard/UmbrellaCard's own props
-// (notably `hidden`) can be applied per-page below without re-deriving this
+// (notably `hidden`) can be applied per-slide below without re-deriving this
 // list on every render.
 const CARD_ITEMS = [
   ...SERVICES.map((s) => ({ key: s.title, render: (hidden) => <ServiceCard s={s} hidden={hidden} /> })),
@@ -151,15 +154,29 @@ const PAGES = Array.from({ length: Math.ceil(CARD_ITEMS.length / PAGE_SIZE) }, (
   CARD_ITEMS.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
 )
 
+// The strip holds every page twice in a row, and the carousel only ever
+// moves forward (right to left) along it. Once it has slid onto the second
+// copy of a page, it jumps back to the identical first copy with the
+// transition switched off — an invisible swap — so looping from the last
+// group back to the first still slides right to left instead of rewinding
+// the whole strip left to right.
+const SLIDES = [...PAGES, ...PAGES]
+
 export function Services() {
-  const [page, setPage] = useState(0)
+  // Position along SLIDES; `page` (0…PAGES.length - 1) is which group it is.
+  const [index, setIndex] = useState(0)
+  const [animate, setAnimate] = useState(true)
   const [paused, setPaused] = useState(false)
+  // Set when `index` last changed through the invisible loop-back jump
+  // rather than a slide — see the autoplay effect.
+  const jumpedRef = useRef(false)
   // Captured lazily at mount so the initial render already reflects the OS
   // setting (no extra render just to sync it) — the effect below only wires
   // up the listener for later changes.
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
+  const page = index % PAGES.length
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -168,17 +185,56 @@ export function Services() {
     return () => query.removeEventListener('change', handler)
   }, [])
 
-  // Advances one page every PAGE_SECONDS, looping back to the start —
-  // paused on hover/focus (so a card can actually be read) and skipped
-  // entirely for prefers-reduced-motion, same as the rest of the site's
-  // autoplaying elements (see HeroVideoBackground).
+  // After sliding onto a page's second copy, wait for the slide to finish,
+  // then jump back to its first copy with no transition.
+  useEffect(() => {
+    if (index < PAGES.length) return
+    const id = setTimeout(() => {
+      jumpedRef.current = true
+      setAnimate(false)
+      setIndex((i) => i - PAGES.length)
+    }, SLIDE_MS)
+    return () => clearTimeout(id)
+  }, [index])
+
+  // Switch the transition back on only once the jump has been painted, so
+  // the jump itself never animates.
+  useEffect(() => {
+    if (animate) return
+    let inner
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => setAnimate(true))
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
+  }, [animate])
+
+  // Autoplay: each group stays still for STAY_MS once its slide has
+  // finished, then the next group slides in — paused on hover/focus (so a
+  // card can actually be read) and skipped entirely for
+  // prefers-reduced-motion, same as the rest of the site's autoplaying
+  // elements (see HeroVideoBackground). The loop-back jump is instant, and
+  // the slide that led to it has already played out, so it only needs the
+  // stay time.
   useEffect(() => {
     if (paused || reduceMotion || PAGES.length <= 1) return
-    const id = setInterval(() => {
-      setPage((p) => (p + 1) % PAGES.length)
-    }, PAGE_SECONDS * 1000)
-    return () => clearInterval(id)
-  }, [paused, reduceMotion])
+    const delay = jumpedRef.current ? STAY_MS : SLIDE_MS + STAY_MS
+    jumpedRef.current = false
+    const id = setTimeout(() => setIndex((i) => i + 1), delay)
+    return () => clearTimeout(id)
+  }, [index, paused, reduceMotion])
+
+  // Dots move forward to the chosen group too (wrapping round through the
+  // duplicate copy when it comes "before" the current one), never back.
+  const goToPage = (target) => {
+    setIndex((current) =>
+      current >= PAGES.length
+        ? current // mid loop-back; the jump lands in a moment
+        : current + ((target - (current % PAGES.length) + PAGES.length) % PAGES.length),
+    )
+  }
 
   return (
     <section id="services" className="overflow-hidden bg-cream pb-16 lg:pb-20">
@@ -187,10 +243,10 @@ export function Services() {
           <div>
             <SectionMark />
             <div className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text-5xl">
-              <RevealText as="h2" text="How We Can" className="text-primary" />
+              <RevealText as="h2" text="Our" className="text-primary" />
               <RevealText
                 as="h2"
-                text="Help You"
+                text="Services"
                 delay={200}
                 className="italic font-medium text-copper"
               />
@@ -212,20 +268,23 @@ export function Services() {
       <div
         className="relative mt-10 px-4 sm:px-6 lg:px-3"
         role="group"
-        aria-label="How we can help you"
+        aria-label="Our Services"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >
         <div
-          className="flex transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateX(-${page * 100}%)` }}
+          className={`flex ${animate ? 'transition-transform duration-700 ease-in-out' : ''}`}
+          style={{ transform: `translateX(-${index * 100}%)` }}
         >
-          {PAGES.map((group, i) => (
-            <div key={i} className="grid w-full shrink-0 grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+          {SLIDES.map((group, slide) => (
+            <div
+              key={slide}
+              className="grid w-full shrink-0 grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5"
+            >
               {group.map((item) => (
-                <div key={item.key}>{item.render(i !== page)}</div>
+                <div key={item.key}>{item.render(slide !== index)}</div>
               ))}
             </div>
           ))}
@@ -240,7 +299,7 @@ export function Services() {
               type="button"
               aria-label={`Show services group ${i + 1} of ${PAGES.length}`}
               aria-current={i === page}
-              onClick={() => setPage(i)}
+              onClick={() => goToPage(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === page ? 'w-6 bg-copper' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
               }`}

@@ -33,7 +33,7 @@ export const HERO = {
   description:
     'Independent travel, practical guidance, and trusted local connections across East and West Africa.',
   primaryCta: { label: 'Explore Africa', to: '/explore' },
-  secondaryCta: { label: 'How We Can Help You', to: '/#services' },
+  secondaryCta: { label: 'Our Services', to: '/#services' },
 }
 
 // Countries covered — the single source of truth. Destinations, the
@@ -498,7 +498,7 @@ export const TANZANIA_PAGE = {
     },
     {
       icon: 'Users',
-      title: 'Independent Tour Guides *',
+      title: 'Independent Tour Guides',
       text: 'Connect with trusted independent local guides for personalized assistance and authentic local experiences.',
       items: [
         'City tours & attractions',
@@ -884,7 +884,7 @@ export const TRAVEL_PLANNER_FLOW = {
 // note and link from COUNTRIES; only what's specific to this page — the
 // services offered there and the featured cards' longer copy — lives here.
 const EXPLORE_SERVICES = ['Personal Visa Guidance', 'Travel Planner', 'Border Crossing Guide']
-const EXPLORE_SERVICES_WITH_GUIDES = [...EXPLORE_SERVICES, 'Independent Tour Guides *']
+const EXPLORE_SERVICES_WITH_GUIDES = [...EXPLORE_SERVICES, 'Independent Tour Guides']
 
 export const EXPLORE_PAGE = {
   hero: {

@@ -343,7 +343,7 @@ export function Explore() {
               )
             })}
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">{footnote}</p>
+         
         </Reveal>
       </section>
 

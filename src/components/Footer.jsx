@@ -77,9 +77,9 @@ export function Footer() {
           <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.14em] text-primary-foreground/50">
             Destinations
           </h3>
-          <ul className="flex flex-col gap-3 text-sm">
+          <ul className="grid grid-cols-2 items-start gap-6 text-sm">
             {REGIONS.map((region) => (
-              <li key={region.id} className="flex flex-col gap-2">
+              <li key={region.id} className="flex min-w-0 flex-col gap-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.06em] text-primary-foreground/85">
                   {region.name}
                 </span>
@@ -134,9 +134,7 @@ export function Footer() {
               {CONTACT_INFO.address}
             </li>
           </ul>
-          <Link to="/travel-planner" className="btn-copper mt-5">
-            Travel Planner
-          </Link>
+          
         </div>
       </div>
 

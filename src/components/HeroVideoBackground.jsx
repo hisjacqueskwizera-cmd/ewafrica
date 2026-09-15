@@ -1,175 +1,228 @@
 import { useEffect, useRef, useState } from 'react'
 import { HERO_VIDEOS } from '../data/heroVideos.js'
 
-// Keep in sync with the `duration-[…]` class on the <video> elements below —
-// this is how long the crossfade takes, and also how far ahead of a clip's
-// cutoff (its natural end, or its watch cap) we start the swap, so the
-// incoming clip has already begun decoding before it's visible instead of
-// cold-starting exactly when the fade begins.
-const CROSSFADE_SECONDS = 2
+// Keep in sync with the `duration-[2000ms]` class on the incoming <video>.
+const CROSSFADE_MS = 2000
 
-// Two backstops around playback, both no-ops once a clip has already
-// crossfaded normally (triggerCrossfade's own advancedRef guard covers
-// that) — see the comment on playWithFallback for what each one is for.
-const STARTED_TIMEOUT_SECONDS = 8
-const MAX_SLOT_SECONDS = 25
+// `timeupdate` only fires every ~250ms, so the hand-over is armed a little
+// earlier than the crossfade itself needs. That keeps the outgoing clip in
+// motion right up to the end of the fade instead of freezing on its last
+// frame underneath it.
+const LEAD_SECONDS = 0.35
+
+// A clip whose playback hasn't advanced for this long (a file the browser
+// can't decode, a dropped connection) is skipped — but only into a clip
+// that has already buffered, so a slow network never fades into a blank.
+const STALL_MS = 8000
+
+const HAVE_FUTURE_DATA = 3
+
+function initialLayers(videoCount) {
+  if (videoCount === 0) return { previous: null, current: null, next: null }
+  return {
+    previous: null,
+    current: { id: 0, clip: 0 },
+    next: { id: 1, clip: 1 % videoCount },
+  }
+}
+
+// Whether a clip has reached the point where it should hand over: its
+// natural end or its watch cap (whichever comes first), minus the crossfade.
+// Never true while the browser doesn't know the duration of an uncapped
+// clip — that clip hands over on `ended` instead.
+function reachedCutoff(video, clip) {
+  const duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : null
+  const cutoff = clip.capSeconds == null ? duration : Math.min(duration ?? Infinity, clip.capSeconds)
+  return cutoff != null && video.currentTime >= cutoff - CROSSFADE_MS / 1000 - LEAD_SECONDS
+}
 
 /**
  * Rotates through every clip in `videos` (the site-wide HERO_VIDEOS by
- * default — pass a different list, e.g. TZ_HERO_VIDEOS, for a page with
- * its own dedicated footage), one at a time, crossfading between two
- * stacked <video> elements. Only ever two videos are loaded at once (the
- * one playing and the one queued next) so we never pull the full playlist
- * of footage on page load. Each clip plays in full — reaching either its
- * own natural end or its configured watch cap, whichever comes first —
- * except the swap itself starts a little early so the crossfade has real
- * motion on both sides instead of fading in a frozen first frame.
+ * default — pass a different list, e.g. TZ_HERO_VIDEOS, for a page with its
+ * own dedicated footage), in order, crossfading from each clip to the next.
+ *
+ * Every playback gets its own <video> element, keyed by a fresh id, that
+ * goes through exactly three roles: `next` (mounted hidden, preloading),
+ * `current` (fades in on top and plays) and `previous` (stays fully opaque
+ * underneath until the fade has finished), after which it's unmounted. So
+ * outside a crossfade only two clips are ever loaded, and no element is
+ * ever reused for a different clip — no `src` swaps, no reset frames
+ * mid-fade, no stray events from whatever used to be in that element.
+ *
+ * Media events and timers read `layersRef` rather than render-time state,
+ * so they always act on the latest layers.
  */
 export function HeroVideoBackground({ videos = HERO_VIDEOS }) {
-  const [reduceMotion, setReduceMotion] = useState(false)
-  const [slots, setSlots] = useState([videos[0], videos[1] ?? videos[0]])
-  const [front, setFront] = useState(0)
-  const pointerRef = useRef(1)
-  const isFirstRun = useRef(true)
-  const advancedRef = useRef([false, false])
-  const videoRefs = [useRef(null), useRef(null)]
-  // Pending STARTED/MAX_SLOT timers per slot — see playWithFallback. Tracked
-  // so a slot's own timers from a past tenure can be canceled before it's
-  // reused, instead of sitting armed and firing against whatever new clip
-  // has since taken over that slot.
-  const fallbackTimersRef = useRef([[], []])
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false,
+  )
+  const [layers, setLayers] = useState(() => initialLayers(videos.length))
+  const [firstFrameShown, setFirstFrameShown] = useState(false)
+
+  const layersRef = useRef(layers)
+  const elementsRef = useRef(new Map())
+  const nextIdRef = useRef(2)
+  // The queued clip has buffered enough to start without stalling.
+  const nextReadyRef = useRef(false)
+  // The current clip is done (cutoff reached, ended, broken or stalled) and
+  // hands over as soon as the queued clip is ready.
+  const handOverRef = useRef(false)
+  const failedClipsRef = useRef(new Set())
+  const progressRef = useRef({ time: -1, at: 0 })
+  const fadeTimerRef = useRef(null)
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduceMotion(query.matches)
     const handler = (event) => setReduceMotion(event.matches)
     query.addEventListener('change', handler)
     return () => query.removeEventListener('change', handler)
   }, [])
 
-  // Start slot 0 playing on mount. Slot 1 (queued next) stays paused until
-  // its own crossfade is triggered — starting it any earlier would mean
-  // viewers join it already in progress once it becomes visible.
+  useEffect(() => () => clearTimeout(fadeTimerRef.current), [])
+
+  const commit = (nextLayers) => {
+    layersRef.current = nextLayers
+    setLayers(nextLayers)
+  }
+
+  // A fresh layer for the first clip after `afterClip` that hasn't failed —
+  // wrapping all the way round to `afterClip` itself if every other clip is
+  // broken.
+  const queueAfter = (afterClip) => {
+    nextReadyRef.current = false
+    for (let step = 1; step <= videos.length; step++) {
+      const clip = (afterClip + step) % videos.length
+      if (!failedClipsRef.current.has(clip)) return { id: nextIdRef.current++, clip }
+    }
+    return null
+  }
+
+  const finishCrossfade = () => {
+    const { previous, current } = layersRef.current
+    const outgoing = previous && elementsRef.current.get(previous.id)
+    if (outgoing) {
+      // Drop its buffer and decoder now rather than whenever the detached
+      // element happens to be garbage-collected.
+      outgoing.pause()
+      outgoing.removeAttribute('src')
+      outgoing.load()
+    }
+    commit({ previous: null, current, next: queueAfter(current.clip) })
+  }
+
+  const tryHandOver = () => {
+    const { previous, current, next } = layersRef.current
+    if (!handOverRef.current || previous || !next || !nextReadyRef.current) return
+    handOverRef.current = false
+    nextReadyRef.current = false
+    progressRef.current = { time: -1, at: performance.now() }
+    elementsRef.current.get(next.id)?.play().catch(() => {})
+    // The incoming clip is buffered, so it can always be shown — even if the
+    // very first clip never produced a frame.
+    setFirstFrameShown(true)
+    commit({ previous: current, current: next, next: null })
+    fadeTimerRef.current = setTimeout(finishCrossfade, CROSSFADE_MS + 150)
+  }
+
+  const requestHandOver = (layer) => {
+    if (layer.id !== layersRef.current.current?.id) return
+    handOverRef.current = true
+    tryHandOver()
+  }
+
+  const handleError = (layer) => {
+    const { current, next } = layersRef.current
+    if (layer.id === current?.id) {
+      failedClipsRef.current.add(layer.clip)
+      requestHandOver(layer)
+    } else if (layer.id === next?.id) {
+      failedClipsRef.current.add(layer.clip)
+      commit({ ...layersRef.current, next: queueAfter(layer.clip) })
+    }
+  }
+
+  // Start the first clip, then check on playback once a second. Media events
+  // drive the normal hand-over; this catches what they can't: a clip that
+  // stalled or never started, a queued clip that was ready before its
+  // `canplay` listener was attached, and playback the browser paused on its
+  // own (e.g. while the tab was in the background).
   useEffect(() => {
     if (reduceMotion) return
-    playWithFallback(0)
+    const first = layersRef.current.current
+    if (first) elementsRef.current.get(first.id)?.play().catch(() => {})
+
+    const interval = setInterval(() => {
+      const { current, next } = layersRef.current
+      const video = current && elementsRef.current.get(current.id)
+      const now = performance.now()
+      if (!video || document.hidden) {
+        progressRef.current = { time: -1, at: now }
+        return
+      }
+      if (next && elementsRef.current.get(next.id)?.readyState >= HAVE_FUTURE_DATA) {
+        nextReadyRef.current = true
+      }
+      if (video.paused && !video.ended) video.play().catch(() => {})
+      if (video.currentTime !== progressRef.current.time) {
+        progressRef.current = { time: video.currentTime, at: now }
+      }
+      handOverRef.current =
+        video.ended ||
+        failedClipsRef.current.has(current.clip) ||
+        now - progressRef.current.at >= STALL_MS ||
+        reachedCutoff(video, videos[current.clip])
+      tryHandOver()
+    }, 1000)
+
+    return () => clearInterval(interval)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reduceMotion])
+  }, [reduceMotion, videos])
 
-  // Once a crossfade has started, queue the *following* clip into the slot
-  // that just went to the back — but only once its fade-out has actually
-  // finished. Swapping its `src` any earlier resets that <video> element
-  // immediately, so the tail of its fade-out would show the next clip's
-  // first frame instead of its own content fading away.
-  useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false
-      return
-    }
-    const backSlot = front === 0 ? 1 : 0
-    const timer = setTimeout(() => {
-      const nextPointer = (pointerRef.current + 1) % videos.length
-      setSlots((prev) => {
-        const next = [...prev]
-        next[backSlot] = videos[nextPointer]
-        return next
-      })
-      pointerRef.current = nextPointer
-      advancedRef.current[backSlot] = false
-    }, CROSSFADE_SECONDS * 1000)
-    return () => clearTimeout(timer)
-  }, [front, videos])
-
-  const clearFallbackTimers = (slotIndex) => {
-    fallbackTimersRef.current[slotIndex].forEach(clearTimeout)
-    fallbackTimersRef.current[slotIndex] = []
-  }
-
-  const triggerCrossfade = (fromSlot) => {
-    if (advancedRef.current[fromSlot]) return
-    advancedRef.current[fromSlot] = true
-    // This slot's tenure is over (however it got triggered — a normal
-    // timeupdate/ended crossfade, onError, or one of the two backstops
-    // below) — cancel its own pending backstop timers so neither can fire
-    // later against whatever new clip eventually occupies this slot.
-    clearFallbackTimers(fromSlot)
-    const toSlot = fromSlot === 0 ? 1 : 0
-    playWithFallback(toSlot)
-    setFront(toSlot)
-  }
-
-  // .play(), plus two backstops — deliberately *not* keyed off `duration`,
-  // since that alone can't tell "broken" apart from "playing fine but the
-  // browser hasn't determined a real duration yet" (some fragmented-MP4
-  // exports report `Infinity` until enough of the stream has buffered,
-  // even mid-playback):
-  //
-  // 1. If the clip still hasn't actually started advancing (currentTime is
-  //    still ~0) after STARTED_TIMEOUT_SECONDS, it never got going at all
-  //    — most often a file that isn't "web-optimized" (its moov atom, the
-  //    index the browser needs for duration/seek info, sits after the
-  //    frame data instead of before it) and sometimes just never starts
-  //    decoding over a plain <video src>. Skip it.
-  // 2. Regardless of whether it started, no clip gets to occupy a slot
-  //    past MAX_SLOT_SECONDS. A clip with a normal, known duration always
-  //    crossfades via handleTimeUpdate well before this fires, so it's a
-  //    backstop, not the common path — it exists for a clip that IS
-  //    playing but never reports a finite duration (the fragmented-MP4
-  //    case above), which would otherwise never trigger the duration-based
-  //    crossfade (nothing to compare against) or `ended` (blocked by the
-  //    `loop` attribute) and would loop on that slot forever.
-  const playWithFallback = (slotIndex) => {
-    // Cancel anything left over from this slot's last tenure first — belt
-    // and braces alongside the clear in triggerCrossfade, since this is
-    // also the function that arms new timers for this slot.
-    clearFallbackTimers(slotIndex)
-    const video = videoRefs[slotIndex].current
-    video?.play?.().catch(() => {})
-    const startedTimer = setTimeout(() => {
-      if (video && video.currentTime < 0.5) triggerCrossfade(slotIndex)
-    }, STARTED_TIMEOUT_SECONDS * 1000)
-    const maxSlotTimer = setTimeout(() => {
-      triggerCrossfade(slotIndex)
-    }, MAX_SLOT_SECONDS * 1000)
-    fallbackTimersRef.current[slotIndex] = [startedTimer, maxSlotTimer]
-  }
-
-  const handleTimeUpdate = (slotIndex) => {
-    const video = videoRefs[slotIndex].current
-    if (!video) return
-    const { capSeconds } = slots[slotIndex]
-    const duration = Number.isFinite(video.duration) ? video.duration : null
-    const effectiveEnd = capSeconds != null ? Math.min(duration ?? Infinity, capSeconds) : duration
-    if (effectiveEnd == null) return
-    if (video.currentTime >= effectiveEnd - CROSSFADE_SECONDS) {
-      triggerCrossfade(slotIndex)
-    }
-  }
-
-  if (reduceMotion) {
+  if (reduceMotion || videos.length === 0) {
     return (
       <div className="absolute inset-0 bg-linear-to-br from-forest to-cocoa" aria-hidden="true" />
     )
   }
 
+  const { previous, current, next } = layers
+
   return (
     <div className="absolute inset-0 overflow-hidden bg-cocoa" aria-hidden="true">
-      {slots.map((video, slotIndex) => (
+      {/* Ids only ever increase along previous → current → next, so this
+          order is stable and React never has to move a playing <video>. */}
+      {[previous, current, next].filter(Boolean).map((layer) => (
         <video
-          key={slotIndex}
-          ref={videoRefs[slotIndex]}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
-            front === slotIndex ? 'z-[2] opacity-100' : 'z-[1] opacity-0'
+          key={layer.id}
+          ref={(element) => {
+            if (element) elementsRef.current.set(layer.id, element)
+            else elementsRef.current.delete(layer.id)
+          }}
+          className={`absolute inset-0 size-full object-cover ${
+            layer === current
+              ? `z-[2] transition-opacity duration-[2000ms] ease-in-out ${
+                  firstFrameShown ? 'opacity-100' : 'opacity-0'
+                }`
+              : layer === previous
+                ? 'z-[1] opacity-100'
+                : 'z-0 opacity-0'
           }`}
-          src={video.src}
+          src={videos[layer.clip].src}
           muted
-          loop
           playsInline
-          autoPlay={slotIndex === 0}
           preload="auto"
-          onTimeUpdate={() => handleTimeUpdate(slotIndex)}
-          onEnded={() => triggerCrossfade(slotIndex)}
-          onError={() => triggerCrossfade(slotIndex)}
+          onLoadedData={() => {
+            if (layer.id === layersRef.current.current?.id) setFirstFrameShown(true)
+          }}
+          onCanPlay={() => {
+            if (layer.id !== layersRef.current.next?.id) return
+            nextReadyRef.current = true
+            tryHandOver()
+          }}
+          onTimeUpdate={(event) => {
+            if (reachedCutoff(event.currentTarget, videos[layer.clip])) requestHandOver(layer)
+          }}
+          onEnded={() => requestHandOver(layer)}
+          onError={() => handleError(layer)}
         />
       ))}
     </div>

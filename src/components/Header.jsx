@@ -127,9 +127,9 @@ export function Header() {
           aria-label="East-West Africa Link home"
         >
           <img
-            src={solid ? '/Logos/East-West.png' : '/Logos/East-West-white.png'}
+            src={solid ? '/Logos/New_logo/Logo_Dark.webp' : '/Logos/New_logo/Logo_White.webp'}
             alt="East-West Africa Link"
-            className="h-12 w-auto transition-opacity duration-300"
+            className="h-[78px] w-auto transition-opacity duration-300"
           />
         </Link>
 

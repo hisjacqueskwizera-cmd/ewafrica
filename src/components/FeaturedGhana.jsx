@@ -34,18 +34,7 @@ export function FeaturedGhana() {
       {/* Oversized Ghana flag used as a subtle right-side background. It is
           intentionally cropped by the section bounds so only a partial edge is
           visible with reduced opacity, keeping the content readable. */}
-      <div
-        className="pointer-events-none absolute right-[-5%] top-1/2 hidden w-[62%] max-w-[400px] -translate-y-1/2 opacity-20 lg:block"
-        aria-hidden="true"
-      >
-        <Reveal big delay={300}>
-          <img
-            src="/Pictures/Flag-map_of_Ghana.png"
-            alt=""
-            className="h-auto w-full scale-[1.35] object-contain drop-shadow-2xl"
-          />
-        </Reveal>
-      </div>
+      
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
         <div className="lg:max-w-xl">

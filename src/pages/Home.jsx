@@ -14,8 +14,8 @@ export function Home() {
     <>
       <Hero />
       <DestinationsTicker />
-      <Services />
       <FeaturedGhana />
+      <Services />
       <section className="bg-cream pb-16 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <HowItWorks />

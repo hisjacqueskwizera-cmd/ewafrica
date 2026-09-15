@@ -20,10 +20,12 @@ import { HashLink } from './HashLink.jsx'
 export function ExploreMenu({ countries, forceClosed, onNavigate }) {
   return (
     <div
-      className={`fixed inset-x-0 top-[84px] z-[99] transition-[opacity,visibility] duration-200 ${
+      // A forced close skips the fade (duration-0) so the panel is gone the
+      // instant something is clicked; hover open/close keeps the 200ms fade.
+      className={`fixed inset-x-0 top-[84px] z-[99] transition-[opacity,visibility] ${
         forceClosed
-          ? 'invisible opacity-0'
-          : 'invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100'
+          ? 'invisible opacity-0 duration-0'
+          : 'invisible opacity-0 duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100'
       }`}
       role="menu"
     >

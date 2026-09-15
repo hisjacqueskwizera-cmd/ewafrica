@@ -93,7 +93,16 @@ export function Header() {
                   className="group relative"
                   onMouseLeave={() => setExploreForceClosed(false)}
                 >
-                  <HashLink to={link.to} className={navLinkClass}>
+                  <HashLink
+                    to={link.to}
+                    className={navLinkClass}
+                    // Clicking the trigger itself (it navigates to /explore)
+                    // snaps the panel shut too, same as clicking a card in it.
+                    onClick={(event) => {
+                      setExploreForceClosed(true)
+                      event.currentTarget.blur()
+                    }}
+                  >
                     {link.label}
                   </HashLink>
                   <ExploreMenu

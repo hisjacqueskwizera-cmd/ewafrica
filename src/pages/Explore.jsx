@@ -45,20 +45,15 @@ function Flag({ slug }) {
   )
 }
 
-function ServiceList({ items, light = false, className = '' }) {
+function ServiceList({ items, className = '' }) {
   return (
     <ul className={`space-y-1.5 ${className}`}>
       {items.map((item) => (
         <li
           key={item}
-          className={`flex items-start gap-2 text-xs leading-relaxed ${
-            light ? 'text-primary-foreground/85' : 'text-muted-foreground'
-          }`}
+          className="flex items-start gap-2 text-xs leading-relaxed text-primary-foreground/85"
         >
-          <CheckCircle2
-            className={`mt-0.5 size-3.5 shrink-0 ${light ? 'text-gold' : 'text-copper'}`}
-            aria-hidden="true"
-          />
+          <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden="true" />
           {item}
         </li>
       ))}
@@ -66,42 +61,119 @@ function ServiceList({ items, light = false, className = '' }) {
   )
 }
 
-// East Africa's cards use the same card language as the homepage's
-// "Explore our Destinations" ticker (DestinationsTicker's DestinationCard):
-// full-bleed photo, square corners, a bottom-up black gradient, a title
-// that lifts on hover and an uppercase "Explore" line that turns gold —
-// with this page's flag and service checklist added over the gradient.
-// The featured card (Tanzania) spans two columns and also carries its
-// description, on a deeper gradient so the longer copy stays readable.
+// Every country card on this page uses the same card language as the
+// homepage's "Explore our Destinations" ticker (DestinationsTicker's
+// DestinationCard): full-bleed photo, square corners, a bottom-up black
+// gradient, a title that lifts on hover and an uppercase "Explore" line
+// that turns gold — with the country's flag and service checklist added
+// over the gradient.
+//
+// A featured card (Tanzania, Ghana) spans more columns, also carries its
+// description and an optional badge, and adds a left-hand gradient so its
+// longer copy stays readable. Its services can come as labelled groups
+// (Ghana's travel vs relocation) instead of one list.
+//
+// A featured card with `imageSide: 'right'` (Ghana, whose photo is a tall
+// portrait) shows its photo whole and uncovered in its own panel on the
+// right — on top on phones — instead of cropping it into a darkened
+// full-bleed background. Behind the copy sits the card's own
+// `backgroundImage` when it has one (Ghana: Cape Coast Castle), shaded
+// darkest on the left for readable text — otherwise a blurred, dimmed copy
+// of the portrait, so the card still reads as one piece.
+//
 // Cards take a min-height rather than a fixed aspect ratio so every card
 // stretches to its grid row instead of one sitting shorter than its
 // neighbour.
 function DestinationCountryCard({ country, featured = false }) {
   const cta = ctaFor(country)
+  const serviceGroups = country.serviceGroups ?? [{ items: country.services }]
+  const grouped = serviceGroups.length > 1
+  const sidePortrait = featured && country.imageSide === 'right'
+
   return (
     <HashLink
       id={country.slug}
       to={cta.to}
-      className="group relative flex h-full min-h-[460px] scroll-mt-28 flex-col justify-end overflow-hidden bg-cocoa"
+      className={`group relative flex h-full min-h-[690px] scroll-mt-28 overflow-hidden bg-cocoa ${
+        sidePortrait ? 'flex-col-reverse lg:flex-row' : 'flex-col justify-end'
+      }`}
     >
-      <img
-        src={country.image}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
-      />
+      {sidePortrait ? (
+        <>
+          {country.backgroundImage ? (
+            <>
+              <img
+                src={country.backgroundImage}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+              />
+              {/* On phones/tablets the copy spans the whole card width, so the
+                  photo gets an even shade; on desktop it's darkest behind the
+                  copy on the left and eases off to the right so the photo
+                  still reads clearly around the portrait. */}
+              <div
+                className="absolute inset-0 bg-black/65 lg:bg-transparent lg:bg-linear-to-r lg:from-black/80 lg:via-black/60 lg:to-black/20"
+                aria-hidden="true"
+              />
+            </>
+          ) : (
+            <>
+              <img
+                src={country.image}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="absolute inset-0 size-full scale-110 object-cover opacity-35 blur-2xl"
+              />
+              <div
+                className="absolute inset-0 bg-linear-to-r from-black/85 via-black/65 to-black/45"
+                aria-hidden="true"
+              />
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <img
+            src={country.image}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
+          />
+          <div
+            className={`absolute inset-0 bg-linear-to-t ${
+              featured
+                ? 'from-black/90 via-black/60 to-black/15'
+                : 'from-black/90 via-black/35 to-transparent'
+            }`}
+            aria-hidden="true"
+          />
+          {featured && (
+            <div
+              className="absolute inset-0 bg-linear-to-r from-black/60 via-black/20 to-transparent"
+              aria-hidden="true"
+            />
+          )}
+          <div
+            className="absolute inset-0 bg-black opacity-0 transition-opacity duration-[450ms] ease-out group-hover:opacity-[0.45]"
+            aria-hidden="true"
+          />
+        </>
+      )}
+      {country.badge && (
+        <span className="absolute top-5 left-6 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground sm:left-8">
+          {country.badge}
+        </span>
+      )}
+
       <div
-        className={`absolute inset-0 bg-linear-to-t ${
-          featured ? 'from-black/90 via-black/60 to-black/15' : 'from-black/90 via-black/35 to-transparent'
+        className={`relative p-6 ${featured ? 'sm:p-8' : ''} ${
+          sidePortrait ? 'flex flex-1 flex-col justify-end' : featured ? 'max-w-3xl' : ''
         }`}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-black opacity-0 transition-opacity duration-[450ms] ease-out group-hover:opacity-[0.45]"
-        aria-hidden="true"
-      />
-      <div className={`relative p-6 ${featured ? 'sm:p-8' : ''}`}>
+      >
         <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
           <Flag slug={country.slug} />
           <h3 className="truncate text-2xl font-semibold text-primary-foreground">
@@ -111,59 +183,50 @@ function DestinationCountryCard({ country, featured = false }) {
         {country.note && (
           <p className="mt-1 truncate text-sm text-primary-foreground/80">{country.note}</p>
         )}
-        <ServiceList
-          light
-          items={country.services}
-          className={`mt-4 ${featured ? 'gap-x-6 sm:columns-2' : ''}`}
-        />
+
+        <div className={`mt-4 grid gap-x-8 gap-y-4 ${grouped ? 'sm:grid-cols-2' : ''}`}>
+          {serviceGroups.map((group) => (
+            <div key={group.label ?? 'services'}>
+              {group.label && (
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold">
+                  {group.label}
+                </p>
+              )}
+              <ServiceList
+                items={group.items}
+                className={featured && !grouped ? 'gap-x-6 sm:columns-2' : ''}
+              />
+            </div>
+          ))}
+        </div>
+
         {featured && (
-          <div className="mt-4 max-w-2xl space-y-2 text-sm leading-relaxed text-primary-foreground/80">
+          <div className="mt-4 space-y-2 text-sm leading-relaxed text-primary-foreground/80">
             {country.description.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
         )}
+
         <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
           {cta.label}
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </span>
       </div>
-    </HashLink>
-  )
-}
 
-// One West Africa country card: photo, flag + name, a checklist of what we
-// offer there, and a CTA.
-function CountryCard({ country }) {
-  const cta = ctaFor(country)
-  return (
-    <article
-      id={country.slug}
-      className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-2xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
-    >
-      <div className="aspect-4/3 w-full shrink-0 overflow-hidden">
-        <img
-          src={country.image}
-          alt={`${country.name} landscape`}
-          loading="lazy"
-          className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-2">
-          <Flag slug={country.slug} />
-          <h3 className="text-sm font-bold text-primary">{country.name}</h3>
+      {sidePortrait && (
+        <div className="relative px-6 pt-6 sm:px-8 sm:pt-8 lg:w-[38%] lg:shrink-0 lg:py-8 lg:pr-8 lg:pl-0">
+          <div className="h-full overflow-hidden">
+            <img
+              src={country.image}
+              alt={country.imageAlt}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04] lg:aspect-auto lg:h-full"
+            />
+          </div>
         </div>
-        <ServiceList items={country.services} className="mt-3 flex-1" />
-        <HashLink
-          to={cta.to}
-          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-        >
-          {cta.label}
-          <ArrowRight className="size-3.5" aria-hidden="true" />
-        </HashLink>
-      </div>
-    </article>
+      )}
+    </HashLink>
   )
 }
 
@@ -190,7 +253,14 @@ export function Explore() {
 
   const { hero, intro, east, west, trust, footnote, closing } = EXPLORE_PAGE
   const [featuredEast, ...otherEast] = east.countries.map(withCountry)
-  const ghana = withCountry(west.featured)
+  const ghana = {
+    ...withCountry(west.featured),
+    imageSide: 'right',
+    serviceGroups: [
+      { label: 'Travel Services', items: west.featured.travelServices },
+      { label: 'Relocation & Living in Ghana', items: west.featured.relocationServices },
+    ],
+  }
   const otherWest = west.countries.map(withCountry)
 
   return (
@@ -205,7 +275,7 @@ export function Explore() {
 
       {/* East Africa */}
       <section id="east-africa" className="scroll-mt-24 overflow-hidden pb-16 lg:pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-[90%]">
           <Reveal>
             <RegionHeader icon={Mountain} title={east.title} tagline={east.tagline} />
           </Reveal>
@@ -227,74 +297,25 @@ export function Explore() {
 
       {/* West Africa */}
       <section id="west-africa" className="scroll-mt-24 overflow-hidden bg-cream pb-16 lg:pb-20">
-        <div className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8 lg:pt-16">
+        <div className="mx-auto w-[90%] pt-14 lg:pt-16">
           <Reveal>
             <RegionHeader icon={Palmtree} title={west.title} tagline={west.tagline} />
           </Reveal>
-
           {/* Ghana gets its own full-width featured row (it offers travel +
-              relocation, the other three don't) — image beside content —
-              and the remaining three countries form one even row below. */}
-          <Reveal className="mt-10">
-            <article
-              id={ghana.slug}
-              className="group relative flex scroll-mt-28 flex-col overflow-hidden rounded-2xl bg-card shadow-lift transition-all duration-300 hover:-translate-y-1.5 sm:flex-row"
-            >
-              <span className="absolute top-4 left-4 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground">
-                {ghana.badge}
-              </span>
-              <div className="aspect-4/3 w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-2/5">
-                {/* object-top so the short, wide crop eats into the
-                    statue's base rather than its head. */}
-                <img
-                  src={ghana.image}
-                  alt={ghana.imageAlt}
-                  loading="lazy"
-                  className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5 sm:p-6">
-                <div className="flex items-center gap-2">
-                  <Flag slug={ghana.slug} />
-                  <h3 className="text-sm font-bold text-primary">{ghana.name}</h3>
-                </div>
-
-                <div className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-copper">
-                      Travel Services
-                    </p>
-                    <ServiceList items={ghana.travelServices} className="mt-2" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-copper">
-                      Relocation &amp; Living in Ghana
-                    </p>
-                    <ServiceList items={ghana.relocationServices} className="mt-2" />
-                  </div>
-                </div>
-
-                <div className="mt-2 space-y-2 text-xs leading-relaxed text-muted-foreground">
-                  {ghana.description.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <HashLink
-                  to={ghana.to}
-                  className="mt-4 inline-flex items-center justify-center gap-1.5 self-start rounded-full bg-copper px-4 py-2.5 text-xs font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
-                >
-                  Explore {ghana.name}
-                  <ArrowRight className="size-3.5" aria-hidden="true" />
-                </HashLink>
-              </div>
-            </article>
-          </Reveal>
-
-          <div className="mt-6 grid gap-5 sm:grid-cols-3">
+              relocation, the other three don't) and the remaining three
+              countries form one even row below — on tablets the last of
+              them spans both columns so no card is left on its own. */}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Reveal className="h-full sm:col-span-2 lg:col-span-3">
+              <DestinationCountryCard country={ghana} featured />
+            </Reveal>
             {otherWest.map((country, i) => (
-              <Reveal key={country.slug} delay={i * 90} className="h-full">
-                <CountryCard country={country} />
+              <Reveal
+                key={country.slug}
+                delay={(i + 1) * 90}
+                className="h-full sm:last:col-span-2 lg:last:col-span-1"
+              >
+                <DestinationCountryCard country={country} />
               </Reveal>
             ))}
           </div>

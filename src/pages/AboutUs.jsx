@@ -226,7 +226,13 @@ export function AboutUs() {
 
       {/* Closing — heading left, right-aligned copy, and a thin curved rule
           that runs down and across into the CTA (the rule is desktop only). */}
-      <section className="px-[30px] pb-[100px] lg:px-[70px]">
+      <section className="relative overflow-hidden px-[30px] pb-[100px] lg:px-[70px]">
+        <div
+          className="absolute inset-0 -z-10 bg-cover bg-center opacity-100"
+          style={{ backgroundImage: "url('/Pictures/Background/about_us_background.png')" }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 -z-10 bg-[#F4E9D4]/30" aria-hidden="true" />
         <div className="relative">
           <span
             className="absolute top-0 left-[30px] hidden h-[120px] border-l border-cocoa/50 lg:block"
@@ -254,12 +260,7 @@ export function AboutUs() {
               className="ml-[30px] hidden h-[120px] flex-1 rounded-bl-[64px] border-b border-l border-cocoa/50 lg:block"
               aria-hidden="true"
             />
-            <HashLink
-              to="/#contact"
-              className="btn-outline-dark w-fit border-cocoa px-8 text-sm text-cocoa hover:bg-cocoa lg:translate-y-1/2"
-            >
-              Get Personalized Guidance
-            </HashLink>
+            
           </div>
         </div>
       </section>

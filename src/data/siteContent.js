@@ -924,6 +924,8 @@ export const EXPLORE_PAGE = {
       badge: 'Featured Destination · Travel + Relocation',
       image: '/Pictures/about/mission-nkrumah-statue.webp',
       imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
+      // Shown clearly behind the card's copy (Cape Coast Castle's courtyard).
+      backgroundImage: '/Pictures/explore/ghana-card-background.webp',
       travelServices: EXPLORE_SERVICES_WITH_GUIDES,
       relocationServices: [
         'General Ghana Relocation Guidance',

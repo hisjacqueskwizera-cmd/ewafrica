@@ -24,9 +24,7 @@ const EXPLORE_MENU_COUNTRIES = EXPLORE_MENU_SLUGS.map((slug) =>
 // behind the fixed header — the same transparent, light-on-dark header
 // treatment as Home before scrolling makes sense there too, rather than a
 // solid bar sitting awkwardly on top of the dark hero from first paint.
-// About also opens on a dark hero but hasn't been switched over to this
-// treatment (not asked yet) — add it here if that changes.
-const TRANSPARENT_HERO_ROUTES = ['/', '/travel-planner', '/tanzania']
+const TRANSPARENT_HERO_ROUTES = ['/', '/about', '/travel-planner', '/tanzania']
 
 export function Header() {
   const location = useLocation()

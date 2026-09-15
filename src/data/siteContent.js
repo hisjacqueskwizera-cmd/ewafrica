@@ -309,10 +309,9 @@ export const FOOTER = {
 }
 
 export const ABOUT_PAGE = {
-  // The hero now carries what used to be the separate "Who We Are" section
-  // (eyebrow, heading, tagline row, single paragraph) directly — no CTAs,
-  // matching the reference design, which folds the two into one banner
-  // instead of stacking a video hero on top of a duplicate intro section.
+  // `badge` is the hero's breadcrumb label and `titleLine1` its heading;
+  // `tagline` and `description` open the dark band that follows the
+  // Mission and Approach rows.
   hero: {
     badge: 'About Us',
     titleLine1: 'Who We Are',
@@ -326,8 +325,8 @@ export const ABOUT_PAGE = {
       'We provide practical research, personalized guidance, and trusted local connections to help you make better-informed decisions before and during your journey.',
       'Our focus is East and West Africa, with growing coverage across selected destinations in both regions.',
     ],
-    image: '/Pictures/caption.jpg',
-    imageAlt: 'Aerial view of a coastal fort on the Ghanaian coast',
+    image: '/Pictures/about/mission-nkrumah-statue.webp',
+    imageAlt: 'Bronze statue of Kwame Nkrumah at the Kwame Nkrumah Memorial Park in Accra, Ghana',
   },
   approach: {
     body: [
@@ -338,6 +337,9 @@ export const ABOUT_PAGE = {
     closing: 'Those practical details are at the heart of East-West Africa Link.',
     image: '/Pictures/countries/Tanzania.jpg',
     imageAlt: 'Safari vehicle watching lions on the East African savanna',
+    // The tall photo filling the row's other column.
+    featureImage: '/Pictures/about/approach-bismarck-rock.webp',
+    featureImageAlt: 'Bismarck Rock rising from Lake Victoria at dusk in Mwanza, Tanzania',
   },
   // The homepage Founder teaser's "Read The Full Bio" button links here
   // (/about#founder) for the complete story.
@@ -362,6 +364,9 @@ export const ABOUT_PAGE = {
           "That might mean a long-distance bus, bush taxi, minibus, train, ferry, fisherman's boat, airplane, boda boda — or occasionally even an elephant or ox cart.",
         ],
         closing: 'For me, the journey itself is often one of the most memorable parts of travel.',
+        // Full-bleed backdrop for this highlight's feature section.
+        image: '/Pictures/about/feature-dhow.webp',
+        imageAlt: 'A traditional dhow under sail on the Indian Ocean',
       },
       {
         icon: 'Lightbulb',
@@ -380,28 +385,34 @@ export const ABOUT_PAGE = {
       icon: 'Globe2',
       title: 'Focused on East and West Africa',
       text: 'Growing coverage across selected destinations',
+      image: '/Explore_regions/optimized/east-africa/15.webp',
+      imageAlt: 'Elephants crossing the plains below Mount Kilimanjaro',
     },
     {
       icon: 'FileText',
       title: 'Practical Information You Can Use',
       text: 'Research you can act on, not generic advice',
+      image: '/Explore_regions/optimized/west-africa/4.webp',
+      imageAlt: 'A grand mosque with tall minarets above a busy West African town',
     },
     {
       icon: 'Handshake',
       title: 'Trusted Local Connections',
       text: 'Vetted guides and on-the-ground contacts',
+      image: '/Explore_regions/optimized/west-africa/7.webp',
+      imageAlt: 'Dancers and drummers at a traditional ceremony in West Africa',
     },
     {
       icon: 'ShieldCheck',
       title: 'Independent, Honest and Transparent',
       text: 'No hidden commissions, ever',
+      image: '/Explore_regions/optimized/east-africa/7.webp',
+      imageAlt: 'Hartebeest running past an acacia tree on the savanna',
     },
   ],
   closing: {
     heading: 'Travel Africa With Confidence',
     tagline: 'Your journey. Your decisions. Better information along the way.',
-    image: '/Pictures/countries/Zambia.jpg',
-    imageAlt: 'Victoria Falls with a rainbow arcing over the gorge',
   },
 }
 

@@ -1,13 +1,15 @@
 import { ArrowRight, MapPin } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DESTINATIONS } from '../data/siteContent.js'
 import { PlaceholderArt } from './PlaceholderArt.jsx'
 import { SectionTitle } from './section-heading.jsx'
 
 // One card in the auto-scrolling destinations ticker. `hidden` marks the
-// duplicated second copy of the row (rendered so the marquee has a full
-// width to slide by before looping) so assistive tech only ever hears each
-// destination once — its link is also dropped from the tab order.
+// duplicated second copy of the row (rendered so the strip has a full loop's
+// worth of width to scroll through before wrapping) so assistive tech only
+// ever hears each destination once — its link is also dropped from the tab
+// order.
 //
 // Same card language as the Services row and Explore Regions: full-bleed
 // photo, square corners, a bottom-up black gradient, serif title, and an
@@ -29,6 +31,7 @@ function DestinationCard({ d, hidden }) {
       to={d.to}
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
+      draggable={false}
       className="group relative w-64 h-[391px] shrink-0 overflow-hidden bg-cocoa sm:w-72 sm:h-[434px] lg:w-[clamp(20rem,25vw-1rem,36rem)] lg:h-[calc(clamp(20rem,25vw-1rem,36rem)*4/3+50px)]"
     >
       {d.image ? (
@@ -37,6 +40,7 @@ function DestinationCard({ d, hidden }) {
           alt=""
           aria-hidden="true"
           loading="lazy"
+          draggable={false}
           className="size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
         />
       ) : (
@@ -70,22 +74,130 @@ function DestinationCard({ d, hidden }) {
   )
 }
 
+// Pixels per second the strip drifts at while idle.
+const AUTO_SPEED = 45
+// After a touch drag ends, autoplay waits this long before resuming — long
+// enough for the browser's momentum/inertia scrolling to settle rather than
+// fighting it.
+const TOUCH_SETTLE_MS = 600
+// Pointer movement past this many pixels counts as a drag rather than a
+// tap, so a mouse-drag never also fires the click on the card underneath.
+const DRAG_THRESHOLD = 4
+
 export function DestinationsTicker() {
+  const trackRef = useRef(null)
+  const [reduceMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+  // Refs, not state — they're read every animation frame and must never
+  // trigger a re-render themselves.
+  const pausedRef = useRef(false)
+  const draggingRef = useRef(false)
+  const dragRef = useRef({ pointerId: null, startX: 0, startScrollLeft: 0, moved: false })
+  const touchSettleTimeoutRef = useRef(null)
+
+  // Auto-scrolls the strip at a constant speed, wrapping back to the start
+  // once it has scrolled through one full copy of the list (the list is
+  // rendered twice below, so the wrap lands on an identical frame and reads
+  // as seamless). Paused on hover/focus and while the user is dragging.
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track || reduceMotion) return
+    let frame
+    let last = null
+    const tick = (time) => {
+      if (last == null) last = time
+      const dt = (time - last) / 1000
+      last = time
+      if (!pausedRef.current && !draggingRef.current) {
+        track.scrollLeft += AUTO_SPEED * dt
+      }
+      const loopWidth = track.scrollWidth / 2
+      if (loopWidth > 0 && track.scrollLeft >= loopWidth) {
+        track.scrollLeft -= loopWidth
+        // Keep the in-progress drag's reference point in step with the wrap.
+        if (draggingRef.current) dragRef.current.startScrollLeft -= loopWidth
+      }
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [reduceMotion])
+
+  useEffect(() => () => clearTimeout(touchSettleTimeoutRef.current), [])
+
+  // Touch scrolls natively (the track is a real overflow-x-auto element),
+  // so only mouse needs manual click-and-drag handling here.
+  const onPointerDown = (event) => {
+    clearTimeout(touchSettleTimeoutRef.current)
+    draggingRef.current = true
+    if (event.pointerType !== 'mouse') return
+    const track = trackRef.current
+    if (!track) return
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startScrollLeft: track.scrollLeft,
+      moved: false,
+    }
+    track.setPointerCapture(event.pointerId)
+  }
+
+  const onPointerMove = (event) => {
+    if (!draggingRef.current || event.pointerType !== 'mouse') return
+    if (event.pointerId !== dragRef.current.pointerId) return
+    const track = trackRef.current
+    if (!track) return
+    const dx = event.clientX - dragRef.current.startX
+    if (Math.abs(dx) > DRAG_THRESHOLD) dragRef.current.moved = true
+    track.scrollLeft = dragRef.current.startScrollLeft - dx
+  }
+
+  const onPointerUp = (event) => {
+    if (event.pointerType === 'mouse') {
+      draggingRef.current = false
+      return
+    }
+    touchSettleTimeoutRef.current = setTimeout(() => {
+      draggingRef.current = false
+    }, TOUCH_SETTLE_MS)
+  }
+
+  const onClickCapture = (event) => {
+    if (dragRef.current.moved) {
+      event.preventDefault()
+      dragRef.current.moved = false
+    }
+  }
+
   return (
     <section id="destinations" className="overflow-hidden pb-16 lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionTitle eyebrow="Where we work" title="Explore our Destinations" />
       </div>
 
-      <div className="relative mt-10" role="group" aria-label="Explore our destinations">
-        <div className="flex w-max animate-marquee gap-5 hover:[animation-play-state:paused]">
-          {DESTINATIONS.map((d) => (
-            <DestinationCard key={d.slug} d={d} />
-          ))}
-          {DESTINATIONS.map((d) => (
-            <DestinationCard key={`${d.slug}-dup`} d={d} hidden />
-          ))}
-        </div>
+      <div
+        ref={trackRef}
+        role="group"
+        aria-label="Explore our destinations"
+        className="mt-10 flex cursor-grab touch-pan-x select-none gap-5 overflow-x-auto active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onMouseEnter={() => (pausedRef.current = true)}
+        onMouseLeave={() => (pausedRef.current = false)}
+        onFocus={() => (pausedRef.current = true)}
+        onBlur={() => (pausedRef.current = false)}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onClickCapture={onClickCapture}
+        onDragStart={(event) => event.preventDefault()}
+      >
+        {DESTINATIONS.map((d) => (
+          <DestinationCard key={d.slug} d={d} />
+        ))}
+        {DESTINATIONS.map((d) => (
+          <DestinationCard key={`${d.slug}-dup`} d={d} hidden />
+        ))}
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

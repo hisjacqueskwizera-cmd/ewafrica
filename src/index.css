@@ -32,11 +32,6 @@
   --shadow-lift: 0 30px 70px -24px rgba(20, 14, 8, 0.55);
 
   /* Motion */
-  /* 54s (not 36s) — the ticker row grew from 6 to 9 cards, so the duration
-     scales up by the same 1.5x to keep the scroll speed (not just the
-     duration) the same as before. */
-  --animate-marquee: marquee 54s linear infinite;
-
   /* A slow, gentle bob for small decorative graphics floating over a photo
      (e.g. the Ghana map) — not tied to scroll, just a bit of ambient life. */
   --animate-float: float 5s ease-in-out infinite;
@@ -49,12 +44,6 @@
      The fade-out holds at opacity 0 until the slide is removed. */
   --animate-slide-fade-in: slide-fade-in 2s ease-out;
   --animate-slide-fade-out: slide-fade-out 2s ease-in forwards;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 @keyframes slide-fade-in {

@@ -273,7 +273,7 @@ export function Services() {
         onBlur={() => setPaused(false)}
       >
         <div
-          className={`flex ${animate ? 'transition-transform duration-700 ease-in-out' : ''}`}
+          className={`flex ${animate ? 'transition-transform duration-2000 ease-in-out' : ''}`}
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {SLIDES.map((group, slide) => (

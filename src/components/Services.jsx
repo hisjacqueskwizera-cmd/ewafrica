@@ -214,9 +214,13 @@ export function Services() {
     clearTimeout(touchSettleTimeoutRef.current)
     setPaused(true)
     draggingRef.current = true
-    if (event.pointerType !== 'mouse') return
     const track = trackRef.current
-    if (!track) return
+    // Grabbing the strip mid-autoplay would otherwise leave the browser's
+    // native smooth-scroll animation still running underneath the drag,
+    // fighting it and making the strip overshoot — cut it off at wherever
+    // it currently sits.
+    if (track) track.scrollTo({ left: track.scrollLeft, behavior: 'auto' })
+    if (event.pointerType !== 'mouse' || !track) return
     dragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,

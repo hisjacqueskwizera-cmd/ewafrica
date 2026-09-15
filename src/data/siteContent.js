@@ -57,7 +57,6 @@ export const COUNTRIES = [
     note: 'Zanzibar and the coast',
     displayName: 'Tanzania (Zanzibar)',
     to: '/tanzania',
-    featured: true,
     tone: 'forest',
     image: '/Pictures/countries/Tanzania.jpg',
   },

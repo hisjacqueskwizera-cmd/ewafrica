@@ -17,18 +17,6 @@ export function Newsletter() {
 
   return (
     <section className="relative overflow-hidden bg-cocoa py-16 text-primary-foreground lg:py-20">
-      {/* A large, near-invisible initial behind the copy — the same quiet
-          watermark move the reference site makes with its own wordmark.
-          Sized to the band's own height so the glyph sits whole, not
-          cropped top and bottom; hidden below lg where the band is too
-          short for it to read as a letter at all. */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 select-none text-[13rem] font-semibold leading-none text-primary-foreground/[0.07] lg:block"
-      >
-        E
-      </span>
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>

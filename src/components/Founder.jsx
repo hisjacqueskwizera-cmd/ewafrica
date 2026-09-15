@@ -7,7 +7,7 @@ import { SectionMark } from './SectionMark.jsx'
 
 export function Founder() {
   return (
-    <section id="about" className="pb-16 lg:pb-20">
+    <section id="about" className="pb-2 lg:pb-3">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:px-8">
         <Reveal className="relative">
           <div className="overflow-hidden rounded-3xl shadow-lift">

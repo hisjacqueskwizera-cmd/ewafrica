@@ -67,7 +67,7 @@ export function ExploreMenu({ countries, forceClosed, onNavigate }) {
 
           <div className="mt-6 flex justify-center border-t border-border pt-6">
             <HashLink
-              to="/#explore"
+              to="/explore"
               role="menuitem"
               onClick={onNavigate}
               className="group/cta inline-flex items-center gap-2 text-sm font-bold text-copper hover:underline"

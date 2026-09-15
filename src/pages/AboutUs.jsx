@@ -61,31 +61,24 @@ export function AboutUs() {
       {/* Hero — full-screen video with just a breadcrumb and the page title,
           centered. The header sits transparent over it (see
           TRANSPARENT_HERO_ROUTES in Header.jsx). */}
-      <section className="relative isolate flex h-svh min-h-[600px] items-center justify-center overflow-hidden px-10 text-center text-primary-foreground">
+      <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-10 text-left text-primary-foreground lg:px-16">
         <HeroVideoBackground />
         <div className="absolute inset-0 z-[3] bg-cocoa/45" aria-hidden="true" />
-        <div className="relative z-[4]">
-          <Reveal>
-            <nav aria-label="Breadcrumb">
-              <ol className="flex items-center justify-center gap-1.5 text-[15px]">
-                <li>
-                  <Link to="/" className="hover:underline">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true" className="text-primary-foreground/60">
-                  /
-                </li>
-                <li aria-current="page" className="text-primary-foreground/60">
-                  {hero.badge}
-                </li>
-              </ol>
-            </nav>
-          </Reveal>
+        <div className="relative z-[4] w-full max-w-5xl">
+         
           <Reveal delay={150} blur>
-            <h1 className="mt-9 font-display text-[3rem] font-normal leading-[1.1] text-balance sm:text-[4rem] lg:text-[5.375rem]">
-              {hero.titleLine1}
-            </h1>
+            <div className="mt-9 max-w-3xl">
+              
+              <h1 className="mt-4 font-display text-[3rem] font-normal leading-[1.1] text-balance sm:text-[4rem] lg:text-[5.375rem]">
+                <AccentHeading text={hero.titleLine1} className={`${HEADING} text-white text-balance sm:text-[4rem] lg:text-[5.375rem]`} />
+              </h1>
+              <p className="mt-6 max-w-[640px] text-base leading-[1.7] text-primary-foreground/90 md:text-lg">
+                East-West Africa Link was founded from decades of firsthand travel and experience
+                across the African continent from North Africa to West, East, Central and Southern
+                Africa, with a focus on practical guidance, trusted local connections, and helping
+                people navigate Africa with confidence.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -151,16 +144,7 @@ export function AboutUs() {
         </div>
       </section>
 
-      <Band
-        heading={hero.tagline.join(', ')}
-        cta={
-          <HashLink to="/travel-planner" className="btn-outline-light w-fit px-8 text-sm">
-            Plan Your Journey
-          </HashLink>
-        }
-      >
-        <p>{hero.description}</p>
-      </Band>
+      
 
       {/* Meet the Founder — photo left, bio and quote right. The homepage's
           "Read The Full Bio" button links here (/about#founder). The photo
@@ -218,7 +202,7 @@ export function AboutUs() {
               <p className="italic">{styleOfTravel.closing}</p>
             </div>
           </Reveal>
-          <HashLink to="/#explore" className="btn-outline-light w-fit shrink-0 px-8 text-sm">
+          <HashLink to="/explore" className="btn-outline-light w-fit shrink-0 px-8 text-sm">
             Explore Destinations
           </HashLink>
         </div>
@@ -238,31 +222,7 @@ export function AboutUs() {
         <p className="italic">{whyCreated.closing}</p>
       </Band>
 
-      {/* What we stand for — half-photo, half-copy cards on sand. */}
-      <section className="bg-sand px-[30px] py-[100px]">
-        <div className="grid gap-2.5 lg:grid-cols-2">
-          {trust.map((item, i) => {
-            const Icon = ICONS[item.icon]
-            return (
-              <Reveal key={item.title} delay={i * 80} className="grid bg-cream sm:grid-cols-2">
-                <img
-                  src={item.image}
-                  alt={item.imageAlt}
-                  loading="lazy"
-                  className="aspect-4/3 w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[420px]"
-                />
-                <div className="p-[30px]">
-                  <Icon className="size-6 text-copper" aria-hidden="true" />
-                  <h3 className="mt-6 font-display text-[1.75rem] font-normal leading-[1.4] text-cocoa">
-                    {item.title}
-                  </h3>
-                  <p className="mt-4 text-base leading-[1.7] text-cocoa">{item.text}</p>
-                </div>
-              </Reveal>
-            )
-          })}
-        </div>
-      </section>
+   
 
       {/* Closing — heading left, right-aligned copy, and a thin curved rule
           that runs down and across into the CTA (the rule is desktop only). */}

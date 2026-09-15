@@ -5,6 +5,7 @@ import { ScrollManager } from './components/ScrollManager.jsx'
 import { TravelPlannerFlowProvider } from './context/TravelPlannerFlowContext.jsx'
 import { PLACEHOLDER_PAGES } from './data/siteContent.js'
 import { AboutUs } from './pages/AboutUs.jsx'
+import { Explore } from './pages/Explore.jsx'
 import { Home } from './pages/Home.jsx'
 import { Placeholder } from './pages/Placeholder.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
@@ -43,6 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/ghana" element={<Placeholder {...PLACEHOLDER_PAGES.ghana} />} />
           <Route path="/tanzania" element={<Tanzania />} />
           <Route path="/travel-planner" element={<TravelPlanner />} />

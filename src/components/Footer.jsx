@@ -85,10 +85,10 @@ export function Footer() {
                 </span>
                 <ul className="flex flex-col gap-2 pl-0.5">
                   {region.countries.map((country) =>
-                    country.to ? (
+                    country.link ? (
                       <li key={country.name}>
                         <Link
-                          to={country.to}
+                          to={country.link}
                           className="text-primary-foreground/65 transition-colors hover:text-gold"
                         >
                           {country.name}

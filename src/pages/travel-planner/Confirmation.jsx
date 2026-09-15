@@ -148,7 +148,7 @@ export function Confirmation() {
                   Return to Home
                 </Link>
                 <Link
-                  to="/#explore"
+                  to="/explore"
                   onClick={resetRequest}
                   className="btn-copper flex-1 justify-center"
                 >

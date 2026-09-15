@@ -90,15 +90,15 @@ export function DestinationsTicker() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-10 flex justify-center">
-          <a
-            href="/#explore"
+          <Link
+            to="/explore"
             className="inline-flex items-center gap-2 text-sm font-semibold text-copper hover:underline"
           >
             <span>View all destinations</span>
             <span className="grid size-8 place-items-center rounded-full bg-copper text-copper-foreground">
               <ArrowRight className="size-4" aria-hidden="true" />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 export const NAV_LINKS = [
   { label: 'Home', to: '/#home' },
-  { label: 'Explore', to: '/#explore' },
+  { label: 'Explore', to: '/explore', isRoute: true },
   { label: 'Ghana', to: '/ghana', isRoute: true },
   { label: 'Travel Planner', to: '/travel-planner', isRoute: true },
   { label: 'About Us', to: '/about', isRoute: true },
@@ -32,7 +32,7 @@ export const HERO = {
   titleAccent: 'With Confidence',
   description:
     'Independent travel, practical guidance, and trusted local connections across East and West Africa.',
-  primaryCta: { label: 'Explore Africa', to: '/#destinations' },
+  primaryCta: { label: 'Explore Africa', to: '/explore' },
   secondaryCta: { label: 'How We Can Help You', to: '/#services' },
 }
 
@@ -66,7 +66,7 @@ export const COUNTRIES = [
     name: 'Malawi',
     region: 'east',
     note: 'Lake of stars',
-    to: '/#explore',
+    to: '/explore#malawi',
     tone: 'forest',
     image: '/Pictures/countries/Malawi.webp',
   },
@@ -75,7 +75,7 @@ export const COUNTRIES = [
     name: 'Zambia',
     region: 'east',
     note: 'Victoria Falls',
-    to: '/#explore',
+    to: '/explore#zambia',
     tone: 'navy',
     image: '/Pictures/countries/Zambia.jpg',
   },
@@ -84,7 +84,7 @@ export const COUNTRIES = [
     name: 'Uganda',
     region: 'east',
     note: 'Pearl of Africa',
-    to: '/#explore',
+    to: '/explore#uganda',
     tone: 'forest',
     image: '/Pictures/countries/Uganda.jpg',
   },
@@ -93,7 +93,7 @@ export const COUNTRIES = [
     name: 'Rwanda',
     region: 'east',
     note: 'Land of a thousand hills',
-    to: '/#explore',
+    to: '/explore#rwanda',
     tone: 'navy',
     image: '/Pictures/countries/Rwanda.jpg',
   },
@@ -101,7 +101,7 @@ export const COUNTRIES = [
     slug: 'senegal',
     name: 'Senegal',
     region: 'west',
-    to: '/#explore',
+    to: '/explore#senegal',
     tone: 'copper',
     image: '/Pictures/countries/Senegal.webp',
   },
@@ -109,7 +109,7 @@ export const COUNTRIES = [
     slug: 'benin',
     name: 'Benin',
     region: 'west',
-    to: '/#explore',
+    to: '/explore#benin',
     tone: 'copper',
     image: '/Pictures/countries/Benin.jpg',
   },
@@ -117,7 +117,7 @@ export const COUNTRIES = [
     slug: 'gambia',
     name: 'The Gambia',
     region: 'west',
-    to: '/#explore',
+    to: '/explore#gambia',
     tone: 'copper',
     image: encodeURI('/Pictures/countries/The gambia.jpg'),
   },
@@ -228,13 +228,16 @@ export const REGIONS = [
     id: 'east-africa',
     name: 'East Africa',
     tone: 'forest',
-    to: '/travel-planner',
+    to: '/explore#east-africa',
     image: '/Pictures/countries/Tanzania.jpg',
     slides: regionSlides('east-africa', [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
     countries: COUNTRIES.filter((c) => c.region === 'east').map((c) => ({
       name: c.displayName ?? c.name,
       featured: c.featured,
       to: c.featured ? c.to : undefined,
+      // Where the footer links this country — every country has somewhere
+      // to go (its own page, or its card on /explore).
+      link: c.to,
     })),
     more: '',
   },
@@ -242,13 +245,16 @@ export const REGIONS = [
     id: 'west-africa',
     name: 'West Africa',
     tone: 'copper',
-    to: '/travel-planner',
+    to: '/explore#west-africa',
     image: '/Pictures/countries/Ghana.jpg',
     slides: regionSlides('west-africa', [1, 2, 3, 4, 5, 6, 7, 8]),
     countries: COUNTRIES.filter((c) => c.region === 'west').map((c) => ({
       name: c.displayName ?? c.name,
       featured: c.featured,
       to: c.featured ? c.to : undefined,
+      // Where the footer links this country — every country has somewhere
+      // to go (its own page, or its card on /explore).
+      link: c.to,
     })),
   },
 ]
@@ -302,7 +308,7 @@ export const FOOTER = {
   quickLinks: [
     { label: 'Home', to: '/#home' },
     { label: 'About Us', to: '/about' },
-    { label: 'Destinations', to: '/#destinations' },
+    { label: 'Destinations', to: '/explore' },
     { label: 'Services', to: '/#services' },
     { label: 'Contact', to: '/#contact' },
   ],
@@ -871,6 +877,99 @@ export const TRAVEL_PLANNER_FLOW = {
   betweenCountriesOptionsPdf: {
     2: ['Overland travel', 'Regional flight', 'Not sure — please recommend'],
     3: ['Overland travel', 'Regional flights', 'A mixture', 'Not sure — please recommend'],
+  },
+}
+
+// The Explore page (/explore). Each country card reads its name, photo,
+// note and link from COUNTRIES; only what's specific to this page — the
+// services offered there and the featured cards' longer copy — lives here.
+const EXPLORE_SERVICES = ['Personal Visa Guidance', 'Travel Planner', 'Border Crossing Guide']
+const EXPLORE_SERVICES_WITH_GUIDES = [...EXPLORE_SERVICES, 'Independent Tour Guides *']
+
+export const EXPLORE_PAGE = {
+  hero: {
+    badge: 'Explore Africa',
+    titleLine1: 'Explore',
+    titleAccent: 'Africa',
+    description: 'Practical guidance. Local knowledge. Your journey, your way.',
+    primaryCta: { label: 'East Africa', to: '/explore#east-africa' },
+    secondaryCta: { label: 'West Africa', to: '/explore#west-africa' },
+  },
+  intro: 'Select a Region',
+  east: {
+    title: 'East Africa',
+    tagline: 'Trusted travel guidance and local connections across East Africa.',
+    // The first country gets the featured, double-wide card.
+    countries: [
+      {
+        slug: 'tanzania',
+        services: EXPLORE_SERVICES_WITH_GUIDES,
+        description: [
+          "Tanzania is one of East Africa's most diverse destinations, known for its wildlife, dramatic landscapes, rich cultures, and Indian Ocean coastline. It is also home to Zanzibar, the legendary island destination just off the Tanzanian coast.",
+          'Zanzibar is the ultimate Indian Ocean experience, combining white-sand beaches, turquoise waters, centuries of Swahili history, and a distinctive blend of African, Arab, and Indian influences. Explore the historic streets of Stone Town, the beaches of Nungwi and Kendwa, the marine world around Mnemba Atoll, colorful local markets, spice farms, and unforgettable Indian Ocean sunsets.',
+          'East-West Africa Link offers travel guidance throughout Tanzania, with local guide services available in Zanzibar.',
+        ],
+      },
+      { slug: 'rwanda', services: EXPLORE_SERVICES },
+      { slug: 'malawi', services: EXPLORE_SERVICES },
+      { slug: 'zambia', services: EXPLORE_SERVICES },
+      { slug: 'uganda', services: EXPLORE_SERVICES },
+    ],
+  },
+  west: {
+    title: 'West Africa',
+    tagline: 'Travel, local connections and relocation support in West Africa.',
+    featured: {
+      slug: 'ghana',
+      badge: 'Featured Destination · Travel + Relocation',
+      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
+      travelServices: EXPLORE_SERVICES_WITH_GUIDES,
+      relocationServices: [
+        'General Ghana Relocation Guidance',
+        'Right of Abode Guidance',
+        'Land & Property Information',
+        'Complete Ghana Relocation Package',
+      ],
+      description: [
+        "Ghana is one of West Africa's most welcoming and culturally rich destinations, where vibrant cities, historic coastal towns, beautiful beaches, traditional communities, and a powerful sense of heritage come together.",
+        "Explore the energy of Accra, the history of Cape Coast and Elmina, the beauty of Ghana's coastline and countryside, and the traditions that make the country such a distinctive place to visit, live, and explore new opportunities.",
+        'For many travelers — especially members of the African diaspora — Ghana offers something deeper: a chance to reconnect with history and heritage, build meaningful connections, and experience West Africa in a more personal way.',
+      ],
+    },
+    countries: [
+      { slug: 'senegal', services: EXPLORE_SERVICES },
+      { slug: 'benin', services: EXPLORE_SERVICES_WITH_GUIDES },
+      { slug: 'gambia', services: EXPLORE_SERVICES },
+    ],
+  },
+  trust: [
+    {
+      icon: 'Shield',
+      title: 'Practical & Reliable',
+      text: 'Up-to-date information you can use to plan with confidence.',
+    },
+    {
+      icon: 'Users',
+      title: 'Local Connections',
+      text: 'Connect with trusted local guides and professionals.',
+    },
+    {
+      icon: 'MapPin',
+      title: 'Travel Your Way',
+      text: 'Independent travel support for your unique journey.',
+    },
+    {
+      icon: 'Globe2',
+      title: 'Across Africa',
+      text: 'East and West Africa guidance in one trusted place.',
+    },
+  ],
+  footnote: '* Independent Tour Guide service is available in selected countries.',
+  closing: {
+    heading: 'Need help choosing a destination or service?',
+    text: "We're here to help you plan the right journey.",
+    cta: 'Get Guidance',
   },
 }
 

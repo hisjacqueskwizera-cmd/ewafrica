@@ -28,6 +28,12 @@ import { RevealText } from './RevealText.jsx'
  * back to a centered single column on small screens, where there's no
  * room for a true left/right split) so the backdrop reads as an open
  * canvas on the left.
+ *
+ * `trustItems` is an optional row of 2-4 short credentials below the
+ * description (icon + bold title + small subtitle, divided by thin
+ * vertical rules on sm+ screens) — pass `icon` as an actual lucide
+ * component (already resolved by the caller), not an icon name, so this
+ * shared component stays icon-agnostic.
  */
 export function PageIntro({
   id,
@@ -36,6 +42,7 @@ export function PageIntro({
   titleAccent,
   tagline,
   description,
+  trustItems,
   primaryCta,
   secondaryCta,
   backgroundImage,
@@ -119,6 +126,29 @@ export function PageIntro({
               {description}
             </p>
           </Reveal>
+
+          {trustItems && (
+            <Reveal delay={350}>
+              <div className="mt-8 flex flex-wrap items-start justify-center gap-6 sm:justify-start">
+                {trustItems.map((item, i) => (
+                  <div
+                    key={item.title}
+                    className={`flex items-center gap-3 ${
+                      i > 0 ? 'sm:border-l sm:border-primary-foreground/25 sm:pl-6' : ''
+                    }`}
+                  >
+                    <span className="grid size-10 shrink-0 place-items-center rounded-full border border-gold/50 text-gold">
+                      <item.icon className="size-4" aria-hidden="true" />
+                    </span>
+                    <div className="text-left">
+                      <p className="text-sm font-bold text-primary-foreground">{item.title}</p>
+                      <p className="text-xs text-primary-foreground/70">{item.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          )}
 
           {(primaryCta || secondaryCta) && (
             <Reveal delay={450}>

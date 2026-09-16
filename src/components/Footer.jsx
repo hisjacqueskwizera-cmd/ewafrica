@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { CONTACT_INFO, FOOTER, REGIONS, SOCIAL_LINKS } from '../data/siteContent.js'
 import { HashLink } from './HashLink.jsx'
@@ -115,11 +115,13 @@ export function Footer() {
           <ul className="flex flex-col gap-3 text-sm">
             <li>
               <a
-                href={CONTACT_INFO.phoneHref}
+                href={CONTACT_INFO.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-start gap-2.5 text-primary-foreground/65 transition-colors hover:text-gold"
               >
-                <Phone className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                {CONTACT_INFO.phone}
+                <WhatsAppIcon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                WhatsApp
               </a>
             </li>
             <li>

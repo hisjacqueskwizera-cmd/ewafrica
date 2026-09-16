@@ -1,9 +1,9 @@
-import { ArrowRight, Clock, Mail, Map, Search, Settings2, Shield, Users } from 'lucide-react'
+import { ArrowRight, Clock, FileText, Mail, Map, Search, Settings2, Shield, Users } from 'lucide-react'
 import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
 import { HashLink } from '../HashLink.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
 
-const ICONS = { Map, Settings2, Mail, Users, Clock, Search }
+const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText }
 
 /**
  * The right-hand rail steps 3–6 of the request wizard share: a photo with
@@ -113,7 +113,7 @@ export function PlannerSidebar({
             <span className="grid size-6 shrink-0 place-items-center rounded-full bg-forest text-primary-foreground">
               <WhatsAppIcon className="size-3" aria-hidden="true" />
             </span>
-            {CONTACT_INFO.phone}
+            WhatsApp
           </a>
           <a
             href={CONTACT_INFO.emailHref}

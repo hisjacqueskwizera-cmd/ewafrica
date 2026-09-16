@@ -1718,14 +1718,19 @@ export const TRAVEL_PLANNER_PAGE = {
   // PageIntro) so the page keeps its own photo and copy.
   hero: {
     badge: 'Travel Planner',
-    titleLine1: 'Plan More',
-    titleAccent: 'Discover Deeper',
-    tagline: ['Real places. Real people. A more meaningful Africa.'],
+    titleLine1: 'Plan Your',
+    titleAccent: 'Africa Journey',
+    tagline: ['One country or multi-country, travel with confidence.'],
     description:
-      'From one country to multi-country adventures, get practical guidance to create your ideal Africa journey.',
-    backgroundImage: '/Pictures/Travel planner hero background.PNG',
+      'Get personalized, practical guidance to help you build a smoother, smarter trip across East and West Africa.',
+    backgroundImage: '/Pictures/TRV_HR.PNG',
     backgroundImageAlt:
-      'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
+      'A veranda table with a map of Africa, compass and journal overlooking Mount Kilimanjaro at sunrise',
+    trustItems: [
+      { icon: 'User', title: 'Expert Guidance', text: 'From people who know Africa' },
+      { icon: 'Map', title: 'Custom Itineraries', text: 'Tailored to your interests' },
+      { icon: 'Users', title: 'Real Local Connections', text: 'Authentic. Trusted. Meaningful.' },
+    ],
   },
   intro: {
     heading: 'Choose the Support That Fits Your Trip',
@@ -1733,21 +1738,17 @@ export const TRAVEL_PLANNER_PAGE = {
       'Whether you are still deciding what to book, already have part of your trip arranged, or want help building your journey from the ground up, choose the service that best matches where you are in your planning.',
   },
   // Travel Planner's per-country-count tiers are the same everywhere,
-  // Ghana included. Travel Audit has a Ghana-specific flat rate;
-  // flatPricing.default covers every other country. Before You Book Check
-  // no longer uses this flat-rate model — see priceForSelection() and
-  // BEFORE_YOU_BOOK_FLOW above, which price it by country count plus a
-  // flat Ghana surcharge instead, and its card below never shows a price.
+  // Ghana included. Before You Book Check and Travel Audit no longer use a
+  // flat-rate model either — see priceForSelection()/BEFORE_YOU_BOOK_FLOW
+  // and priceForTravelAudit()/TRAVEL_AUDIT_FLOW below, which price each by
+  // country count plus their own flat Ghana surcharge, and neither card
+  // shows a price here any more anyway.
   travelPlannerTiers: [
     { countries: 1, price: 65 },
     { countries: 2, price: 135 },
     { countries: 3, price: 195 },
     { countries: 4, price: 245 },
   ],
-  flatPricing: {
-    default: { travelAudit: 45 },
-    ghana: { travelAudit: 55 },
-  },
   services: [
     {
       key: 'travelPlanner',
@@ -2295,6 +2296,213 @@ export function priceForSelection(destinationSlugs) {
   const base = BEFORE_YOU_BOOK_FLOW.tiers.find((t) => t.countries === count)?.price ?? null
   if (base == null) return null
   return base + (destinationSlugs.includes('ghana') ? BEFORE_YOU_BOOK_FLOW.ghanaSurcharge : 0)
+}
+
+// The Travel Audit service — its own detail page
+// (/travel-planner/travel-audit) plus a 4-step request wizard (.../request
+// through .../confirmation), a third independent flow alongside Travel
+// Planner and Before You Book Check above. Same shape (request → review →
+// payment → confirmation) and the same shared step components
+// (PlannerBackground, PlannerStepHero, PlannerSidebar, PlannerStepper), its
+// own question set (for travelers who have already booked, or partially
+// booked, and want an independent review), and its own pricing — tiered by
+// country count, plus a flat Ghana surcharge, same hybrid model as Before
+// You Book Check just with this service's own numbers.
+//
+// Body copy on the detail page is transcribed verbatim from the "Travel
+// Planner DETAILS" reference document's Travel Audit section (the same
+// document Travel Planner's and Before You Book Check's detail pages
+// already draw from).
+export const TRAVEL_AUDIT_PAGE = {
+  hero: {
+    badge: 'Travel Planner',
+    titleLine1: 'Travel',
+    titleAccent: 'Audit',
+    tagline: ['Already booked? Let us review how it fits together.'],
+    description:
+      'The Travel Audit is for travelers who have already booked — or partially booked — their trip and want an independent review before they travel.',
+    backgroundImage: '/Pictures/Travel planner hero background.PNG',
+    backgroundImageAlt:
+      'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
+  },
+  intro: {
+    heading: 'Already Booked? Let Us Review How the Journey Fits Together.',
+    paragraphs: [
+      'The Travel Audit is for travelers who have already booked—or partially booked—their trip and want an independent review before they travel.',
+      'It can be used for a single-country trip or a multi-country journey, with particular attention to overland travel, border crossings, ground transportation, and how the different parts of the trip connect.',
+      'We review how the journey works as a whole and identify possible gaps, difficult connections, unnecessary backtracking, unrealistic travel times, or transportation issues.',
+    ],
+  },
+  whatWeReview: {
+    heading: 'What We Review',
+    items: [
+      'Your existing flight and accommodation bookings',
+      'The sequence of your destinations',
+      'Transportation between locations',
+      'Multi-country routing',
+      'Overland travel through one or several countries',
+      'Border crossings and connections between countries',
+      'Approximate travel times',
+      'Difficult or tight connections',
+      'Gaps in your itinerary',
+      'Unnecessary backtracking',
+      'Parts of the journey that may be impractical',
+      'Areas where the trip may be simplified or improved',
+    ],
+  },
+  whyItMatters: {
+    heading: 'Why a Travel Audit Matters',
+    paragraphs: [
+      'A trip can look complete because the flights, hotels, and major activities are already booked, but problems often appear in the details between those bookings.',
+      'This can be especially valuable on multi-country journeys, where overland travel, border crossings, transportation schedules, route sequence, and realistic travel times can affect the entire trip.',
+      'The Travel Audit looks at how the journey works as a whole and can help identify difficult connections, unrealistic travel days, unnecessary backtracking, or gaps that may be easier to correct before you travel.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'You will receive a written review by email outlining any concerns we identify, together with practical suggestions for improving the trip where possible.',
+      'If your existing arrangements already make good practical sense, we will tell you that as well.',
+    ],
+  },
+  followUpSupport: {
+    heading: 'Follow-Up Support',
+    items: [
+      {
+        label: 'Most countries',
+        text: 'Your Travel Audit includes 3 clarification emails within 7 days after delivery.',
+      },
+      {
+        label: 'Ghana',
+        text: 'Includes 3 clarification emails within 7 days plus an optional 20-minute phone consultation.',
+      },
+      {
+        label: 'Benin and Senegal',
+        text: 'Includes 3 clarification emails within 7 days in English or French.',
+      },
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important to Know',
+    paragraphs: [
+      'East-West Africa Link does not make, cancel, or change bookings on your behalf.',
+      'Any changes remain your decision and must be arranged directly with the airline, hotel, transportation provider, or other supplier.',
+    ],
+  },
+  sidebar: {
+    title: 'Travel Audit',
+    tagline: 'Plan wisely. Travel with confidence.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Your full report sent to you securely' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is always protected' },
+    { icon: 'Users', title: 'Expert Guidance', text: 'Country-specific. Up-to-date. Trusted.' },
+  ],
+  closing: 'Plan wisely. Travel with confidence.',
+}
+
+export const TRAVEL_AUDIT_FLOW = {
+  // 1 country: $40, 2: $70, 3: $90, 4: $105 — the same tiers no matter
+  // which countries are picked. Ghana adds a flat $5 on top of whichever
+  // tier applies (not its own tier), matching the standalone "Ghana Travel
+  // Audit is $45" ($40 + $5) rate.
+  tiers: [
+    { countries: 1, price: 40 },
+    { countries: 2, price: 70 },
+    { countries: 3, price: 90 },
+    { countries: 4, price: 105 },
+  ],
+  ghanaSurcharge: 5,
+  includes: [
+    { icon: 'FileText', text: 'Review of your existing bookings and itinerary' },
+    { icon: 'Search', text: 'Identify gaps, issues or better options' },
+    { icon: 'Mail', text: 'Delivered by email' },
+    { icon: 'Users', text: '3 clarification emails within 7 days' },
+    { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
+  ],
+  bookedOptions: [
+    'International flights',
+    'Regional or domestic flights',
+    'Accommodation (hotels, guesthouses, etc.)',
+    'Ground transport (buses, trains, private drivers, etc.)',
+    'Tours or activities',
+  ],
+  durationOptions: [
+    '1 week or less',
+    'About 2 weeks',
+    'About 3 weeks',
+    'About 1 month',
+    'More than 1 month',
+    'Not sure yet',
+  ],
+  stepLabels: ['Your Request', 'Review Your Answers', 'Secure Payment', 'Payment Received'],
+  steps: {
+    request: {
+      bannerTagline: 'Real Places. Meaningful Journeys.',
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Start Your Request',
+      description:
+        "Tell us about your trip. We'll review your existing bookings and plans to help you identify potential issues, improve your route, and make the most of your journey. All fields marked with * are required.",
+      back: { label: 'Back to Service Details', to: '/travel-planner/travel-audit' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['Plan wisely.', 'Travel with confidence.'],
+    },
+    review: {
+      bannerTagline: 'Real Places. Meaningful Journeys.',
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please review your answers below. If you need to make changes, click Edit for the relevant section. When you are ready, click Continue to Secure Payment.',
+      back: { label: 'Back to Make Changes', to: '/travel-planner/travel-audit/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['Plan wisely.', 'Travel with confidence.'],
+    },
+    payment: {
+      bannerTagline: 'Real Places. Meaningful Journeys.',
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Secure Payment',
+      description:
+        'Please review your order details below and complete your payment to submit your request. Your payment is processed securely using industry-standard encryption.',
+      back: { label: 'Back to Review Your Answers', to: '/travel-planner/travel-audit/review' },
+      quote: ['Plan wisely.', 'Travel with confidence.'],
+      helper:
+        'After payment, you will receive a confirmation and your Travel Audit request will be submitted for review.',
+      sidebarHeading: 'Your Payment Is Secure',
+      sidebarCaption: ['Plan wisely.', 'Travel with confidence.'],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+    confirmation: {
+      bannerTagline: 'Real Places. Meaningful Journeys.',
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Your Payment Has Been Received',
+      intro: 'Your request for the Travel Audit has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will carefully review your existing bookings and questions.',
+      deliveryNote: 'Your personalized Travel Audit will be delivered by email.',
+      followUp:
+        'You have 3 clarification emails within 7 days of delivery (plus an optional 20-minute phone consultation for Ghana). If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Travel Audit',
+      sidebarCaption: ['Plan wisely. Travel with confidence.', "We're here to help."],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+  },
+}
+
+// Turns a destination selection into the Travel Audit price — mirrors
+// priceForSelection above (tiered by count, plus a flat Ghana surcharge),
+// just against TRAVEL_AUDIT_FLOW's own tiers/surcharge. Returns null when
+// nothing is selected yet.
+export function priceForTravelAudit(destinationSlugs) {
+  const count = destinationSlugs.length
+  if (count === 0) return null
+  const base = TRAVEL_AUDIT_FLOW.tiers.find((t) => t.countries === count)?.price ?? null
+  if (base == null) return null
+  return base + (destinationSlugs.includes('ghana') ? TRAVEL_AUDIT_FLOW.ghanaSurcharge : 0)
 }
 
 // The Explore page (/explore). Each country card reads its name, photo,

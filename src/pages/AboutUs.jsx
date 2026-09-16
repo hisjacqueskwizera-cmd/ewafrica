@@ -5,6 +5,7 @@ import { ABOUT_PAGE } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
 import { HeroVideoBackground } from '../components/HeroVideoBackground.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { SectionMark } from '../components/SectionMark.jsx'
 
 const ICONS = { Globe2, FileText, Handshake, ShieldCheck }
 
@@ -176,6 +177,36 @@ export function AboutUs() {
         </div>
       </section>
 
+      {/* Travel Africa With Confidence — full-bleed savanna photo band,
+          directly under Meet the Founder. The photo is naturally light/warm
+          (a sunset sky, golden grass), so the dark cocoa text sits straight
+          on it with no boxed highlight or tint behind it. */}
+      <section className="relative isolate overflow-hidden px-[30px] py-[100px] lg:px-16 lg:py-[140px]">
+        <img
+          src="/Pictures/Background/about_us_background.png"
+          alt="A giraffe and a lone acacia tree on the savanna at sunset"
+          loading="lazy"
+          className="absolute inset-0 -z-10 size-full object-cover"
+        />
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <SectionMark />
+            <AccentHeading text={closing.heading} className={`${HEADING} text-cocoa`} />
+            <p className="mt-4 max-w-[420px] text-lg italic leading-snug text-cocoa/90">
+              {closing.tagline}
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="lg:mt-16">
+            <p className={`max-w-[480px] text-cocoa lg:ml-auto ${BODY}`}>
+              Every journey is different. Whether Africa is your next adventure, your future home,
+              or a place where you are exploring new opportunities,{' '}
+              <span className="font-bold">East-West Africa Link</span> is here to help you
+              research, prepare, connect, and move forward with greater confidence.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Full-bleed photo feature — copy anchored bottom-left, CTA
           bottom-right. */}
       <section className="relative isolate flex min-h-[800px] items-end overflow-hidden px-[30px] lg:px-10">
@@ -221,49 +252,6 @@ export function AboutUs() {
         ))}
         <p className="italic">{whyCreated.closing}</p>
       </Band>
-
-   
-
-      {/* Closing — heading left, right-aligned copy, and a thin curved rule
-          that runs down and across into the CTA (the rule is desktop only). */}
-      <section className="relative overflow-hidden px-[30px] pb-[100px] lg:px-[70px]">
-        <div
-          className="absolute inset-0 -z-10 bg-cover bg-center opacity-100"
-          style={{ backgroundImage: "url('/Pictures/Background/about_us_background.png')" }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 -z-10 bg-[#F4E9D4]/30" aria-hidden="true" />
-        <div className="relative">
-          <span
-            className="absolute top-0 left-[30px] hidden h-[120px] border-l border-cocoa/50 lg:block"
-            aria-hidden="true"
-          />
-          <div className="grid gap-10 pt-[100px] lg:grid-cols-[530px_1fr] lg:pt-[160px]">
-            <Reveal>
-              <AccentHeading
-                text={closing.heading}
-                className="font-display text-[1.875rem] font-normal leading-[1.2] text-cocoa lg:text-[2.8125rem]"
-              />
-            </Reveal>
-            <Reveal delay={120} className={`space-y-4 text-cocoa lg:pt-16 lg:text-right ${BODY}`}>
-              <p className="italic">{closing.tagline}</p>
-              <p className="lg:ml-auto lg:max-w-[430px]">
-                Every journey is different. Whether Africa is your next adventure, your future home,
-                or a place where you are exploring new opportunities,{' '}
-                <span className="font-bold">East-West Africa Link</span> is here to help you
-                research, prepare, connect, and move forward with greater confidence.
-              </p>
-            </Reveal>
-          </div>
-          <div className="mt-12 flex items-end">
-            <span
-              className="ml-[30px] hidden h-[120px] flex-1 rounded-bl-[64px] border-b border-l border-cocoa/50 lg:block"
-              aria-hidden="true"
-            />
-            
-          </div>
-        </div>
-      </section>
     </>
   )
 }

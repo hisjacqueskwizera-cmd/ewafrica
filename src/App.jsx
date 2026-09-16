@@ -3,6 +3,7 @@ import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
+import { TravelAuditFlowProvider } from './context/TravelAuditFlowContext.jsx'
 import { TravelPlannerFlowProvider } from './context/TravelPlannerFlowContext.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { Benin } from './pages/Benin.jsx'
@@ -16,6 +17,7 @@ import { Placeholder } from './pages/Placeholder.jsx'
 import { Rwanda } from './pages/Rwanda.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
+import { TravelAudit } from './pages/TravelAudit.jsx'
 import { TravelPlanner } from './pages/TravelPlanner.jsx'
 import { TravelPlannerServiceDetails } from './pages/TravelPlannerServiceDetails.jsx'
 import { Uganda } from './pages/Uganda.jsx'
@@ -28,6 +30,10 @@ import { Confirmation } from './pages/travel-planner/Confirmation.jsx'
 import { Payment } from './pages/travel-planner/Payment.jsx'
 import { RequestForm } from './pages/travel-planner/RequestForm.jsx'
 import { ReviewAnswers } from './pages/travel-planner/ReviewAnswers.jsx'
+import { Confirmation as TravelAuditConfirmation } from './pages/travel-audit/Confirmation.jsx'
+import { Payment as TravelAuditPayment } from './pages/travel-audit/Payment.jsx'
+import { RequestForm as TravelAuditRequestForm } from './pages/travel-audit/RequestForm.jsx'
+import { ReviewAnswers as TravelAuditReviewAnswers } from './pages/travel-audit/ReviewAnswers.jsx'
 
 // The request wizard (reached via "View Details" on the Travel Planner
 // card, which goes straight to the request form — the separate service-
@@ -66,6 +72,23 @@ function BeforeYouBookFlowRoutes() {
   )
 }
 
+// The Travel Audit request wizard — a third independent flow alongside
+// TravelPlannerFlowRoutes and BeforeYouBookFlowRoutes above, reached from
+// its own service detail page (TravelAudit.jsx). Same shape, own
+// provider, own state.
+function TravelAuditFlowRoutes() {
+  return (
+    <TravelAuditFlowProvider>
+      <Routes>
+        <Route path="request" element={<TravelAuditRequestForm />} />
+        <Route path="review" element={<TravelAuditReviewAnswers />} />
+        <Route path="payment" element={<TravelAuditPayment />} />
+        <Route path="confirmation" element={<TravelAuditConfirmation />} />
+      </Routes>
+    </TravelAuditFlowProvider>
+  )
+}
+
 function App() {
   return (
     <>
@@ -95,6 +118,8 @@ function App() {
             path="/travel-planner/before-you-book-check/*"
             element={<BeforeYouBookFlowRoutes />}
           />
+          <Route path="/travel-planner/travel-audit" element={<TravelAudit />} />
+          <Route path="/travel-planner/travel-audit/*" element={<TravelAuditFlowRoutes />} />
           <Route path="/travel-planner/*" element={<TravelPlannerFlowRoutes />} />
           <Route
             path="*"

@@ -1,7 +1,24 @@
-import { ArrowRight, Compass, FileText, Mail, Route, Search, ShieldCheck, Users } from 'lucide-react'
+import {
+  ArrowRight,
+  Compass,
+  FileText,
+  Mail,
+  Map,
+  Route,
+  Search,
+  ShieldCheck,
+  User,
+  Users,
+} from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { CONTACT_INFO, COUNTRIES, TRAVEL_PLANNER_PAGE } from '../data/siteContent.js'
+import {
+  BEFORE_YOU_BOOK_FLOW,
+  CONTACT_INFO,
+  COUNTRIES,
+  TRAVEL_AUDIT_FLOW,
+  TRAVEL_PLANNER_PAGE,
+} from '../data/siteContent.js'
 import { DestinationPicker } from '../components/DestinationPicker.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
@@ -10,7 +27,7 @@ import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 
-const ICONS = { Route, Search, FileText, ShieldCheck, Users, Compass }
+const ICONS = { Route, Search, FileText, ShieldCheck, Users, Compass, User, Map }
 
 // accent 'forest' vs 'copper' picks which brand color a card's icon badge
 // and button render in — matches the reference's green "Before You Book
@@ -23,17 +40,15 @@ const ACCENT = {
 // count/hasGhana still drive what the price *would* be; isLocked+
 // lockedCountryName override the caption with the one country the visitor
 // arrived with (see the comment on TravelPlanner() below for when each case
-// applies). requestHref carries the selection into the Travel Planner
-// service's own details page, beforeYouBookHref into the (separate) Before
-// You Book Check flow. Every card's "View Details" is always clickable —
-// none of them dead-end a visitor who hasn't picked anything: the Travel
-// Planner service's own details page (TravelPlannerServiceDetails.jsx)
-// picks up from there and lets them choose a country count if nothing was
-// carried over, the same way Before You Book Check's request form does.
-// None of the three cards show a price on this page any more (showPrice
-// below) — pricing only appears once a visitor is inside a service's own
-// flow — but the computation itself (tiers, the Ghana flat-rate variant)
-// stays in place so it's a one-line flip to bring it back.
+// applies). requestHref/beforeYouBookHref/travelAuditHref each carry the
+// selection into that service's own flow. Every card's "View Details" is
+// always clickable — none of them dead-end a visitor who hasn't picked
+// anything: each service's own details/request page picks up from there
+// and lets them choose a country count if nothing was carried over. None
+// of the three cards show a price on this page any more (showPrice below)
+// — pricing only appears once a visitor is inside a service's own flow —
+// but each service's own tiered-plus-Ghana-surcharge computation stays in
+// place here so it's a one-line flip to bring it back.
 function ServiceCard({
   service,
   isLocked,
@@ -42,29 +57,34 @@ function ServiceCard({
   hasGhana,
   requestHref,
   beforeYouBookHref,
+  travelAuditHref,
   delay,
 }) {
   const Icon = ICONS[service.icon]
   const accent = ACCENT[service.accent]
-  const { travelPlannerTiers, flatPricing } = TRAVEL_PLANNER_PAGE
+  const { travelPlannerTiers } = TRAVEL_PLANNER_PAGE
   const showPrice = false
+  const tiersFor = {
+    beforeYouBook: BEFORE_YOU_BOOK_FLOW,
+    travelAudit: TRAVEL_AUDIT_FLOW,
+  }[service.key]
   const price =
     service.key === 'travelPlanner'
       ? travelPlannerTiers.find((t) => t.countries === count)?.price
-      : (hasGhana ? flatPricing.ghana : flatPricing.default)[service.key]
+      : tiersFor &&
+        (tiersFor.tiers.find((t) => t.countries === count)?.price ?? 0) +
+          (hasGhana ? tiersFor.ghanaSurcharge : 0)
   const priceLabel = isLocked
     ? lockedCountryName
-    : service.key === 'travelPlanner'
-      ? `${count} ${count === 1 ? 'country' : 'countries'}`
-      : hasGhana
-        ? 'Ghana'
-        : ''
+    : `${count} ${count === 1 ? 'country' : 'countries'}`
   const href =
     service.key === 'travelPlanner'
       ? requestHref
       : service.key === 'beforeYouBook'
         ? beforeYouBookHref
-        : '/#contact'
+        : service.key === 'travelAudit'
+          ? travelAuditHref
+          : '/#contact'
 
   return (
     <Reveal delay={delay}>
@@ -161,7 +181,12 @@ export function TravelPlanner() {
   // end to guard against any more.
   const requestHref = `/travel-planner/service-details?destinations=${destinationSlugs.join(',')}`
   const beforeYouBookHref = `/travel-planner/before-you-book-check?destinations=${destinationSlugs.join(',')}`
+  const travelAuditHref = `/travel-planner/travel-audit?destinations=${destinationSlugs.join(',')}`
   const { hero, intro, services, helpBand, trust } = TRAVEL_PLANNER_PAGE
+  // hero.trustItems stores icon names (data stays framework-agnostic);
+  // resolve them to actual components here since PageIntro expects real
+  // icon components, not strings — see the note on PageIntro's trustItems.
+  const heroTrustItems = hero.trustItems?.map((item) => ({ ...item, icon: ICONS[item.icon] }))
 
   return (
     <>
@@ -176,7 +201,7 @@ export function TravelPlanner() {
           grammar), just with this page's own static photo via
           backgroundImage instead of the site's rotating video, and its own
           copy — see the comment on TRAVEL_PLANNER_PAGE.hero. */}
-      <PageIntro {...hero} />
+      <PageIntro {...hero} trustItems={heroTrustItems} />
 
       {/* Choose the Support That Fits Your Trip */}
       <section className="py-16 lg:py-20">
@@ -232,6 +257,7 @@ export function TravelPlanner() {
                 hasGhana={hasGhana}
                 requestHref={requestHref}
                 beforeYouBookHref={beforeYouBookHref}
+                travelAuditHref={travelAuditHref}
                 delay={i * 100}
               />
             ))}

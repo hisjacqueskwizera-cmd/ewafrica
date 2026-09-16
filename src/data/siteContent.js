@@ -637,6 +637,70 @@ const trustFor = (country) => [
 // six-card first-timer tips grid — none of which the generic template
 // has room for.
 export const ZAMBIA_PAGE = {
+  // The page now opens with a services "landing" section (matching every
+  // other country's Personal Visa Guidance / Travel Planner / Border
+  // Crossing Guide grid) ahead of the deeper practical guide below —
+  // landingHero/services/servicesIntro/landingTrust/closing drive that
+  // top-and-tail; everything from `hero` (the old wordmark hero) onward is
+  // the original practical-guide content, now living under the services
+  // section instead of leading the page.
+  landingHero: {
+    eyebrow: 'Travel Services For',
+    title: 'Zambia',
+    tagline: 'Explore. Plan. Travel with Confidence.',
+    description:
+      'Practical information and personalized support to help you travel, explore, and navigate opportunities in Zambia.',
+    image: '/Pictures/countries/Zambia.jpg',
+    imageAlt: 'Victoria Falls with a rainbow arcing over the gorge in Zambia',
+    watermark: 'Zambia',
+    watermarkCaption: ['Stunning Landscapes.', 'Welcoming People.', 'Real Possibilities.'],
+  },
+  servicesIntro: {
+    heading: 'Explore Our Services',
+    eyebrow: 'Practical Guidance for Your Zambia Journey',
+    description:
+      'Choose the service that fits your needs. Each one provides clear, reliable information and personalized guidance informed by practical research, local sources, and first-hand experience in Zambia.',
+  },
+  services: [
+    {
+      icon: 'FileText',
+      title: 'Personal Visa Guidance',
+      description:
+        'Get clear, up-to-date information on visa requirements, entry rules, and the application process for Zambia.',
+      image: '/Pictures/Visa_Entry.png',
+      to: '/#contact',
+    },
+    {
+      icon: 'Bus',
+      title: 'Travel Planner',
+      description:
+        'Personalized overland travel planning to help you explore Zambia and combine it with nearby countries.',
+      image: '/Pictures/Travel planner.PNG',
+      to: '/travel-planner?destination=zambia',
+    },
+    {
+      icon: 'RouteIcon',
+      title: 'Border Crossing Guide',
+      description:
+        'Get practical guidance for crossing into and out of Zambia, including key border points, requirements, and what to expect.',
+      image: '/Pictures/Border_crossing.jpg',
+      to: '/#contact',
+    },
+  ],
+  landingTrust: [
+    { icon: 'BookOpen', title: 'Accurate', title2: 'Information' },
+    { icon: 'Users', title: 'Personalized', title2: 'Support' },
+    { icon: 'Signpost', title: 'Independent', title2: 'Travel Focus' },
+    { icon: 'ShieldCheck', title: 'Trusted', title2: 'Local Connections' },
+  ],
+  closing: {
+    watermark: 'Zambia',
+    heading: 'A Land of Natural Beauty and Opportunity',
+    body: 'From the mighty Zambezi to welcoming communities, Zambia offers unforgettable experiences for travelers, prospective residents, and entrepreneurs.',
+    quote: ['Explore new places.', 'Discover new possibilities.'],
+    image: '/Pictures/countries/Zambia.jpg',
+    imageAlt: 'The Zambezi River at sunset in Zambia',
+  },
   hero: {
     image: '/Pictures/countries/Zambia.jpg',
     imageAlt: 'Victoria Falls with a rainbow arcing over the gorge in Zambia',

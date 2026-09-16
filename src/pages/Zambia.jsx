@@ -1,6 +1,7 @@
 import {
   ArrowRight,
   Banknote,
+  BookOpen,
   Bus,
   Camera,
   Car,
@@ -15,6 +16,7 @@ import {
   PawPrint,
   Route as RouteIcon,
   Shield,
+  ShieldCheck,
   Signpost,
   Smartphone,
   Sun,
@@ -23,7 +25,6 @@ import {
   Waves,
 } from 'lucide-react'
 import { useEffect } from 'react'
-import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { ZAMBIA_PAGE } from '../data/siteContent.js'
@@ -42,24 +43,155 @@ const ICONS = {
   Bus,
   RouteIcon,
   Shield,
+  ShieldCheck,
   Users,
   Globe2,
   Handshake,
+  BookOpen,
 }
 
 export function Zambia() {
   useEffect(() => {
-    document.title = 'Explore Zambia | East-West Africa Link'
+    document.title = 'Travel Services for Zambia | East-West Africa Link'
   }, [])
 
-  const { hero, seasons, beforeYouGo, places, currency, simCards, gettingAround, overland, tips, helpWith, helpPhoto, trust, farewell } =
-    ZAMBIA_PAGE
+  const {
+    landingHero,
+    servicesIntro,
+    services,
+    landingTrust,
+    closing,
+    seasons,
+    beforeYouGo,
+    places,
+    currency,
+    simCards,
+    gettingAround,
+    overland,
+    tips,
+    helpWith,
+    helpPhoto,
+  } = ZAMBIA_PAGE
 
   return (
     <>
-      {/* Hero — the same full-viewport hero every destination page shares,
-          lifted from About Us. */}
-      <DestinationHero heading="Explore Zambia" description={hero.description} backgroundImage={hero.image} backgroundImageAlt={hero.imageAlt} />
+      {/* Hero — "Travel Services for Zambia", matching the same pattern as
+          Ghana/Benin's own services landing hero, with a large script
+          watermark + caption on the right (this page's own reference,
+          not shared with any other country page yet). */}
+      <section className="relative isolate flex min-h-[560px] items-center overflow-hidden px-4 py-20 text-primary-foreground sm:px-6 lg:px-8">
+        <img
+          src={landingHero.image}
+          alt={landingHero.imageAlt}
+          loading="eager"
+          className="absolute inset-0 -z-10 size-full object-cover"
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-linear-to-b from-cocoa/70 via-cocoa/35 to-cocoa/70"
+          aria-hidden="true"
+        />
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <Reveal>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
+              {landingHero.eyebrow}
+            </p>
+            <h1 className="mt-3 font-display text-[3rem] font-normal leading-none sm:text-[4.5rem]">
+              {landingHero.title}
+            </h1>
+            <p className="mt-4 text-lg font-semibold sm:text-xl">{landingHero.tagline}</p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/85 sm:text-base">
+              {landingHero.description}
+            </p>
+          </Reveal>
+          <Reveal delay={150} className="hidden text-right lg:block">
+            <p className="font-display text-4xl italic text-primary-foreground/90">
+              {landingHero.watermark}
+            </p>
+            <div className="mt-3 ml-auto h-px w-14 bg-gold" aria-hidden="true" />
+            <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground/80">
+              {landingHero.watermarkCaption.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Explore Our Services */}
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+          <Reveal>
+            <h2 className="text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
+              {servicesIntro.heading}
+            </h2>
+            <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-copper">
+              {servicesIntro.eyebrow}
+            </p>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {servicesIntro.description}
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-8 text-left sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, i) => {
+              const Icon = ICONS[service.icon]
+              return (
+                <Reveal key={service.title} delay={i * 100}>
+                  <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
+                    <div className="aspect-4/3 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        className="size-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col items-center p-6 pt-0 text-center">
+                      <span className="relative z-10 -mt-7 grid size-14 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground shadow-card">
+                        <Icon className="size-6" aria-hidden="true" />
+                      </span>
+                      <h3 className="mt-4 text-xl font-bold text-primary">{service.title}</h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {service.description}
+                      </p>
+                      <HashLink to={service.to} className="btn-copper mt-5 w-full justify-center">
+                        View Details
+                        <ArrowRight className="size-4" aria-hidden="true" />
+                      </HashLink>
+                    </div>
+                  </article>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust row — flat, dividers-only row matching the reference. */}
+      <section className="border-y border-border bg-cream py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
+            {landingTrust.map((item) => {
+              const Icon = ICONS[item.icon]
+              return (
+                <div key={item.title} className="flex items-center justify-center gap-3 lg:px-6">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <p className="text-sm font-bold leading-snug text-primary">
+                    {item.title}
+                    <br />
+                    {item.title2}
+                  </p>
+                </div>
+              )
+            })}
+          </Reveal>
+        </div>
+      </section>
 
       {/* When to Visit */}
       <section className="py-16 lg:py-20">
@@ -338,34 +470,39 @@ export function Zambia() {
         </div>
       </section>
 
-      {/* Trust row — same flat, dividers-only treatment used across every
-          destination page. */}
-      <section className="bg-cream pb-16 lg:pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
-            {trust.map((item) => {
-              const Icon = ICONS[item.icon]
-              return (
-                <div key={item.title} className="flex flex-col items-center gap-3 text-center lg:px-6">
-                  <span className="grid size-12 place-items-center rounded-full border-2 border-copper text-copper">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-bold text-primary">{item.title}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{item.text}</p>
-                  </div>
-                </div>
-              )
-            })}
+      {/* Closing — full-bleed photo band with a script watermark, closing
+          the landing page the way it opened. */}
+      <section className="relative isolate overflow-hidden px-4 py-16 text-primary-foreground sm:px-6 lg:px-8 lg:py-20">
+        <img
+          src={closing.image}
+          alt={closing.imageAlt}
+          loading="lazy"
+          className="absolute inset-0 -z-10 size-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-cocoa/55" aria-hidden="true" />
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <Reveal className="max-w-lg">
+            <p className="font-display text-3xl italic text-primary-foreground/90">
+              {closing.watermark}
+            </p>
+            <h2 className="mt-3 text-xl font-bold uppercase tracking-[0.04em] sm:text-2xl">
+              {closing.heading}
+            </h2>
+            <div className="mt-3 h-px w-14 bg-gold" aria-hidden="true" />
+            <p className="mt-4 text-sm leading-relaxed text-primary-foreground/85 sm:text-base">
+              {closing.body}
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="border-l-2 border-gold py-1 pl-5">
+            <p className="font-display text-lg italic leading-snug sm:text-xl">
+              {closing.quote.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
           </Reveal>
         </div>
-      </section>
-
-      {/* Farewell strip — a light, welcoming close rather than a dark cocoa
-          bar, matching the reference. */}
-      <section className="bg-sand py-8 text-center">
-        <p className="text-lg font-bold italic text-primary">{farewell.heading}</p>
-        <p className="mt-1 text-sm text-muted-foreground">{farewell.text}</p>
       </section>
     </>
   )

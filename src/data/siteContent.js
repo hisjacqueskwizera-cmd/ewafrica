@@ -1421,24 +1421,24 @@ export const GAMBIA_PAGE = {
   ],
   routes: [
     {
-      from: 'Senegal (Ziguinchor)',
+      from: 'Senegal (Dakar)',
       image: '/Pictures/countries/Senegal.webp',
-      text: 'Cross at the Fantarinï or Karantaba border, or take a ferry across the Gambia River.',
+      text: 'Travel south from Dakar through central Senegal toward The Gambia, with onward road connections to Banjul and the coastal areas.',
     },
     {
-      from: 'Guinea-Bissau',
+      from: 'Senegal (Ziguinchor)',
       image: '/Explore_regions/optimized/west-africa/8.webp',
-      text: 'Cross at Karantaba/Sindjan border. Local transport to Banjul.',
+      text: "A practical route from Senegal's Casamance region, traveling north by road toward The Gambia and the main coastal destinations.",
     },
     {
-      from: 'Colon, Guinea',
+      from: 'Guinea-Bissau via Senegal',
       image: '/Explore_regions/optimized/west-africa/1.webp',
-      text: 'Ferry across the Gambia River at Basse Santa Su.',
+      text: 'Travel north from Guinea-Bissau through southern Senegal before continuing across the border into The Gambia.',
     },
     {
-      from: 'Sierra Leone',
+      from: 'Guinea via Senegal',
       image: '/Explore_regions/optimized/west-africa/2.webp',
-      text: 'Via Bissau (Guinea-Bissau) or through Senegal.',
+      text: 'Overland travelers from Guinea generally continue through Senegal before entering The Gambia, with several possible road connections depending on the route.',
     },
   ],
   guide: {

@@ -169,13 +169,6 @@ export function Gambia() {
                     <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">
                       {route.text}
                     </p>
-                    <HashLink
-                      to="/#contact"
-                      className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-                    >
-                      Explore Route
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </HashLink>
                   </div>
                 </article>
               </Reveal>

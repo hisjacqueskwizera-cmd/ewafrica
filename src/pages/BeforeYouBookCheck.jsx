@@ -1,4 +1,14 @@
-import { ChevronRight, Clock, Compass, Mail, Route, Search, ShieldCheck, Users } from 'lucide-react'
+import {
+  ChevronRight,
+  Clock,
+  Compass,
+  Info,
+  Mail,
+  Route,
+  Search,
+  ShieldCheck,
+  Users,
+} from 'lucide-react'
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import {
@@ -37,7 +47,19 @@ export function BeforeYouBookCheck() {
   const price = priceForSelection(destinationSlugs)
   const requestHref = `/travel-planner/before-you-book-check/request?destinations=${destinationSlugs.join(',')}`
 
-  const { hero, intro, whoFor, included, sidebar, stats, closing } = BEFORE_YOU_BOOK_PAGE
+  const {
+    hero,
+    intro,
+    whatWeReview,
+    whyItHelps,
+    whatYouReceive,
+    followUpSupport,
+    delivery,
+    importantToKnow,
+    sidebar,
+    stats,
+    closing,
+  } = BEFORE_YOU_BOOK_PAGE
 
   return (
     <>
@@ -67,36 +89,79 @@ export function BeforeYouBookCheck() {
                 <h1 className="text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
                   {intro.heading}
                 </h1>
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  {intro.description}
-                </p>
+                <div className="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {intro.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
               </Reveal>
 
-              <div className="mt-10 grid gap-8 sm:grid-cols-2">
-                <Reveal delay={100}>
-                  <h2 className="text-lg font-bold text-primary">Who This Service Is For</h2>
-                  <ul className="mt-4 space-y-3">
-                    {whoFor.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
+              <Reveal delay={100} className="mt-10">
+                <h2 className="text-lg font-bold text-primary">{whatWeReview.heading}</h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {whatWeReview.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                      <ShieldCheck className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
 
-                <Reveal delay={150}>
-                  <h2 className="text-lg font-bold text-primary">What's Included</h2>
-                  <ul className="mt-4 space-y-3">
-                    {included.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
-                        {item}
-                      </li>
+              <Reveal delay={125} className="mt-10">
+                <h2 className="text-lg font-bold text-primary">{whyItHelps.heading}</h2>
+                <div className="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground">
+                  {whyItHelps.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </Reveal>
+
+              <Reveal delay={150} className="mt-10">
+                <h2 className="text-lg font-bold text-primary">{whatYouReceive.heading}</h2>
+                <div className="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground">
+                  {whatYouReceive.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </Reveal>
+
+              <Reveal delay={175} className="mt-10">
+                <h2 className="text-lg font-bold text-primary">{followUpSupport.heading}</h2>
+                <div className="mt-4 grid gap-5 sm:grid-cols-3">
+                  {followUpSupport.items.map((item) => (
+                    <div key={item.label} className="rounded-2xl bg-cream p-5">
+                      <h3 className="text-sm font-bold text-primary">{item.label}</h3>
+                      <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+
+              <Reveal delay={190} className="mt-10 grid gap-6 rounded-3xl bg-cream p-6 sm:grid-cols-2">
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
+                    <Mail className="size-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-bold text-primary">Delivery</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{delivery}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
+                    <Info className="size-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-bold text-primary">{importantToKnow.heading}</h3>
+                    {importantToKnow.paragraphs.map((p) => (
+                      <p key={p} className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {p}
+                      </p>
                     ))}
-                  </ul>
-                </Reveal>
-              </div>
+                  </div>
+                </div>
+              </Reveal>
 
               {/* Need help before purchasing? */}
               <Reveal

@@ -1846,45 +1846,70 @@ export const TRAVEL_PLANNER_DETAILS_PAGE = {
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
   },
+  // Body copy below is transcribed verbatim from the "Travel Planner
+  // DETAILS" reference document. That document also carries a pricing/UX
+  // reminder (Ghana/Benin/Senegal need their own rates and follow-up
+  // variants, and a locked arrival should show its starting country plus
+  // room to add more) that is NOT applied yet — this page still uses the
+  // uniform travelPlannerTiers from TRAVEL_PLANNER_PAGE above and the
+  // existing locked/unlocked picker behavior. That's a separate, larger
+  // change to confirm before building.
   intro: {
-    heading: 'Travel Planner – Plan Your Africa Journey',
-    description:
-      'Get personalized planning support based on your travel dates, interests, destinations, and preferred way of travelling. Whether you are visiting one country or several, we help you plan a practical, well-paced and meaningful journey.',
+    heading: 'Plan Your Journey With Practical, Personalized Guidance',
+    paragraphs: [
+      'Our Travel Planner is for travelers who want help building a trip from the ground up.',
+      'You tell us where you want to go, your travel dates, interests, preferred pace, transportation preferences, and the type of experience you are looking for. We then help you turn those ideas into a practical journey that works on the ground.',
+    ],
   },
   countPicker: {
     heading: 'How many countries are you planning to visit?',
     subtext: 'Select an option below to see the price.',
   },
-  included: {
-    heading: "What's Included",
-    description:
-      'Your customized Travel Planner will be delivered by email and includes practical guidance to help you plan and organize your trip with confidence.',
+  whatWeHelpPlan: {
+    heading: 'What We Help You Plan',
     items: [
-      { icon: 'MapPin', text: 'Suggested itinerary' },
-      { icon: 'Camera', text: 'Places to visit' },
-      { icon: 'Bus', text: 'Transportation options (including overland routes)' },
-      { icon: 'Route', text: 'Recommended travel sequence' },
+      { icon: 'Map', text: 'A suggested travel route and itinerary' },
+      { icon: 'ListOrdered', text: 'The best order in which to visit your destinations' },
+      { icon: 'Heart', text: 'Places and experiences that fit your interests' },
+      { icon: 'Bus', text: 'Transportation options between destinations' },
+      { icon: 'Milestone', text: 'Overland routes and border connections where relevant' },
       { icon: 'Clock', text: 'Approximate travel times' },
-      { icon: 'ClipboardCheck', text: 'Practical travel tips' },
+      { icon: 'Route', text: 'Practical routing advice to reduce unnecessary backtracking' },
+      { icon: 'CalendarClock', text: 'Suggestions based on the amount of time you have available' },
+      { icon: 'ClipboardCheck', text: 'General travel tips and country-specific considerations' },
     ],
   },
-  info: [
-    {
-      icon: 'Mail',
-      title: 'Delivery Time',
-      text: 'Typical delivery: 3–5 business days',
-    },
-    {
-      icon: 'MessageCircle',
-      title: 'Follow-Up Support',
-      text: 'Includes 3 follow-up clarification emails within 7 days of delivery.',
-    },
-    {
-      icon: 'Users',
-      title: "Who It's For",
-      text: 'Independent travelers, couples, families and small groups planning a trip to one or more countries in East or West Africa.',
-    },
-  ],
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'You will receive a personalized written Travel Planner by email based on the information you provide in your request.',
+      'The planner is designed to give you a clear, practical framework for your journey while allowing you to make your own bookings and travel decisions.',
+    ],
+  },
+  followUpSupport: {
+    heading: 'Follow-Up Support',
+    items: [
+      {
+        label: 'Most countries',
+        text: 'Your Travel Planner includes 3 clarification emails within 7 days after delivery.',
+      },
+      {
+        label: 'Ghana',
+        text: 'Includes 3 clarification emails within 7 days plus an optional phone consultation.',
+      },
+      {
+        label: 'Benin and Senegal',
+        text: 'Includes 3 clarification emails in English or French within 7 days plus a phone consultation.',
+      },
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important to Know',
+    paragraphs: [
+      'East-West Africa Link provides independent travel guidance. We do not make bookings or act as a travel agency.',
+    ],
+  },
   closingPhoto: '/Pictures/countries/Tanzania.jpg',
   closingPhotoAlt: 'A safari vehicle on a dirt road through the savanna near a lake and mountains',
   closingTagline: ['Different Journeys', 'A Richer You'],
@@ -2075,36 +2100,86 @@ export const TRAVEL_PLANNER_FLOW = {
 // countries don't) — see priceForSelection() below, the one place that
 // turns a selection into a number for this service.
 export const BEFORE_YOU_BOOK_PAGE = {
+  // Body copy below is transcribed verbatim from the "Travel Planner
+  // DETAILS" reference document's Before You Book Check section. That
+  // document doesn't call for any pricing/UX change on this service (its
+  // "Just A Note" reminder is scoped to Travel Planner only) — this page's
+  // existing tiered-plus-Ghana-surcharge pricing (priceForSelection below)
+  // already matches what the document describes.
   hero: {
     badge: 'Travel Planner',
     titleLine1: 'Before You Book',
     titleAccent: 'Check',
-    tagline: ['Get practical, expert feedback before you book.'],
+    tagline: ['Check your trip before you commit.'],
     description:
-      "The Before You Book Check service is for travelers who are still planning and want expert feedback before making any bookings. Share your proposed plans with us, and we'll review them and provide practical, up-to-date advice to help you avoid problems and make the best choices for a smooth and enjoyable trip across Africa.",
+      'The Before You Book Check is for travelers who already have an idea of where they want to go but have not yet committed to the major bookings.',
     backgroundImage: '/Pictures/Travel planner hero background.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
   },
   intro: {
-    heading: 'Plan Smarter. Travel with Confidence.',
-    description:
-      "The Before You Book Check service is for travelers who are still planning and want expert feedback before making any bookings. Share your proposed plans with us, and we'll review them and provide practical, up-to-date advice to help you avoid problems and make the best choices for a smooth and enjoyable trip across Africa.",
+    heading: 'Check Your Trip Before You Commit',
+    paragraphs: [
+      'The Before You Book Check is for travelers who already have an idea of where they want to go but have not yet committed to the major bookings.',
+      'You may already know your countries, destinations, approximate dates, and preferred route. We review those plans before you spend money on flights, accommodation, transportation, or other major parts of the trip.',
+    ],
   },
-  whoFor: [
-    'Travelers comparing routes, destinations or itineraries',
-    'Those considering accommodations, tours or transport options',
-    'Travelers planning multi-country trips or complex itineraries',
-    'People who want to understand border crossings, transport connections, or regional logistics',
-    'Anyone who wants expert, practical advice before committing to bookings',
-  ],
-  included: [
-    'Review of your proposed travel plans, itinerary, or ideas',
-    'Practical recommendations based on our local knowledge and experience',
-    'Advice on destinations, accommodations, tours, and ground travel options',
-    'Identification of possible issues or challenges to consider',
-    'Guidance to help you make informed decisions before booking',
-  ],
+  whatWeReview: {
+    heading: 'What We Review',
+    items: [
+      'Your proposed travel dates',
+      'The countries and destinations you plan to visit',
+      'The order of your destinations',
+      'Whether the route is realistic within the time available',
+      'Transportation options between destinations',
+      'Overland routes and border crossings where relevant',
+      'Approximate travel times',
+      'Tight or difficult connections',
+      'Unnecessary backtracking',
+      'Parts of the journey that may be impractical or difficult to arrange',
+      'Opportunities to simplify or improve the overall route',
+    ],
+  },
+  whyItHelps: {
+    heading: 'Why This Service Can Help',
+    paragraphs: [
+      'A trip may look simple on a map but work very differently on the ground.',
+      'Distances, road conditions, transportation schedules, border procedures, and actual travel times can affect whether a route is practical.',
+      'The Before You Book Check gives you an independent review before you commit your money.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'You will receive a written review of your proposed journey by email.',
+      'We will point out any areas that may need attention and, where appropriate, suggest practical changes to the route, timing, transportation, or sequence of destinations.',
+    ],
+  },
+  followUpSupport: {
+    heading: 'Follow-Up Support',
+    items: [
+      {
+        label: 'Most countries',
+        text: 'Your Before You Book Check includes 3 clarification emails within 7 days after delivery.',
+      },
+      {
+        label: 'Ghana',
+        text: 'Includes 3 clarification emails within 7 days plus an optional 20-minute phone consultation.',
+      },
+      {
+        label: 'Benin and Senegal',
+        text: 'Includes 3 clarification emails within 7 days in English or French.',
+      },
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important to Know',
+    paragraphs: [
+      'This service is for a trip that is still in the planning stage and has not yet been substantially booked.',
+      'East-West Africa Link provides independent travel guidance. We do not make reservations or purchase travel services on your behalf.',
+    ],
+  },
   sidebar: {
     title: 'Before You Book Check',
     tagline: 'Expert feedback. Better decisions. A smoother journey.',
@@ -2134,7 +2209,7 @@ export const BEFORE_YOU_BOOK_FLOW = {
     { icon: 'Search', text: 'Review of your proposed travel plans' },
     { icon: 'Map', text: 'Practical, up-to-date advice before you book' },
     { icon: 'Mail', text: 'Delivered by email' },
-    { icon: 'Users', text: '1 follow-up clarification email within 7 days' },
+    { icon: 'Users', text: '3 clarification emails within 7 days of delivery' },
     { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
   ],
   bookingOptions: [
@@ -2198,7 +2273,7 @@ export const BEFORE_YOU_BOOK_FLOW = {
       whatsNext: 'Our team will carefully review your plans and questions.',
       deliveryNote: 'Your personalized Before You Book Check will be delivered by email.',
       followUp:
-        'You have 1 follow-up clarification email within 7 days of delivery. If we need any additional information, we will contact you by email.',
+        'You have 3 clarification emails within 7 days of delivery (plus an optional 20-minute phone consultation for Ghana). If we need any additional information, we will contact you by email.',
       confirmationNote: 'Please check your inbox (and spam folder) for our email.',
       secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
       secureNote2: 'Your information is safe and protected.',

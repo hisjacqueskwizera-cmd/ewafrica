@@ -1,16 +1,18 @@
 import {
   Bus,
-  Camera,
+  CalendarClock,
   Check,
   ChevronRight,
   ClipboardCheck,
   Clock,
+  Heart,
+  Info,
+  ListOrdered,
+  Map,
   Mail,
-  MapPin,
-  MessageCircle,
+  Milestone,
   Route,
   Shield,
-  Users,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -20,7 +22,7 @@ import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 
-const ICONS = { MapPin, Camera, Bus, Route, Clock, ClipboardCheck, Mail, MessageCircle, Users }
+const ICONS = { Map, ListOrdered, Heart, Bus, Milestone, Clock, Route, CalendarClock, ClipboardCheck }
 
 function CountTile({ n, price, selected, onSelect }) {
   return (
@@ -79,8 +81,19 @@ export function TravelPlannerServiceDetails() {
     ? `/travel-planner/request?destinations=${destinationSlugs.join(',')}`
     : `/travel-planner/request?count=${selectedCount}`
 
-  const { hero, intro, countPicker, included, info, closingPhoto, closingPhotoAlt, closingTagline } =
-    TRAVEL_PLANNER_DETAILS_PAGE
+  const {
+    hero,
+    intro,
+    countPicker,
+    whatWeHelpPlan,
+    whatYouReceive,
+    followUpSupport,
+    delivery,
+    importantToKnow,
+    closingPhoto,
+    closingPhotoAlt,
+    closingTagline,
+  } = TRAVEL_PLANNER_DETAILS_PAGE
 
   return (
     <>
@@ -108,9 +121,11 @@ export function TravelPlannerServiceDetails() {
             <h1 className="text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
               {intro.heading}
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {intro.description}
-            </p>
+            <div className="mx-auto mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {intro.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal delay={100} className="mt-10 rounded-3xl bg-cream p-6 sm:p-8">
@@ -155,12 +170,9 @@ export function TravelPlannerServiceDetails() {
           </Reveal>
 
           <Reveal delay={150} className="mt-16">
-            <h2 className="text-2xl font-bold text-primary sm:text-3xl">{included.heading}</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {included.description}
-            </p>
-            <div className="mx-auto mt-8 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
-              {included.items.map((item) => {
+            <h2 className="text-2xl font-bold text-primary sm:text-3xl">{whatWeHelpPlan.heading}</h2>
+            <div className="mx-auto mt-8 grid grid-cols-2 gap-8 sm:grid-cols-3">
+              {whatWeHelpPlan.items.map((item) => {
                 const Icon = ICONS[item.icon]
                 return (
                   <div key={item.text} className="flex flex-col items-center gap-2 text-center">
@@ -174,24 +186,53 @@ export function TravelPlannerServiceDetails() {
             </div>
           </Reveal>
 
-          <Reveal
-            delay={200}
-            className="mt-16 grid gap-8 rounded-3xl bg-cream p-6 text-left sm:grid-cols-3 sm:p-8"
-          >
-            {info.map((item) => {
-              const Icon = ICONS[item.icon]
-              return (
-                <div key={item.title} className="flex items-start gap-3">
-                  <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
-                    <Icon className="size-4" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="text-sm font-bold text-primary">{item.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.text}</p>
-                  </div>
+          <Reveal delay={175} className="mt-16">
+            <h2 className="text-2xl font-bold text-primary sm:text-3xl">{whatYouReceive.heading}</h2>
+            <div className="mx-auto mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {whatYouReceive.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={200} className="mt-16">
+            <h2 className="text-2xl font-bold text-primary sm:text-3xl">{followUpSupport.heading}</h2>
+            <div className="mx-auto mt-8 grid gap-5 text-left sm:grid-cols-3">
+              {followUpSupport.items.map((item) => (
+                <div key={item.label} className="rounded-2xl bg-cream p-5">
+                  <h3 className="text-sm font-bold text-primary">{item.label}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{item.text}</p>
                 </div>
-              )
-            })}
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal
+            delay={225}
+            className="mt-16 grid gap-8 rounded-3xl bg-cream p-6 text-left sm:grid-cols-2 sm:p-8"
+          >
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
+                <Mail className="size-4" aria-hidden="true" />
+              </span>
+              <div>
+                <h3 className="text-sm font-bold text-primary">Delivery</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{delivery}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
+                <Info className="size-4" aria-hidden="true" />
+              </span>
+              <div>
+                <h3 className="text-sm font-bold text-primary">{importantToKnow.heading}</h3>
+                {importantToKnow.paragraphs.map((p) => (
+                  <p key={p} className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

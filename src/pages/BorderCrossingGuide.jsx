@@ -1,109 +1,46 @@
 import {
-  Bus,
-  CalendarClock,
-  Check,
   ChevronRight,
-  ClipboardCheck,
   Clock,
-  Heart,
   Info,
-  ListOrdered,
-  Map,
   Mail,
-  Milestone,
-  Route,
+  Route as RouteIcon,
   ShieldCheck,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import {
-  CONTACT_INFO,
-  COUNTRIES,
-  TRAVEL_PLANNER_DETAILS_PAGE,
-  TRAVEL_PLANNER_PAGE,
-} from '../data/siteContent.js'
+import { BORDER_CROSSING_FLOW, BORDER_CROSSING_PAGE, CONTACT_INFO, COUNTRIES } from '../data/siteContent.js'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
 
-const ICONS = {
-  Map,
-  ListOrdered,
-  Heart,
-  Bus,
-  Milestone,
-  Clock,
-  Route,
-  CalendarClock,
-  ClipboardCheck,
-  Mail,
-  ShieldCheck,
-}
+const ICONS = { RouteIcon, Clock, Mail, ShieldCheck }
 
-function CountTile({ n, price, selected, onSelect }) {
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={selected}
-      className={`flex flex-1 flex-col items-center gap-2 rounded-2xl border-2 px-4 py-5 text-center transition-colors ${
-        selected
-          ? 'border-forest bg-forest text-primary-foreground'
-          : 'border-border bg-card text-primary hover:border-forest/40'
-      }`}
-    >
-      <span
-        className={`grid size-6 place-items-center rounded-full border-2 ${
-          selected ? 'border-primary-foreground' : 'border-copper'
-        }`}
-      >
-        {selected && <Check className="size-3.5" aria-hidden="true" />}
-      </span>
-      <span className="text-sm font-bold">
-        {n} {n === 1 ? 'Country' : 'Countries'}
-      </span>
-      <span className="text-lg font-bold">${price}</span>
-    </button>
-  )
-}
-
-export function TravelPlannerServiceDetails() {
+export function BorderCrossingGuide() {
   useEffect(() => {
-    document.title = 'Travel Planner Service Details | East-West Africa Link'
+    document.title = 'Border Crossing Guide | East-West Africa Link'
   }, [])
 
-  // Carried over from the Travel Planner landing page's picker (its "View
-  // Details" link on this card) — never re-picked here. If nothing was
-  // carried over, the count tiles below let the visitor choose how many
-  // countries they're planning before moving on; the specific countries
-  // themselves are then picked inline on the request step if still
-  // unknown — same "always give them a place to choose" logic Before You
-  // Book Check's own request form uses.
+  // Carried over from a country page's own Border Crossing Guide card
+  // (?from=<slug>) when the visitor already arrived with a starting
+  // country in mind — forwarded on to the request step, which pre-fills
+  // (but doesn't lock) the "traveling from" field with it. There's no
+  // price preview here: unlike the other three services, this one prices
+  // by how many border crossings the route involves, which isn't known
+  // until the request form itself asks.
   const [searchParams] = useSearchParams()
-  const destinationSlugs = (searchParams.get('destinations') ?? '')
-    .split(',')
-    .filter((slug) => COUNTRIES.some((c) => c.slug === slug))
-    .slice(0, 4)
-  const destinationNames = destinationSlugs
-    .map((slug) => COUNTRIES.find((c) => c.slug === slug)?.name)
-    .filter(Boolean)
-  const arrivedWithSelection = destinationSlugs.length > 0
-
-  const [selectedCount, setSelectedCount] = useState(1)
-  const { travelPlannerTiers } = TRAVEL_PLANNER_PAGE
-  const count = arrivedWithSelection ? destinationSlugs.length : selectedCount
-  const price = travelPlannerTiers.find((t) => t.countries === count)?.price
-  const requestHref = arrivedWithSelection
-    ? `/travel-planner/request?destinations=${destinationSlugs.join(',')}`
-    : `/travel-planner/request?count=${selectedCount}`
+  const from = searchParams.get('from')
+  const fromCountry = COUNTRIES.find((c) => c.slug === from)
+  const requestHref = fromCountry
+    ? `/travel-planner/border-crossing-guide/request?from=${fromCountry.slug}`
+    : '/travel-planner/border-crossing-guide/request'
 
   const {
     hero,
     intro,
-    countPicker,
-    whatWeHelpPlan,
+    whatWeReview,
+    whyItHelps,
     whatYouReceive,
     followUpSupport,
     delivery,
@@ -111,7 +48,7 @@ export function TravelPlannerServiceDetails() {
     sidebar,
     stats,
     closing,
-  } = TRAVEL_PLANNER_DETAILS_PAGE
+  } = BORDER_CROSSING_PAGE
 
   return (
     <>
@@ -129,7 +66,7 @@ export function TravelPlannerServiceDetails() {
             Travel Planner
           </Link>
           <ChevronRight className="size-3" aria-hidden="true" />
-          <span className="font-semibold text-primary">Service Details</span>
+          <span className="font-semibold text-primary">Border Crossing Guide</span>
         </div>
       </div>
 
@@ -148,55 +85,26 @@ export function TravelPlannerServiceDetails() {
                 </div>
               </Reveal>
 
-              <Reveal delay={100} className="mt-10 rounded-3xl bg-cream p-6 sm:p-8">
-                <h2 className="text-lg font-bold text-primary">{countPicker.heading}</h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {arrivedWithSelection
-                    ? `You're planning to visit ${destinationNames.join(', ')}.`
-                    : countPicker.subtext}
-                </p>
-
-                {arrivedWithSelection ? (
-                  <div className="mt-6 flex flex-col items-start gap-2">
-                    <p className="text-3xl font-bold text-primary">${price}</p>
-                    <Link
-                      to="/travel-planner"
-                      className="text-xs font-semibold text-copper hover:underline"
-                    >
-                      Change destinations
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                    {travelPlannerTiers.map((t) => (
-                      <CountTile
-                        key={t.countries}
-                        n={t.countries}
-                        price={t.price}
-                        selected={selectedCount === t.countries}
-                        onSelect={() => setSelectedCount(t.countries)}
-                      />
-                    ))}
-                  </div>
-                )}
+              <Reveal delay={100} className="mt-10">
+                <h2 className="text-lg font-bold text-primary">{whatWeReview.heading}</h2>
+                <p className="mt-2 text-sm font-semibold text-primary">{whatWeReview.intro}</p>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {whatWeReview.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                      <ShieldCheck className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
 
               <Reveal delay={125} className="mt-10">
-                <h2 className="text-lg font-bold text-primary">{whatWeHelpPlan.heading}</h2>
-                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {whatWeHelpPlan.items.map((item) => {
-                    const Icon = ICONS[item.icon]
-                    return (
-                      <li
-                        key={item.text}
-                        className="flex items-start gap-2.5 text-sm text-muted-foreground"
-                      >
-                        <Icon className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
-                        {item.text}
-                      </li>
-                    )
-                  })}
-                </ul>
+                <h2 className="text-lg font-bold text-primary">{whyItHelps.heading}</h2>
+                <div className="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground">
+                  {whyItHelps.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
               </Reveal>
 
               <Reveal delay={150} className="mt-10">
@@ -280,9 +188,9 @@ export function TravelPlannerServiceDetails() {
 
             <PlannerSidebar
               heading={sidebar.title}
-              price={price}
-              includesHeading="Your Travel Planner Includes"
-              caption={destinationNames.length > 0 ? [destinationNames.join(', ')] : [sidebar.tagline]}
+              includes={BORDER_CROSSING_FLOW.includes}
+              includesHeading={sidebar.tagline}
+              caption={[sidebar.tagline]}
               primaryCta={{ label: 'Start Your Request', to: requestHref }}
             />
           </div>

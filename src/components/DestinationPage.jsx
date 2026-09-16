@@ -178,7 +178,9 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
                             ? `/travel-planner?destination=${slug}`
                             : service.title.startsWith('Independent Tour Guides')
                               ? `/independent-tour-guide/${slug}`
-                              : '/#contact'
+                              : service.title === 'Border Crossing Guide'
+                                ? `/travel-planner/border-crossing-guide?from=${slug}`
+                                : '/#contact'
                         }
                       >
                         {service.cta}

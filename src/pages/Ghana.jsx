@@ -123,7 +123,9 @@ export function Ghana() {
                             ? '/travel-planner?destination=ghana'
                             : service.title === 'Independent Tour Guides'
                               ? '/independent-tour-guide/ghana'
-                              : '/#contact'
+                              : service.title === 'Border Crossing Guide'
+                                ? '/travel-planner/border-crossing-guide?from=ghana'
+                                : '/#contact'
                         }
                       >
                         {service.cta}

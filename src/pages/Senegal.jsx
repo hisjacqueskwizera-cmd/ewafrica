@@ -125,7 +125,9 @@ export function Senegal() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=senegal'
-                            : '/#contact'
+                            : service.title === 'Border Crossing Guide'
+                              ? '/travel-planner/border-crossing-guide?from=senegal'
+                              : '/#contact'
                         }
                       >
                         {service.cta}

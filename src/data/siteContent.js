@@ -46,7 +46,7 @@ export const COUNTRIES = [
     slug: 'ghana',
     name: 'Ghana',
     region: 'west',
-    note: 'Featured destination',
+    note: 'Featured Destination',
     featured: true,
     to: '/ghana',
     tone: 'copper',
@@ -147,7 +147,7 @@ export const SERVICES = [
     icon: 'FileText',
     title: 'Border Crossings',
     description: 'Navigate land borders with ease, backed by up-to-date, on-the-ground advice.',
-    to: '/#contact',
+    to: '/travel-planner/border-crossing-guide',
     image: '/Pictures/Border_crossing.jpg',
   },
   {
@@ -684,7 +684,7 @@ export const ZAMBIA_PAGE = {
       description:
         'Get practical guidance for crossing into and out of Zambia, including key border points, requirements, and what to expect.',
       image: '/Pictures/Border_crossing.jpg',
-      to: '/#contact',
+      to: '/travel-planner/border-crossing-guide?from=zambia',
     },
   ],
   landingTrust: [
@@ -957,7 +957,7 @@ export const MALAWI_PAGE = {
       icon: 'IdCard',
       eyebrow: 'Need a Border Crossing Guide?',
       text: 'Get up-to-date, step-by-step information for border crossings and procedures on your journey.',
-      cta: { label: 'Get a Border Crossing Guide', to: '/#contact' },
+      cta: { label: 'Get a Border Crossing Guide', to: '/travel-planner/border-crossing-guide?from=malawi' },
     },
   ],
   trust: trustFor('Malawi'),
@@ -1982,9 +1982,17 @@ export const TRAVEL_PLANNER_DETAILS_PAGE = {
       'East-West Africa Link provides independent travel guidance. We do not make bookings or act as a travel agency.',
     ],
   },
-  closingPhoto: '/Pictures/countries/Tanzania.jpg',
-  closingPhotoAlt: 'A safari vehicle on a dirt road through the savanna near a lake and mountains',
-  closingTagline: ['Different Journeys', 'A Richer You'],
+  sidebar: {
+    title: 'Travel Planner',
+    tagline: 'Plan more. Discover deeper.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'Route', title: 'One or Multiple Countries', text: 'Guidance for any trip length.' },
+  ],
+  closing: 'Different Journeys. A Richer You.',
 }
 
 // The Travel Planner request wizard — /travel-planner/request through
@@ -2620,7 +2628,7 @@ export const EXPLORE_PAGE = {
     featured: {
       slug: 'ghana',
       badge: 'Featured Destination · Travel + Relocation',
-      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      image: '/Pictures/Ghana_Card.png',
       imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
       // Shown clearly behind the card's copy (Cape Coast Castle's courtyard).
       backgroundImage: '/Pictures/explore/ghana-card-background.webp',
@@ -2964,4 +2972,227 @@ export const TOUR_GUIDE_PAGES = {
       subtext: 'Be the first to know when our Zanzibar Guide Match service is available.',
     },
   },
+}
+
+// The Border Crossing Guide service — its own detail page
+// (/travel-planner/border-crossing-guide) plus a 4-step request wizard (.../request
+// through .../confirmation), a fourth independent flow alongside Travel
+// Planner, Before You Book Check and Travel Audit above. Same shape
+// (request → review → payment → confirmation) and the same shared step
+// components (PlannerBackground, PlannerStepHero, PlannerSidebar,
+// PlannerStepper) and detail-page layout as Before You Book Check. Priced
+// by how many border crossings the trip involves (not by country count
+// like the other three services) — see priceForBorderCrossing() below.
+//
+// Body copy on the detail page is transcribed verbatim from the "BORDER
+// CROSSING Details" reference document, the same kind of document Travel
+// Planner's, Before You Book Check's and Travel Audit's own detail pages
+// already draw from.
+export const BORDER_CROSSING_PAGE = {
+  hero: {
+    badge: 'Travel Planner',
+    titleLine1: 'Border Crossing',
+    titleAccent: 'Guide',
+    tagline: ['Practical guidance for crossing one or multiple borders.'],
+    description:
+      'The Border Crossing Guide is for travelers who want practical help understanding how to move between countries by land.',
+    backgroundImage: '/Pictures/Border_crossing.jpg',
+    backgroundImageAlt: 'A truck stopped for inspection at a land border crossing checkpoint',
+  },
+  intro: {
+    heading: 'Practical Guidance for Crossing One or Multiple Borders',
+    paragraphs: [
+      'The Border Crossing Guide is for travelers who want practical help understanding how to move between countries by land.',
+      'It can be used for a single border crossing or a journey involving several borders, especially when you need help understanding the route, crossing points, transportation options, timing, documentation requirements, or what to expect on the ground.',
+    ],
+  },
+  whatWeReview: {
+    heading: 'What We Help With',
+    intro: 'We can provide guidance on:',
+    items: [
+      'Which border crossing may be the most practical for your route',
+      'How to travel from your departure point to the border',
+      'How to continue from the border to your next destination',
+      'Ground transportation options on both sides',
+      'Approximate travel times',
+      'Border opening considerations where relevant',
+      'Entry and exit procedures',
+      'Visa or entry requirements that may affect the crossing',
+      'Documentation you should have ready',
+      'Currency, payment, or transport considerations at the border',
+      'Multi-border routing through several countries',
+      'Practical issues that may make one route easier than another',
+      'Alternative crossing options where appropriate',
+      'Vehicle-entry requirements where applicable, including a Carnet de Passages en Douane (CPD), often called a "car passport," temporary import permits, or other required vehicle documents',
+    ],
+  },
+  whyItHelps: {
+    heading: 'Multiple Border Crossings',
+    paragraphs: [
+      'This service is not limited to one border.',
+      'If your journey involves 2, 3, 4, or more border crossings, we can review the route as a whole and provide guidance for each crossing, including how the different segments connect.',
+      'This can be especially useful for longer overland journeys where one border decision can affect transportation, timing, documentation, or the next stage of the trip.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'You will receive a personalized written Border Crossing Guide by email based on the countries, route, and crossings you provide.',
+      'The guide is intended to help you understand the practical steps involved before you travel.',
+    ],
+  },
+  followUpSupport: {
+    heading: 'Follow-Up Support',
+    items: [
+      {
+        label: 'Most countries',
+        text: 'The service includes 3 clarification emails within 7 days after delivery.',
+      },
+      {
+        label: 'Ghana',
+        text: 'Includes 3 clarification emails within 7 days plus an optional phone consultation.',
+      },
+      {
+        label: 'Benin and Senegal',
+        text: 'Includes 3 clarification emails in English or French within 7 days, with up to 2 additional clarification emails if necessary.',
+      },
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important to Know',
+    paragraphs: [
+      'Border procedures, visa rules, transportation options, and operating conditions can change.',
+      'East-West Africa Link provides practical travel guidance based on the information available at the time of preparation. Travelers remain responsible for confirming current entry requirements and official documentation requirements with the appropriate immigration, customs, or government authorities before travel.',
+    ],
+  },
+  sidebar: {
+    title: 'Border Crossing Guide',
+    tagline: 'Cross with confidence. Travel prepared.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'RouteIcon', title: 'One or Multiple Borders', text: 'Guidance for any route length.' },
+  ],
+  closing: 'Cross with Confidence. Travel Prepared.',
+}
+
+export const BORDER_CROSSING_FLOW = {
+  // 1 crossing: $25, 2: $45, 3: $60, 4: $75 — 5 or more is a custom quote
+  // (no fixed tier), see priceForBorderCrossing() below.
+  tiers: [
+    { crossings: 1, price: 25 },
+    { crossings: 2, price: 45 },
+    { crossings: 3, price: 60 },
+    { crossings: 4, price: 75 },
+  ],
+  customQuoteAt: 5,
+  includes: [
+    { icon: 'RouteIcon', text: 'Guidance for one or multiple border crossings' },
+    { icon: 'FileText', text: 'Documentation & entry requirement guidance' },
+    { icon: 'Mail', text: 'Delivered by email' },
+    { icon: 'Users', text: '3 clarification emails within 7 days' },
+    { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
+  ],
+  crossingCountOptions: [1, 2, 3, 4, 5],
+  purposeOptions: [
+    'Tourism / leisure',
+    'Business',
+    'Family visit',
+    'Relocation / long-term stay',
+    'Other',
+  ],
+  durationOptions: [
+    '1 week or less',
+    'About 2 weeks',
+    'About 3 weeks',
+    'About 1 month',
+    'More than 1 month',
+    'Not sure yet',
+  ],
+  certaintyOptions: [
+    {
+      value: 'unsure',
+      label: "No, I'm not sure",
+      hint: 'Please recommend the best option(s) for me.',
+    },
+    {
+      value: 'idea',
+      label: 'I have an idea, but not sure',
+      hint: 'I need help confirming the best option.',
+    },
+    {
+      value: 'known',
+      label: 'Yes, I already know',
+      hint: 'I will provide the border crossing I plan to use.',
+    },
+  ],
+  stepLabels: ['Your Request', 'Review Your Answers', 'Secure Payment', 'Payment Received'],
+  steps: {
+    request: {
+      bannerTagline: 'Cross with Confidence. Travel Prepared.',
+      cornerTagline: ['Explore Today.', 'A Richer Tomorrow.'],
+      heading: 'Start Your Request',
+      description:
+        "Tell us about your route and we'll help you understand how to cross — whether it's one border or several. All fields marked with * are required.",
+      back: { label: 'Back to Service Details', to: '/travel-planner/border-crossing-guide' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['Cross with confidence.', 'Travel prepared.'],
+    },
+    review: {
+      bannerTagline: 'Travel with knowledge. Travel with confidence.',
+      cornerTagline: ['Travel with knowledge.', 'Travel with confidence.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please review your answers below. If you need to make changes, click Edit for the relevant section. When you are ready, click Continue to Secure Payment.',
+      back: { label: 'Back to Make Changes', to: '/travel-planner/border-crossing-guide/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['Cross with confidence.', 'Travel prepared.'],
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      back: { label: 'Back to Review Your Answers', to: '/travel-planner/border-crossing-guide/review' },
+      quote: ['Cross with confidence.', 'Travel prepared.'],
+      helper:
+        'After payment, you will receive a confirmation and your Border Crossing Guide request will be submitted for review.',
+      sidebarHeading: 'Border Crossing Guide',
+      sidebarCaption: ['Cross with confidence.', 'Travel prepared.'],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+    confirmation: {
+      bannerTagline: 'Extraordinary places. A brighter tomorrow.',
+      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
+      heading: 'Your Payment Has Been Received',
+      intro: 'Your request for the Border Crossing Guide has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will carefully review your route and questions.',
+      deliveryNote: 'Your personalized Border Crossing Guide will be delivered by email.',
+      followUp:
+        'You have 3 clarification emails within 7 days of delivery. If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Border Crossing Guide',
+      sidebarCaption: ['Cross with confidence. Travel prepared.', "We're here to help."],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+  },
+}
+
+// Turns a border-crossing count into this service's price — mirrors
+// priceForSelection()/priceForTravelAudit() above, but tiered by crossing
+// count (not country count) and with no fixed price at all past
+// BORDER_CROSSING_FLOW.customQuoteAt (5+ crossings). Returns null both
+// when nothing is selected yet and when a custom quote applies — callers
+// check crossingCount >= BORDER_CROSSING_FLOW.customQuoteAt separately to
+// tell those two cases apart (see BorderCrossingFlowContext's `price` +
+// `isCustomQuote`).
+export function priceForBorderCrossing(crossingCount) {
+  if (!crossingCount || crossingCount >= BORDER_CROSSING_FLOW.customQuoteAt) return null
+  return BORDER_CROSSING_FLOW.tiers.find((t) => t.crossings === crossingCount)?.price ?? null
 }

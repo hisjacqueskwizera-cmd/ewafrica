@@ -371,7 +371,7 @@ export function Zambia() {
                 <ArrowRight className="size-4" aria-hidden="true" />
               </HashLink>
               <HashLink
-                to="/#contact"
+                to="/travel-planner/border-crossing-guide?from=zambia"
                 className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-5 py-2.5 text-sm font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
               >
                 Get a Border Crossing Guide

@@ -130,7 +130,9 @@ export function Malawi() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=malawi'
-                            : '/#contact'
+                            : service.title === 'Border Crossing Guide'
+                              ? '/travel-planner/border-crossing-guide?from=malawi'
+                              : '/#contact'
                         }
                       >
                         {service.cta}

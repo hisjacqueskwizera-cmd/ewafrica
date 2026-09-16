@@ -70,7 +70,9 @@ export function Uganda() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=uganda'
-                            : '/#contact'
+                            : service.title === 'Border Crossing Guide'
+                              ? '/travel-planner/border-crossing-guide?from=uganda'
+                              : '/#contact'
                         }
                         className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
                       >

@@ -130,7 +130,9 @@ export function Benin() {
                             ? '/travel-planner?destination=benin'
                             : service.title.startsWith('Independent Tour Guides')
                               ? '/independent-tour-guide/benin'
-                              : '/#contact'
+                              : service.title === 'Border Crossing Guide'
+                                ? '/travel-planner/border-crossing-guide?from=benin'
+                                : '/#contact'
                         }
                       >
                         {service.cta}

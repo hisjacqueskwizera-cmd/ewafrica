@@ -3,11 +3,13 @@ import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
+import { BorderCrossingFlowProvider } from './context/BorderCrossingFlowContext.jsx'
 import { TravelAuditFlowProvider } from './context/TravelAuditFlowContext.jsx'
 import { TravelPlannerFlowProvider } from './context/TravelPlannerFlowContext.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { Benin } from './pages/Benin.jsx'
 import { BeforeYouBookCheck } from './pages/BeforeYouBookCheck.jsx'
+import { BorderCrossingGuide } from './pages/BorderCrossingGuide.jsx'
 import { Explore } from './pages/Explore.jsx'
 import { Gambia } from './pages/Gambia.jsx'
 import { Ghana } from './pages/Ghana.jsx'
@@ -36,6 +38,10 @@ import { Confirmation as TravelAuditConfirmation } from './pages/travel-audit/Co
 import { Payment as TravelAuditPayment } from './pages/travel-audit/Payment.jsx'
 import { RequestForm as TravelAuditRequestForm } from './pages/travel-audit/RequestForm.jsx'
 import { ReviewAnswers as TravelAuditReviewAnswers } from './pages/travel-audit/ReviewAnswers.jsx'
+import { Confirmation as BorderCrossingConfirmation } from './pages/border-crossing/Confirmation.jsx'
+import { Payment as BorderCrossingPayment } from './pages/border-crossing/Payment.jsx'
+import { RequestForm as BorderCrossingRequestForm } from './pages/border-crossing/RequestForm.jsx'
+import { ReviewAnswers as BorderCrossingReviewAnswers } from './pages/border-crossing/ReviewAnswers.jsx'
 
 // The request wizard (reached via "View Details" on the Travel Planner
 // card, which goes straight to the request form — the separate service-
@@ -91,6 +97,22 @@ function TravelAuditFlowRoutes() {
   )
 }
 
+// The Border Crossing Guide request wizard — a fourth independent flow
+// alongside the three above, reached from its own service detail page
+// (BorderCrossingGuide.jsx). Same shape, own provider, own state.
+function BorderCrossingFlowRoutes() {
+  return (
+    <BorderCrossingFlowProvider>
+      <Routes>
+        <Route path="request" element={<BorderCrossingRequestForm />} />
+        <Route path="review" element={<BorderCrossingReviewAnswers />} />
+        <Route path="payment" element={<BorderCrossingPayment />} />
+        <Route path="confirmation" element={<BorderCrossingConfirmation />} />
+      </Routes>
+    </BorderCrossingFlowProvider>
+  )
+}
+
 function App() {
   return (
     <>
@@ -127,6 +149,11 @@ function App() {
           />
           <Route path="/travel-planner/travel-audit" element={<TravelAudit />} />
           <Route path="/travel-planner/travel-audit/*" element={<TravelAuditFlowRoutes />} />
+          <Route path="/travel-planner/border-crossing-guide" element={<BorderCrossingGuide />} />
+          <Route
+            path="/travel-planner/border-crossing-guide/*"
+            element={<BorderCrossingFlowRoutes />}
+          />
           <Route path="/travel-planner/*" element={<TravelPlannerFlowRoutes />} />
           <Route
             path="*"

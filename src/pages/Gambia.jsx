@@ -124,7 +124,9 @@ export function Gambia() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=gambia'
-                            : '/#contact'
+                            : service.title === 'Border Crossing Guide'
+                              ? '/travel-planner/border-crossing-guide?from=gambia'
+                              : '/#contact'
                         }
                       >
                         {service.cta}

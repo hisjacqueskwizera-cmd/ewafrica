@@ -1,9 +1,20 @@
-import { ArrowRight, Clock, FileText, Mail, Map, Search, Settings2, Shield, Users } from 'lucide-react'
+import {
+  ArrowRight,
+  Clock,
+  FileText,
+  Mail,
+  Map,
+  Route as RouteIcon,
+  Search,
+  Settings2,
+  Shield,
+  Users,
+} from 'lucide-react'
 import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
 import { HashLink } from '../HashLink.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
 
-const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText }
+const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon }
 
 /**
  * The right-hand rail steps 3–6 of the request wizard share: a photo with
@@ -12,9 +23,13 @@ const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText }
  * steps — a second photo. `helpHeading`/`helpText` and the two photos are
  * the only things that actually change page to page.
  *
- * Reused as-is by the (separate) Before You Book Check flow via the
- * `includes`/`includesHeading` and `primaryCta` props — everything else
- * about the rail is identical between the two services.
+ * Reused as-is by the (separate) Before You Book Check/Travel Audit/Border
+ * Crossing Guide flows via the `includes`/`includesHeading` and
+ * `primaryCta` props — everything else about the rail is identical across
+ * services. `priceLabel` overrides the `$price` display with plain text
+ * (e.g. "Custom Quote") for Border Crossing Guide's 5+-crossings tier,
+ * which has no fixed number — pass it alongside `price` so the "Secure &
+ * Encrypted" note underneath still renders.
  */
 export function PlannerSidebar({
   heading = 'Your Travel Planner',
@@ -22,6 +37,7 @@ export function PlannerSidebar({
   photoAlt = 'Aerial view of a coastal fort on the Ghanaian coast',
   caption,
   price,
+  priceLabel,
   includes = TRAVEL_PLANNER_FLOW.includes,
   includesHeading = 'Your Travel Planner Includes',
   primaryCta,
@@ -72,9 +88,11 @@ export function PlannerSidebar({
           })}
         </ul>
 
-        {price != null && (
+        {(price != null || priceLabel) && (
           <>
-            <p className="mt-4 text-3xl font-bold text-primary">${price}</p>
+            <p className="mt-4 text-3xl font-bold text-primary">
+              {priceLabel ?? `$${price}`}
+            </p>
             <div className="mt-2 flex items-center gap-2 text-sm font-semibold text-primary">
               <Shield className="size-4 text-copper" aria-hidden="true" />
               Secure &amp; Encrypted

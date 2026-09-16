@@ -1,5 +1,6 @@
 import { ArrowRight, CalendarDays, Headphones, Home as HomeIcon, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { FLAGS } from '../data/countryFlags.js'
 import { GHANA_FEATURES } from '../data/siteContent.js'
 import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
@@ -43,14 +44,21 @@ export function FeaturedGhana() {
             <span className="inline-flex w-fit items-center rounded-full bg-primary-foreground/15 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.15em] text-gold backdrop-blur">
               Featured Country
             </span>
-            <h2 className="mt-3 text-3xl font-semibold sm:text-4xl lg:text-[2.75rem]">
-              <RevealText as="span" text="" />{' '}
-              <RevealText
-                as="span"
-                text="Ghana"
-                delay={280}
-                wordClassName="italic font-medium text-gold"
+            <h2 className="mt-3 flex items-center gap-3 text-3xl font-semibold sm:text-4xl lg:text-[2.75rem]">
+              <img
+                src={FLAGS.ghana}
+                alt="Flag of Ghana"
+                className="h-7 w-auto shrink-0 rounded-[4px] object-cover shadow-md ring-1 ring-inset ring-primary-foreground/25 sm:h-8 lg:h-9"
               />
+              <span>
+                <RevealText as="span" text="" />{' '}
+                <RevealText
+                  as="span"
+                  text="Ghana"
+                  delay={280}
+                  wordClassName="italic font-medium text-gold"
+                />
+              </span>
             </h2>
           </Reveal>
 

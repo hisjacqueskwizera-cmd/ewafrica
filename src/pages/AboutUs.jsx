@@ -65,13 +65,13 @@ export function AboutUs() {
         <HeroVideoBackground />
         <div className="absolute inset-0 z-[3] bg-cocoa/45" aria-hidden="true" />
         <div className="relative z-[4] w-full max-w-5xl">
-         
           <Reveal delay={150} blur>
             <div className="mt-9 max-w-3xl">
-              
-              <h1 className="mt-4 font-display text-[3rem] font-normal leading-[1.1] text-balance sm:text-[4rem] lg:text-[5.375rem]">
-                <AccentHeading text={hero.titleLine1} className={`${HEADING} text-white text-balance sm:text-[4rem] lg:text-[5.375rem]`} />
-              </h1>
+              <AccentHeading
+                as="h1"
+                text={hero.titleLine1}
+                className="font-display text-[3rem] font-normal leading-[1.1] text-balance text-white sm:text-[4rem] lg:text-[5.375rem]"
+              />
               <p className="mt-6 max-w-[640px] text-base leading-[1.7] text-primary-foreground/90 md:text-lg">
                 East-West Africa Link was founded from decades of firsthand travel and experience
                 across the African continent from North Africa to West, East, Central and Southern

@@ -20,11 +20,20 @@ const ACCENT = {
   forest: { badge: 'bg-forest text-primary-foreground', button: 'bg-forest text-primary-foreground' },
 }
 
-// count/hasGhana drive the price shown; isLocked+lockedCountryName override
-// the caption with the one country the visitor arrived with (see the
-// comment on TravelPlanner() below for when each case applies). requestHref
-// carries the selection into the flow; canProceed is false only for the
-// Travel Planner card when arriving unlocked with nothing picked yet.
+// count/hasGhana still drive what the price *would* be; isLocked+
+// lockedCountryName override the caption with the one country the visitor
+// arrived with (see the comment on TravelPlanner() below for when each case
+// applies). requestHref carries the selection into the Travel Planner
+// service's own details page, beforeYouBookHref into the (separate) Before
+// You Book Check flow. Every card's "View Details" is always clickable —
+// none of them dead-end a visitor who hasn't picked anything: the Travel
+// Planner service's own details page (TravelPlannerServiceDetails.jsx)
+// picks up from there and lets them choose a country count if nothing was
+// carried over, the same way Before You Book Check's request form does.
+// None of the three cards show a price on this page any more (showPrice
+// below) — pricing only appears once a visitor is inside a service's own
+// flow — but the computation itself (tiers, the Ghana flat-rate variant)
+// stays in place so it's a one-line flip to bring it back.
 function ServiceCard({
   service,
   isLocked,
@@ -32,12 +41,13 @@ function ServiceCard({
   count,
   hasGhana,
   requestHref,
-  canProceed,
+  beforeYouBookHref,
   delay,
 }) {
   const Icon = ICONS[service.icon]
   const accent = ACCENT[service.accent]
   const { travelPlannerTiers, flatPricing } = TRAVEL_PLANNER_PAGE
+  const showPrice = false
   const price =
     service.key === 'travelPlanner'
       ? travelPlannerTiers.find((t) => t.countries === count)?.price
@@ -49,6 +59,12 @@ function ServiceCard({
       : hasGhana
         ? 'Ghana'
         : ''
+  const href =
+    service.key === 'travelPlanner'
+      ? requestHref
+      : service.key === 'beforeYouBook'
+        ? beforeYouBookHref
+        : '/#contact'
 
   return (
     <Reveal delay={delay}>
@@ -77,12 +93,14 @@ function ServiceCard({
           </span>
           <h3 className="mt-4 text-xl font-bold text-primary">{service.title}</h3>
 
-          {/* Travel Planner's price tracks how many countries are
-              selected (1 = $65 up to 4 = $245); the flat-rate cards vary
-              only for Ghana — everything always resolves to a real number,
-              nothing is ever missing pricing. */}
-          <p className="mt-3 text-3xl font-bold text-primary">${price}</p>
-          {priceLabel && <p className="text-xs text-muted-foreground">({priceLabel} pricing)</p>}
+          {/* Pricing is hidden on every card here (showPrice above) — see
+              each service's own flow for the actual price. */}
+          {showPrice && (
+            <>
+              <p className="mt-3 text-3xl font-bold text-primary">${price}</p>
+              {priceLabel && <p className="text-xs text-muted-foreground">({priceLabel} pricing)</p>}
+            </>
+          )}
 
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
 
@@ -98,24 +116,13 @@ function ServiceCard({
             ))}
           </ul>
 
-          {service.key === 'travelPlanner' && !canProceed ? (
-            <span
-              aria-disabled="true"
-              title="Select at least 1 country above to continue"
-              className={`mt-5 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold opacity-50 ${accent.button}`}
-            >
-              View Details
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </span>
-          ) : (
-            <HashLink
-              to={service.key === 'travelPlanner' ? requestHref : '/#contact'}
-              className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${accent.button}`}
-            >
-              View Details
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </HashLink>
-          )}
+          <HashLink
+            to={href}
+            className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${accent.button}`}
+          >
+            View Details
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </HashLink>
         </div>
       </article>
     </Reveal>
@@ -147,12 +154,13 @@ export function TravelPlanner() {
     .filter(Boolean)
   const count = Math.max(destinationSlugs.length, 1)
   const hasGhana = destinationSlugs.includes('ghana')
-  // Locked arrivals always have exactly one slug pre-loaded (see the
-  // useState above), so this same check covers both required cases: a
-  // locked visitor can always proceed, an unlocked one only once they've
-  // picked something — no separate isLocked branch needed here.
-  const canProceed = destinationSlugs.length > 0
-  const requestHref = `/travel-planner/request?destinations=${destinationSlugs.join(',')}`
+  // Every card's "View Details" always works, selected or not — the
+  // Travel Planner card goes to that service's own details page (where a
+  // count can still be chosen if nothing was picked here) rather than
+  // straight to the request form, so there's no "nothing picked yet" dead
+  // end to guard against any more.
+  const requestHref = `/travel-planner/service-details?destinations=${destinationSlugs.join(',')}`
+  const beforeYouBookHref = `/travel-planner/before-you-book-check?destinations=${destinationSlugs.join(',')}`
   const { hero, intro, services, helpBand, trust } = TRAVEL_PLANNER_PAGE
 
   return (
@@ -223,7 +231,7 @@ export function TravelPlanner() {
                 count={count}
                 hasGhana={hasGhana}
                 requestHref={requestHref}
-                canProceed={canProceed}
+                beforeYouBookHref={beforeYouBookHref}
                 delay={i * 100}
               />
             ))}

@@ -96,7 +96,7 @@ export function DestinationPicker({ countries, values, onChange, max = 4, classN
         onClick={toggleOpen}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex w-full items-center justify-center gap-2.5 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-primary shadow-card transition-colors hover:border-copper/50"
+        className="flex w-full items-center justify-center gap-2.5 rounded-full border-2 border-copper/35 bg-sand px-5 py-3 text-sm font-semibold text-primary shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-copper/60 hover:shadow-lift"
       >
         {selected.length > 0 ? (
           <span className="flex -space-x-1.5">

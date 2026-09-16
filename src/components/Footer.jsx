@@ -45,6 +45,8 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="grid size-9.5 place-items-center rounded-full border border-primary-foreground/15 text-primary-foreground/75 transition-colors hover:border-copper hover:bg-copper hover:text-copper-foreground"
                 >

@@ -24,7 +24,23 @@ const EXPLORE_MENU_COUNTRIES = EXPLORE_MENU_SLUGS.map((slug) =>
 // behind the fixed header — the same transparent, light-on-dark header
 // treatment as Home before scrolling makes sense there too, rather than a
 // solid bar sitting awkwardly on top of the dark hero from first paint.
-const TRANSPARENT_HERO_ROUTES = ['/', '/about', '/explore', '/travel-planner', '/tanzania']
+// Every destination page shares the same DestinationHero now (see
+// src/components/DestinationHero.jsx), so all of them are listed here.
+const TRANSPARENT_HERO_ROUTES = [
+  '/',
+  '/about',
+  '/explore',
+  '/travel-planner',
+  '/tanzania',
+  '/ghana',
+  '/malawi',
+  '/zambia',
+  '/uganda',
+  '/rwanda',
+  '/gambia',
+  '/senegal',
+  '/benin',
+]
 
 export function Header() {
   const location = useLocation()

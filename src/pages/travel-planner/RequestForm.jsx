@@ -1,7 +1,8 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { COUNTRIES, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
+import { DestinationPicker } from '../../components/DestinationPicker.jsx'
 import { PlannerBackground } from '../../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../../components/travel-planner/PlannerSidebar.jsx'
 import { PlannerStepHero } from '../../components/travel-planner/PlannerStepHero.jsx'
@@ -67,8 +68,9 @@ function CheckboxOption({ checked, onChange, label }) {
 }
 
 // Read-only "Your Destination(s)" block shared by both question sets —
-// destinations are carried over from the landing page's picker and only
-// ever changed by going back there, never re-picked inline on this page.
+// shown once destinations are known, whether carried over from the landing
+// page's picker or just picked inline below by DestinationPickerField.
+// Only ever changed by going back to /travel-planner, never re-picked here.
 function DestinationSummary({ label, destinationNames }) {
   return (
     <div>
@@ -81,6 +83,20 @@ function DestinationSummary({ label, destinationNames }) {
         Change destinations
       </Link>
     </div>
+  )
+}
+
+// Shown instead of DestinationSummary when nothing was carried over from
+// either the landing page's picker or the Service Details page's own
+// summary — mirrors Before You Book Check's own request form, which asks
+// inline rather than leaving the visitor stuck with no way to proceed.
+// `max` is the count already promised on Service Details (or 4 for a
+// direct/bookmarked visit with no promise at all).
+function DestinationPickerField({ label, hint, values, onChange, max }) {
+  return (
+    <Field label={label} required hint={hint}>
+      <DestinationPicker countries={COUNTRIES} values={values} onChange={onChange} max={max} />
+    </Field>
   )
 }
 
@@ -99,6 +115,7 @@ function PdfRequestSections({
   setDaysForCountry,
   destinationNames,
   count,
+  arrivedWithSelection,
 }) {
   const destinationQuestion =
     count === 1
@@ -116,7 +133,17 @@ function PdfRequestSections({
   return (
     <>
       <SectionCard number={2} title="Your Trip">
-        <DestinationSummary label={destinationQuestion} destinationNames={destinationNames} />
+        {arrivedWithSelection ? (
+          <DestinationSummary label={destinationQuestion} destinationNames={destinationNames} />
+        ) : (
+          <DestinationPickerField
+            label={destinationQuestion}
+            hint={`You can select up to ${count} ${count === 1 ? 'country' : 'countries'}.`}
+            values={request.destinationSlugs}
+            onChange={(slugs) => updateRequest({ destinationSlugs: slugs })}
+            max={count}
+          />
+        )}
 
         <Field
           label="What are your planned travel dates?"
@@ -506,11 +533,27 @@ function PdfRequestSections({
 // ---------------------------------------------------------------------
 // Pre-existing 4-country question set — unchanged.
 // ---------------------------------------------------------------------
-function LegacyRequestSections({ request, updateRequest, toggleListValue, destinationNames }) {
+function LegacyRequestSections({
+  request,
+  updateRequest,
+  toggleListValue,
+  destinationNames,
+  arrivedWithSelection,
+}) {
   return (
     <>
       <SectionCard number={2} title="Your Trip">
-        <DestinationSummary label="Your Destination(s)" destinationNames={destinationNames} />
+        {arrivedWithSelection ? (
+          <DestinationSummary label="Your Destination(s)" destinationNames={destinationNames} />
+        ) : (
+          <DestinationPickerField
+            label="Your Destination(s)"
+            hint="You can select up to 4 countries."
+            values={request.destinationSlugs}
+            onChange={(slugs) => updateRequest({ destinationSlugs: slugs })}
+            max={4}
+          />
+        )}
 
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="When are you planning to travel?" required>
@@ -737,23 +780,19 @@ export function RequestForm() {
   }, [])
 
   const navigate = useNavigate()
-  const { request, updateRequest, toggleListValue, setDaysForCountry, tier } = useTravelPlannerFlow()
+  const { request, updateRequest, toggleListValue, setDaysForCountry, tier, count } =
+    useTravelPlannerFlow()
   const copy = TRAVEL_PLANNER_FLOW.steps.request
-  const count = request.destinationSlugs.length
   const destinationNames = request.destinationSlugs
     .map((slug) => COUNTRIES.find((c) => c.slug === slug)?.name)
     .filter(Boolean)
 
-  // The only way into this flow is the landing page's "View Details",
-  // which won't even link here without at least one country picked (see
-  // TravelPlanner.jsx) — this just catches a direct/bookmarked visit with
-  // nothing carried over, rather than showing a request form with no
-  // destination and no way to price it.
-  useEffect(() => {
-    if (count === 0) navigate('/travel-planner', { replace: true })
-  }, [count, navigate])
-
-  if (count === 0) return null
+  // Captured once, at mount, from whatever the context seeded from the URL
+  // — not derived from request.destinationSlugs on every render, since
+  // that would flip this flag the moment someone picks a country in the
+  // inline picker below and switch them over to the read-only summary
+  // mid-selection. Mirrors Before You Book Check's own RequestForm.
+  const [arrivedWithSelection] = useState(() => request.destinationSlugs.length > 0)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -824,6 +863,7 @@ export function RequestForm() {
                   setDaysForCountry={setDaysForCountry}
                   destinationNames={destinationNames}
                   count={count}
+                  arrivedWithSelection={arrivedWithSelection}
                 />
               ) : (
                 <LegacyRequestSections
@@ -831,6 +871,7 @@ export function RequestForm() {
                   updateRequest={updateRequest}
                   toggleListValue={toggleListValue}
                   destinationNames={destinationNames}
+                  arrivedWithSelection={arrivedWithSelection}
                 />
               )}
 

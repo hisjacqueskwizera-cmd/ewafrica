@@ -1,9 +1,9 @@
-import { Clock, Mail, Map, Settings2, Shield, Users } from 'lucide-react'
+import { ArrowRight, Clock, Mail, Map, Search, Settings2, Shield, Users } from 'lucide-react'
 import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
 import { HashLink } from '../HashLink.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
 
-const ICONS = { Map, Settings2, Mail, Users, Clock }
+const ICONS = { Map, Settings2, Mail, Users, Clock, Search }
 
 /**
  * The right-hand rail steps 3–6 of the request wizard share: a photo with
@@ -11,6 +11,10 @@ const ICONS = { Map, Settings2, Mail, Users, Clock }
  * for whatever tier is selected, a help block, and — on the later two
  * steps — a second photo. `helpHeading`/`helpText` and the two photos are
  * the only things that actually change page to page.
+ *
+ * Reused as-is by the (separate) Before You Book Check flow via the
+ * `includes`/`includesHeading` and `primaryCta` props — everything else
+ * about the rail is identical between the two services.
  */
 export function PlannerSidebar({
   heading = 'Your Travel Planner',
@@ -18,6 +22,9 @@ export function PlannerSidebar({
   photoAlt = 'Aerial view of a coastal fort on the Ghanaian coast',
   caption,
   price,
+  includes = TRAVEL_PLANNER_FLOW.includes,
+  includesHeading = 'Your Travel Planner Includes',
+  primaryCta,
   helpHeading = 'Need Help?',
   helpText = 'General questions about our services, pricing, or how the website works can be sent through WhatsApp or email at no charge.',
   secondaryPhoto,
@@ -47,13 +54,13 @@ export function PlannerSidebar({
       </div>
 
       <div className="rounded-2xl bg-cream p-5">
-        <h3 className="text-sm font-bold text-primary">Your Travel Planner Includes</h3>
+        <h3 className="text-sm font-bold text-primary">{includesHeading}</h3>
         <ul className="mt-3 space-y-3">
-          {TRAVEL_PLANNER_FLOW.includes.map((item, i) => {
+          {includes.map((item, i) => {
             const Icon = ICONS[item.icon]
             return (
               <li key={item.text}>
-                {i === TRAVEL_PLANNER_FLOW.includes.length - 1 && (
+                {i === includes.length - 1 && (
                   <span className="mb-3 block h-px w-full bg-border" aria-hidden="true" />
                 )}
                 <div className="flex items-start gap-2.5 text-sm text-primary">
@@ -74,6 +81,16 @@ export function PlannerSidebar({
             </div>
             <p className="mt-1 text-xs text-muted-foreground">Your information is safe with us.</p>
           </>
+        )}
+
+        {primaryCta && (
+          <HashLink
+            to={primaryCta.to}
+            className="btn-copper mt-4 w-full justify-center"
+          >
+            {primaryCta.label}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </HashLink>
         )}
       </div>
 

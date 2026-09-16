@@ -71,15 +71,25 @@ const TravelPlannerFlowContext = createContext(null)
 export function TravelPlannerFlowProvider({ children }) {
   const [searchParams] = useSearchParams()
   const [request, setRequest] = useState(() => {
-    // Read once on mount — the landing page's "View Details" link is the
-    // only entry point into this flow (RequestForm redirects back out if
-    // nothing came through), so this is the visitor's carried-over pick,
-    // up to the same 4-country max the picker itself enforces.
+    // Read once on mount — carried over from either the landing page's
+    // picker or the Service Details page's own summary (both use this same
+    // ?destinations= convention), up to the same 4-country max the picker
+    // itself enforces.
     const slugs = (searchParams.get('destinations') ?? '')
       .split(',')
       .filter((slug) => COUNTRIES.some((c) => c.slug === slug))
       .slice(0, 4)
     return { ...DEFAULT_REQUEST, destinationSlugs: slugs }
+  })
+  // Reached from the Service Details page's country-count tiles
+  // (?count=1..4) when nothing was picked yet — a promise about how many
+  // countries to expect, used for pricing/question-set wording until real
+  // destinationSlugs exist below, and as the DestinationPicker's cap once
+  // RequestForm asks for the specific countries inline. Read once, same as
+  // destinationSlugs above; irrelevant once real picks exist.
+  const [plannedCount] = useState(() => {
+    const n = Number(searchParams.get('count'))
+    return n >= 1 && n <= 4 ? n : null
   })
   const [paid, setPaid] = useState(false)
 
@@ -105,10 +115,13 @@ export function TravelPlannerFlowProvider({ children }) {
     setPaid(false)
   }
 
-  // Prices throughout the flow follow the carried-over selection directly
-  // — never a separately-asked count — so this is the one place that turns
-  // "how many countries" into a tier; everything downstream reads `tier`.
-  const count = Math.max(request.destinationSlugs.length, 1)
+  // Prices (and the Pdf-vs-Legacy question-set choice) follow this one
+  // effective count everywhere downstream: real picks once they exist,
+  // else the Service Details page's promised count, else a floor of 1 —
+  // the same formula every step reads, so a visitor who promised "4" on
+  // Service Details but has only picked 1 country so far still sees $245
+  // and the matching (Legacy) question set, not a mismatched Pdf one.
+  const count = Math.max(request.destinationSlugs.length, plannedCount ?? 0, 1)
   const tier = useMemo(
     () => TRAVEL_PLANNER_FLOW.tiers.find((t) => t.countries === count),
     [count],
@@ -120,6 +133,7 @@ export function TravelPlannerFlowProvider({ children }) {
     toggleListValue,
     setDaysForCountry,
     resetRequest,
+    count,
     tier,
     paid,
     setPaid,

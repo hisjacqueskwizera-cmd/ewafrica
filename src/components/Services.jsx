@@ -6,9 +6,20 @@ import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
 import { SectionMark } from './SectionMark.jsx'
 
-// How long each group of 3 stays on screen before autoplay advances to the
+// How slowly each group slides into place — deliberately slow/cinematic
+// rather than snappy.
+const SLIDE_MS = 2000
+// How long each group stays fully in place before autoplay slides in the
 // next one.
-const STAY_MS = 3500
+const STAY_MS = 3000
+// A drag that doesn't clear this fraction of the strip's width snaps back
+// to the current page instead of committing to the next one — and does so
+// quickly, not over the full slow SLIDE_MS.
+const DRAG_COMMIT_FRACTION = 0.2
+const SNAP_BACK_MS = 320
+// Pointer movement past this many pixels counts as a drag rather than a
+// tap, so a drag never also fires the click on the card underneath.
+const CLICK_DRAG_THRESHOLD = 4
 const PAGE_SIZE = 3
 
 // A landscape, full-bleed photo card: image fills the frame, a bottom-up
@@ -23,10 +34,16 @@ const PAGE_SIZE = 3
 // opacity + a small rise (~.4s). `group-focus-within` mirrors it for
 // keyboard focus, since `:hover` alone would leave it keyboard-inaccessible.
 //
-function PhotoCard({ to, image, children }) {
+// `hidden` marks every card that isn't in the group currently on screen
+// (including the strip's duplicate copy of each group — see SLIDES below)
+// so assistive tech only ever hears the visible cards, and their links drop
+// out of the tab order.
+function PhotoCard({ to, image, hidden, children }) {
   return (
     <HashLink
       to={to}
+      aria-hidden={hidden}
+      tabIndex={hidden ? -1 : undefined}
       draggable={false}
       className="group relative block h-[350px] w-full overflow-hidden bg-cocoa sm:h-[390px]"
     >
@@ -35,6 +52,7 @@ function PhotoCard({ to, image, children }) {
         alt=""
         aria-hidden="true"
         loading="lazy"
+        draggable={false}
         className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
       />
       <div
@@ -83,9 +101,9 @@ function CardReveal({
   )
 }
 
-function ServiceCard({ s }) {
+function ServiceCard({ s, hidden }) {
   return (
-    <PhotoCard to={s.to} image={s.image}>
+    <PhotoCard to={s.to} image={s.image} hidden={hidden}>
       <CardTitle className="text-2xl font-semibold text-primary-foreground">{s.title}</CardTitle>
       <CardReveal>
         <p className="pt-2 text-sm leading-relaxed text-primary-foreground/80">{s.description}</p>
@@ -98,9 +116,9 @@ function ServiceCard({ s }) {
   )
 }
 
-function UmbrellaCard() {
+function UmbrellaCard({ hidden }) {
   return (
-    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/Pictures/caption.jpg">
+    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/Pictures/caption.jpg" hidden={hidden}>
       <Umbrella className="size-6 text-gold" aria-hidden="true" />
       <CardTitle className="mt-3 text-2xl font-semibold leading-snug text-primary-foreground">
         {TRAVEL_PLANNER_UMBRELLA.title}
@@ -131,10 +149,13 @@ function UmbrellaCard() {
   )
 }
 
-// Every card, in order — the 5 services plus the Travel Planner umbrella.
+// Every card, in order — the 5 services plus the Travel Planner umbrella —
+// each wrapped as a render function so ServiceCard/UmbrellaCard's own props
+// (notably `hidden`) can be applied per-slide below without re-deriving this
+// list on every render.
 const CARD_ITEMS = [
-  ...SERVICES.map((s) => ({ key: s.title, render: () => <ServiceCard s={s} /> })),
-  { key: 'umbrella', render: () => <UmbrellaCard /> },
+  ...SERVICES.map((s) => ({ key: s.title, render: (hidden) => <ServiceCard s={s} hidden={hidden} /> })),
+  { key: 'umbrella', render: (hidden) => <UmbrellaCard hidden={hidden} /> },
 ]
 
 // Grouped into pages of 3 — with 6 cards total that's an even 2 pages, but
@@ -144,29 +165,32 @@ const PAGES = Array.from({ length: Math.ceil(CARD_ITEMS.length / PAGE_SIZE) }, (
   CARD_ITEMS.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
 )
 
-// Pointer movement past this many pixels counts as a drag rather than a
-// tap, so a mouse-drag never also fires the click on the card underneath.
-const DRAG_THRESHOLD = 4
-// After a touch drag ends, autoplay waits this long before resuming — long
-// enough for the browser's momentum/inertia scrolling to settle rather than
-// fighting it.
-const TOUCH_SETTLE_MS = 600
+// The strip holds every page twice in a row, and only ever moves forward
+// (right to left) along it — it never reverses. Once it has slid onto the
+// second copy of a page, it jumps back to the identical first copy with the
+// transition switched off — an invisible swap — so looping from the last
+// group back to the first still slides right to left instead of rewinding
+// the whole strip left to right.
+const SLIDES = [...PAGES, ...PAGES]
 
 export function Services() {
-  const trackRef = useRef(null)
-  const [page, setPage] = useState(0)
+  // Position along SLIDES; `page` (0…PAGES.length - 1) is which group it is.
+  const [index, setIndex] = useState(0)
+  const [animate, setAnimate] = useState(true)
   const [paused, setPaused] = useState(false)
-  // Refs, not state — read from event handlers that fire between renders
-  // and must never themselves trigger one.
-  const draggingRef = useRef(false)
-  const dragRef = useRef({ pointerId: null, startX: 0, startScrollLeft: 0, moved: false })
-  const touchSettleTimeoutRef = useRef(null)
+  // Set when `index` last changed through the invisible loop-back jump
+  // rather than a slide — see the autoplay effect.
+  const jumpedRef = useRef(false)
+  const trackRef = useRef(null)
+  const viewportRef = useRef(null)
+  const dragRef = useRef({ active: false, pointerId: null, pointerType: null, startX: 0, dx: 0, moved: false })
   // Captured lazily at mount so the initial render already reflects the OS
   // setting (no extra render just to sync it) — the effect below only wires
   // up the listener for later changes.
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
+  const page = index % PAGES.length
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -175,82 +199,128 @@ export function Services() {
     return () => query.removeEventListener('change', handler)
   }, [])
 
-  useEffect(() => () => clearTimeout(touchSettleTimeoutRef.current), [])
-
-  // Scrolls the strip to a given page — used by autoplay, the dots, and to
-  // settle on the nearest page once a mouse-drag ends.
-  const scrollToPage = useCallback((target) => {
+  // The one place that ever writes the strip's transform/transition —
+  // autoplay, dot clicks, and the jump-back all funnel through `index`, and
+  // this effect applies it. Forcing a reflow between the transition-enable
+  // and the transform change is what makes the browser actually animate the
+  // second write instead of jumping straight to it — needed both for the
+  // jump-back (transition off) and for a drag hand-off (transition was just
+  // switched off imperatively for the live drag).
+  useEffect(() => {
     const track = trackRef.current
     if (!track) return
-    const clamped = Math.max(0, Math.min(PAGES.length - 1, target))
-    track.scrollTo({ left: clamped * track.clientWidth, behavior: 'smooth' })
-  }, [])
+    track.style.transition = animate ? `transform ${SLIDE_MS}ms ease-in-out` : 'none'
+    void track.offsetHeight
+    track.style.transform = `translateX(-${index * 100}%)`
+  }, [index, animate])
 
-  // Keeps `page` (for the dots) in sync with wherever the strip is actually
-  // scrolled to — from autoplay, a dot click, or the user dragging/swiping.
-  const onScroll = () => {
-    const track = trackRef.current
-    if (!track || track.clientWidth === 0) return
-    const next = Math.round(track.scrollLeft / track.clientWidth)
-    setPage((current) => (next === current ? current : next))
-  }
+  // After sliding onto a page's second copy, wait for the slide to finish,
+  // then jump back to its first copy with no transition.
+  useEffect(() => {
+    if (index < PAGES.length) return
+    const id = setTimeout(() => {
+      jumpedRef.current = true
+      setAnimate(false)
+      setIndex((i) => i - PAGES.length)
+    }, SLIDE_MS)
+    return () => clearTimeout(id)
+  }, [index])
 
-  // Autoplay — advances one page at a time, pausing on hover/focus/drag and
-  // skipped entirely for prefers-reduced-motion. Wraps from the last page
-  // back to the first as a plain scroll backward — with only two pages a
-  // forward-only "duplicate strip" loop isn't worth the complexity it buys
-  // the destinations ticker above.
+  // Switch the transition back on only once the jump has been painted, so
+  // the jump itself never animates.
+  useEffect(() => {
+    if (animate) return
+    let inner
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => setAnimate(true))
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
+  }, [animate])
+
+  // Autoplay: each group stays still for STAY_MS once its slide has
+  // finished, then the next group slides in — paused on hover/focus/drag
+  // (so a card can actually be read) and skipped entirely for
+  // prefers-reduced-motion, same as the rest of the site's autoplaying
+  // elements (see HeroVideoBackground). The loop-back jump is instant, and
+  // the slide that led to it has already played out, so it only needs the
+  // stay time.
   useEffect(() => {
     if (paused || reduceMotion || PAGES.length <= 1) return
-    const id = setTimeout(() => {
-      scrollToPage((page + 1) % PAGES.length)
-    }, STAY_MS)
+    const delay = jumpedRef.current ? STAY_MS : SLIDE_MS + STAY_MS
+    jumpedRef.current = false
+    const id = setTimeout(() => setIndex((i) => i + 1), delay)
     return () => clearTimeout(id)
-  }, [page, paused, reduceMotion, scrollToPage])
+  }, [index, paused, reduceMotion])
 
-  // Touch scrolls (and snaps) natively, so only mouse needs manual
-  // click-and-drag handling here.
-  const onPointerDown = (event) => {
-    clearTimeout(touchSettleTimeoutRef.current)
+  // Dots move forward to the chosen group too (wrapping round through the
+  // duplicate copy when it comes "before" the current one), never back —
+  // same rule as autoplay and dragging.
+  const goToPage = (target) => {
+    setIndex((current) =>
+      current >= PAGES.length
+        ? current // mid loop-back; the jump lands in a moment
+        : current + ((target - (current % PAGES.length) + PAGES.length) % PAGES.length),
+    )
+  }
+
+  // Forward-only drag: grabbing the strip and pulling left previews the
+  // next group early; pulling right is clamped to a no-op, since the strip
+  // never reverses. Release either commits to the next group (animating the
+  // rest of the way at the same slow SLIDE_MS) or snaps back to the current
+  // one — quickly, not over the full slow duration.
+  const onPointerDown = useCallback((event) => {
+    if (PAGES.length <= 1) return
     setPaused(true)
-    draggingRef.current = true
     const track = trackRef.current
-    // Grabbing the strip mid-autoplay would otherwise leave the browser's
-    // native smooth-scroll animation still running underneath the drag,
-    // fighting it and making the strip overshoot — cut it off at wherever
-    // it currently sits.
-    if (track) track.scrollTo({ left: track.scrollLeft, behavior: 'auto' })
-    if (event.pointerType !== 'mouse' || !track) return
+    if (!track) return
+    track.style.transition = 'none'
+    track.style.transform = `translateX(-${index * 100}%)`
     dragRef.current = {
+      active: true,
       pointerId: event.pointerId,
+      pointerType: event.pointerType,
       startX: event.clientX,
-      startScrollLeft: track.scrollLeft,
+      dx: 0,
       moved: false,
     }
     track.setPointerCapture(event.pointerId)
-  }
+  }, [index])
 
-  const onPointerMove = (event) => {
-    if (!draggingRef.current || event.pointerType !== 'mouse') return
-    if (event.pointerId !== dragRef.current.pointerId) return
+  const onPointerMove = useCallback((event) => {
+    const drag = dragRef.current
+    if (!drag.active || event.pointerId !== drag.pointerId) return
     const track = trackRef.current
-    if (!track) return
-    const dx = event.clientX - dragRef.current.startX
-    if (Math.abs(dx) > DRAG_THRESHOLD) dragRef.current.moved = true
-    track.scrollLeft = dragRef.current.startScrollLeft - dx
-  }
+    const viewport = viewportRef.current
+    if (!track || !viewport) return
+    const rawDx = event.clientX - drag.startX
+    const dx = Math.min(rawDx, 0) // never drag backward into the previous group
+    if (Math.abs(rawDx) > CLICK_DRAG_THRESHOLD) drag.moved = true
+    drag.dx = dx
+    track.style.transform = `translateX(calc(-${index * 100}% + ${dx}px))`
+  }, [index])
 
-  const onPointerUp = (event) => {
-    draggingRef.current = false
-    if (event.pointerType === 'mouse') {
-      const track = trackRef.current
-      if (track) scrollToPage(Math.round(track.scrollLeft / track.clientWidth))
-      setPaused(false)
-      return
+  const onPointerUp = useCallback((event) => {
+    const drag = dragRef.current
+    if (!drag.active || event.pointerId !== drag.pointerId) return
+    drag.active = false
+    setPaused(false)
+
+    const viewport = viewportRef.current
+    const track = trackRef.current
+    const widthPx = viewport ? viewport.clientWidth : 0
+    const commit = widthPx > 0 && -drag.dx > widthPx * DRAG_COMMIT_FRACTION
+
+    if (commit) {
+      setIndex((i) => i + 1) // the transform effect above animates the rest of the way at SLIDE_MS
+    } else if (track) {
+      track.style.transition = `transform ${SNAP_BACK_MS}ms ease-out`
+      void track.offsetHeight
+      track.style.transform = `translateX(-${index * 100}%)`
     }
-    // Touch: let momentum scrolling finish before autoplay resumes.
-    touchSettleTimeoutRef.current = setTimeout(() => setPaused(false), TOUCH_SETTLE_MS)
-  }
+  }, [index])
 
   const onClickCapture = (event) => {
     if (dragRef.current.moved) {
@@ -278,17 +348,20 @@ export function Services() {
         </Reveal>
       </div>
 
-      {/* 3 cards at a time, one page per scroll-snap stop. Full-bleed to
-          both screen edges — same pattern as Tanzania's Popular Overland
-          Routes cards — with a small lg:px-3 gutter rather than lg:px-0 so
-          the row doesn't read like it's been cut off flush against the
-          edge. */}
+      {/* 3 cards at a time: every page sits full-width side by side and the
+          whole strip slides left by one page width on each advance, so the
+          next group of 3 enters from the right while the current group
+          exits to the left — it only ever moves this one direction. Draggable
+          the same way (pull left to advance, release to commit or snap back).
+          Full-bleed to both screen edges — same pattern as Tanzania's
+          Popular Overland Routes cards — with a small lg:px-3 gutter rather
+          than lg:px-0 so the row doesn't read like it's been cut off flush
+          against the edge. */}
       <div
-        ref={trackRef}
+        ref={viewportRef}
+        className="relative mt-10 touch-pan-y select-none px-4 sm:px-6 lg:px-3"
         role="group"
         aria-label="Our Services"
-        className="mt-10 flex cursor-grab touch-pan-x select-none snap-x snap-mandatory overflow-x-auto px-4 active:cursor-grabbing sm:px-6 lg:px-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onScroll={onScroll}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
@@ -300,16 +373,18 @@ export function Services() {
         onClickCapture={onClickCapture}
         onDragStart={(event) => event.preventDefault()}
       >
-        {PAGES.map((group, i) => (
-          <div
-            key={i}
-            className="grid w-full shrink-0 snap-start grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5"
-          >
-            {group.map((item) => (
-              <div key={item.key}>{item.render()}</div>
-            ))}
-          </div>
-        ))}
+        <div ref={trackRef} className="flex cursor-grab active:cursor-grabbing">
+          {SLIDES.map((group, slide) => (
+            <div
+              key={slide}
+              className="grid w-full shrink-0 grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5"
+            >
+              {group.map((item) => (
+                <div key={item.key}>{item.render(slide !== index)}</div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
 
       {PAGES.length > 1 && (
@@ -320,7 +395,7 @@ export function Services() {
               type="button"
               aria-label={`Show services group ${i + 1} of ${PAGES.length}`}
               aria-current={i === page}
-              onClick={() => scrollToPage(i)}
+              onClick={() => goToPage(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === page ? 'w-6 bg-copper' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
               }`}

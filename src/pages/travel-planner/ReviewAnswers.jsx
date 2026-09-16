@@ -206,10 +206,14 @@ export function ReviewAnswers() {
   }, [])
 
   const navigate = useNavigate()
-  const { request, tier } = useTravelPlannerFlow()
+  // count comes from context (not request.destinationSlugs.length directly)
+  // so it stays the same effective count RequestForm used to decide
+  // Pdf-vs-Legacy — otherwise a visitor who promised "4" on Service
+  // Details but only finished picking 1-3 countries would see Pdf review
+  // labels for data that was actually collected via the Legacy questions.
+  const { request, tier, count } = useTravelPlannerFlow()
   const copy = TRAVEL_PLANNER_FLOW.steps.review
   const editTo = '/travel-planner/request'
-  const count = request.destinationSlugs.length
   const names = countryNames(request.destinationSlugs)
 
   return (

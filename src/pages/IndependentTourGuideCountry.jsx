@@ -148,12 +148,6 @@ export function IndependentTourGuideCountry() {
                   {howItWorks.feeNoteRest}
                 </p>
               </div>
-              <img
-                src={howItWorks.image}
-                alt={howItWorks.imageAlt}
-                loading="lazy"
-                className="mt-5 aspect-video w-full rounded-2xl object-cover shadow-card"
-              />
             </Reveal>
 
             <Reveal delay={200}>

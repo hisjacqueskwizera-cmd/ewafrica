@@ -2756,8 +2756,8 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, vibrant communities, and beautiful places — explore Ghana with a trusted independent local guide.',
-      backgroundImage: '/Pictures/countries/Ghana.jpg',
-      backgroundImageAlt: 'Cape Coast Castle on the Ghanaian coast at sunset',
+      backgroundImage: '/Pictures/Ghana_Landing_Hero.JPG',
+      backgroundImageAlt: "Ghana's Independence Arch in Accra under a clear sky",
     },
     stats: [
       { icon: 'Landmark', title: 'Rich History', text: 'Living Culture' },
@@ -2770,8 +2770,8 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Ghana.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Ghana's history, culture, communities, and everyday life.",
-      image: '/Pictures/about/mission-nkrumah-statue.webp',
-      imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
+      image: '/Pictures/Ghana_Side_Image.JPG',
+      imageAlt: "Cape Coast Castle's ramparts overlooking the Ghanaian coastline",
     },
     offer: {
       heading: 'What the Service Will Offer',
@@ -2814,8 +2814,6 @@ export const TOUR_GUIDE_PAGES = {
       ],
       feeNoteLead: 'The East-West Africa Link Guide Match fee is',
       feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
-      image: '/Pictures/explore/ghana-card-background.webp',
-      imageAlt: "Cape Coast Castle's courtyard in Ghana",
     },
     comingSoon: {
       title: 'Our Ghana Guide Match service is currently in development.',
@@ -2833,8 +2831,8 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, unique communities, and beautiful places — explore Benin with a trusted independent local guide.',
-      backgroundImage: '/Pictures/countries/Benin.jpg',
-      backgroundImageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
+      backgroundImage: '/Pictures/Benin_Hero.jpg',
+      backgroundImageAlt: 'A traditional woven-sail boat crossing the water in Benin',
     },
     stats: [
       { icon: 'Landmark', title: 'Rich History', text: 'Vibrant Culture' },
@@ -2847,8 +2845,8 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Benin.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Benin's history, culture, communities, and everyday life.",
-      image: '/Pictures/countries/Benin.jpg',
-      imageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
+      image: '/Pictures/Benin_Side_Image.JPG',
+      imageAlt: 'Traditional carved fetish figures dressed in cloth in Benin',
     },
     offer: {
       heading: 'What the Service Will Offer',
@@ -2887,8 +2885,6 @@ export const TOUR_GUIDE_PAGES = {
       ],
       feeNoteLead: 'The East-West Africa Link Guide Match fee is',
       feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
-      image: '/Pictures/countries/Benin.jpg',
-      imageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
     },
     comingSoon: {
       title: 'Our Benin Guide Match service is currently in development.',
@@ -2906,8 +2902,8 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, vibrant communities, and beautiful places — explore Zanzibar with a trusted independent local guide.',
-      backgroundImage: '/Pictures/countries/Tanzania.jpg',
-      backgroundImageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+      backgroundImage: '/Pictures/Zanzibar_Tour.JPG',
+      backgroundImageAlt: 'Stone Town waterfront with a dhow sailboat passing by at golden hour',
     },
     stats: [
       { icon: 'Landmark', title: 'Rich History', text: 'Living Culture' },
@@ -2920,8 +2916,8 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Zanzibar.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Zanzibar's history, culture, communities, and everyday life.",
-      image: '/Pictures/countries/Tanzania.jpg',
-      imageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+      image: '/Pictures/Zanzibar_ Card.JPG',
+      imageAlt: 'A traditional dhow sailing off Zanzibar at sunset',
     },
     offer: {
       heading: 'What the Service Will Offer',
@@ -2960,8 +2956,6 @@ export const TOUR_GUIDE_PAGES = {
       ],
       feeNoteLead: 'The East-West Africa Link Guide Match fee is',
       feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
-      image: '/Pictures/countries/Tanzania.jpg',
-      imageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
     },
     comingSoon: {
       title: 'Our Zanzibar Guide Match service is currently in development.',

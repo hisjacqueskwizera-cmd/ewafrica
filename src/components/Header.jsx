@@ -1,4 +1,4 @@
-import { Menu, Search, X } from 'lucide-react'
+import { Mail, Menu, Search, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
@@ -72,12 +72,6 @@ export function Header() {
 
   const navLinkClass = `text-sm font-medium tracking-wide transition-colors hover:underline underline-offset-4 ${
     solid ? 'text-muted-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-white'
-  }`
-
-  const pillClass = `hidden items-center justify-center rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] transition-colors lg:inline-flex ${
-    solid
-      ? 'border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground'
-      : 'border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10'
   }`
 
   const iconBtnClass = `hidden size-10 items-center justify-center rounded-full border transition-colors lg:inline-flex ${
@@ -157,13 +151,13 @@ export function Header() {
         </Link>
 
         <div className="flex items-center justify-end gap-3">
-          <HashLink to="/#contact" className={pillClass}>
-            Contact Us
-          </HashLink>
-
           <button type="button" className={iconBtnClass} aria-label="Search">
             <Search className="size-4" aria-hidden="true" />
           </button>
+
+          <a href={CONTACT_INFO.emailHref} className={iconBtnClass} aria-label="Email us">
+            <Mail className="size-4" aria-hidden="true" />
+          </a>
 
           <a
             href={CONTACT_INFO.whatsappHref}
@@ -218,13 +212,6 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3 bg-card px-4 pb-6 pt-2 sm:px-6">
-          <HashLink
-            to="/#contact"
-            onClick={closeMenu}
-            className="inline-flex flex-1 items-center justify-center rounded-full border border-primary/30 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary"
-          >
-            Contact Us
-          </HashLink>
           <button
             type="button"
             aria-label="Search"
@@ -232,6 +219,13 @@ export function Header() {
           >
             <Search className="size-4" aria-hidden="true" />
           </button>
+          <a
+            href={CONTACT_INFO.emailHref}
+            aria-label="Email us"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary"
+          >
+            <Mail className="size-4" aria-hidden="true" />
+          </a>
           <a
             href={CONTACT_INFO.whatsappHref}
             target="_blank"

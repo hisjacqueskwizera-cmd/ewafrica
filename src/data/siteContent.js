@@ -1718,12 +1718,14 @@ export const TRAVEL_PLANNER_PAGE = {
   // PageIntro) so the page keeps its own photo and copy.
   hero: {
     badge: 'Travel Planner',
+    badgeImage: '/Pictures/umbrella.PNG',
+    badgeImageAlt: 'Travel Planner',
     titleLine1: 'Plan Your',
     titleAccent: 'Africa Journey',
     tagline: ['One country or multi-country, travel with confidence.'],
     description:
       'Get personalized, practical guidance to help you build a smoother, smarter trip across East and West Africa.',
-    backgroundImage: '/Pictures/TRV_HR.PNG',
+    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
     backgroundImageAlt:
       'A veranda table with a map of Africa, compass and journal overlooking Mount Kilimanjaro at sunrise',
     trustItems: [
@@ -1843,7 +1845,7 @@ export const TRAVEL_PLANNER_DETAILS_PAGE = {
     titleAccent: 'Discover Deeper',
     tagline: ['Real places. Real people. A more meaningful Africa.'],
     description: 'Personalized planning support to help you create your ideal Africa journey — your way.',
-    backgroundImage: '/Pictures/Travel planner hero background.PNG',
+    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
   },
@@ -2114,7 +2116,7 @@ export const BEFORE_YOU_BOOK_PAGE = {
     tagline: ['Check your trip before you commit.'],
     description:
       'The Before You Book Check is for travelers who already have an idea of where they want to go but have not yet committed to the major bookings.',
-    backgroundImage: '/Pictures/Travel planner hero background.PNG',
+    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
   },
@@ -2321,7 +2323,7 @@ export const TRAVEL_AUDIT_PAGE = {
     tagline: ['Already booked? Let us review how it fits together.'],
     description:
       'The Travel Audit is for travelers who have already booked — or partially booked — their trip and want an independent review before they travel.',
-    backgroundImage: '/Pictures/Travel planner hero background.PNG',
+    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
   },

@@ -1725,9 +1725,13 @@ export const TRAVEL_PLANNER_PAGE = {
     tagline: ['One country or multi-country, travel with confidence.'],
     description:
       'Get personalized, practical guidance to help you build a smoother, smarter trip across East and West Africa.',
-    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
+    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
     backgroundImageAlt:
       'A veranda table with a map of Africa, compass and journal overlooking Mount Kilimanjaro at sunrise',
+    // This photo's sky is naturally light/blue rather than the site's usual
+    // darker backdrops — the default cocoa-tinted scrim reads as an
+    // unwanted brown cast on it, so this hero uses a neutral black one.
+    overlayTone: 'neutral',
     trustItems: [
       { icon: 'User', title: 'Expert Guidance', text: 'From people who know Africa' },
       { icon: 'Map', title: 'Custom Itineraries', text: 'Tailored to your interests' },
@@ -1845,9 +1849,10 @@ export const TRAVEL_PLANNER_DETAILS_PAGE = {
     titleAccent: 'Discover Deeper',
     tagline: ['Real places. Real people. A more meaningful Africa.'],
     description: 'Personalized planning support to help you create your ideal Africa journey — your way.',
-    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
+    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
+    overlayTone: 'neutral',
   },
   // Body copy below is transcribed verbatim from the "Travel Planner
   // DETAILS" reference document. That document also carries a pricing/UX
@@ -2116,9 +2121,10 @@ export const BEFORE_YOU_BOOK_PAGE = {
     tagline: ['Check your trip before you commit.'],
     description:
       'The Before You Book Check is for travelers who already have an idea of where they want to go but have not yet committed to the major bookings.',
-    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
+    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
+    overlayTone: 'neutral',
   },
   intro: {
     heading: 'Check Your Trip Before You Commit',
@@ -2323,9 +2329,10 @@ export const TRAVEL_AUDIT_PAGE = {
     tagline: ['Already booked? Let us review how it fits together.'],
     description:
       'The Travel Audit is for travelers who have already booked — or partially booked — their trip and want an independent review before they travel.',
-    backgroundImage: '/Pictures/TRV_TO_USE.PNG',
+    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
+    overlayTone: 'neutral',
   },
   intro: {
     heading: 'Already Booked? Let Us Review How the Journey Fits Together.',

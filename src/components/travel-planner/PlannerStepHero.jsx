@@ -15,13 +15,17 @@ export function PlannerStepHero({ cornerTagline, bannerTagline, stepper }) {
   return (
     <section className="relative isolate overflow-hidden">
       <img
-        src="/Pictures/TRV_TO_USE.PNG"
+        src="/Pictures/Hero_Trv_PLNR.PNG"
         alt=""
         aria-hidden="true"
         loading="eager"
         className="absolute inset-0 size-full object-cover"
       />
-      <div className="absolute inset-0 bg-cocoa/55" aria-hidden="true" />
+      {/* Neutral black, not the site's usual cocoa tint — this photo's sky
+          is naturally light/blue, and a warm cocoa scrim on it reads as an
+          unwanted brown cast rather than a mood-setting one (matches the
+          same fix on every other hero using this photo). */}
+      <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
       <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-8 pt-28 sm:px-6 lg:px-8">
         {stepper}
         <p className="text-right text-xs italic leading-relaxed text-primary-foreground/90 sm:text-sm">

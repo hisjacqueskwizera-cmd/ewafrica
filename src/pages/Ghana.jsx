@@ -121,7 +121,9 @@ export function Ghana() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=ghana'
-                            : '/#contact'
+                            : service.title === 'Independent Tour Guides'
+                              ? '/independent-tour-guide/ghana'
+                              : '/#contact'
                         }
                       >
                         {service.cta}

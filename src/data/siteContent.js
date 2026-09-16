@@ -161,7 +161,7 @@ export const SERVICES = [
     icon: 'Users',
     title: 'Find a Local Guide',
     description: "Connect with trusted, vetted local guides who know the places and the people.",
-    to: '/#contact',
+    to: '/independent-tour-guide',
     image: '/Pictures/local_guide.jpg',
   },
 ]
@@ -2606,5 +2606,304 @@ export const EXPLORE_PAGE = {
     heading: 'Need help choosing a destination or service?',
     text: "We're here to help you plan the right journey.",
     cta: 'Get Guidance',
+  },
+}
+
+// Independent Tour Guide — a generic landing page (/independent-tour-guide)
+// plus one detail page per country that actually has the service
+// (/independent-tour-guide/ghana|benin|tanzania — the same three countries
+// EXPLORE_SERVICES_WITH_GUIDES already covers above). The landing page is
+// only for a visitor arriving with no country context yet — every card on
+// it (and every "Independent Tour Guide" link on Ghana.jsx/Benin.jsx/
+// DestinationPage.jsx's own service grids) skips straight to that
+// country's own detail page instead, mirroring how Travel Planner treats a
+// locked vs. unlocked arrival.
+export const TOUR_GUIDE_LANDING_PAGE = {
+  hero: {
+    badge: 'Independent Tour Guides',
+    titleLine1: 'Find a Local',
+    titleAccent: 'Guide',
+    tagline: ['More than a trip. A deeper connection.'],
+    description:
+      'Independent local guides. Authentic experiences. Real insights from people who know their country best.',
+    backgroundImage: '/Pictures/countries/Tanzania.jpg',
+    backgroundImageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+  },
+  trust: [
+    {
+      icon: 'Users',
+      title: 'Experienced Local Guides',
+      text: 'Knowledgeable, professional, and passionate about their communities.',
+    },
+    {
+      icon: 'ShieldCheck',
+      title: 'Travel with Confidence',
+      text: 'Guides are carefully vetted for experience, reliability, and communication.',
+    },
+    {
+      icon: 'Compass',
+      title: 'Support Local Communities',
+      text: 'Travel that creates positive impact.',
+    },
+  ],
+  intro: {
+    heading: 'Choose Your Destination',
+    description:
+      'Select a destination below to learn more about our local guide service and its current availability.',
+  },
+  destinationBadge: 'Guide network in development',
+  destinations: [
+    {
+      slug: 'ghana',
+      description: 'Explore vibrant cities, rich history, and warm hospitality with a local guide.',
+    },
+    {
+      slug: 'benin',
+      description: 'Discover history, culture, and unique traditions with a local guide.',
+    },
+    {
+      slug: 'tanzania',
+      label: 'Tanzania / Zanzibar',
+      description: 'From wildlife adventures to island escapes, explore with a local guide.',
+    },
+  ],
+  comingSoon: {
+    heading: 'Our Guide Network is Coming Soon',
+    body: 'We are currently developing our network of independent local guides in selected destinations. Check back soon or contact us if you would like to be notified when this service becomes available.',
+    contactHeading: 'Be the First to Know',
+    contactBody: "Contact us by WhatsApp or email and we'll keep you updated.",
+  },
+}
+
+// Per-country Independent Tour Guide detail pages, keyed by the same
+// COUNTRIES slug used everywhere else (ghana/benin/tanzania). Tanzania's
+// own copy talks about "Zanzibar" specifically (matching how the guide
+// service is already scoped on /explore — "local guide services available
+// in Zanzibar" — and COUNTRIES' own `displayName: 'Tanzania (Zanzibar)'")
+// even though its route/slug stays "tanzania" for consistency with every
+// other Tanzania link on the site.
+export const TOUR_GUIDE_PAGES = {
+  ghana: {
+    countryLabel: 'Ghana',
+    hero: {
+      badge: 'Independent Tour Guides',
+      titleLine1: 'Find a Local Guide',
+      titleAccent: 'in Ghana',
+      tagline: ['Local People. Deeper Experiences.'],
+      description:
+        'Rich history, vibrant communities, and beautiful places — explore Ghana with a trusted independent local guide.',
+      backgroundImage: '/Pictures/countries/Ghana.jpg',
+      backgroundImageAlt: 'Cape Coast Castle on the Ghanaian coast at sunset',
+    },
+    stats: [
+      { icon: 'Landmark', title: 'Rich History', text: 'Living Culture' },
+      { icon: 'Leaf', title: 'Vibrant Communities', text: 'Real Connections' },
+      { icon: 'Palmtree', title: 'Beautiful Places', text: 'Meaningful Travel' },
+      { icon: 'Users', title: 'Local Guides', text: 'A Deeper Ghana' },
+    ],
+    intro: {
+      eyebrow: 'Independent Guide Network in Development',
+      heading:
+        'We are currently building and vetting our network of independent local guides in Ghana.',
+      body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Ghana's history, culture, communities, and everyday life.",
+      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
+    },
+    offer: {
+      heading: 'What the Service Will Offer',
+      intro:
+        'When available, our Guide Match service will help connect travelers with independent local guides based on their interests and the type of experience you are looking for.',
+      lead: 'The service may include:',
+      items: [
+        { icon: 'Users', text: 'Local guide matching based on your interests' },
+        { icon: 'Landmark', text: 'Accra and city experiences' },
+        {
+          icon: 'Landmark',
+          text: 'Historical and cultural experiences (Cape Coast, Elmina and beyond)',
+        },
+        { icon: 'Leaf', text: 'Nature, national parks and rural communities' },
+        { icon: 'Store', text: 'Markets, food and local neighborhoods' },
+        { icon: 'Waves', text: 'Coastal and beach experiences' },
+        { icon: 'Handshake', text: 'Community-based and responsible travel' },
+        { icon: 'ClipboardCheck', text: 'Guide profiles to review before deciding whether to proceed' },
+      ],
+    },
+    vetting: {
+      heading: 'Our Vetting Approach',
+      intro: 'Guides considered for the East-West Africa Link network are reviewed for:',
+      items: [
+        'Relevant guiding experience',
+        'Local knowledge',
+        'Communication skills',
+        'Professionalism and reliability',
+        'References',
+        'Understanding of independent travelers and their needs',
+        'English language ability (and other languages where applicable)',
+        'Compliance with applicable government requirements, including licenses, permits, registrations, or other credentials where required',
+      ],
+    },
+    howItWorks: {
+      heading: 'How Guide Match Will Work',
+      paragraphs: [
+        'When the service becomes available, you will tell us what you would like to experience in Ghana and the type of guide you are looking for.',
+        'We will then identify suitable independent guides from our network and provide you with matching options.',
+      ],
+      feeNoteLead: 'The East-West Africa Link Guide Match fee is',
+      feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
+      image: '/Pictures/explore/ghana-card-background.webp',
+      imageAlt: "Cape Coast Castle's courtyard in Ghana",
+    },
+    comingSoon: {
+      title: 'Our Ghana Guide Match service is currently in development.',
+      body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
+      cta: 'Contact Us for Updates',
+      subtext: 'Be the first to know when our Ghana Guide Match service is available.',
+    },
+  },
+  benin: {
+    countryLabel: 'Benin',
+    hero: {
+      badge: 'Independent Tour Guides',
+      titleLine1: 'Find a Local Guide',
+      titleAccent: 'in Benin',
+      tagline: ['Local People. Deeper Experiences.'],
+      description:
+        'Rich history, unique communities, and beautiful places — explore Benin with a trusted independent local guide.',
+      backgroundImage: '/Pictures/countries/Benin.jpg',
+      backgroundImageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
+    },
+    stats: [
+      { icon: 'Landmark', title: 'Rich History', text: 'Vibrant Culture' },
+      { icon: 'Leaf', title: 'Unique', text: 'Communities' },
+      { icon: 'Palmtree', title: 'Beautiful Places', text: 'Coastal & Nature' },
+      { icon: 'Users', title: 'Local Guides', text: 'A Deeper Benin' },
+    ],
+    intro: {
+      eyebrow: 'Independent Guide Network in Development',
+      heading:
+        'We are currently building and vetting our network of independent local guides in Benin.',
+      body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Benin's history, culture, communities, and everyday life.",
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
+    },
+    offer: {
+      heading: 'What the Service Will Offer',
+      intro:
+        'When available, our Guide Match service will help connect travelers with independent local guides based on their interests and the type of experience you are looking for.',
+      lead: 'The service may include:',
+      items: [
+        { icon: 'Users', text: 'Local guide matching based on your interests' },
+        { icon: 'Landmark', text: 'Historic sites and cultural experiences' },
+        { icon: 'Leaf', text: 'Nature and outdoor experiences' },
+        { icon: 'Store', text: 'Local markets and artisan communities' },
+        { icon: 'Waves', text: 'Coastal and village experiences' },
+        { icon: 'Binoculars', text: 'Local insight beyond the major tourist sites' },
+        { icon: 'ClipboardCheck', text: 'Guide profiles to review before deciding whether to proceed' },
+      ],
+    },
+    vetting: {
+      heading: 'Our Vetting Approach',
+      intro: 'Guides considered for the East-West Africa Link network are reviewed for:',
+      items: [
+        'Relevant guiding experience',
+        'Local knowledge',
+        'Communication skills',
+        'Professionalism and reliability',
+        'References',
+        'Understanding of independent travelers and their needs',
+        'English and/or French communication ability, depending on the guide and service',
+        'Compliance with applicable government requirements, including licenses, permits, registrations, or other credentials where required',
+      ],
+    },
+    howItWorks: {
+      heading: 'How Guide Match Will Work',
+      paragraphs: [
+        'When the service becomes available, you will tell us what you would like to experience in Benin and the type of guide you are looking for.',
+        'We will then identify suitable independent guides from our network and provide you with matching options.',
+      ],
+      feeNoteLead: 'The East-West Africa Link Guide Match fee is',
+      feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'A traditional pirogue boat on the water beside a coastal fort in Benin',
+    },
+    comingSoon: {
+      title: 'Our Benin Guide Match service is currently in development.',
+      body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
+      cta: 'Contact Us for Updates',
+      subtext: 'Be the first to know when our Benin Guide Match service is available.',
+    },
+  },
+  tanzania: {
+    countryLabel: 'Zanzibar',
+    hero: {
+      badge: 'Independent Tour Guides',
+      titleLine1: 'Find a Local Guide',
+      titleAccent: 'in Zanzibar',
+      tagline: ['Local People. Deeper Experiences.'],
+      description:
+        'Rich history, vibrant communities, and beautiful places — explore Zanzibar with a trusted independent local guide.',
+      backgroundImage: '/Pictures/countries/Tanzania.jpg',
+      backgroundImageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+    },
+    stats: [
+      { icon: 'Landmark', title: 'Rich History', text: 'Living Culture' },
+      { icon: 'Leaf', title: 'Vibrant Communities', text: 'Real Connections' },
+      { icon: 'Palmtree', title: 'Beautiful Places', text: 'Meaningful Travel' },
+      { icon: 'Users', title: 'Local Guides', text: 'A Deeper Zanzibar' },
+    ],
+    intro: {
+      eyebrow: 'Independent Guide Network in Development',
+      heading:
+        'We are currently building and vetting our network of independent local guides in Zanzibar.',
+      body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Zanzibar's history, culture, communities, and everyday life.",
+      image: '/Pictures/countries/Tanzania.jpg',
+      imageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+    },
+    offer: {
+      heading: 'What the Service Will Offer',
+      intro:
+        'When available, our Guide Match service will help connect travelers with independent local guides based on their interests and the type of experience you are looking for.',
+      lead: 'The service may include:',
+      items: [
+        { icon: 'Users', text: 'Local guide matching based on your interests' },
+        { icon: 'Landmark', text: 'Stone Town and historical experiences' },
+        { icon: 'Handshake', text: 'Cultural and community-based experiences' },
+        { icon: 'Store', text: 'Local markets and neighborhoods' },
+        { icon: 'Waves', text: 'Coastal and village experiences' },
+        { icon: 'Binoculars', text: 'Local insight beyond the major tourist sites' },
+        { icon: 'ClipboardCheck', text: 'Guide profiles to review before deciding whether to proceed' },
+      ],
+    },
+    vetting: {
+      heading: 'Our Vetting Approach',
+      intro: 'Guides considered for the East-West Africa Link network are reviewed for:',
+      items: [
+        'Relevant guiding experience',
+        'Local knowledge',
+        'Communication skills',
+        'Professionalism and reliability',
+        'References',
+        'Understanding of independent travelers and their needs',
+        'English and/or French communication ability, depending on the guide and service',
+        'Compliance with applicable government requirements, including licenses, permits, registrations, or other credentials where required',
+      ],
+    },
+    howItWorks: {
+      heading: 'How Guide Match Will Work',
+      paragraphs: [
+        'When the service becomes available, you will tell us what you would like to experience in Zanzibar and the type of guide you are looking for.',
+        'We will then identify suitable independent guides from our network and provide you with matching options.',
+      ],
+      feeNoteLead: 'The East-West Africa Link Guide Match fee is',
+      feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
+      image: '/Pictures/countries/Tanzania.jpg',
+      imageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
+    },
+    comingSoon: {
+      title: 'Our Zanzibar Guide Match service is currently in development.',
+      body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
+      cta: 'Contact Us for Updates',
+      subtext: 'Be the first to know when our Zanzibar Guide Match service is available.',
+    },
   },
 }

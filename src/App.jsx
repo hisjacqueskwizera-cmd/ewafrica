@@ -12,6 +12,8 @@ import { Explore } from './pages/Explore.jsx'
 import { Gambia } from './pages/Gambia.jsx'
 import { Ghana } from './pages/Ghana.jsx'
 import { Home } from './pages/Home.jsx'
+import { IndependentTourGuide } from './pages/IndependentTourGuide.jsx'
+import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry.jsx'
 import { Malawi } from './pages/Malawi.jsx'
 import { Placeholder } from './pages/Placeholder.jsx'
 import { Rwanda } from './pages/Rwanda.jsx'
@@ -108,6 +110,11 @@ function App() {
           <Route path="/senegal" element={<Senegal />} />
           <Route path="/benin" element={<Benin />} />
           <Route path="/gambia" element={<Gambia />} />
+          <Route path="/independent-tour-guide" element={<IndependentTourGuide />} />
+          <Route
+            path="/independent-tour-guide/:slug"
+            element={<IndependentTourGuideCountry />}
+          />
           <Route path="/travel-planner" element={<TravelPlanner />} />
           <Route
             path="/travel-planner/service-details"

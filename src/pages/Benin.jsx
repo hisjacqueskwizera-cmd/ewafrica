@@ -128,7 +128,9 @@ export function Benin() {
                         to={
                           service.title === 'Travel Planner'
                             ? '/travel-planner?destination=benin'
-                            : '/#contact'
+                            : service.title.startsWith('Independent Tour Guides')
+                              ? '/independent-tour-guide/benin'
+                              : '/#contact'
                         }
                       >
                         {service.cta}

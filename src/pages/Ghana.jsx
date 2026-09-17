@@ -352,23 +352,25 @@ export function Ghana() {
           <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
             <Reveal className="relative flex flex-col overflow-hidden rounded-3xl shadow-card">
               <img
-                src={livingGuide.backgroundImage}
+                src="/Pictures/Ghana_Background_22.jpg"
                 alt={livingGuide.backgroundImageAlt}
                 aria-hidden="true"
                 loading="lazy"
                 className="absolute inset-0 size-full object-cover"
               />
-              {/* A light tint only — just enough to keep the accordion's
-                  dark-on-light text readable — rather than the heavy tint
-                  that used to leave the photo barely visible. */}
-              <div className="absolute inset-0 bg-card/25" aria-hidden="true" />
-              <div className="relative flex flex-1 flex-col p-6 sm:p-8">
+              <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+              <div className="relative flex flex-1 flex-col p-6 text-white sm:p-8">
                 <Accordion
-                  items={livingGuide.topics.map((topic) => ({ ...topic, icon: ICONS[topic.icon] }))}
+                  items={livingGuide.topics.map((topic) => ({
+                    ...topic,
+                    icon: ICONS[topic.icon],
+                  }))}
+                  textClassName="text-white"
+                  answerClassName="text-white/80"
                 />
                 <HashLink
                   to={livingGuide.cta.to}
-                  className="mt-6 inline-flex w-fit items-center gap-2 self-start rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 lg:mt-auto"
+                  className="mt-6 inline-flex w-fit items-center gap-2 self-start rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1B1B1B] transition-transform hover:-translate-y-0.5 lg:mt-auto"
                 >
                   {livingGuide.cta.label}
                   <ArrowRight className="size-4" aria-hidden="true" />

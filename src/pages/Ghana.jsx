@@ -125,7 +125,9 @@ export function Ghana() {
                               ? '/independent-tour-guide/ghana'
                               : service.title === 'Border Crossing Guide'
                                 ? '/travel-planner/border-crossing-guide?from=ghana'
-                                : '/#contact'
+                                : service.title === 'Personal Visa Guidance'
+                                  ? '/personal-visa-guidance/ghana'
+                                  : '/#contact'
                         }
                       >
                         {service.cta}
@@ -295,7 +297,13 @@ export function Ghana() {
                       ))}
                     </ul>
                     <HashLink
-                      to="/#contact"
+                      to={
+                        service.title === 'Land & Property Information Package'
+                          ? '/ghana/land-property-guidance'
+                          : service.title === 'Complete Ghana Relocation Package'
+                            ? '/ghana/complete-relocation-package'
+                            : '/#contact'
+                      }
                       className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
                     >
                       View Details

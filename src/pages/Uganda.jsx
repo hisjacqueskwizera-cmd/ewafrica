@@ -72,7 +72,9 @@ export function Uganda() {
                             ? '/travel-planner?destination=uganda'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=uganda'
-                              : '/#contact'
+                              : service.title === 'Personal Visa Guidance'
+                                ? '/personal-visa-guidance/uganda'
+                                : '/#contact'
                         }
                         className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
                       >

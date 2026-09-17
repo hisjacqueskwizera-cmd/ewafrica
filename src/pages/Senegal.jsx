@@ -127,7 +127,9 @@ export function Senegal() {
                             ? '/travel-planner?destination=senegal'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=senegal'
-                              : '/#contact'
+                              : service.title === 'Personal Visa Guidance'
+                                ? '/personal-visa-guidance/senegal'
+                                : '/#contact'
                         }
                       >
                         {service.cta}

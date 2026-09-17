@@ -51,6 +51,7 @@ export const COUNTRIES = [
     to: '/ghana',
     tone: 'copper',
     image: '/Pictures/countries/Ghana.jpg',
+    flag: '🇬🇭',
   },
   {
     slug: 'tanzania',
@@ -61,6 +62,7 @@ export const COUNTRIES = [
     to: '/tanzania',
     tone: 'forest',
     image: '/Pictures/countries/Tanzania.jpg',
+    flag: '🇹🇿',
   },
   {
     slug: 'malawi',
@@ -70,6 +72,7 @@ export const COUNTRIES = [
     to: '/malawi',
     tone: 'forest',
     image: '/Pictures/countries/Malawi.webp',
+    flag: '🇲🇼',
   },
   {
     slug: 'zambia',
@@ -79,6 +82,7 @@ export const COUNTRIES = [
     to: '/zambia',
     tone: 'navy',
     image: '/Pictures/countries/Zambia.jpg',
+    flag: '🇿🇲',
   },
   {
     slug: 'uganda',
@@ -88,6 +92,7 @@ export const COUNTRIES = [
     to: '/uganda',
     tone: 'forest',
     image: '/Pictures/countries/Uganda.jpg',
+    flag: '🇺🇬',
   },
   {
     slug: 'rwanda',
@@ -97,6 +102,7 @@ export const COUNTRIES = [
     to: '/rwanda',
     tone: 'navy',
     image: '/Pictures/countries/Rwanda.jpg',
+    flag: '🇷🇼',
   },
   {
     slug: 'senegal',
@@ -105,6 +111,7 @@ export const COUNTRIES = [
     to: '/senegal',
     tone: 'copper',
     image: '/Pictures/countries/Senegal.webp',
+    flag: '🇸🇳',
   },
   {
     slug: 'benin',
@@ -113,6 +120,7 @@ export const COUNTRIES = [
     to: '/benin',
     tone: 'copper',
     image: '/Pictures/countries/Benin.jpg',
+    flag: '🇧🇯',
   },
   {
     slug: 'gambia',
@@ -121,6 +129,7 @@ export const COUNTRIES = [
     to: '/gambia',
     tone: 'copper',
     image: encodeURI('/Pictures/countries/The gambia.jpg'),
+    flag: '🇬🇲',
   },
 ]
 
@@ -668,7 +677,7 @@ export const ZAMBIA_PAGE = {
       description:
         'Get clear, up-to-date information on visa requirements, entry rules, and the application process for Zambia.',
       image: '/Pictures/Visa_Entry.png',
-      to: '/#contact',
+      to: '/personal-visa-guidance/zambia',
     },
     {
       icon: 'Bus',
@@ -1634,7 +1643,7 @@ export const GHANA_PAGE = {
       title: 'Right of Abode',
       text: "Practical guidance for eligible members of the African diaspora who want to understand Ghana's Right of Abode pathway.",
       image: '/Pictures/image_Ghana.webp',
-      cta: { label: 'Explore Right of Abode Guidance', to: '/#contact' },
+      cta: { label: 'Explore Right of Abode Guidance', to: '/ghana/right-of-abode-guidance' },
     },
     pathways: [
       {
@@ -3195,4 +3204,761 @@ export const BORDER_CROSSING_FLOW = {
 export function priceForBorderCrossing(crossingCount) {
   if (!crossingCount || crossingCount >= BORDER_CROSSING_FLOW.customQuoteAt) return null
   return BORDER_CROSSING_FLOW.tiers.find((t) => t.crossings === crossingCount)?.price ?? null
+}
+
+// Ghana Exclusive: Land & Property Guidance — /ghana/land-property-guidance.
+// Unlike the country-agnostic Travel Planner family above, this service and
+// its request form are Ghana-only (no destination picker at all), and its
+// price is a single flat one-time fee rather than a tiered/per-country
+// rate — see GHANA_LAND_PROPERTY_FLOW.price below. Body copy is
+// transcribed from the "Land & Property Guidance" reference mockup;
+// Section 1 (Contact Information) was added to match every other flow on
+// the site, since the reference form has no way to collect an email to
+// deliver the guidance to otherwise.
+export const GHANA_LAND_PROPERTY_PAGE = {
+  hero: {
+    badge: 'Ghana Exclusive Service 🇬🇭',
+    titleLine1: 'Land & Property',
+    titleAccent: 'Guidance',
+    tagline: ['Practical research. Local insight. Smarter decisions.'],
+    description:
+      'Buying or leasing land in Ghana can be a rewarding investment — but it is important to understand the laws, processes, and local realities before you commit.',
+    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImageAlt: 'Coastal land overlooking the Ghanaian coastline',
+    overlayTone: 'neutral',
+  },
+  intro: {
+    heading: 'Make Confident, Informed Land & Property Decisions',
+    paragraphs: [
+      'Buying or leasing land in Ghana can be a rewarding investment — but it is important to understand the laws, processes, and local realities before you commit.',
+      'Our Land & Property Guidance gives you the information and clarity you need to make confident, informed decisions.',
+    ],
+  },
+  whoFor: {
+    heading: 'Who This Service Is For',
+    paragraphs: [
+      'Perfect for anyone considering buying or leasing land in Ghana — for homes, retirement, investment, agriculture, or business.',
+    ],
+  },
+  howWeHelp: {
+    heading: 'How We Help',
+    paragraphs: [
+      'We research and provide practical, easy-to-understand guidance on land and property in Ghana, including ownership options, legal considerations, risks, due diligence, and key steps to take.',
+    ],
+  },
+  whatWeCover: {
+    heading: 'What We Cover',
+    items: [
+      'Land ownership laws for foreigners',
+      'Land registration & title process',
+      'Freehold vs. leasehold explained',
+      'Land use zoning & permits',
+      'Customary land and family land issues',
+      'Taxes, fees & ongoing costs',
+      'Due diligence steps & site checks',
+      'Recommended professionals',
+      'Key questions to ask before you buy',
+      'Warning signs & red flags',
+      'Documents you should verify',
+      'Practical tips from local experience',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Will Receive',
+    paragraphs: [
+      'A personalized guidance report with answers to your questions, practical steps, and recommendations tailored to your situation.',
+    ],
+  },
+  examplesOfQuestions: {
+    heading: 'Examples of Questions We Answer',
+    items: [
+      'Can foreigners own land in Ghana?',
+      'What are the safest ways to buy land?',
+      'How do I verify a land title?',
+      'What costs should I expect?',
+      'What are the risks to look out for?',
+      'What documents do I need?',
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important Note',
+    paragraphs: [
+      'We provide information and practical guidance only. We are not lawyers and do not replace legal advice. We recommend you consult qualified legal professionals for all purchases.',
+    ],
+  },
+  sidebar: {
+    title: 'Land & Property Guidance',
+    tagline: 'Independent. Practical. Local insight.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'Search', title: 'Ghana Exclusive', text: 'Local insight you can trust.' },
+  ],
+  closing: 'Helping you make informed land and property decisions in Ghana.',
+}
+
+export const GHANA_LAND_PROPERTY_FLOW = {
+  // A single flat one-time fee — no tiers, no destination picker, since
+  // this service only ever concerns land or property within Ghana.
+  price: 39.95,
+  includes: [
+    { icon: 'Search', text: 'Practical land & property research for Ghana' },
+    { icon: 'FileText', text: 'Personalized written guidance report' },
+    { icon: 'Mail', text: 'Delivered by email' },
+    { icon: 'Users', text: 'One follow-up clarification email within 7 days' },
+    { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
+  ],
+  purposeOptions: [
+    'Residential (home)',
+    'Investment',
+    'Retirement',
+    'Agriculture',
+    'Vacation / Holiday home',
+    'Business / Commercial',
+  ],
+  propertyTypeOptions: ['Land', 'House', 'Apartment', 'Commercial property', 'Not sure yet'],
+  locationOptions: ['Accra', 'Tema', 'Cape Coast', 'Takoradi', 'Kumasi', 'Tamale', 'Ho'],
+  lengthOfStayOptions: ['Short-term (up to a few months)', 'Long-term / Permanent', 'Not applicable'],
+  stayPurposeOptions: [
+    'Relocation',
+    'Investment only (not relocating)',
+    'Vacation home',
+    'Retirement',
+    'Business',
+  ],
+  yesNoOptions: ['Yes', 'No'],
+  budgetOptions: [
+    'Under $25,000',
+    '$25,000 – $50,000',
+    '$50,000 – $100,000',
+    '$100,000 – $250,000',
+    'Over $250,000',
+    'Not sure yet',
+  ],
+  timeframeOptions: ['Within 3 months', 'Within 6 months', 'Within 1 year', '1–2 years', 'Not sure yet'],
+  citizenshipOptions: ['Ghanaian citizen', 'Foreign national', 'Dual citizen'],
+  researchFocusOptions: [
+    'Ownership laws for foreigners',
+    'Title verification process',
+    'Costs and fees breakdown',
+    'Recommended professionals',
+    'Risks to consider',
+    'Best areas for investment',
+    'Any other important information',
+  ],
+  stepLabels: ['Your Request', 'Review Your Answers', 'Secure Payment', 'Payment Received'],
+  steps: {
+    request: {
+      bannerTagline: 'Practical Research. Local Insight.',
+      cornerTagline: ['Independent guidance.', 'Smarter decisions.'],
+      heading: 'Tell Us About Your Land & Property Needs',
+      description:
+        'Please provide as much detail as you can. This helps us deliver accurate and practical guidance. All fields marked with * are required.',
+      back: { label: 'Back to Service Details', to: '/ghana/land-property-guidance' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['Independent.', 'Practical. Local insight.'],
+    },
+    review: {
+      bannerTagline: 'Independent guidance. Smarter decisions.',
+      cornerTagline: ['Independent guidance.', 'Smarter decisions.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please confirm that all of the information below is correct. You can go back and edit any section if needed.',
+      back: { label: 'Back to Make Changes', to: '/ghana/land-property-guidance/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['Independent.', 'Practical. Local insight.'],
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['Independent guidance.', 'Smarter decisions.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      back: { label: 'Back to Review Your Answers', to: '/ghana/land-property-guidance/review' },
+      helper:
+        'After payment, you will receive a confirmation and your Land & Property Guidance request will be submitted for research.',
+      sidebarHeading: 'Land & Property Guidance',
+      sidebarCaption: ['Independent.', 'Practical. Local insight.'],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+    confirmation: {
+      bannerTagline: 'Extraordinary places. A brighter tomorrow.',
+      cornerTagline: ['Independent guidance.', 'Smarter decisions.'],
+      heading: 'Your Payment Has Been Received',
+      intro: 'Your request for the Land & Property Guidance has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will research and prepare your personalized land & property guidance.',
+      deliveryNote: 'Your personalized guidance report will be delivered by email.',
+      followUp:
+        'You have one follow-up clarification email within 7 days of delivery. If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Land & Property Guidance',
+      sidebarCaption: ['Independent. Practical.', "We're here to help."],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+  },
+}
+
+// Ghana Exclusive: Right of Abode Guidance —
+// /ghana/right-of-abode-guidance. Reached from the Residency & Immigration
+// section's "Explore Right of Abode Guidance" featured card on the Ghana
+// page. Same shape as GHANA_LAND_PROPERTY_PAGE/FLOW above (Ghana-only, flat
+// one-time fee, no destination picker) — body copy transcribed from the
+// "Right of Abode Guidance" reference mockup. Section 1 (Contact
+// Information) folds the mockup's own "Personal Information" section's
+// name/email/phone fields into the site's usual shape; its
+// nationality/current country/city fields stay as their own questions in
+// Section 2 below.
+export const GHANA_RIGHT_OF_ABODE_PAGE = {
+  hero: {
+    badge: 'Ghana Exclusive Service 🇬🇭',
+    titleLine1: 'Right of Abode',
+    titleAccent: 'Guidance',
+    tagline: ['Personalized research. Practical guidance. Clear next steps.'],
+    description:
+      "Ghana's Right of Abode is a specialized immigration status that may be relevant to certain people with Ghanaian connections, former Ghanaian citizenship, African descent, or other qualifying circumstances.",
+    backgroundImage: '/Pictures/image_Ghana.webp',
+    backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline',
+    overlayTone: 'neutral',
+  },
+  intro: {
+    heading: 'Understand Your Path to Ghana’s Right of Abode',
+    paragraphs: [
+      "Ghana's Right of Abode is a specialized immigration status that may be relevant to certain people with Ghanaian connections, former Ghanaian citizenship, African descent, or other qualifying circumstances. Our personalized guidance service reviews the information you provide, researches how the current requirements may apply to your situation, and gives you practical written guidance on the process, documentation, and important considerations before you proceed.",
+      'This is not a generic information sheet. Your guidance is prepared around your personal background, immigration history, long-term plans, and the specific questions you want addressed.',
+    ],
+  },
+  whoFor: {
+    heading: 'Who This Service Is For',
+    paragraphs: [
+      "This service is for individuals who want personalized research and practical guidance about Ghana's Right of Abode and how it may relate to their background, circumstances, and long-term plans.",
+    ],
+  },
+  whatCanInclude: {
+    heading: 'What Your Personalized Guidance Can Include',
+    items: [
+      'How the Right of Abode may apply to your individual background and circumstances',
+      'Current eligibility categories and official requirements',
+      'Key documents typically required and how to obtain them',
+      'The application process and important steps to consider',
+      'Relevant Ghanaian government agencies involved in the Right of Abode process, including where applications are handled and where to find official information',
+      'Timelines, potential challenges, and practical next steps',
+      'Answers to your specific questions',
+    ],
+  },
+  howItWorks: {
+    heading: 'How It Works',
+    paragraphs: [
+      'You complete a detailed questionnaire about your background, connection to Ghana, immigration history, long-term plans, and your questions.',
+      'We then prepare personalized research and practical guidance based on the information you provide.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'A written Right of Abode guidance report organized around your circumstances and questions. Delivered by email.',
+    ],
+  },
+  delivery:
+    'Typical delivery: 3–5 business days. Includes up to 3 follow-up clarification emails within 7 days and one phone consultation.',
+  importantToKnow: {
+    heading: 'Important',
+    paragraphs: [
+      'East-West Africa Link provides independent research and practical information. We are not a law firm, government agency, or immigration authority, and we do not guarantee approval of any application.',
+    ],
+  },
+  sidebar: {
+    title: 'Right of Abode Guidance',
+    tagline: 'Your path to a future in Ghana.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'Search', title: 'Ghana Exclusive', text: 'Local insight you can trust.' },
+  ],
+  closing: 'Helping you understand your path to a future in Ghana.',
+}
+
+export const GHANA_RIGHT_OF_ABODE_FLOW = {
+  // A single flat one-time fee — no tiers, no destination picker, since
+  // this service only ever concerns an individual's own Right of Abode
+  // circumstances in Ghana.
+  price: 49.95,
+  includes: [
+    { icon: 'Search', text: 'Personalized research based on your circumstances' },
+    { icon: 'FileText', text: 'Practical written guidance' },
+    { icon: 'Mail', text: 'Delivered by email' },
+    { icon: 'Users', text: 'Up to 3 follow-up emails within 7 days plus one phone consultation' },
+    { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
+  ],
+  yesNoOptions: ['Yes', 'No'],
+  yesNoUnsureOptions: ['Yes', 'No', 'Not sure'],
+  citizenshipAcquiredOptions: [
+    'Born in Ghana',
+    'Born abroad to a Ghanaian parent',
+    'Naturalization',
+    'Registration',
+    'Not applicable',
+  ],
+  immigrationStatusOptions: [
+    'Tourist visa',
+    'Visitor permit',
+    'Residence permit',
+    'Work permit',
+    'No current status',
+    'Not applicable',
+  ],
+  intendLengthOptions: [
+    'A few months',
+    '1–2 years',
+    '3–5 years',
+    'Permanently',
+    'Not sure yet',
+  ],
+  purposeOptions: [
+    'Retirement',
+    'Business or investment',
+    'Family or ancestral connection',
+    'Employment',
+    'Community or charitable work',
+    'Not sure yet',
+  ],
+  documentOptions: [
+    'Current passport',
+    'Previous Ghanaian passport',
+    'Ghanaian birth certificate',
+    'Evidence of former Ghanaian citizenship',
+    'Citizenship renunciation or loss documents',
+    'Ghana residence permit',
+    'Ghana Card / Non-Citizen ID',
+    'Police clearance',
+    'Proof of income or financial means',
+    'Property documents in Ghana',
+    'Business or investment documents',
+    'None yet',
+  ],
+  stepLabels: ['Your Questionnaire', 'Review Your Answers', 'Secure Payment', 'Payment Received'],
+  steps: {
+    request: {
+      bannerTagline: 'Personalized Research. Clear Next Steps.',
+      cornerTagline: ['Your path to a future in Ghana.'],
+      heading: 'Right of Abode Guidance Questionnaire',
+      description:
+        'Please provide the information below so we can better understand your background, connection to Ghana, immigration history, and long-term plans. This helps us provide personalized guidance relevant to your situation. All fields marked with * are required.',
+      back: { label: 'Back to Service Details', to: '/ghana/right-of-abode-guidance' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['Your path to', 'a future in Ghana.'],
+    },
+    review: {
+      bannerTagline: 'Your path to a future in Ghana.',
+      cornerTagline: ['Your path to a future in Ghana.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please review your information carefully. You can return to make changes before continuing to secure payment.',
+      back: { label: 'Edit Answers', to: '/ghana/right-of-abode-guidance/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['Your path to', 'a future in Ghana.'],
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['Your path to a future in Ghana.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      back: { label: 'Back to Review Your Answers', to: '/ghana/right-of-abode-guidance/review' },
+      helper:
+        'After payment, you will receive a confirmation and your Right of Abode Guidance request will be submitted for research.',
+      sidebarHeading: 'Right of Abode Guidance',
+      sidebarCaption: ['Your path to', 'a future in Ghana.'],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+    confirmation: {
+      bannerTagline: 'Extraordinary places. A brighter tomorrow.',
+      cornerTagline: ['Your path to a future in Ghana.'],
+      heading: 'Your Payment Has Been Received',
+      intro: 'Your request for the Right of Abode Guidance has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will research and prepare your personalized Right of Abode guidance.',
+      deliveryNote: 'Your personalized guidance report will be delivered by email.',
+      followUp:
+        'You have up to 3 follow-up clarification emails within 7 days of delivery, plus one phone consultation. If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Right of Abode Guidance',
+      sidebarCaption: ['Your path to a future in Ghana.', "We're here to help."],
+      sidebarCaption2: ['Extraordinary places.', 'A brighter tomorrow.'],
+    },
+  },
+}
+
+// Ghana Exclusive: Complete Relocation Package —
+// /ghana/complete-relocation-package. Same shape as GHANA_LAND_PROPERTY_*
+// and GHANA_RIGHT_OF_ABODE_* above (Ghana-only, flat one-time fee), but
+// this service has an extra page in front of the request wizard: a "Full
+// Package Details" page (its own route, no form state) reached via the
+// summary landing page's "See Full Package Details" sidebar CTA, with the
+// request wizard's own "Start Your Request" CTA living on THAT page
+// instead of the summary landing page — matching the reference mockup,
+// where the summary page only offers "See Full Package Details" and the
+// details page is what actually starts the request.
+export const GHANA_RELOCATION_PAGE = {
+  hero: {
+    badge: 'Complete Relocation Package 🇬🇭',
+    titleLine1: 'Complete Relocation',
+    titleAccent: 'Package',
+    tagline: ['Comprehensive, personalized guidance to help you plan your move to Ghana with confidence.'],
+    description:
+      'Our Complete Relocation Package is a personalized guidance service designed for individuals, couples, and families planning a move to Ghana. It brings together the major areas you need to think through before departure, during your move, and as you settle into everyday life.',
+    backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+    backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline at sunset',
+    overlayTone: 'neutral',
+  },
+  about: {
+    heading: 'About This Service',
+    paragraphs: [
+      'Our Complete Relocation Package is a personalized guidance service designed for individuals, couples, and families planning a move to Ghana. It brings together the major areas you need to think through before departure, during your move, and as you settle into everyday life.',
+      'Your guidance is prepared around your own situation, including your reason for relocating, expected arrival date, budget, preferred areas, housing needs, work or business plans, family considerations, transportation needs, and the practical questions you want answered.',
+      'The package can include guidance on immigration and residency options, housing and where to live, cost of living and budgeting, banking and money, healthcare and insurance, transportation, phone and internet services, utilities, work and business considerations, schools and education, moving preparation, and settling into Ghana after arrival.',
+      'Rather than giving you scattered information, we organize the guidance into a practical relocation roadmap so you understand what to research, what to arrange before leaving, what to handle after arrival, and where to find relevant official information and useful resources.',
+      'You will also receive follow-up support after delivery, including 3 clarification emails within 7 days and one 20-minute phone consultation.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Will Receive',
+    items: [
+      'Personalized relocation roadmap',
+      'Step-by-step instructions',
+      'Detailed guidance in 15 key areas',
+      'Answers to your specific questions',
+      'Practical checklists and timelines',
+      'Templates and useful tools',
+      'Relevant resources and official contacts',
+      'Ongoing follow-up support',
+    ],
+  },
+  fullDetailsBand: {
+    heading: 'Full Package Details',
+    text: "Learn more about what's included in the Complete Relocation Package and how it can help you.",
+    cta: { label: 'View Full Details', to: '/ghana/complete-relocation-package/full-details' },
+  },
+  sidebar: {
+    title: 'Complete Relocation Package',
+    tagline: 'New beginnings. A brighter tomorrow.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'Search', title: 'Ghana Exclusive', text: 'Local insight you can trust.' },
+  ],
+  closing: 'Different journeys. A brighter Africa.',
+}
+
+// The "Full Package Details" page's own content — a deeper, second page
+// in front of the request wizard (see the note on GHANA_RELOCATION_PAGE
+// above). Reached from the summary landing page's "See Full Package
+// Details" CTA; its own sidebar is what actually starts the request.
+export const GHANA_RELOCATION_DETAILS_PAGE = {
+  hero: {
+    badge: 'Complete Relocation Package 🇬🇭',
+    titleLine1: 'Full Package',
+    titleAccent: 'Details',
+    tagline: ['A closer look at what’s included and how it can help you plan, move, and settle into Ghana with confidence.'],
+    description:
+      'A closer look at what’s included and how it can help you plan, move, and settle into Ghana with confidence.',
+    backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+    backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline at sunset',
+    overlayTone: 'neutral',
+  },
+  sections: [
+    {
+      icon: 'Globe2',
+      title: 'Immigration, Residency & Official Processes',
+      text: 'Clear guidance on visa options, residency permits, and the Right of Abode process, including required documents, application steps, timelines, and the relevant Ghanaian government agencies.',
+      items: [
+        'Visa and residency options based on your situation',
+        'Step-by-step application guidance and document checklist',
+        'Where to find official information and who to contact',
+      ],
+      image: '/Pictures/image_Ghana.webp',
+      imageAlt: 'A Republic of Ghana passport',
+    },
+    {
+      icon: 'HomeIcon',
+      title: 'Housing, Cost of Living & Essential Services',
+      text: 'Practical advice on where to live, rental options, typical costs, and what to consider when choosing a neighborhood. Guidance on utilities, healthcare, insurance, phone and internet services, and budgeting for everyday expenses.',
+      items: [
+        'Neighborhoods and housing options',
+        'Realistic cost of living and budgeting',
+        'Essential services: utilities, healthcare, phone and internet',
+      ],
+      image: '/Pictures/countries/Ghana.jpg',
+      imageAlt: 'Modern apartment buildings in Ghana',
+    },
+    {
+      icon: 'Briefcase',
+      title: 'Work, Business, Banking & Education',
+      text: 'Information on employment opportunities, starting or bringing a business to Ghana, and key steps for registration and compliance. Guidance on banking options, mobile money, and school considerations for families.',
+      items: [
+        'Work and business opportunities and resources',
+        'Banking, mobile money, and international transfers',
+        'School options and education considerations',
+      ],
+      image: '/Pictures/explore/ghana-card-background.webp',
+      imageAlt: 'City skyline in Accra, Ghana',
+    },
+    {
+      icon: 'Bus',
+      title: 'Transportation, Safety & Settling In',
+      text: "How to get around, including public and private transportation, vehicle import or rental options, and driver's license information. Practical safety tips, common scams to watch for, and what to expect in your first days and weeks as you settle in.",
+      items: [
+        'Getting around Ghana',
+        'Safety tips and emergency contacts',
+        'Helpful tips for your first days and weeks',
+      ],
+      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      imageAlt: 'Traffic on a street in Accra, Ghana',
+    },
+    {
+      icon: 'Users',
+      title: 'Your Personalized Relocation Roadmap',
+      text: 'All of the above is organized into a step-by-step roadmap tailored to your arrival date, budget, family situation, preferred locations, work or business plans, and your specific questions.',
+      items: [
+        'Customized to your goals and timeline',
+        'Practical next steps before and after arrival',
+        'Useful contacts, resources, and templates',
+      ],
+      image: '/Pictures/countries/Ghana.jpg',
+      imageAlt: 'A beach with fishing boats in Ghana',
+    },
+    {
+      icon: 'Headphones',
+      title: 'Included Follow-Up Support',
+      text: 'After delivery, you will receive 3 clarification emails within 7 days and one 20-minute phone consultation to discuss your guidance and any follow-up questions.',
+      items: [],
+      image: null,
+      imageAlt: '',
+    },
+  ],
+}
+
+export const GHANA_RELOCATION_FLOW = {
+  // A single flat one-time fee — no tiers, no destination picker, since
+  // this service only ever concerns a move to Ghana.
+  price: 79.95,
+  includes: [
+    { icon: 'Search', text: 'Personalized, practical guidance' },
+    { icon: 'FileText', text: 'Confidential & private' },
+    { icon: 'Mail', text: 'Delivered by email' },
+    { icon: 'Users', text: '3 clarification emails within 7 days plus one 20-minute phone consultation' },
+    { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
+  ],
+  contactMethodOptions: ['Email', 'WhatsApp', 'Phone'],
+  timeframeOptions: ['Within 3 months', 'Within 6 months', 'Within 1 year', '1–2 years', 'Not sure yet'],
+  purposeOptions: ['Retire', 'Work', 'Start a business', 'Study', 'Join family'],
+  relocatingWithOptions: ['Alone', 'With partner / spouse', 'With family', 'With friends / other'],
+  numPeopleOptions: ['1', '2', '3', '4', '5', '6 or more'],
+  topGoalsOptions: [
+    'Enjoy a lower cost of living',
+    'Be closer to family',
+    'Start or grow a business',
+    'Experience a new culture',
+    'Retire',
+    'Access educational opportunities',
+  ],
+  areaOptions: ['Accra', 'Kumasi', 'Cape Coast', 'Elmina', 'Takoradi (Western Region)'],
+  housingTypeOptions: ['Apartment (rent)', 'House (rent)', 'House (buy)', 'Not sure yet'],
+  budgetOptions: [
+    'Under $500',
+    '$500 – $1,000',
+    '$1,000 – $2,000',
+    '$2,000 – $4,000',
+    'Over $4,000',
+    'Not sure yet',
+  ],
+  neighborhoodPriorityOptions: [
+    'Safety',
+    'Close to amenities (shops, restaurants, etc.)',
+    'Access to healthcare',
+    'International community',
+    'Public transportation',
+  ],
+  yesNoOptions: ['Yes', 'No'],
+  yesNoMaybeOptions: ['Yes', 'No', 'Maybe'],
+  hasVisaOptions: ['Yes', 'No', 'In progress', 'Not sure'],
+  residencyOptionOptions: [
+    'Right of Abode',
+    'Long-stay visa',
+    'Work or business permit',
+    'Retirement residency',
+    'Not sure yet',
+  ],
+  transportInfoOptions: [
+    'Public transportation (trotro, buses, etc.)',
+    'Ride-hailing / taxis',
+    'Buying or renting a vehicle',
+    "Driver's license information",
+  ],
+  dailyLifeOptions: [
+    'Utilities (electricity, water, internet)',
+    'Mobile phone and SIM card',
+    'Cost of living',
+    'Getting around cities',
+  ],
+  moveSupportOptions: [
+    'Packing and shipping information',
+    'Required documents checklist',
+    'What to bring / what to buy in Ghana',
+    'Setting up banking and mobile money',
+  ],
+  settlingInfoOptions: [
+    'Finding trusted service providers',
+    'Meeting people and community',
+    'Understanding local customs',
+    'Opening a local bank account',
+  ],
+  stepLabels: ['Your Information', 'Review Your Answers', 'Secure Payment', 'Payment Received'],
+  steps: {
+    request: {
+      bannerTagline: 'New Beginnings. A Brighter Tomorrow.',
+      cornerTagline: ['New beginnings.', 'A brighter tomorrow.'],
+      heading: 'Your Information',
+      description:
+        'Please answer the questions below so we can prepare your personalized relocation package for Ghana. All fields marked with * are required.',
+      back: { label: 'Back to Full Package Details', to: '/ghana/complete-relocation-package/full-details' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['New beginnings.', 'A brighter tomorrow.'],
+    },
+    review: {
+      bannerTagline: 'New beginnings. A brighter tomorrow.',
+      cornerTagline: ['New beginnings.', 'A brighter tomorrow.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please review your information below before continuing to secure payment. You can edit any section if needed.',
+      back: { label: 'Back and Edit', to: '/ghana/complete-relocation-package/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['New beginnings.', 'A brighter tomorrow.'],
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['New beginnings.', 'A brighter tomorrow.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      back: { label: 'Back to Review Your Answers', to: '/ghana/complete-relocation-package/review' },
+      helper:
+        'After payment, you will receive a confirmation and your Complete Relocation Package request will be submitted for research.',
+      sidebarHeading: 'Complete Relocation Package',
+      sidebarCaption: ['New beginnings.', 'A brighter tomorrow.'],
+      sidebarCaption2: ['Different journeys.', 'A brighter Africa.'],
+    },
+    confirmation: {
+      bannerTagline: 'Different journeys. A brighter Africa.',
+      cornerTagline: ['New beginnings.', 'A brighter tomorrow.'],
+      heading: 'Your Payment Has Been Received',
+      intro: 'Your request for the Complete Relocation Package has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will research and prepare your personalized relocation roadmap.',
+      deliveryNote: 'Your personalized relocation package will be delivered by email.',
+      followUp:
+        'You have 3 clarification emails within 7 days of delivery, plus one 20-minute phone consultation. If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Complete Relocation Package',
+      sidebarCaption: ['New beginnings. A brighter tomorrow.', "We're here to help."],
+      sidebarCaption2: ['Different journeys.', 'A brighter Africa.'],
+    },
+  },
+}
+
+// Personal Visa Guidance — /personal-visa-guidance/:slug. Unlike the Ghana
+// Exclusive services above, this is one of the services offered on every
+// country's page (see the 'Personal Visa Guidance' card wired into each
+// country page's CTAs), so it uses the same generic per-country template
+// pattern as Independent Tour Guides (TOUR_GUIDE_PAGES/IndependentTourGuideCountry.jsx)
+// rather than a single Ghana-only page. Body copy is transcribed from the
+// "Personal Visa Guidance" reference mockup, which happened to be
+// illustrated for Ghana — countryName/countryFlag/countryImage are filled
+// in per-country at render time from COUNTRIES, not hardcoded here.
+export const VISA_GUIDANCE_FLOW = {
+  // One flat price for every country — the reference mockup shows no
+  // per-country tiering, only a per-country follow-up-support variant
+  // (see followUpForCountry below), same idea as the Ghana/Benin/Senegal
+  // variants already used by Before You Book Check and Travel Planner.
+  price: 45,
+  includes: [
+    { icon: 'Search', text: 'Personalized research and guidance' },
+    { icon: 'FileText', text: 'Clear information on requirements and process' },
+    { icon: 'Mail', text: 'Delivered by email (typically 3–5 business days)' },
+  ],
+  purposeOptions: ['Tourism', 'Business', 'Family visit', 'Transit', 'Study'],
+  lengthOfStayOptions: ['Less than 1 week', '1–2 weeks', '2–4 weeks', '1–3 months', 'More than 3 months'],
+  yesNoOptions: ['Yes', 'No'],
+  helpOptions: [
+    'Visa requirements',
+    'Required documents',
+    'Application process',
+    'Processing times',
+    'Visa fees',
+    'Where to apply',
+    'Special circumstances (e.g. multiple entry, long stay)',
+    'Travel with family',
+  ],
+  phoneConsultOptions: [
+    'Yes, I would like a phone consultation.',
+    'No, email guidance only.',
+  ],
+  stepLabels: ['Start Your Request', 'Review Your Answers', 'Secure Payment', 'Request Received'],
+  steps: {
+    request: {
+      bannerTagline: 'Practical Guidance. Clear Requirements.',
+      cornerTagline: ['Explore Africa.', 'Your way.'],
+      heading: 'Start Your Request',
+      cta: 'Review Your Answers',
+    },
+    review: {
+      bannerTagline: 'Explore Africa with confidence.',
+      cornerTagline: ['Explore Africa.', 'Your way.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please check your information below. If you need to make changes, click Edit next to any section. When everything looks correct, click Continue to Payment.',
+      cta: 'Continue to Secure Payment',
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['Explore Africa.', 'Your way.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      helper: 'After payment, you will receive a confirmation and your visa guidance request will be submitted for research.',
+    },
+    confirmation: {
+      bannerTagline: 'Explore Africa. A brighter tomorrow.',
+      cornerTagline: ['Explore Africa.', 'Your way.'],
+      heading: 'Your Request Has Been Received',
+      whatsNext: 'Our team will research the latest requirements for your situation.',
+      deliveryNote: 'Your personalized visa guidance will be delivered by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+    },
+  },
+}
+
+// The one thing this service varies by country: how many follow-up emails
+// are included and whether a phone consultation is offered, mirroring the
+// Ghana/Benin+Senegal/everyone-else split BEFORE_YOU_BOOK_FLOW and
+// TRAVEL_PLANNER_DETAILS_PAGE already use for their own follow-up support.
+export function followUpForCountry(slug) {
+  if (slug === 'ghana') {
+    return '3 follow-up clarification emails (within 7 days) plus an optional 20-minute phone consultation before you submit your visa application.'
+  }
+  if (slug === 'benin' || slug === 'senegal') {
+    return '3 follow-up clarification emails in English or French (within 7 days) plus an optional 20-minute phone consultation before you submit your visa application.'
+  }
+  return '3 follow-up clarification emails (within 7 days) after delivery.'
 }

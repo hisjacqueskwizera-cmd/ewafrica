@@ -88,7 +88,9 @@ export function Rwanda() {
                             ? '/travel-planner?destination=rwanda'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=rwanda'
-                              : '/#contact'
+                              : service.title === 'Personal Visa Guidance'
+                                ? '/personal-visa-guidance/rwanda'
+                                : '/#contact'
                         }
                         className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
                       >

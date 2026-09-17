@@ -4,6 +4,7 @@ import {
   FileText,
   Mail,
   Map,
+  Phone,
   Route as RouteIcon,
   Search,
   Settings2,
@@ -14,7 +15,7 @@ import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
 import { HashLink } from '../HashLink.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
 
-const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon }
+const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon, Phone }
 
 /**
  * The right-hand rail steps 3–6 of the request wizard share: a photo with

@@ -132,7 +132,9 @@ export function Malawi() {
                             ? '/travel-planner?destination=malawi'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=malawi'
-                              : '/#contact'
+                              : service.title === 'Personal Visa Guidance'
+                                ? '/personal-visa-guidance/malawi'
+                                : '/#contact'
                         }
                       >
                         {service.cta}

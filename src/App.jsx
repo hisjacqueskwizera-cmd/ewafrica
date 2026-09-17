@@ -4,8 +4,12 @@ import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
 import { BorderCrossingFlowProvider } from './context/BorderCrossingFlowContext.jsx'
+import { LandPropertyFlowProvider } from './context/LandPropertyFlowContext.jsx'
+import { RelocationFlowProvider } from './context/RelocationFlowContext.jsx'
+import { RightOfAbodeFlowProvider } from './context/RightOfAbodeFlowContext.jsx'
 import { TravelAuditFlowProvider } from './context/TravelAuditFlowContext.jsx'
 import { TravelPlannerFlowProvider } from './context/TravelPlannerFlowContext.jsx'
+import { VisaGuidanceFlowProvider } from './context/VisaGuidanceFlowContext.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { Benin } from './pages/Benin.jsx'
 import { BeforeYouBookCheck } from './pages/BeforeYouBookCheck.jsx'
@@ -16,8 +20,13 @@ import { Ghana } from './pages/Ghana.jsx'
 import { Home } from './pages/Home.jsx'
 import { IndependentTourGuide } from './pages/IndependentTourGuide.jsx'
 import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry.jsx'
+import { LandPropertyGuidance } from './pages/LandPropertyGuidance.jsx'
 import { Malawi } from './pages/Malawi.jsx'
+import { PersonalVisaGuidance } from './pages/PersonalVisaGuidance.jsx'
 import { Placeholder } from './pages/Placeholder.jsx'
+import { RelocationFullDetails } from './pages/RelocationFullDetails.jsx'
+import { RelocationPackage } from './pages/RelocationPackage.jsx'
+import { RightOfAbodeGuidance } from './pages/RightOfAbodeGuidance.jsx'
 import { Rwanda } from './pages/Rwanda.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
@@ -42,6 +51,22 @@ import { Confirmation as BorderCrossingConfirmation } from './pages/border-cross
 import { Payment as BorderCrossingPayment } from './pages/border-crossing/Payment.jsx'
 import { RequestForm as BorderCrossingRequestForm } from './pages/border-crossing/RequestForm.jsx'
 import { ReviewAnswers as BorderCrossingReviewAnswers } from './pages/border-crossing/ReviewAnswers.jsx'
+import { Confirmation as LandPropertyConfirmation } from './pages/land-property/Confirmation.jsx'
+import { Payment as LandPropertyPayment } from './pages/land-property/Payment.jsx'
+import { RequestForm as LandPropertyRequestForm } from './pages/land-property/RequestForm.jsx'
+import { ReviewAnswers as LandPropertyReviewAnswers } from './pages/land-property/ReviewAnswers.jsx'
+import { Confirmation as RightOfAbodeConfirmation } from './pages/right-of-abode/Confirmation.jsx'
+import { Payment as RightOfAbodePayment } from './pages/right-of-abode/Payment.jsx'
+import { RequestForm as RightOfAbodeRequestForm } from './pages/right-of-abode/RequestForm.jsx'
+import { ReviewAnswers as RightOfAbodeReviewAnswers } from './pages/right-of-abode/ReviewAnswers.jsx'
+import { Confirmation as RelocationConfirmation } from './pages/relocation/Confirmation.jsx'
+import { Payment as RelocationPayment } from './pages/relocation/Payment.jsx'
+import { RequestForm as RelocationRequestForm } from './pages/relocation/RequestForm.jsx'
+import { ReviewAnswers as RelocationReviewAnswers } from './pages/relocation/ReviewAnswers.jsx'
+import { Confirmation as VisaGuidanceConfirmation } from './pages/visa-guidance/Confirmation.jsx'
+import { Payment as VisaGuidancePayment } from './pages/visa-guidance/Payment.jsx'
+import { RequestForm as VisaGuidanceRequestForm } from './pages/visa-guidance/RequestForm.jsx'
+import { ReviewAnswers as VisaGuidanceReviewAnswers } from './pages/visa-guidance/ReviewAnswers.jsx'
 
 // The request wizard (reached via "View Details" on the Travel Planner
 // card, which goes straight to the request form — the separate service-
@@ -113,6 +138,76 @@ function BorderCrossingFlowRoutes() {
   )
 }
 
+// Ghana's Land & Property Guidance request wizard — a fifth independent
+// flow alongside the four above, reached from its own service detail page
+// (LandPropertyGuidance.jsx). Same shape, own provider, own state; unlike
+// the others this one is Ghana-only, so there's no destination picker.
+function LandPropertyFlowRoutes() {
+  return (
+    <LandPropertyFlowProvider>
+      <Routes>
+        <Route path="request" element={<LandPropertyRequestForm />} />
+        <Route path="review" element={<LandPropertyReviewAnswers />} />
+        <Route path="payment" element={<LandPropertyPayment />} />
+        <Route path="confirmation" element={<LandPropertyConfirmation />} />
+      </Routes>
+    </LandPropertyFlowProvider>
+  )
+}
+
+// Ghana's Right of Abode Guidance questionnaire wizard — a sixth
+// independent flow, reached from its own service detail page
+// (RightOfAbodeGuidance.jsx). Same shape as LandPropertyFlowRoutes above:
+// Ghana-only, own provider, own state.
+function RightOfAbodeFlowRoutes() {
+  return (
+    <RightOfAbodeFlowProvider>
+      <Routes>
+        <Route path="request" element={<RightOfAbodeRequestForm />} />
+        <Route path="review" element={<RightOfAbodeReviewAnswers />} />
+        <Route path="payment" element={<RightOfAbodePayment />} />
+        <Route path="confirmation" element={<RightOfAbodeConfirmation />} />
+      </Routes>
+    </RightOfAbodeFlowProvider>
+  )
+}
+
+// Ghana's Complete Relocation Package request wizard — a seventh
+// independent flow, reached from the Full Package Details page
+// (RelocationFullDetails.jsx), not the summary landing page
+// (RelocationPackage.jsx) directly. Same shape as the other Ghana Exclusive
+// flows: Ghana-only, own provider, own state.
+function RelocationFlowRoutes() {
+  return (
+    <RelocationFlowProvider>
+      <Routes>
+        <Route path="request" element={<RelocationRequestForm />} />
+        <Route path="review" element={<RelocationReviewAnswers />} />
+        <Route path="payment" element={<RelocationPayment />} />
+        <Route path="confirmation" element={<RelocationConfirmation />} />
+      </Routes>
+    </RelocationFlowProvider>
+  )
+}
+
+// Personal Visa Guidance — the one service on this list reached via a
+// `:slug` route param rather than its own fixed URL, since the same flow
+// serves every country's page (see the note on VisaGuidanceFlowContext).
+// VisaGuidanceFlowProvider reads that param itself via useParams(), so it
+// only needs to sit above these four step routes, not the whole app.
+function VisaGuidanceFlowRoutes() {
+  return (
+    <VisaGuidanceFlowProvider>
+      <Routes>
+        <Route path="request" element={<VisaGuidanceRequestForm />} />
+        <Route path="review" element={<VisaGuidanceReviewAnswers />} />
+        <Route path="payment" element={<VisaGuidancePayment />} />
+        <Route path="confirmation" element={<VisaGuidanceConfirmation />} />
+      </Routes>
+    </VisaGuidanceFlowProvider>
+  )
+}
+
 function App() {
   return (
     <>
@@ -155,6 +250,18 @@ function App() {
             element={<BorderCrossingFlowRoutes />}
           />
           <Route path="/travel-planner/*" element={<TravelPlannerFlowRoutes />} />
+          <Route path="/ghana/land-property-guidance" element={<LandPropertyGuidance />} />
+          <Route path="/ghana/land-property-guidance/*" element={<LandPropertyFlowRoutes />} />
+          <Route path="/ghana/right-of-abode-guidance" element={<RightOfAbodeGuidance />} />
+          <Route path="/ghana/right-of-abode-guidance/*" element={<RightOfAbodeFlowRoutes />} />
+          <Route path="/ghana/complete-relocation-package" element={<RelocationPackage />} />
+          <Route
+            path="/ghana/complete-relocation-package/full-details"
+            element={<RelocationFullDetails />}
+          />
+          <Route path="/ghana/complete-relocation-package/*" element={<RelocationFlowRoutes />} />
+          <Route path="/personal-visa-guidance/:slug" element={<PersonalVisaGuidance />} />
+          <Route path="/personal-visa-guidance/:slug/*" element={<VisaGuidanceFlowRoutes />} />
           <Route
             path="*"
             element={

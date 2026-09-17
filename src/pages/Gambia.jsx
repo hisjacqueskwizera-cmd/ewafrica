@@ -126,7 +126,9 @@ export function Gambia() {
                             ? '/travel-planner?destination=gambia'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=gambia'
-                              : '/#contact'
+                              : service.title === 'Personal Visa Guidance'
+                                ? '/personal-visa-guidance/gambia'
+                                : '/#contact'
                         }
                       >
                         {service.cta}

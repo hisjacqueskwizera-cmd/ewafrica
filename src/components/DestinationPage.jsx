@@ -180,7 +180,9 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
                               ? `/independent-tour-guide/${slug}`
                               : service.title === 'Border Crossing Guide'
                                 ? `/travel-planner/border-crossing-guide?from=${slug}`
-                                : '/#contact'
+                                : service.title === 'Personal Visa Guidance'
+                                  ? `/personal-visa-guidance/${slug}`
+                                  : '/#contact'
                         }
                       >
                         {service.cta}

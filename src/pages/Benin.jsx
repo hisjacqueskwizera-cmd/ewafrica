@@ -132,7 +132,9 @@ export function Benin() {
                               ? '/independent-tour-guide/benin'
                               : service.title === 'Border Crossing Guide'
                                 ? '/travel-planner/border-crossing-guide?from=benin'
-                                : '/#contact'
+                                : service.title === 'Personal Visa Guidance'
+                                  ? '/personal-visa-guidance/benin'
+                                  : '/#contact'
                         }
                       >
                         {service.cta}

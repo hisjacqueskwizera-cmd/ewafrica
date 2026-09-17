@@ -737,7 +737,7 @@ export const ZAMBIA_PAGE = {
     },
     {
       to: 'Zimbabwe',
-      image: '/Explore_regions/optimized/east-africa/9.webp',
+      image: '/Explore_regions/optimized/east-africa/16.webp',
       text: 'Cross the Zambezi at Victoria Falls Bridge or Chirundu, linking the two countries.',
     },
     {
@@ -886,8 +886,8 @@ export const ZAMBIA_PAGE = {
 // service" banner.
 export const MALAWI_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/countries/Malawi.webp',
-    backgroundImageAlt: 'Traditional fishing boat on the shore of Lake Malawi',
+    backgroundImage: '/Pictures/Malawi_Hero_Section.JPG',
+    backgroundImageAlt: 'The Ilala ferry crossing Lake Malawi toward the mountains beyond',
     heading: 'Explore Malawi',
     description:
       'The Warm Heart of Africa, Malawi stretches from the beautiful shores of Lake Malawi to the highlands of Mulanje and the wildlife of Liwonde, offering a relaxed blend of scenery, culture, nature and genuine warmth.',
@@ -953,6 +953,17 @@ export const MALAWI_PAGE = {
       to: 'Mozambique',
       image: '/Explore_regions/optimized/east-africa/4.webp',
       text: 'Via Dedza or Mwanza border, with beautiful countryside views.',
+    },
+    // A fourth card — Malawi's own Lake Malawi ferry crossings, alongside
+    // the ordinary land-border routes above, condensed from the "Lake
+    // Malawi Border Crossings" reference graphic (Cóbuè and Metangula in
+    // Mozambique, Mbamba Bay in Tanzania) into the same RouteCard shape as
+    // every other route on this site rather than its own standalone
+    // section.
+    {
+      to: 'Likoma Lake Crossings',
+      image: '/Pictures/Malawi_Hero_Section.JPG',
+      text: 'Ferries from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, and Mbamba Bay in Tanzania.',
     },
   ],
   guide: {

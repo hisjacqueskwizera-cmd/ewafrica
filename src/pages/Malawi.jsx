@@ -150,7 +150,10 @@ export function Malawi() {
       </section>
 
       {/* Popular overland routes — shared with every other country page,
-          see RouteCard.jsx. */}
+          see RouteCard.jsx. The 4th card (Likoma Lake Crossings) is
+          Malawi's own Lake Malawi ferry crossings, condensed into the same
+          card shape as the ordinary land-border routes rather than a
+          separate section — see the note on MALAWI_PAGE.routes. */}
       <OverlandRoutesSection countryName="Malawi" routes={routes} />
 
       {/* First-time traveller's guide — an accordion of real topic

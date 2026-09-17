@@ -954,18 +954,69 @@ export const MALAWI_PAGE = {
       image: '/Explore_regions/optimized/east-africa/4.webp',
       text: 'Via Dedza or Mwanza border, with beautiful countryside views.',
     },
-    // A fourth card — Malawi's own Lake Malawi ferry crossings, alongside
-    // the ordinary land-border routes above, condensed from the "Lake
-    // Malawi Border Crossings" reference graphic (Cóbuè and Metangula in
-    // Mozambique, Mbamba Bay in Tanzania) into the same RouteCard shape as
-    // every other route on this site rather than its own standalone
-    // section.
-    {
-      to: 'Likoma Lake Crossings',
+  ],
+  // A 4th "route" card, sitting in the same grid as the three above and
+  // built from the same RouteCard visuals (see LakeCrossingsCard in
+  // Malawi.jsx) — but since the full "Lake Malawi Border Crossings"
+  // reference graphic has far more content than any RouteCard's teaser
+  // text can hold (a subtitle, an intro, three named destinations each
+  // with their own photo and paragraph, and a guide band with a
+  // checklist), the card itself only teases it; clicking it opens a
+  // bottom-sheet modal (see BottomSheetModal.jsx, the same pattern Ghana's
+  // Residency & Immigration pathway cards use) with every field below.
+  lakeBorder: {
+    card: {
+      title: 'Likoma Lake Crossings',
       image: '/Pictures/Malawi_Hero_Section.JPG',
       text: 'Ferries from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, and Mbamba Bay in Tanzania.',
     },
-  ],
+    banner: {
+      badge: 'Malawi',
+      title: 'Lake Malawi',
+      titleAccent: 'Border Crossings',
+      subtitle: 'Malawi – Mozambique & Tanzania',
+      text: 'Lake crossings from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, while the wider lake transport network also links toward Mbamba Bay in Tanzania.',
+      image: '/Pictures/Malawi_Hero_Section.JPG',
+      imageAlt: 'The Ilala ferry crossing Lake Malawi toward the mountains beyond',
+    },
+    eyebrow: 'Three Lake-Border Destinations',
+    heading: 'Explore the Lake Border Destinations',
+    intro:
+      'The Likoma Immigration Office caters for three lake-border posts: Cóbuè, Metangula and Mbamba Bay.',
+    destinations: [
+      {
+        name: 'Cóbuè',
+        country: 'Mozambique',
+        image: '/Explore_regions/optimized/east-africa/11.webp',
+        text: 'A peaceful lakeside village surrounded by clear blue water, green hills, and an unhurried atmosphere. Cóbuè offers a beautiful introduction to the quieter, less-traveled side of Lake Malawi, with stunning views across the lake toward Likoma Island.',
+      },
+      {
+        name: 'Metangula',
+        country: 'Mozambique',
+        image: '/Explore_regions/optimized/east-africa/12.webp',
+        text: "Set along Mozambique's scenic lakeshore, Metangula combines sweeping lake views, sandy shoreline, and a relaxed local atmosphere. It is a beautiful and peaceful stop along this quieter side of Lake Malawi.",
+      },
+      {
+        name: 'Mbamba Bay',
+        country: 'Tanzania',
+        image: '/Explore_regions/optimized/east-africa/2.webp',
+        text: 'A picturesque Tanzanian lakeside town framed by rolling hills and the wide waters of Lake Malawi. Mbamba Bay offers a tranquil shoreline, attractive scenery, and a strong sense of being away from the usual tourist trail.',
+      },
+    ],
+    guideBand: {
+      eyebrow: 'Plan With Confidence',
+      heading: 'Our Border Crossing Guide',
+      text: 'Border procedures, ferry schedules, travel requirements and entry rules can change. Our Border Crossing Guide provides the latest information and practical tips to help you plan a smooth and relaxed journey across Lake Malawi.',
+      items: [
+        'Latest travel requirements',
+        'Ferry and transport information',
+        'Practical tips for a smoother crossing',
+        'Local insights and guidance',
+      ],
+      cta: { label: 'Get the Border Crossing Guide', to: '/travel-planner/border-crossing-guide?from=malawi' },
+    },
+    note: 'We recommend checking the latest information before your trip or requesting our Border Crossing Guide for personalized guidance.',
+  },
   guide: {
     eyebrow: 'First Time in Malawi?',
     heading: 'A Practical Guide for First-Time Travellers to Malawi',

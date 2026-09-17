@@ -17,11 +17,12 @@ import {
   Users,
   Wallet,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
+import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
-import { OverlandRoutesSection } from '../components/RouteCard.jsx'
+import { OverlandRoutesSection, RouteCardButton } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { MALAWI_PAGE } from '../data/siteContent.js'
 
@@ -59,7 +60,12 @@ export function Malawi() {
     document.title = 'Explore Malawi | East-West Africa Link'
   }, [])
 
-  const { hero, services, routes, guide, ctas, trust, farewell } = MALAWI_PAGE
+  const { hero, services, routes, lakeBorder, guide, ctas, trust, farewell } = MALAWI_PAGE
+
+  // Whether the Lake Malawi Border Crossings modal is open — its card
+  // sits in the same "Popular Overland Routes" grid as the three ordinary
+  // land-border routes (see the note on MALAWI_PAGE.lakeBorder).
+  const [lakeBorderOpen, setLakeBorderOpen] = useState(false)
 
   return (
     <>
@@ -151,10 +157,24 @@ export function Malawi() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. The 4th card (Likoma Lake Crossings) is
-          Malawi's own Lake Malawi ferry crossings, condensed into the same
-          card shape as the ordinary land-border routes rather than a
-          separate section — see the note on MALAWI_PAGE.routes. */}
-      <OverlandRoutesSection countryName="Malawi" routes={routes} />
+          Malawi's own Lake Malawi ferry crossings — a RouteCardButton
+          rather than an ordinary RouteCard, since its full content (see
+          the note on MALAWI_PAGE.lakeBorder) is opened in a modal instead
+          of a direct link. */}
+      <OverlandRoutesSection
+        countryName="Malawi"
+        routes={routes}
+        extraCard={
+          <RouteCardButton
+            image={lakeBorder.card.image}
+            imageAlt="The Ilala ferry crossing Lake Malawi toward the mountains beyond"
+            title={`Malawi → ${lakeBorder.card.title}`}
+            text={lakeBorder.card.text}
+            ctaLabel="See All Crossings"
+            onClick={() => setLakeBorderOpen(true)}
+          />
+        }
+      />
 
       {/* First-time traveller's guide — an accordion of real topic
           summaries, not a flat checklist. */}
@@ -250,6 +270,82 @@ export function Malawi() {
         <p className="text-sm font-bold">{farewell.heading}</p>
         <p className="mt-1 text-xs text-primary-foreground/70">{farewell.text}</p>
       </section>
+
+      {/* Lake Malawi Border Crossings — every field from the reference
+          graphic, opened from the "Likoma Lake Crossings" card above
+          rather than laid out as its own full-page section. */}
+      <BottomSheetModal
+        open={lakeBorderOpen}
+        onClose={() => setLakeBorderOpen(false)}
+        eyebrow={lakeBorder.banner.badge}
+        title={`${lakeBorder.banner.title} ${lakeBorder.banner.titleAccent}`}
+      >
+        <div className="space-y-6">
+          <div>
+            <p className="text-sm font-bold text-primary">{lakeBorder.banner.subtitle}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{lakeBorder.banner.text}</p>
+          </div>
+
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-copper">
+              {lakeBorder.eyebrow}
+            </p>
+            <h3 className="mt-1 text-lg font-bold text-primary">{lakeBorder.heading}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{lakeBorder.intro}</p>
+
+            <div className="mt-4 space-y-4">
+              {lakeBorder.destinations.map((dest) => (
+                <div key={dest.name} className="flex gap-4 rounded-2xl bg-cream p-3">
+                  <img
+                    src={dest.image}
+                    alt={`${dest.name}, ${dest.country}, on the shore of Lake Malawi`}
+                    loading="lazy"
+                    className="size-20 shrink-0 rounded-xl object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-bold text-primary">
+                      {dest.name}, {dest.country}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{dest.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-navy/10 p-5">
+            <div className="flex items-start gap-3">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-navy/15 text-navy">
+                <BookOpen className="size-5" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-navy">
+                  {lakeBorder.guideBand.eyebrow}
+                </p>
+                <h3 className="mt-1 text-base font-bold text-primary">{lakeBorder.guideBand.heading}</h3>
+              </div>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{lakeBorder.guideBand.text}</p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {lakeBorder.guideBand.items.map((item) => (
+                <div key={item} className="flex items-start gap-2 text-sm text-primary">
+                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-navy" aria-hidden="true" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <HashLink
+              to={lakeBorder.guideBand.cta.to}
+              className="mt-4 inline-flex items-center gap-2 rounded-full bg-cocoa px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              {lakeBorder.guideBand.cta.label}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </HashLink>
+          </div>
+
+          <p className="text-xs italic leading-relaxed text-muted-foreground">{lakeBorder.note}</p>
+        </div>
+      </BottomSheetModal>
     </>
   )
 }

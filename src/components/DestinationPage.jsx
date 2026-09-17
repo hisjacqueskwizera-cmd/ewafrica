@@ -168,7 +168,7 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
           (home of the Border Crossing Guide card) so overland routing and
           border-crossing guidance read together. Shared with every other
           country page — see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName={countryName} routes={routes} />
+      <OverlandRoutesSection countryName={countryName} slug={slug} routes={routes} />
 
       {/* First-time traveller's guide */}
       <section className="bg-cream py-16 lg:py-20">

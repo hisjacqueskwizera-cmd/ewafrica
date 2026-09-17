@@ -186,7 +186,7 @@ export function Benin() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Benin" routes={routes} />
+      <OverlandRoutesSection countryName="Benin" slug="benin" routes={routes} />
 
       {/* Practical guide preview — an accordion of real topic summaries. */}
       <section className="bg-cream py-16 lg:py-20">

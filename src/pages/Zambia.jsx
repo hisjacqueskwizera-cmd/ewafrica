@@ -187,7 +187,7 @@ export function Zambia() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Zambia" routes={routes} />
+      <OverlandRoutesSection countryName="Zambia" slug="zambia" routes={routes} />
 
       {/* Trust row — flat, dividers-only row matching the reference. */}
       <section className="border-y border-border bg-cream py-10">

@@ -145,7 +145,7 @@ export function Gambia() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="The Gambia" routes={routes} />
+      <OverlandRoutesSection countryName="The Gambia" slug="gambia" routes={routes} />
 
       {/* Practical guide — an accordion of 8 real topic summaries. */}
       <section className="bg-cream py-16 lg:py-20">

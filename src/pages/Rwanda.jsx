@@ -109,7 +109,7 @@ export function Rwanda() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Rwanda" routes={routes} />
+      <OverlandRoutesSection countryName="Rwanda" slug="rwanda" routes={routes} />
 
       {/* Benefits row — same flat, outline-icon treatment as the trust row
           elsewhere, just different content: what makes this service worth

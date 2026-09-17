@@ -146,7 +146,7 @@ export function Senegal() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Senegal" routes={routes} />
+      <OverlandRoutesSection countryName="Senegal" slug="senegal" routes={routes} />
 
       {/* Practical guide — an accordion of real topic summaries. */}
       <section className="bg-cream py-16 lg:py-20">

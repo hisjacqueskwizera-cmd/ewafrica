@@ -108,7 +108,7 @@ export function Uganda() {
 
       {/* Popular overland routes — shared with every other country page,
           see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Uganda" routes={routes} />
+      <OverlandRoutesSection countryName="Uganda" slug="uganda" routes={routes} />
 
       {/* Explore Uganda repeat banner + Practical Guide */}
       <section className="pb-16 lg:pb-20">

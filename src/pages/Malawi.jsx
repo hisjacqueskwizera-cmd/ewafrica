@@ -166,6 +166,7 @@ export function Malawi() {
           of a direct link. */}
       <OverlandRoutesSection
         countryName="Malawi"
+        slug="malawi"
         routes={routes}
         extraCard={
           <RouteCardButton

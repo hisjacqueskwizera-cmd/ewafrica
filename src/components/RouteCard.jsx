@@ -49,10 +49,19 @@ function CardVisual({ image, imageAlt, title, text, ctaLabel, imagePosition = 'o
  *
  * `route` is `{ to, image, text }` — `to` is the neighbouring country's
  * name, rendered as "{countryName} → {route.to}".
+ *
+ * `slug` is the current country's own siteContent.js `COUNTRIES` slug —
+ * carried into the Border Crossing Guide flow's `?from=` param so the
+ * guide request arrives pre-filled with the country the visitor was
+ * already reading about, same as the Travel Services card's own Border
+ * Crossing Guide link (see DestinationPage.jsx).
  */
-export function RouteCard({ countryName, route }) {
+export function RouteCard({ countryName, route, slug }) {
   return (
-    <HashLink to="/#contact" className="group relative block aspect-[3/4] overflow-hidden bg-cocoa">
+    <HashLink
+      to={`/travel-planner/border-crossing-guide?from=${slug}`}
+      className="group relative block aspect-[3/4] overflow-hidden bg-cocoa"
+    >
       <CardVisual
         image={route.image}
         imageAlt={`Landscape along the route between ${countryName} and ${route.to}`}
@@ -108,7 +117,7 @@ export function RouteCardButton({
  * more "route" than the rest but whose content doesn't fit RouteCard's own
  * `{ to, image, text }` shape, e.g. a RouteCardButton opening a modal.
  */
-export function OverlandRoutesSection({ countryName, routes, extraCard }) {
+export function OverlandRoutesSection({ countryName, slug, routes, extraCard }) {
   return (
     <section className="overflow-hidden py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -128,7 +137,7 @@ export function OverlandRoutesSection({ countryName, routes, extraCard }) {
       <div className="mt-10 grid grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:gap-5 lg:px-3">
         {routes.map((route, i) => (
           <Reveal key={route.to} delay={i * 90}>
-            <RouteCard countryName={countryName} route={route} />
+            <RouteCard countryName={countryName} route={route} slug={slug} />
           </Reveal>
         ))}
         {extraCard && <Reveal delay={routes.length * 90}>{extraCard}</Reveal>}

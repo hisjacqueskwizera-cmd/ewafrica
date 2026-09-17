@@ -5,7 +5,6 @@ import { ABOUT_PAGE } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
 import { HeroVideoBackground } from '../components/HeroVideoBackground.jsx'
 import { Reveal } from '../components/Reveal.jsx'
-import { SectionMark } from '../components/SectionMark.jsx'
 
 const ICONS = { Globe2, FileText, Handshake, ShieldCheck }
 
@@ -188,9 +187,8 @@ export function AboutUs() {
           loading="lazy"
           className="absolute inset-0 -z-10 size-full object-cover"
         />
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="-mt-20 grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <SectionMark />
             <AccentHeading text={closing.heading} className={`${HEADING} text-cocoa`} />
             <p className="mt-4 max-w-[420px] text-lg italic leading-snug text-cocoa/90">
               {closing.tagline}

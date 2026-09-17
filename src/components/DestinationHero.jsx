@@ -31,8 +31,20 @@ function AccentHeading({ text }) {
  * `backgroundVideos` (HERO_VIDEOS-shaped) to rotate a page's own dedicated
  * clips the way About Us rotates the site-wide reel — Tanzania is the
  * only destination with any of its own footage.
+ *
+ * `overlay` (default `true`) is the flat cocoa tint described above — pass
+ * `false` to show the backdrop photo at full strength instead, for a photo
+ * that's already legible under the white heading text without it (Malawi's
+ * own hero photo, for instance).
  */
-export function DestinationHero({ heading, description, backgroundImage, backgroundImageAlt, backgroundVideos }) {
+export function DestinationHero({
+  heading,
+  description,
+  backgroundImage,
+  backgroundImageAlt,
+  backgroundVideos,
+  overlay = true,
+}) {
   return (
     <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-10 text-left text-primary-foreground lg:px-16">
       {backgroundImage ? (
@@ -46,7 +58,7 @@ export function DestinationHero({ heading, description, backgroundImage, backgro
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
       )}
-      <div className="absolute inset-0 z-[3] bg-cocoa/45" aria-hidden="true" />
+      {overlay && <div className="absolute inset-0 z-[3] bg-cocoa/45" aria-hidden="true" />}
       <div className="relative z-[4] w-full max-w-5xl">
         <Reveal delay={150} blur>
           <div className="mt-9 max-w-3xl">

@@ -9,14 +9,14 @@ import { Reveal } from './Reveal.jsx'
 // RouteCardButton (a button that opens a modal, for a route with more
 // detail than a teaser can hold) render identically without duplicating
 // all of these classes.
-function CardVisual({ image, imageAlt, title, text, ctaLabel }) {
+function CardVisual({ image, imageAlt, title, text, ctaLabel, imagePosition = 'object-center' }) {
   return (
     <>
       <img
         src={image}
         alt={imageAlt}
         loading="lazy"
-        className="size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
+        className={`size-full object-cover ${imagePosition} transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]`}
       />
       <div
         className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent"
@@ -58,7 +58,7 @@ export function RouteCard({ countryName, route }) {
         imageAlt={`Landscape along the route between ${countryName} and ${route.to}`}
         title={`${countryName} → ${route.to}`}
         text={route.text}
-        ctaLabel="Explore Route"
+        ctaLabel="Border Crossing Guide"
       />
     </HashLink>
   )
@@ -71,14 +71,29 @@ export function RouteCard({ countryName, route }) {
  * destinations plus a guide band — see the note on MALAWI_PAGE.lakeBorder
  * and Malawi.jsx's LakeCrossingsCard).
  */
-export function RouteCardButton({ image, imageAlt, title, text, ctaLabel = 'Learn More', onClick }) {
+export function RouteCardButton({
+  image,
+  imageAlt,
+  title,
+  text,
+  ctaLabel = 'Learn More',
+  imagePosition,
+  onClick,
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       className="group relative block aspect-[3/4] w-full overflow-hidden bg-cocoa text-left"
     >
-      <CardVisual image={image} imageAlt={imageAlt} title={title} text={text} ctaLabel={ctaLabel} />
+      <CardVisual
+        image={image}
+        imageAlt={imageAlt}
+        title={title}
+        text={text}
+        ctaLabel={ctaLabel}
+        imagePosition={imagePosition}
+      />
     </button>
   )
 }

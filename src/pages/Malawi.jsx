@@ -70,12 +70,15 @@ export function Malawi() {
   return (
     <>
       {/* Hero — the same full-viewport hero every destination page shares,
-          lifted from About Us. */}
+          lifted from About Us. No dark tint over the backdrop here
+          (`overlay={false}`) — the Ilala ferry photo reads clearly under
+          the white heading text without it. */}
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
+        overlay={false}
       />
 
       {/* Travel Services in Malawi — three cards, no Independent Tour
@@ -170,7 +173,8 @@ export function Malawi() {
             imageAlt="The Ilala ferry crossing Lake Malawi toward the mountains beyond"
             title={`Malawi → ${lakeBorder.card.title}`}
             text={lakeBorder.card.text}
-            ctaLabel="See All Crossings"
+            ctaLabel="Border Crossing Guide"
+            imagePosition="object-[68%_45%]"
             onClick={() => setLakeBorderOpen(true)}
           />
         }

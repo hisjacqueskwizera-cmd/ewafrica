@@ -1162,6 +1162,11 @@ export const UGANDA_PAGE = {
       image: '/Explore_regions/optimized/east-africa/5.webp',
       text: 'An overland journey through diverse landscapes and welcoming communities.',
     },
+    {
+      to: 'Kenya',
+      image: '/Explore_regions/optimized/east-africa/3.webp',
+      text: 'Uganda shares four active official land border crossings with Kenya, The border crossing guide can provide the specific routes and crossing information for your journey.',
+    },
   ],
   guideItems: [
     'When to visit',
@@ -3630,8 +3635,8 @@ export const GHANA_RIGHT_OF_ABODE_PAGE = {
     tagline: ['Personalized research. Practical guidance. Clear next steps.'],
     description:
       "Ghana's Right of Abode is a specialized immigration status that may be relevant to certain people with Ghanaian connections, former Ghanaian citizenship, African descent, or other qualifying circumstances.",
-    backgroundImage: '/Pictures/image_Ghana.webp',
-    backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline',
+    backgroundImage: '/Pictures/Ghana_Abode.JPG',
+    backgroundImageAlt: 'A scenic view representing Ghana’s Right of Abode pathway',
     overlayTone: 'neutral',
   },
   intro: {

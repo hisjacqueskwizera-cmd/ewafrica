@@ -1645,21 +1645,61 @@ export const GHANA_PAGE = {
       image: '/Pictures/image_Ghana.webp',
       cta: { label: 'Explore Right of Abode Guidance', to: '/ghana/right-of-abode-guidance' },
     },
+    // Each pathway opens a bottom-sheet modal (see BottomSheetModal.jsx)
+    // rather than routing to /#contact — modal content is transcribed
+    // verbatim from the "Ghana Right of Abode" reference document. Only
+    // the Work & Business and Other Pathways modals carry a closing
+    // "Need guidance" prompt pointing at Right of Abode Guidance; the
+    // Residence Permits modal doesn't have one in the source document.
     pathways: [
       {
         icon: 'IdCard',
         title: 'Residence Permits',
         text: 'Learn about long-stay and residence permit options.',
+        modal: {
+          eyebrow: 'Ghana Right of Abode',
+          heading: 'Residence Permits in Ghana',
+          paragraphs: [
+            'Foreign nationals who plan to live in Ghana beyond a short visit may need an appropriate residence permit based on their circumstances and the purpose of their stay.',
+            'Residence options can differ depending on whether a person is relocating for employment, joining family, conducting business, investing, retiring, studying, or establishing a longer-term connection to Ghana. The documents required, length of stay permitted, renewal process, and other conditions can vary according to the type of permit.',
+            'It is important to understand that a visa used to enter Ghana and permission to reside in Ghana are not necessarily the same thing. Travelers planning an extended stay should determine which immigration requirements apply to their particular situation before making long-term arrangements.',
+            'East-West Africa Link provides general information to help you understand the main residence pathways and the questions you should consider before beginning the process.',
+          ],
+        },
       },
       {
         icon: 'Briefcase',
         title: 'Work & Business Permits',
         text: 'Information for professionals, entrepreneurs and investors.',
+        modal: {
+          eyebrow: 'Ghana Right of Abode',
+          heading: 'Work & Business Permits in Ghana',
+          paragraphs: [
+            'Foreign nationals who plan to work, establish a business, manage a company, or take part in certain professional activities in Ghana may need immigration and employment permissions that go beyond a standard entry visa.',
+            "The requirements can vary depending on the type of work or business activity involved, the individual's role, the structure of the company, and the length of time they intend to remain in Ghana. In some cases, immigration requirements may also be connected to business registration, investment, or employment documentation.",
+            'Anyone considering employment or business activity in Ghana should understand that company registration, the right to work, and the right to reside are separate matters and may involve different government processes.',
+            'East-West Africa Link provides general information to help you understand the main areas to consider before moving forward.',
+          ],
+          prompt:
+            'Need guidance for your own situation? Our personalized services can help you identify the questions to research and the steps you may need to prepare for.',
+        },
       },
       {
         icon: 'Users',
         title: 'Other Immigration Pathways',
         text: 'Explore additional options based on your goals.',
+        modal: {
+          eyebrow: 'Ghana Right of Abode',
+          heading: 'Other Immigration Pathways in Ghana',
+          paragraphs: [
+            "Not everyone planning a longer stay in Ghana will fit neatly into a standard residence, employment, or business category. Depending on a person's background, family connections, nationality, purpose of stay, or long-term plans, other immigration pathways may be worth exploring.",
+            'These can involve different eligibility rules, supporting documents, government agencies, and application procedures. Some options may apply only in specific circumstances, while others may require a person to meet particular legal or residency conditions before they can qualify.',
+            'Because immigration status can affect work, residence, travel, and long-term planning, it is important to understand which pathway may be relevant before beginning an application.',
+            'East-West Africa Link provides general information to help you understand the main possibilities and the questions you should consider before moving forward.',
+          ],
+          prompt:
+            'Need guidance for your own situation? Our personalized services can help you identify which areas may be relevant to your circumstances and what you should research next.',
+        },
       },
     ],
   },
@@ -3961,4 +4001,235 @@ export function followUpForCountry(slug) {
     return '3 follow-up clarification emails in English or French (within 7 days) plus an optional 20-minute phone consultation before you submit your visa application.'
   }
   return '3 follow-up clarification emails (within 7 days) after delivery.'
+}
+
+// Ghana Exclusive: Personalized Relocation Guidance —
+// /ghana/personalized-relocation-guidance. This is a lighter, standalone
+// sibling of the Complete Relocation Package above (GHANA_RELOCATION_PAGE/
+// FLOW) — same Ghana-only, flat one-time fee shape, but its own reference
+// mockup, its own single long questionnaire (not ten numbered sections),
+// and its own price ($39.95 vs the Complete Package's $79.95). It's the
+// first card in GHANA_PAGE.servicePackages ("Personalized Relocation
+// Guidance"), not the second ("Land & Property...") or third ("Complete
+// Ghana Relocation Package...") already wired to their own flows.
+export const GHANA_PERSONALIZED_RELOCATION_PAGE = {
+  hero: {
+    badge: 'Ghana',
+    titleLine1: 'Personalized',
+    titleAccent: 'Relocation Guidance',
+    tagline: ['Practical, personalized guidance for your new chapter in Ghana.'],
+    description: 'Make informed decisions. Move with confidence.',
+    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImageAlt: 'Independence Arch in Accra, Ghana',
+    overlayTone: 'neutral',
+  },
+  intro: {
+    heading: 'Plan Your Move With Expert Guidance',
+    paragraphs: [
+      'Relocating to Ghana involves many decisions — where to live, what to budget for, how to manage everyday life, and what to prepare before you arrive. Our Personalized Relocation Guidance is designed for people who want practical advice based on their own plans and circumstances, not just general information.',
+      'You tell us about your situation, priorities, budget, timeline, lifestyle, and concerns. We review your answers and prepare personalized guidance to help you make more informed decisions about your move to Ghana.',
+    ],
+  },
+  whoFor: {
+    heading: 'Who This Service Is For',
+    items: [
+      'People seriously considering a move to Ghana',
+      'Individuals planning an extended stay',
+      'Retirees looking to relocate',
+      'Professionals working in Ghana',
+      'Entrepreneurs and investors exploring opportunities',
+      'Ghanaian diaspora members returning home',
+      'Anyone who wants practical, personalized guidance for living in Ghana',
+    ],
+  },
+  mayInclude: {
+    heading: 'Your Guidance May Include',
+    intro: 'Depending on your needs, your personalized guidance may cover:',
+    items: [
+      { icon: 'HomeIcon', text: 'Living in Ghana', hint: 'Areas and locations that may suit your lifestyle and priorities' },
+      { icon: 'BedDouble', text: 'Housing', hint: 'Rental considerations and what to prepare for' },
+      { icon: 'Wallet', text: 'Cost of Living', hint: 'Estimated costs and budgeting considerations' },
+      { icon: 'HeartPulse', text: 'Healthcare', hint: 'Healthcare and insurance considerations' },
+      { icon: 'Landmark', text: 'Banking & Money', hint: 'Banking options, money access, and everyday financial matters' },
+      { icon: 'Bus', text: 'Getting Around', hint: 'Transportation options and getting around' },
+      { icon: 'CalendarClock', text: 'Longer-Term Stay', hint: 'Residency and stay considerations' },
+      { icon: 'Briefcase', text: 'Work & Business', hint: 'Working or starting a business in Ghana' },
+      { icon: 'Plane', text: 'Preparing for Your Move', hint: 'Practical steps before you arrive' },
+      { icon: 'MessageCircleQuestion', text: 'Your Questions', hint: 'Specific questions or concerns you want addressed' },
+    ],
+  },
+  whatMakesPersonalized: {
+    heading: 'What Makes It Personalized',
+    paragraphs: [
+      'Your guidance is based on the information you provide in your request, including your plans, budget, timeline, preferred location, and specific interests or concerns. This allows us to focus on the information most relevant to your situation, rather than providing generic advice.',
+    ],
+  },
+  whatYouReceive: {
+    heading: 'What You Receive',
+    paragraphs: [
+      'You will receive a personalized written relocation guidance report, delivered by email. Your report will highlight practical considerations, options, and areas that may require further attention as you prepare for your move.',
+    ],
+  },
+  followUpSupport: {
+    heading: 'Follow-Up Support (For Ghana)',
+    intro:
+      'Your guidance does not end when your report is delivered. After receiving your guidance, you may follow up with:',
+    items: ['Up to 3 clarification emails', 'One follow-up phone chat to discuss questions arising from your personalized guidance'],
+    note: 'This follow-up support is intended to help clarify the information provided in your report.',
+  },
+  howItWorks: {
+    heading: 'How It Works',
+    steps: [
+      { title: 'Start Your Request', text: 'Complete a short questionnaire about your plans.' },
+      { title: 'Review Your Answers', text: 'Check your information before submitting.' },
+      { title: 'Secure Payment', text: 'Complete payment for your guidance.' },
+      { title: 'We Prepare Your Guidance', text: 'We review your answers and prepare your personalized guidance.' },
+      { title: 'Receive Your Report', text: 'Your guidance is delivered to you by email.' },
+    ],
+  },
+  delivery: 'Typical delivery: 3–5 business days.',
+  importantToKnow: {
+    heading: 'Important to Know',
+    paragraphs: [
+      'East-West Africa Link provides independent practical information and guidance. We do not provide legal, immigration, tax, financial, investment, or real-estate professional services. Where your situation requires professional advice or an official determination, we may recommend that you consult the appropriate qualified professional or Ghanaian authority.',
+    ],
+  },
+  sidebar: {
+    title: 'Personalized Relocation Guidance',
+    tagline: 'Move to Ghana with confidence.',
+  },
+  stats: [
+    { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },
+    { icon: 'Mail', title: 'Delivered by Email', text: 'Clear, personalized guidance' },
+    { icon: 'ShieldCheck', title: 'Secure & Encrypted', text: 'Your information is safe with us.' },
+    { icon: 'Search', title: 'Ghana Exclusive', text: 'Local insight you can trust.' },
+  ],
+  closing: 'A new chapter can be the start of something amazing.',
+}
+
+export const GHANA_PERSONALIZED_RELOCATION_FLOW = {
+  // A single flat one-time fee — no tiers, no destination picker, since
+  // this service only ever concerns a move to Ghana.
+  price: 39.95,
+  includes: [
+    { icon: 'FileText', text: 'Personalized written guidance delivered by email' },
+    { icon: 'Mail', text: 'Up to 3 clarification emails' },
+    { icon: 'Phone', text: 'One follow-up phone chat (for Ghana)' },
+    { icon: 'Clock', text: 'Typical delivery: 3–5 business days' },
+  ],
+  timeframeOptions: ['Within 3 months', '3–6 months', '6–12 months', 'More than 12 months', 'Still exploring / no fixed date'],
+  lengthOfStayOptions: ['Less than 6 months', '6–12 months', '1–2 years', 'Long-term / permanent relocation', 'Not yet decided'],
+  moveReasonOptions: [
+    'Retirement',
+    'Work / employment',
+    'Starting or operating a business',
+    'Returning to Ghana / diaspora relocation',
+    'Family reasons',
+    'Lifestyle change',
+    'Extended stay',
+    'Investment or property interests',
+  ],
+  areaOptions: ['Accra', 'Tema', 'Cape Coast / Elmina', 'Kumasi', 'Takoradi / Western Region', 'Volta Region', 'Northern Ghana'],
+  areaTypeOptions: [
+    'Central / urban',
+    'Quiet residential area',
+    'Coastal',
+    'Close to business districts',
+    'Close to healthcare',
+    'Good public transportation / easy mobility',
+    'Expatriate or international community nearby',
+    'More local Ghanaian environment',
+    'Lower cost of living',
+  ],
+  housingTypeOptions: [
+    'Apartment',
+    'House',
+    'Furnished rental',
+    'Unfurnished rental',
+    'Short-term accommodation first',
+    'Property purchase',
+    'Not yet sure',
+  ],
+  currencyOptions: ['USD', 'GHS', 'GBP', 'EUR'],
+  lifestylePriorityOptions: [
+    'Safety and security',
+    'Healthcare access',
+    'Walkability / transportation',
+    'Restaurants and shopping',
+    'Quiet surroundings',
+    'Social life / community',
+    'Beaches / outdoor lifestyle',
+    'Business opportunities',
+    'Schools / family needs',
+    'Reliable internet',
+  ],
+  transportationOptions: ['Own or rent a vehicle', 'Hire a driver', 'Taxis / ride-hailing', 'Public transportation', 'Combination of options', 'Not sure yet'],
+  yesNoOptions: ['Yes', 'No'],
+  businessOptions: [
+    'Yes, employment',
+    'Yes, starting a business',
+    'Yes, already operating a business',
+    'Exploring possibilities',
+    'No',
+  ],
+  yesNoNotSureOptions: ['Yes', 'No', 'Not sure'],
+  consentText:
+    'I understand that East-West Africa Link provides independent practical information and guidance and does not provide legal, immigration, tax, financial, investment, or real-estate professional advice. Where my situation requires professional advice or an official determination, we may recommend that I consult the appropriate qualified professional or Ghanaian authority.',
+  stepLabels: ['Start Your Request', 'Review Your Answers', 'Secure Payment', 'Request Received'],
+  stepDescriptions: [
+    'Complete the questionnaire',
+    'Check your information',
+    'Complete your purchase',
+    'You’re all set',
+  ],
+  steps: {
+    request: {
+      bannerTagline: 'Move to Ghana With Confidence.',
+      cornerTagline: ['Practical guidance.', 'A smoother start.'],
+      heading: 'Start Your Request',
+      description: 'Tell us about your plans so we can prepare personalized guidance for your move to Ghana.',
+      back: { label: 'Back to Service Details', to: '/ghana/personalized-relocation-guidance' },
+      cta: 'Review Your Answers',
+      sidebarCaption: ['Move to Ghana', 'with confidence.'],
+    },
+    review: {
+      bannerTagline: 'Practical guidance. A smoother start.',
+      cornerTagline: ['Practical guidance.', 'A smoother start.'],
+      heading: 'Review Your Answers',
+      description:
+        'Please review your information carefully before continuing to payment. If you need to make changes, click "Edit Answers" at the bottom of the page.',
+      back: { label: 'Edit Answers', to: '/ghana/personalized-relocation-guidance/request' },
+      cta: 'Continue to Secure Payment',
+      sidebarCaption: ['Move to Ghana', 'with confidence.'],
+    },
+    payment: {
+      bannerTagline: "You're Almost Done.",
+      cornerTagline: ['Practical guidance.', 'A smoother start.'],
+      heading: 'Secure Payment',
+      description: "You're almost done! Complete your payment below to submit your request.",
+      back: { label: 'Back to Review Your Answers', to: '/ghana/personalized-relocation-guidance/review' },
+      helper:
+        'After payment, you will receive a confirmation and your Personalized Relocation Guidance request will be submitted for research.',
+      sidebarHeading: 'Personalized Relocation Guidance',
+      sidebarCaption: ['Move to Ghana', 'with confidence.'],
+      sidebarCaption2: ['A new chapter', 'can be the start of something amazing.'],
+    },
+    confirmation: {
+      bannerTagline: 'A new chapter can be the start of something amazing.',
+      cornerTagline: ['Practical guidance.', 'A smoother start.'],
+      heading: 'Your Request Has Been Received',
+      intro: 'Your request for Personalized Relocation Guidance has been successfully submitted.',
+      body: "We'll review your information and be in touch soon.",
+      whatsNext: 'Our team will review your answers and prepare your personalized relocation guidance.',
+      deliveryNote: 'Your personalized guidance report will be delivered by email.',
+      followUp:
+        'You have up to 3 clarification emails plus one follow-up phone chat to discuss questions arising from your personalized guidance. If we need any additional information, we will contact you by email.',
+      confirmationNote: 'Please check your inbox (and spam folder) for our email.',
+      secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
+      secureNote2: 'Your information is safe and protected.',
+      sidebarHeading: 'Personalized Relocation Guidance',
+      sidebarCaption: ['Move to Ghana with confidence.', "We're here to help."],
+      sidebarCaption2: ['A new chapter', 'can be the start of something amazing.'],
+    },
+  },
 }

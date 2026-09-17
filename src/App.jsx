@@ -5,6 +5,7 @@ import { ScrollManager } from './components/ScrollManager.jsx'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
 import { BorderCrossingFlowProvider } from './context/BorderCrossingFlowContext.jsx'
 import { LandPropertyFlowProvider } from './context/LandPropertyFlowContext.jsx'
+import { PersonalizedRelocationFlowProvider } from './context/PersonalizedRelocationFlowContext.jsx'
 import { RelocationFlowProvider } from './context/RelocationFlowContext.jsx'
 import { RightOfAbodeFlowProvider } from './context/RightOfAbodeFlowContext.jsx'
 import { TravelAuditFlowProvider } from './context/TravelAuditFlowContext.jsx'
@@ -23,6 +24,7 @@ import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry
 import { LandPropertyGuidance } from './pages/LandPropertyGuidance.jsx'
 import { Malawi } from './pages/Malawi.jsx'
 import { PersonalVisaGuidance } from './pages/PersonalVisaGuidance.jsx'
+import { PersonalizedRelocationGuidance } from './pages/PersonalizedRelocationGuidance.jsx'
 import { Placeholder } from './pages/Placeholder.jsx'
 import { RelocationFullDetails } from './pages/RelocationFullDetails.jsx'
 import { RelocationPackage } from './pages/RelocationPackage.jsx'
@@ -67,6 +69,10 @@ import { Confirmation as VisaGuidanceConfirmation } from './pages/visa-guidance/
 import { Payment as VisaGuidancePayment } from './pages/visa-guidance/Payment.jsx'
 import { RequestForm as VisaGuidanceRequestForm } from './pages/visa-guidance/RequestForm.jsx'
 import { ReviewAnswers as VisaGuidanceReviewAnswers } from './pages/visa-guidance/ReviewAnswers.jsx'
+import { Confirmation as PersonalizedRelocationConfirmation } from './pages/personalized-relocation/Confirmation.jsx'
+import { Payment as PersonalizedRelocationPayment } from './pages/personalized-relocation/Payment.jsx'
+import { RequestForm as PersonalizedRelocationRequestForm } from './pages/personalized-relocation/RequestForm.jsx'
+import { ReviewAnswers as PersonalizedRelocationReviewAnswers } from './pages/personalized-relocation/ReviewAnswers.jsx'
 
 // The request wizard (reached via "View Details" on the Travel Planner
 // card, which goes straight to the request form — the separate service-
@@ -208,6 +214,25 @@ function VisaGuidanceFlowRoutes() {
   )
 }
 
+// Ghana's Personalized Relocation Guidance request wizard — an eighth
+// independent flow, reached from its own service detail page
+// (PersonalizedRelocationGuidance.jsx). Same shape as the other Ghana
+// Exclusive flows: Ghana-only, own provider, own state. Not to be confused
+// with RelocationFlowRoutes above, the separate Complete Relocation
+// Package flow.
+function PersonalizedRelocationFlowRoutes() {
+  return (
+    <PersonalizedRelocationFlowProvider>
+      <Routes>
+        <Route path="request" element={<PersonalizedRelocationRequestForm />} />
+        <Route path="review" element={<PersonalizedRelocationReviewAnswers />} />
+        <Route path="payment" element={<PersonalizedRelocationPayment />} />
+        <Route path="confirmation" element={<PersonalizedRelocationConfirmation />} />
+      </Routes>
+    </PersonalizedRelocationFlowProvider>
+  )
+}
+
 function App() {
   return (
     <>
@@ -262,6 +287,14 @@ function App() {
           <Route path="/ghana/complete-relocation-package/*" element={<RelocationFlowRoutes />} />
           <Route path="/personal-visa-guidance/:slug" element={<PersonalVisaGuidance />} />
           <Route path="/personal-visa-guidance/:slug/*" element={<VisaGuidanceFlowRoutes />} />
+          <Route
+            path="/ghana/personalized-relocation-guidance"
+            element={<PersonalizedRelocationGuidance />}
+          />
+          <Route
+            path="/ghana/personalized-relocation-guidance/*"
+            element={<PersonalizedRelocationFlowRoutes />}
+          />
           <Route
             path="*"
             element={

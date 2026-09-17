@@ -7,7 +7,7 @@
 export function PlannerBackground() {
   return (
     <div
-      className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-10"
+      className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-30"
       style={{
         backgroundImage: `url(${encodeURI('/Pictures/Background on travel planner landing page.PNG')})`,
       }}

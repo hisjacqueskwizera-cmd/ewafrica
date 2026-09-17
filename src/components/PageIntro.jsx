@@ -2,7 +2,13 @@ import { ArrowRight } from 'lucide-react'
 import { HashLink } from './HashLink.jsx'
 import { HeroVideoBackground } from './HeroVideoBackground.jsx'
 import { Reveal } from './Reveal.jsx'
-import { RevealText } from './RevealText.jsx'
+
+// Same display-type scale and weight as DestinationHero/About Us's hero
+// heading — every page's intro banner now shares one font treatment
+// (serif, normal weight, this exact size scale) rather than PageIntro
+// having its own separate sans/semibold/clamp() scale.
+const HEADING =
+  'font-display text-[3rem] font-normal leading-[1.1] text-balance text-primary-foreground sm:text-[4rem] lg:text-[5.375rem]'
 
 /**
  * The site's shared dark hero/intro banner — badge, heading, optional
@@ -79,23 +85,10 @@ export function PageIntro({
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
       )}
+      {/* Same flat single-tint overlay as DestinationHero (no gradient, no
+          vignette) — overlayTone still picks the tint color. */}
       <div
-        className={`absolute inset-0 z-[3] bg-linear-to-b ${
-          overlayTone === 'neutral'
-            ? 'from-black/55 via-black/20 to-black/60'
-            : 'from-cocoa/60 via-cocoa/30 to-cocoa/75'
-        }`}
-        aria-hidden="true"
-      />
-      {/* A soft vignette behind the copy — centered on small screens where
-          the block is still centered, shifted under the right column once
-          the sm:justify-end split below kicks in. */}
-      <div
-        className="absolute inset-0 z-[3] hidden sm:block"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 55% at 68% 55%, rgba(0,0,0,0.32), transparent 70%)',
-        }}
+        className={`absolute inset-0 z-[3] ${overlayTone === 'neutral' ? 'bg-black/45' : 'bg-cocoa/45'}`}
         aria-hidden="true"
       />
 
@@ -110,7 +103,10 @@ export function PageIntro({
             the section's own justify-end above. */}
         <div className="flex flex-col items-center sm:items-start">
           <div className="max-w-2xl text-center sm:text-left">
-            <Reveal>
+            {/* One shared blur-fade reveal for the whole intro block — same
+                timing/easing as DestinationHero's, instead of the previous
+                per-word RevealText cascade plus separately-timed pieces. */}
+            <Reveal delay={150} blur>
               {badgeImage ? (
                 <img
                   src={badgeImage}
@@ -122,25 +118,18 @@ export function PageIntro({
                   {badge}
                 </span>
               )}
-            </Reveal>
 
-            <h1 className="mt-6 text-[clamp(2.4rem,6vw,4.5rem)] font-semibold leading-[1.05] text-balance text-primary-foreground">
-              <RevealText as="span" text={titleLine1} />
-              {titleAccent && (
-                <>
-                  <br />
-                  <RevealText
-                    as="span"
-                    text={titleAccent}
-                    delay={300}
-                    wordClassName="italic font-medium text-gold"
-                  />
-                </>
-              )}
-            </h1>
+              <h1 className={`mt-6 ${HEADING}`}>
+                {titleLine1}
+                {titleAccent && (
+                  <>
+                    <br />
+                    <em className="font-medium italic text-gold">{titleAccent}</em>
+                  </>
+                )}
+              </h1>
 
-            {tagline && (
-              <Reveal delay={200}>
+              {tagline && (
                 <p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-base font-bold text-primary-foreground sm:justify-start">
                   {tagline.map((word, i) => (
                     <span key={word} className="flex items-center gap-2">
@@ -153,11 +142,9 @@ export function PageIntro({
                     </span>
                   ))}
                 </p>
-              </Reveal>
-            )}
+              )}
 
-            <Reveal delay={250}>
-              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:mx-0 sm:text-lg">
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/90 sm:mx-0 sm:text-lg">
                 {description}
               </p>
             </Reveal>
@@ -171,7 +158,7 @@ export function PageIntro({
               block's exact left edge via the shared wrapper's items-start
               above. */}
           {trustItems && (
-            <Reveal delay={350} className="mt-8 text-center sm:text-left">
+            <Reveal delay={350} blur className="mt-8 text-center sm:text-left">
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:justify-start sm:gap-x-0">
                 {trustItems.map((item, i) => (
                   <div
@@ -195,7 +182,7 @@ export function PageIntro({
 
           {(primaryCta || secondaryCta) && (
             <div className="max-w-2xl">
-              <Reveal delay={450}>
+              <Reveal delay={450} blur>
                 <div className="mt-9 flex flex-wrap justify-center gap-4 sm:justify-start">
                   {primaryCta && (
                     <HashLink to={primaryCta.to} className="btn-copper">

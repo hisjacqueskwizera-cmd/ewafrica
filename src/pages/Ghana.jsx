@@ -210,29 +210,22 @@ export function Ghana() {
               />
             </div>
 
-            <div className="flex flex-col justify-center gap-4 bg-gold/20 p-8 sm:p-10 lg:w-2/5">
-              <span className="inline-flex w-fit items-center rounded-full bg-cocoa px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.15em] text-gold">
+            <div className="flex flex-col justify-center gap-5 bg-gold/20 p-8 sm:p-10 lg:w-2/5">
+              <span className="inline-flex w-fit items-center rounded-full bg-cocoa px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-gold">
                 {residency.featured.badge}
               </span>
-              <div className="flex items-center gap-4">
-                <img
-                  src={residency.featured.image}
-                  alt="Ghana"
-                  className="h-9 w-14 shrink-0 rounded-[3px] object-cover shadow-card"
-                />
-                <h3 className="text-2xl font-bold text-primary sm:text-3xl">
-                  {residency.featured.title}
-                </h3>
-              </div>
-              <p className="text-sm leading-relaxed text-primary/75 sm:text-base">
+              <h3 className="text-4xl font-bold leading-tight text-primary sm:text-5xl">
+                {residency.featured.title}
+              </h3>
+              <p className="text-base leading-relaxed text-primary/75 sm:text-lg">
                 {residency.featured.text}
               </p>
               <HashLink
                 to={residency.featured.cta.to}
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-7 py-3.5 text-base font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
               >
                 {residency.featured.cta.label}
-                <ArrowRight className="size-4" aria-hidden="true" />
+                <ArrowRight className="size-5" aria-hidden="true" />
               </HashLink>
             </div>
 
@@ -244,19 +237,19 @@ export function Ghana() {
                     key={item.title}
                     type="button"
                     onClick={() => setOpenPathway(i)}
-                    className="flex flex-1 items-center gap-4 p-6 text-left transition-colors hover:bg-sand/50"
+                    className="flex flex-1 items-center gap-5 p-6 text-left transition-colors hover:bg-sand/50"
                   >
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-sand text-copper">
-                      <Icon className="size-5" aria-hidden="true" />
+                    <span className="grid size-14 shrink-0 place-items-center rounded-full bg-sand text-copper">
+                      <Icon className="size-6" aria-hidden="true" />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-sm font-bold text-primary">{item.title}</h4>
-                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      <h4 className="text-base font-bold text-primary sm:text-lg">{item.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                         {item.text}
                       </p>
                     </div>
                     <ChevronRight
-                      className="size-4 shrink-0 text-muted-foreground"
+                      className="size-5 shrink-0 text-muted-foreground"
                       aria-hidden="true"
                     />
                   </button>
@@ -365,11 +358,10 @@ export function Ghana() {
                 loading="lazy"
                 className="absolute inset-0 size-full object-cover"
               />
-              {/* A tinted overlay rather than the photo showing through at
-                  full strength — the accordion's text colors assume a
-                  light card, so the image reads as a subtle backdrop
-                  rather than competing with it for legibility. */}
-              <div className="absolute inset-0 bg-card/92" aria-hidden="true" />
+              {/* A light tint only — just enough to keep the accordion's
+                  dark-on-light text readable — rather than the heavy tint
+                  that used to leave the photo barely visible. */}
+              <div className="absolute inset-0 bg-card/25" aria-hidden="true" />
               <div className="relative flex flex-1 flex-col p-6 sm:p-8">
                 <Accordion
                   items={livingGuide.topics.map((topic) => ({ ...topic, icon: ICONS[topic.icon] }))}

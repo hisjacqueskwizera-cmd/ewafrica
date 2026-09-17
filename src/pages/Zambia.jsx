@@ -76,27 +76,25 @@ export function Zambia() {
 
   return (
     <>
-      {/* Hero — "Travel Services for Zambia", matching the same pattern as
-          Ghana/Benin's own services landing hero, with a large script
-          watermark + caption on the right (this page's own reference,
-          not shared with any other country page yet). */}
-      <section className="relative isolate flex min-h-[560px] items-center overflow-hidden px-4 py-20 text-primary-foreground sm:px-6 lg:px-8">
+      {/* Hero — same full-viewport height, flat cocoa tint, serif display
+          heading (same size scale) and single blur-fade reveal as every
+          other destination page's DestinationHero, just composed inline
+          here since this page also carries an eyebrow/tagline and a script
+          watermark column that DestinationHero doesn't have a slot for. */}
+      <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-4 text-primary-foreground sm:px-6 lg:px-8">
         <img
           src={landingHero.image}
           alt={landingHero.imageAlt}
           loading="eager"
           className="absolute inset-0 -z-10 size-full object-cover"
         />
-        <div
-          className="absolute inset-0 -z-10 bg-linear-to-b from-cocoa/70 via-cocoa/35 to-cocoa/70"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 -z-10 bg-cocoa/45" aria-hidden="true" />
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <Reveal>
+          <Reveal delay={150} blur>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
               {landingHero.eyebrow}
             </p>
-            <h1 className="mt-3 font-display text-[3rem] font-normal leading-none sm:text-[4.5rem]">
+            <h1 className="mt-3 font-display text-[3rem] font-normal leading-[1.1] text-balance sm:text-[4rem] lg:text-[5.375rem]">
               {landingHero.title}
             </h1>
             <p className="mt-4 text-lg font-semibold sm:text-xl">{landingHero.tagline}</p>
@@ -104,7 +102,7 @@ export function Zambia() {
               {landingHero.description}
             </p>
           </Reveal>
-          <Reveal delay={150} className="hidden text-right lg:block">
+          <Reveal delay={350} blur className="hidden text-right lg:block">
             <p className="font-display text-4xl italic text-primary-foreground/90">
               {landingHero.watermark}
             </p>

@@ -271,23 +271,25 @@ export function Services() {
   // never reverses. Release either commits to the next group (animating the
   // rest of the way at the same slow SLIDE_MS) or snaps back to the current
   // one — quickly, not over the full slow duration.
-  const onPointerDown = useCallback((event) => {
-    if (PAGES.length <= 1) return
-    setPaused(true)
-    const track = trackRef.current
-    if (!track) return
-    track.style.transition = 'none'
-    track.style.transform = `translateX(-${index * 100}%)`
-    dragRef.current = {
-      active: true,
-      pointerId: event.pointerId,
-      pointerType: event.pointerType,
-      startX: event.clientX,
-      dx: 0,
-      moved: false,
-    }
-    track.setPointerCapture(event.pointerId)
-  }, [index])
+  // Dragging is tracked via window-level listeners rather than this
+  // element's own onPointerMove/onPointerUp plus setPointerCapture. Pointer
+  // capture keeps delivering move events once the cursor leaves the strip
+  // mid-drag, which is exactly why it was here — but while captured, the
+  // browser also retargets the *click* event that follows pointerup to the
+  // capturing element instead of hit-testing normally, so a card's own
+  // click (and the navigation it triggers) gets silently swallowed even
+  // after capture is released in the pointerup handler itself, because the
+  // click has already been dispatched with the overridden target by then.
+  // Window listeners get the same "track outside the element" behavior
+  // without ever touching click targeting.
+  //
+  // onPointerMove/onPointerUp both close over `index`, so they're
+  // necessarily recreated on every page change — `latestPointerHandlersRef`
+  // is kept in sync with whichever pair is current (a plain assignment
+  // during render, not in an effect, is the standard way to keep a ref
+  // current every render) so onPointerUp can remove the listeners it's
+  // mid-handling without referring to its own `const` binding by name.
+  const latestPointerHandlersRef = useRef({ move: null, up: null })
 
   const onPointerMove = useCallback((event) => {
     const drag = dragRef.current
@@ -307,6 +309,10 @@ export function Services() {
     if (!drag.active || event.pointerId !== drag.pointerId) return
     drag.active = false
     setPaused(false)
+    const { move, up } = latestPointerHandlersRef.current
+    window.removeEventListener('pointermove', move)
+    window.removeEventListener('pointerup', up)
+    window.removeEventListener('pointercancel', up)
 
     const viewport = viewportRef.current
     const track = trackRef.current
@@ -321,6 +327,40 @@ export function Services() {
       track.style.transform = `translateX(-${index * 100}%)`
     }
   }, [index])
+
+  useEffect(() => {
+    latestPointerHandlersRef.current = { move: onPointerMove, up: onPointerUp }
+  }, [onPointerMove, onPointerUp])
+
+  const onPointerDown = useCallback((event) => {
+    if (PAGES.length <= 1) return
+    setPaused(true)
+    const track = trackRef.current
+    if (!track) return
+    track.style.transition = 'none'
+    track.style.transform = `translateX(-${index * 100}%)`
+    dragRef.current = {
+      active: true,
+      pointerId: event.pointerId,
+      pointerType: event.pointerType,
+      startX: event.clientX,
+      dx: 0,
+      moved: false,
+    }
+    const { move, up } = latestPointerHandlersRef.current
+    window.addEventListener('pointermove', move)
+    window.addEventListener('pointerup', up)
+    window.addEventListener('pointercancel', up)
+  }, [index])
+
+  // In case the component unmounts mid-drag (route change, etc.) — a
+  // normal pointerup already removes these itself above.
+  useEffect(() => () => {
+    const { move, up } = latestPointerHandlersRef.current
+    window.removeEventListener('pointermove', move)
+    window.removeEventListener('pointerup', up)
+    window.removeEventListener('pointercancel', up)
+  }, [])
 
   const onClickCapture = (event) => {
     if (dragRef.current.moved) {
@@ -367,9 +407,6 @@ export function Services() {
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
         onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
         onClickCapture={onClickCapture}
         onDragStart={(event) => event.preventDefault()}
       >

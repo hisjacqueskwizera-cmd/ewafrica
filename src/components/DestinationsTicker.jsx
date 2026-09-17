@@ -126,6 +126,46 @@ export function DestinationsTicker() {
 
   useEffect(() => () => clearTimeout(touchSettleTimeoutRef.current), [])
 
+  // Mouse dragging is tracked via window-level listeners rather than this
+  // element's own onPointerMove/onPointerUp plus setPointerCapture. Pointer
+  // capture keeps delivering move events once the cursor leaves the strip
+  // mid-drag, which is exactly why it was here — but while captured, the
+  // browser also retargets the *click* event that follows pointerup to the
+  // capturing element instead of hit-testing normally, so the card's own
+  // click (and the navigation it triggers) is silently swallowed even
+  // after capture is released in the pointerup handler itself, because the
+  // click has already been dispatched with the overridden target by then.
+  // Window listeners get the same "track outside the element" behavior
+  // without ever touching click targeting, which is why a touch tap (never
+  // captured here — it scrolls natively) worked while a mouse click didn't.
+  //
+  // Built once, in an effect, as a matched { onMove, onUp } pair — rather
+  // than as two separately memoized callbacks — so neither has to refer to
+  // the other by its outer binding name before that binding exists.
+  const dragListenersRef = useRef(null)
+
+  useEffect(() => {
+    const onMove = (event) => {
+      if (!draggingRef.current) return
+      if (event.pointerId !== dragRef.current.pointerId) return
+      const track = trackRef.current
+      if (!track) return
+      const dx = event.clientX - dragRef.current.startX
+      if (Math.abs(dx) > DRAG_THRESHOLD) dragRef.current.moved = true
+      track.scrollLeft = dragRef.current.startScrollLeft - dx
+    }
+    const onUp = () => {
+      draggingRef.current = false
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('pointercancel', onUp)
+    }
+    dragListenersRef.current = { onMove, onUp }
+    // In case the component unmounts mid-drag (route change, etc.) — a
+    // normal pointerup already removes these itself via onUp above.
+    return onUp
+  }, [])
+
   // Touch scrolls natively (the track is a real overflow-x-auto element),
   // so only mouse needs manual click-and-drag handling here.
   const onPointerDown = (event) => {
@@ -140,24 +180,14 @@ export function DestinationsTicker() {
       startScrollLeft: track.scrollLeft,
       moved: false,
     }
-    track.setPointerCapture(event.pointerId)
-  }
-
-  const onPointerMove = (event) => {
-    if (!draggingRef.current || event.pointerType !== 'mouse') return
-    if (event.pointerId !== dragRef.current.pointerId) return
-    const track = trackRef.current
-    if (!track) return
-    const dx = event.clientX - dragRef.current.startX
-    if (Math.abs(dx) > DRAG_THRESHOLD) dragRef.current.moved = true
-    track.scrollLeft = dragRef.current.startScrollLeft - dx
+    const { onMove, onUp } = dragListenersRef.current
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+    window.addEventListener('pointercancel', onUp)
   }
 
   const onPointerUp = (event) => {
-    if (event.pointerType === 'mouse') {
-      draggingRef.current = false
-      return
-    }
+    if (event.pointerType === 'mouse') return
     touchSettleTimeoutRef.current = setTimeout(() => {
       draggingRef.current = false
     }, TOUCH_SETTLE_MS)
@@ -186,7 +216,6 @@ export function DestinationsTicker() {
         onFocus={() => (pausedRef.current = true)}
         onBlur={() => (pausedRef.current = false)}
         onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onClickCapture={onClickCapture}

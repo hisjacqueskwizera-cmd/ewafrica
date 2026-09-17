@@ -176,35 +176,7 @@ export function AboutUs() {
         </div>
       </section>
 
-      {/* Travel Africa With Confidence — full-bleed savanna photo band,
-          directly under Meet the Founder. The photo is naturally light/warm
-          (a sunset sky, golden grass), so the dark cocoa text sits straight
-          on it with no boxed highlight or tint behind it. */}
-      <section className="relative isolate overflow-hidden px-[30px] py-[100px] lg:px-16 lg:py-[140px]">
-        <img
-          src="/Pictures/Background/about_us_background.png"
-          alt="A giraffe and a lone acacia tree on the savanna at sunset"
-          loading="lazy"
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
-        <div className="-mt-20 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <AccentHeading text={closing.heading} className={`${HEADING} text-cocoa`} />
-            <p className="mt-4 max-w-[420px] text-lg italic leading-snug text-cocoa/90">
-              {closing.tagline}
-            </p>
-          </Reveal>
-          <Reveal delay={120} className="lg:mt-16">
-            <p className={`max-w-[480px] text-cocoa lg:ml-auto ${BODY}`}>
-              Every journey is different. Whether Africa is your next adventure, your future home,
-              or a place where you are exploring new opportunities,{' '}
-              <span className="font-bold">East-West Africa Link</span> is here to help you
-              research, prepare, connect, and move forward with greater confidence.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
+      
       {/* Full-bleed photo feature — copy anchored bottom-left, CTA
           bottom-right. */}
       <section className="relative isolate flex min-h-[800px] items-end overflow-hidden px-[30px] lg:px-10">

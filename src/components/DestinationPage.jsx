@@ -14,6 +14,7 @@ import {
 import { useEffect } from 'react'
 import { DestinationHero } from './DestinationHero.jsx'
 import { HashLink } from './HashLink.jsx'
+import { OverlandRoutesSection } from './RouteCard.jsx'
 import { Reveal } from './Reveal.jsx'
 
 const ICONS = {
@@ -24,44 +25,6 @@ const ICONS = {
   Shield,
   Globe2,
   Handshake,
-}
-
-// Same card language as the homepage's "Explore our Destinations" ticker
-// (DestinationsTicker's DestinationCard): full-bleed photo, square corners,
-// a bottom-up black gradient, serif-weight title, and an uppercase
-// "Explore" line that lifts + golds on hover.
-function RouteCard({ countryName, route }) {
-  return (
-    <HashLink
-      to="/#contact"
-      className="group relative block aspect-[3/4] overflow-hidden bg-cocoa"
-    >
-      <img
-        src={route.image}
-        alt={`Landscape along the route between ${countryName} and ${route.to}`}
-        loading="lazy"
-        className="size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
-      />
-      <div
-        className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-black opacity-0 transition-opacity duration-[450ms] ease-out group-hover:opacity-[0.45]"
-        aria-hidden="true"
-      />
-      <div className="absolute inset-x-0 bottom-0 p-6">
-        <h3 className="truncate text-2xl font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
-          {countryName} → {route.to}
-        </h3>
-        <p className="mt-1 line-clamp-2 text-sm text-primary-foreground/80">{route.text}</p>
-        <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
-          Explore Route
-          <ArrowRight className="size-3.5" aria-hidden="true" />
-        </span>
-      </div>
-    </HashLink>
-  )
 }
 
 // Solid cocoa pill — the "goes to a modal/tool" CTA shape the reference
@@ -203,32 +166,9 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
 
       {/* Popular overland routes — placed directly under Travel Services
           (home of the Border Crossing Guide card) so overland routing and
-          border-crossing guidance read together. */}
-      <section className="overflow-hidden py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
-              Popular Overland Routes
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Travelling beyond {countryName}? We can help you research routes between{' '}
-              {countryName} and neighbouring countries.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Breaks out of the max-w-7xl container above so all the cards sit
-            in one row that reaches close to both edges of the screen, not
-            just the container's own bounds — the same full-bleed treatment
-            as the homepage's Explore our Destinations row. */}
-        <div className="mt-10 grid grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:gap-5 lg:px-3">
-          {routes.map((route, i) => (
-            <Reveal key={route.to} delay={i * 90}>
-              <RouteCard countryName={countryName} route={route} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
+          border-crossing guidance read together. Shared with every other
+          country page — see RouteCard.jsx. */}
+      <OverlandRoutesSection countryName={countryName} routes={routes} />
 
       {/* First-time traveller's guide */}
       <section className="bg-cream py-16 lg:py-20">

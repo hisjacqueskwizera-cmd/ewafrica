@@ -214,7 +214,7 @@ export function Ghana() {
               <span className="inline-flex w-fit items-center rounded-full bg-cocoa px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-gold">
                 {residency.featured.badge}
               </span>
-              <h3 className="text-4xl font-bold leading-tight text-primary sm:text-5xl">
+              <h3 className="text-4xl font-bold leading-tight text-primary sm:text-5xl md:whitespace-nowrap">
                 {residency.featured.title}
               </h3>
               <p className="text-base leading-relaxed text-primary/75 sm:text-lg">
@@ -222,7 +222,7 @@ export function Ghana() {
               </p>
               <HashLink
                 to={residency.featured.cta.to}
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-7 py-3.5 text-base font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-7 py-3.5 text-base font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5 md:whitespace-nowrap"
               >
                 {residency.featured.cta.label}
                 <ArrowRight className="size-5" aria-hidden="true" />

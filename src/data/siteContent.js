@@ -913,17 +913,17 @@ export const MALAWI_PAGE = {
   ],
   routes: [
     {
-      from: 'Tanzania',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Kasumulu or Karonga border — a scenic route along Lake Malawi.',
     },
     {
-      from: 'Zambia',
+      to: 'Zambia',
       image: '/Pictures/countries/Zambia.jpg',
       text: 'Via Mchinji or Mwami border, a popular crossing for travelers and traders.',
     },
     {
-      from: 'Mozambique',
+      to: 'Mozambique',
       image: '/Explore_regions/optimized/east-africa/4.webp',
       text: 'Via Dedza or Mwanza border, with beautiful countryside views.',
     },

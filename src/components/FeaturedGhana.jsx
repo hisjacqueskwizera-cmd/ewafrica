@@ -24,11 +24,11 @@ export function FeaturedGhana() {
         <img
           src="/Pictures/image_Ghana.webp"
           alt="The Kwame Nkrumah Memorial Park monument in Accra, Ghana"
-          className="size-full object-cover object-[center_15%]"
+          className="size-full object-cover object-[center_13%]"
         />
       </Reveal>
       <div
-        className="absolute inset-0 bg-linear-to-b from-cocoa/40 via-cocoa/85 to-cocoa/95 lg:bg-linear-to-r lg:from-cocoa/95 lg:via-cocoa/80 lg:to-cocoa/20"
+        className="absolute inset-0 bg-linear-to-b from-cocoa/20 via-cocoa/30 to-cocoa/30 lg:bg-linear-to-r lg:from-cocoa/95 lg:via-cocoa/30 lg:to-cocoa/20"
         aria-hidden="true"
       />
 

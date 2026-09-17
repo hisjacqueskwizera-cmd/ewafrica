@@ -15,7 +15,7 @@ import { createPortal } from 'react-dom'
  */
 export function BottomSheetModal({ open, onClose, title, eyebrow, children }) {
   // `rendered` intentionally lags `open` by one tick on close (kept true
-  // for 300ms so the slide-down/fade-out transition can play before the
+  // for 350ms so the slide-down/fade-out transition can play before the
   // panel leaves the DOM) — that lag is exactly what an effect is for
   // here: synchronizing local state with the real-world duration of a CSS
   // transition, an external timing concern React itself doesn't track.
@@ -33,7 +33,7 @@ export function BottomSheetModal({ open, onClose, title, eyebrow, children }) {
       return () => cancelAnimationFrame(raf)
     }
     setVisible(false)
-    const timeout = setTimeout(() => setRendered(false), 300)
+    const timeout = setTimeout(() => setRendered(false), 350)
     return () => clearTimeout(timeout)
   }, [open])
 
@@ -60,7 +60,7 @@ export function BottomSheetModal({ open, onClose, title, eyebrow, children }) {
   return createPortal(
     <div className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:p-6">
       <div
-        className={`absolute inset-0 bg-cocoa/60 transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-cocoa/60 backdrop-blur-[2px] transition-opacity duration-300 ease-out ${
           visible ? 'opacity-100' : 'opacity-0'
         }`}
         onClick={onClose}
@@ -71,11 +71,17 @@ export function BottomSheetModal({ open, onClose, title, eyebrow, children }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="bottom-sheet-title"
-        className={`relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-3xl bg-card shadow-lift transition-transform duration-300 ease-out sm:max-w-2xl sm:rounded-3xl ${
-          visible ? 'translate-y-0' : 'translate-y-full sm:translate-y-8'
+        className={`relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-3xl bg-card shadow-lift transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(0.32,0.72,0,1)] sm:max-w-2xl sm:rounded-3xl ${
+          visible
+            ? 'translate-y-0 scale-100 opacity-100'
+            : 'translate-y-full scale-100 opacity-100 sm:translate-y-6 sm:scale-95 sm:opacity-0'
         }`}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-border px-6 py-5 sm:px-8">
+        <div
+          className={`flex items-start justify-between gap-4 border-b border-border px-6 py-5 transition-[opacity,transform] duration-300 ease-out sm:px-8 ${
+            visible ? 'translate-y-0 opacity-100 delay-100' : 'translate-y-2 opacity-0'
+          }`}
+        >
           <div>
             {eyebrow && (
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-copper">{eyebrow}</p>
@@ -89,12 +95,18 @@ export function BottomSheetModal({ open, onClose, title, eyebrow, children }) {
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-copper hover:text-copper"
+            className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-200 hover:border-copper hover:text-copper active:scale-90"
           >
             <X className="size-4" aria-hidden="true" />
           </button>
         </div>
-        <div className="overflow-y-auto px-6 py-6 sm:px-8">{children}</div>
+        <div
+          className={`overflow-y-auto px-6 py-6 transition-[opacity,transform] duration-300 ease-out sm:px-8 ${
+            visible ? 'translate-y-0 opacity-100 delay-150' : 'translate-y-3 opacity-0'
+          }`}
+        >
+          {children}
+        </div>
       </div>
     </div>,
     document.body,

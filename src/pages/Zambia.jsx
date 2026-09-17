@@ -27,6 +27,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { HashLink } from '../components/HashLink.jsx'
+import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { ZAMBIA_PAGE } from '../data/siteContent.js'
 
@@ -60,6 +61,7 @@ export function Zambia() {
     landingHero,
     servicesIntro,
     services,
+    routes,
     landingTrust,
     closing,
     seasons,
@@ -182,6 +184,10 @@ export function Zambia() {
           </div>
         </div>
       </section>
+
+      {/* Popular overland routes — shared with every other country page,
+          see RouteCard.jsx. */}
+      <OverlandRoutesSection countryName="Zambia" routes={routes} />
 
       {/* Trust row — flat, dividers-only row matching the reference. */}
       <section className="border-y border-border bg-cream py-10">

@@ -719,6 +719,33 @@ export const ZAMBIA_PAGE = {
       to: '/travel-planner/border-crossing-guide?from=zambia',
     },
   ],
+  // Feeds the shared "Popular Overland Routes" card grid (see
+  // RouteCard.jsx/OverlandRoutesSection) — same {to, image, text} shape as
+  // every other country page. Zambia borders six countries (see the
+  // overland.neighbours list below), but only these four have their own
+  // real photo in this project.
+  routes: [
+    {
+      to: 'Tanzania',
+      image: '/Pictures/countries/Tanzania.jpg',
+      text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
+    },
+    {
+      to: 'Malawi',
+      image: '/Pictures/countries/Malawi.webp',
+      text: 'Via Mchinji or Mwami border, a popular crossing for travelers and traders.',
+    },
+    {
+      to: 'Zimbabwe',
+      image: '/Explore_regions/optimized/east-africa/9.webp',
+      text: 'Cross the Zambezi at Victoria Falls Bridge or Chirundu, linking the two countries.',
+    },
+    {
+      to: 'Mozambique',
+      image: '/Explore_regions/optimized/east-africa/10.webp',
+      text: 'Via Cassacatiza or Zumbo, a quieter overland route into northern Mozambique.',
+    },
+  ],
   landingTrust: [
     { icon: 'BookOpen', title: 'Accurate', title2: 'Information' },
     { icon: 'Users', title: 'Personalized', title2: 'Support' },
@@ -1059,17 +1086,17 @@ export const UGANDA_PAGE = {
   ],
   routes: [
     {
-      from: 'Rwanda',
+      to: 'Rwanda',
       image: '/Pictures/countries/Rwanda.jpg',
       text: 'A scenic and popular route through beautiful highlands and rolling hills.',
     },
     {
-      from: 'Tanzania',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'A well-traveled route with good transport options and stunning landscapes.',
     },
     {
-      from: 'South Sudan',
+      to: 'South Sudan',
       image: '/Explore_regions/optimized/east-africa/5.webp',
       text: 'An overland journey through diverse landscapes and welcoming communities.',
     },
@@ -1141,22 +1168,22 @@ export const RWANDA_PAGE = {
   ],
   routes: [
     {
-      from: 'Uganda',
+      to: 'Uganda',
       image: '/Pictures/countries/Uganda.jpg',
       text: 'A popular route through beautiful highlands, connecting Kigali with southwestern Uganda.',
     },
     {
-      from: 'Tanzania',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Overland connections through the Kagera region, linking Rwanda with northwestern Tanzania.',
     },
     {
-      from: 'Burundi',
+      to: 'Burundi',
       image: '/Explore_regions/optimized/east-africa/7.webp',
       text: 'A short overland route south to Bujumbura, sharing similar landscapes and culture.',
     },
     {
-      from: 'DR Congo',
+      to: 'DR Congo',
       image: '/Explore_regions/optimized/east-africa/8.webp',
       text: 'Crossings near Lake Kivu connect Rwanda with the eastern DR Congo.',
     },
@@ -1246,22 +1273,22 @@ export const SENEGAL_PAGE = {
   ],
   routes: [
     {
-      from: 'The Gambia',
+      to: 'The Gambia',
       image: encodeURI('/Pictures/countries/The gambia.jpg'),
       text: 'A popular route with frequent crossings at Farafenni.',
     },
     {
-      from: 'Mali',
+      to: 'Mali',
       image: '/Explore_regions/optimized/west-africa/2.webp',
       text: 'Common entry through Kidira or Kayes.',
     },
     {
-      from: 'Mauritania',
+      to: 'Mauritania',
       image: '/Explore_regions/optimized/west-africa/3.webp',
       text: 'Overland route via Rosso with regular transport.',
     },
     {
-      from: 'Guinea',
+      to: 'Guinea',
       image: '/Explore_regions/optimized/west-africa/4.webp',
       text: 'Route via Kolda or Mako with shared transport.',
     },
@@ -1414,22 +1441,22 @@ export const BENIN_PAGE = {
   ],
   routes: [
     {
-      from: 'Togo',
+      to: 'Togo',
       image: '/Explore_regions/optimized/west-africa/5.webp',
       text: 'Frequent taxis and buses via Saint-Jean/Hillacondji or Aflao/Séva.',
     },
     {
-      from: 'Nigeria',
+      to: 'Nigeria',
       image: '/Explore_regions/optimized/west-africa/6.webp',
       text: 'Via Seme (Porto-Novo/Cotonou) — a busy border with document and vehicle checks.',
     },
     {
-      from: 'Burkina Faso',
+      to: 'Burkina Faso',
       image: '/Explore_regions/optimized/west-africa/7.webp',
       text: 'Routes through Malanville — check security updates before traveling.',
     },
     {
-      from: 'Ghana (via Togo)',
+      to: 'Ghana (via Togo)',
       image: '/Pictures/countries/Ghana.jpg',
       text: 'A popular multi-country route along the coast.',
     },
@@ -1541,22 +1568,22 @@ export const GAMBIA_PAGE = {
   ],
   routes: [
     {
-      from: 'Senegal (Dakar)',
+      to: 'Senegal (Dakar)',
       image: '/Pictures/countries/Senegal.webp',
       text: 'Travel south from Dakar through central Senegal toward The Gambia, with onward road connections to Banjul and the coastal areas.',
     },
     {
-      from: 'Senegal (Ziguinchor)',
+      to: 'Senegal (Ziguinchor)',
       image: '/Explore_regions/optimized/west-africa/8.webp',
       text: "A practical route from Senegal's Casamance region, traveling north by road toward The Gambia and the main coastal destinations.",
     },
     {
-      from: 'Guinea-Bissau via Senegal',
+      to: 'Guinea-Bissau via Senegal',
       image: '/Explore_regions/optimized/west-africa/1.webp',
       text: 'Travel north from Guinea-Bissau through southern Senegal before continuing across the border into The Gambia.',
     },
     {
-      from: 'Guinea via Senegal',
+      to: 'Guinea via Senegal',
       image: '/Explore_regions/optimized/west-africa/2.webp',
       text: 'Overland travelers from Guinea generally continue through Senegal before entering The Gambia, with several possible road connections depending on the route.',
     },

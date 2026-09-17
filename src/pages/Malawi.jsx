@@ -21,6 +21,7 @@ import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { MALAWI_PAGE } from '../data/siteContent.js'
 
@@ -148,51 +149,9 @@ export function Malawi() {
         </div>
       </section>
 
-      {/* Popular overland routes — side-by-side photo+text cards, not a
-          4-up grid (only three real neighbours have a photo here). */}
-      <section className="py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
-              Popular Overland Routes
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Travelling overland? Malawi connects with Tanzania, Zambia and Mozambique. Routes,
-              transport connections and border procedures vary depending on your journey.
-            </p>
-          </Reveal>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {routes.map((route, i) => (
-              <Reveal key={route.from} delay={i * 90}>
-                <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-card shadow-card sm:flex-row">
-                  <div className="aspect-4/3 w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-2/5">
-                    <img
-                      src={route.image}
-                      alt={`Landscape along the route between ${route.from} and Malawi`}
-                      loading="lazy"
-                      className="size-full object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-sm font-bold text-primary">{route.from} → Malawi</h3>
-                    <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">
-                      {route.text}
-                    </p>
-                    <HashLink
-                      to="/#contact"
-                      className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-                    >
-                      Explore Route
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </HashLink>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Popular overland routes — shared with every other country page,
+          see RouteCard.jsx. */}
+      <OverlandRoutesSection countryName="Malawi" routes={routes} />
 
       {/* First-time traveller's guide — an accordion of real topic
           summaries, not a flat checklist. */}

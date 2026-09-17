@@ -214,7 +214,7 @@ export function Ghana() {
               <span className="inline-flex w-fit items-center rounded-full bg-cocoa px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-gold">
                 {residency.featured.badge}
               </span>
-              <h3 className="text-4xl font-bold leading-tight text-primary sm:text-5xl md:whitespace-nowrap">
+              <h3 className="text-[1.2rem] font-bold leading-tight text-primary sm:text-[1.5rem] md:whitespace-nowrap">
                 {residency.featured.title}
               </h3>
               <p className="text-base leading-relaxed text-primary/75 sm:text-lg">

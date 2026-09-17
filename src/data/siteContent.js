@@ -161,7 +161,7 @@ export const SERVICES = [
   },
   {
     icon: 'Building2',
-    title: 'Ghana right of abode',
+    title: 'Ghana Right of Abode',
     description: 'Market insight, setup support and local connections to start, invest and grow.',
     to: '/ghana/right-of-abode-guidance',
     image: '/Pictures/Investment-Opportunities-in-Africa.webp',
@@ -368,7 +368,7 @@ export const ABOUT_PAGE = {
     quoteAttribution: 'Humphrey',
     bio: [
       'My love of travel began shortly after high school, when an airline "Buddy Pass" took me to London, Paris, and Rome. That first journey sparked a lifelong curiosity about the world and a passion for discovering places beyond the typical tourist trail.',
-      'After years working in banking and the credit-card industry, travel eventually led me to spend extended periods in Europe, Asia, Latin America and across Africa. For more than 20 years, I have traveled, lived, and done Ghana right of abode, including extended stays in Malawi, Tanzania and Zanzibar, Rwanda, and Benin.',
+      'After years working in banking and the credit-card industry, travel eventually led me to spend extended periods in Europe, Asia, Latin America and across Africa. For more than 20 years, I have traveled, lived, and done Ghana Right of Abode, including extended stays in Malawi, Tanzania and Zanzibar, Rwanda, and Benin.',
       'Along the way, I learned firsthand what it means to navigate a country beyond the visitor experience — from immigration and transportation to business, property, and everyday life.',
     ],
     highlights: [

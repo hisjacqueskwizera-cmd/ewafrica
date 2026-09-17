@@ -5,6 +5,7 @@ import {
   Bus,
   Camera,
   Car,
+  CheckCircle2,
   Clock,
   CloudRain,
   Coins,
@@ -154,9 +155,23 @@ export function Zambia() {
                         <Icon className="size-6" aria-hidden="true" />
                       </span>
                       <h3 className="mt-4 text-xl font-bold text-primary">{service.title}</h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                         {service.description}
                       </p>
+                      <ul className="mt-4 flex-1 space-y-1.5 self-stretch text-left">
+                        {service.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 size-3.5 shrink-0 text-copper"
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                       <HashLink to={service.to} className="btn-copper mt-5 w-full justify-center">
                         View Details
                         <ArrowRight className="size-4" aria-hidden="true" />

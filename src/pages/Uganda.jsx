@@ -25,8 +25,9 @@ export function Uganda() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
-      {/* Travel Services in Uganda — no checklist bullets under each card,
-          just a description and a button. */}
+      {/* Travel Services in Uganda — same card shape as every other
+          destination page: description, checklist bullets, then a
+          button. */}
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
@@ -63,9 +64,23 @@ export function Uganda() {
                     </span>
                     <div className="flex flex-1 flex-col p-6 pt-3">
                       <h3 className="text-base font-bold text-primary">{service.title}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {service.text}
                       </p>
+                      <ul className="mt-4 flex-1 space-y-1.5">
+                        {service.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 size-3.5 shrink-0 text-copper"
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                       <HashLink
                         to={
                           service.title === 'Travel Planner'

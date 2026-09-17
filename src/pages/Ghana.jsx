@@ -121,9 +121,23 @@ export function Ghana() {
                     </span>
                     <div className="flex flex-1 flex-col p-6 pt-3">
                       <h3 className="text-base font-bold text-primary">{service.title}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {service.text}
                       </p>
+                      <ul className="mt-4 flex-1 space-y-1.5">
+                        {service.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 size-3.5 shrink-0 text-copper"
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
@@ -176,10 +190,16 @@ export function Ghana() {
               aria-hidden="true"
             />
           </Reveal>
+        </div>
 
+        {/* Widened to 85% of the viewport rather than staying inside the
+            max-w-7xl container above — at wide desktop sizes the card was
+            leaving a lot of empty margin either side; 200px taller too, so
+            the three panels have more breathing room for their content. */}
+        <div className="mx-auto w-full px-4 sm:px-6 lg:w-[85%] lg:px-0">
           <Reveal
             delay={100}
-            className="mt-10 overflow-hidden rounded-3xl shadow-lift lg:flex lg:items-stretch"
+            className="mt-10 overflow-hidden rounded-3xl shadow-lift lg:flex lg:min-h-[650px] lg:items-stretch"
           >
             <div className="aspect-4/3 w-full shrink-0 overflow-hidden lg:aspect-auto lg:w-1/4">
               <img
@@ -281,12 +301,7 @@ export function Ghana() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-base font-bold text-primary">{service.title}</h3>
-                      <span className="shrink-0 text-base font-bold text-copper">
-                        {service.price}
-                      </span>
-                    </div>
+                    <h3 className="text-base font-bold text-primary">{service.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {service.text}
                     </p>
@@ -342,17 +357,31 @@ export function Ghana() {
           </Reveal>
 
           <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-            <Reveal className="rounded-3xl bg-card p-6 shadow-card sm:p-8">
-              <Accordion
-                items={livingGuide.topics.map((topic) => ({ ...topic, icon: ICONS[topic.icon] }))}
+            <Reveal className="relative flex flex-col overflow-hidden rounded-3xl shadow-card">
+              <img
+                src={livingGuide.backgroundImage}
+                alt={livingGuide.backgroundImageAlt}
+                aria-hidden="true"
+                loading="lazy"
+                className="absolute inset-0 size-full object-cover"
               />
-              <HashLink
-                to={livingGuide.cta.to}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-              >
-                {livingGuide.cta.label}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </HashLink>
+              {/* A tinted overlay rather than the photo showing through at
+                  full strength — the accordion's text colors assume a
+                  light card, so the image reads as a subtle backdrop
+                  rather than competing with it for legibility. */}
+              <div className="absolute inset-0 bg-card/92" aria-hidden="true" />
+              <div className="relative flex flex-1 flex-col p-6 sm:p-8">
+                <Accordion
+                  items={livingGuide.topics.map((topic) => ({ ...topic, icon: ICONS[topic.icon] }))}
+                />
+                <HashLink
+                  to={livingGuide.cta.to}
+                  className="mt-6 inline-flex w-fit items-center gap-2 self-start rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 lg:mt-auto"
+                >
+                  {livingGuide.cta.label}
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </HashLink>
+              </div>
             </Reveal>
 
             <Reveal delay={90} className="grid grid-rows-2 gap-6">

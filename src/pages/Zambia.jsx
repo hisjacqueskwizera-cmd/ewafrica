@@ -254,35 +254,24 @@ export function Zambia() {
                 </p>
               </div>
 
-              <div className="flex flex-col justify-between gap-5 sm:col-span-3">
-                <div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
-                    <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                      {travelingOverland.researchText}
-                    </p>
-                  </div>
+              <div className="flex flex-col items-center justify-center gap-5 sm:col-span-3">
+                <div className="w-full max-w-[270px] space-y-3">
+                  <HashLink
+                    to={travelingOverland.planRouteTo}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cocoa px-5 py-2.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-xs transition-transform hover:-translate-y-0.5"
+                  >
+                    Plan My Route
+                    <ArrowRight className="size-3.5" aria-hidden="true" />
+                  </HashLink>
 
-                  <div className="mt-6 flex flex-col gap-3">
-                    <HashLink
-                      to={travelingOverland.planRouteTo}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cocoa px-5 py-2.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-xs transition-transform hover:-translate-y-0.5"
-                    >
-                      Plan My Route
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </HashLink>
-
-                    <HashLink
-                      to={travelingOverland.borderGuideTo}
-                      className="btn-copper w-full justify-center text-xs sm:text-sm py-2.5"
-                    >
-                      Get a Border Crossing Guide
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </HashLink>
-                  </div>
+                  <HashLink
+                    to={travelingOverland.borderGuideTo}
+                    className="btn-copper w-full justify-center text-xs sm:text-sm py-2.5"
+                  >
+                    Get a Border Crossing Guide
+                    <ArrowRight className="size-3.5" aria-hidden="true" />
+                  </HashLink>
                 </div>
-
-
               </div>
             </div>
           </Reveal>

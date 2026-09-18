@@ -43,7 +43,7 @@ export const ZAMBIA_DATA = {
         description:
           'Discover Zambia’s central location and excellent overland links to Tanzania, Malawi, Zimbabwe and beyond.',
         image: '/Pictures/zambia/overland_4x4.jpg',
-        to: '#popular-overland-routes',
+        to: '/travel-planner?destination=zambia',
       },
     ],
   },

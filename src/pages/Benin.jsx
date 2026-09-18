@@ -70,6 +70,61 @@ export function Benin() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
+      <section className="bg-cream py-10 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-px lg:grid-cols-[1.8fr_0.9fr_0.9fr]">
+            <Reveal className="group overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="relative h-full min-h-[430px] overflow-hidden">
+                <img
+                  src="/Pictures/Benin/Benin_Hero.jpg"
+                  alt="Historic Benin coastline and architecture"
+                  loading="lazy"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+            </Reveal>
+
+            <div className="grid h-full gap-px">
+              {['/Pictures/Benin_Side_Image.JPG', '/Pictures/Benin_Landing_Hero.JPG'].map((src, index) => (
+                <Reveal
+                  key={src}
+                  delay={index * 110}
+                  className="group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
+                    <img
+                      src={src}
+                      alt="Benin landscape"
+                      loading="lazy"
+                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <div className="grid h-full gap-px">
+              {['/Pictures/Benin/Back_River.jpg', '/Pictures/countries/Benin.jpg'].map((src, index) => (
+                <Reveal
+                  key={src}
+                  delay={(index + 2) * 110}
+                  className="group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
+                    <img
+                      src={src}
+                      alt="Benin landscape"
+                      loading="lazy"
+                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Travel Services in Benin — four cards, including Independent Tour
           Guides. */}
       <section className="py-16 lg:py-20">

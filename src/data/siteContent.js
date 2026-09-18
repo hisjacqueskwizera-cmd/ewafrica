@@ -1480,7 +1480,7 @@ export const BENIN_PAGE = {
     },
     {
       icon: 'Users',
-      title: 'Independent Tour Guides *',
+      title: 'Independent Tour Guides',
       text: 'We connect you with trusted independent local guides for personalized experiences in Benin.',
       items: [
         'City tours & attractions',

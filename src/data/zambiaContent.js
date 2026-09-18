@@ -399,13 +399,13 @@ export const ZAMBIA_DATA = {
         title: 'Breathtaking Landscapes',
         description:
           'From the mighty Zambezi River and dramatic waterfalls to vast national parks and tranquil lakes, Zambia’s diverse landscapes inspire adventure at every turn.',
-        image: '/Pictures/zambia/zambezi_landscapes.jpg',
+        image: '/Pictures/zambia/ZAMBIA_CARDS_PRG (2).jpg',
       },
       {
         title: 'Authentic Experiences',
         description:
           'Warm and welcoming people, rich cultures, and vibrant local communities make Zambia a place for meaningful travel experiences and lasting connections.',
-        image: '/Pictures/zambia/authentic_people.jpg',
+        image: '/Pictures/zambia/Zambia_Cards_PRG.JPG',
       },
     ],
   },

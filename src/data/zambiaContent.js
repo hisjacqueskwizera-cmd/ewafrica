@@ -424,6 +424,6 @@ export const ZAMBIA_DATA = {
     },
     leftWatermark: ['Zambia', 'More to Explore'],
     rightWatermark: ['People', 'Nature', 'Culture', 'Opportunity', 'Zambia'],
-    backgroundImage: '/Pictures/zambia/cta_banner_sunset.jpg',
+    backgroundImage: '/Pictures/zambia/traveling_overland_leopard.jpg',
   },
 }

@@ -79,7 +79,10 @@ export function Zambia() {
                   ))}
                 </div>
                 <div className="mt-8">
-                  <HashLink to="/zambia/practical-guide" className="btn-copper text-sm">
+                  <HashLink
+                    to="/zambia/practical-guide"
+                    className="btn-copper translate-y-8 text-sm"
+                  >
                     {travelInZambia.cta}
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </HashLink>

@@ -147,10 +147,6 @@ export function Benin() {
             })}
           </div>
 
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            * Independent Tour Guide service is available in selected destinations and subject to
-            guide availability.
-          </p>
         </div>
       </section>
 
@@ -183,7 +179,7 @@ export function Benin() {
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col gap-3 px-4 pb-5 pt-4">
-                      <h3 className="text-lg font-bold uppercase tracking-[0.08em] text-primary sm:text-[1.35rem]">
+                      <h3 className="text-base font-bold uppercase tracking-[0.08em] text-primary sm:text-lg">
                         {place.name}
                       </h3>
                       <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
@@ -195,7 +191,7 @@ export function Benin() {
               ))}
             </div>
 
-            <div className="grid gap-0 lg:grid-cols-2">
+            <div className="grid gap-0 lg:grid-cols-3">
               {places.slice(3).map((place, i) => (
                 <Reveal key={place.name} delay={(i + 3) * 90}>
                   <article className="group flex h-full flex-col overflow-hidden border-t border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:last:border-r-0 lg:first:border-l-0">
@@ -211,7 +207,7 @@ export function Benin() {
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col gap-3 px-4 pb-5 pt-4">
-                      <h3 className="text-lg font-bold uppercase tracking-[0.08em] text-primary sm:text-[1.35rem]">
+                      <h3 className="text-base font-bold uppercase tracking-[0.08em] text-primary sm:text-lg">
                         {place.name}
                       </h3>
                       <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">

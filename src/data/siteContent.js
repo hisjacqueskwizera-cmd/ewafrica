@@ -1497,33 +1497,39 @@ export const BENIN_PAGE = {
   places: [
     {
       name: 'Ouidah',
-      text: 'Historic city and birthplace of Vodun (Voodoo). Visit the Door of No Return and its museums.',
+      text: 'Explore one of Benin’s most historic cities, known for its powerful cultural heritage, sacred traditions, colonial history, and connection to the Atlantic slave trade.',
       image: '/Pictures/Benin_Side_Image.JPG',
       imageAlt: 'Historic Ouidah and the coastal heritage of Benin',
     },
     {
       name: 'Ganvié',
-      text: 'The "Venice of Africa" — a stilt village on Lake Nokoué.',
+      text: 'Discover Benin’s remarkable lakeside community, where homes, markets, and daily life unfold on the water in a setting unlike anywhere else in the country.',
       image: '/Pictures/Benin_Landing_Hero.JPG',
       imageAlt: 'Stilt village homes on Lake Nokoué in Benin',
     },
     {
       name: 'Abomey',
-      text: 'Home to the Royal Palaces, a UNESCO World Heritage Site.',
+      text: 'Step into the history of the former Kingdom of Dahomey through royal palaces, museums, traditions, and stories that remain central to Benin’s cultural identity.',
       image: '/Pictures/countries/Benin.jpg',
       imageAlt: 'Royal palaces and historical heritage in Abomey',
     },
     {
       name: 'Parakou & Atacora',
-      text: "Discover northern Benin's culture, landscapes, and traditional villages.",
+      text: 'Journey into northern Benin for changing landscapes, local traditions, lively towns, and access to some of the country’s most scenic and culturally rich areas.',
       image: '/Pictures/Benin/Benin_Hero.jpg',
       imageAlt: 'Northern Benin landscapes and villages',
     },
     {
       name: 'Grand-Popo',
-      text: 'Relax on beautiful beaches and enjoy a laid-back coastal atmosphere.',
+      text: 'Relax along Benin’s Atlantic coast, where broad beaches, fishing communities, palm-lined scenery, and the Mono River create a peaceful coastal escape.',
       image: '/Pictures/Benin_Side_Image.JPG',
       imageAlt: 'Coastal beach setting in Grand-Popo, Benin',
+    },
+    {
+      name: 'Black River (La Rivière Noire) — Adjarra',
+      text: 'Take a traditional canoe trip along a mysterious river surrounded by raffia palms and unspoiled nature, offering a landscape as peaceful as it is spectacular.',
+      image: '/Pictures/Benin/Back_River.jpg',
+      imageAlt: 'Riverfront scenery in Black River Adjarra',
     },
   ],
   routes: [

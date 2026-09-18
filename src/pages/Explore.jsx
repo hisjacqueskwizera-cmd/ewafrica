@@ -214,18 +214,6 @@ function DestinationCountryCard({ country, featured = false }) {
         </span>
       </div>
 
-      {sidePortrait && (
-        <div className="relative px-6 pt-6 sm:px-8 sm:pt-8 lg:w-[38%] lg:shrink-0 lg:py-8 lg:pr-8 lg:pl-0">
-          <div className="h-full overflow-hidden">
-            <img
-              src={country.image}
-              alt={country.imageAlt}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04] lg:aspect-auto lg:h-full"
-            />
-          </div>
-        </div>
-      )}
     </HashLink>
   )
 }

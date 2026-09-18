@@ -135,7 +135,7 @@ export const ZAMBIA_DATA = {
   ],
 
   travelingOverland: {
-    image: '/Pictures/zambia/traveling_overland_falls.jpg',
+    image: '/Pictures/zambia/traveling_overland_leopard.jpg',
     title: 'Traveling Overland?',
     description:
       'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',

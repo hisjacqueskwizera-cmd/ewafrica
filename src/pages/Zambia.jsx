@@ -44,9 +44,11 @@ export function Zambia() {
            other destination page (Ghana, Uganda, Malawi, etc.). */}
       <DestinationHero
         heading={`${hero.eyebrow} — ${hero.title}`}
+        headingClassName="font-display text-[2.1rem] font-normal leading-[1.1] text-balance text-white sm:text-[2.8rem] lg:text-[3.76rem]"
         description={hero.description}
         backgroundImage={hero.image}
         backgroundImageAlt="Victoria Falls, Zambia"
+        overlayClassName="bg-black/35"
       />
 
       {/* 2. Travel in Zambia Section — safari silhouette background */}
@@ -202,29 +204,31 @@ export function Zambia() {
           see RouteCard.jsx. */}
       <OverlandRoutesSection countryName="Zambia" slug="zambia" routes={routes} />
 
-      {/* 4. Traveling Overland? Banner Box matching Image 3 */}
-      <section className="pb-16 sm:pb-20 lg:pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="overflow-hidden rounded-3xl bg-card shadow-card border border-border/60 lg:grid lg:grid-cols-12">
-              {/* Left photo segment */}
-              <div className="relative min-h-[220px] lg:col-span-3 lg:min-h-full">
-                <img
-                  src={travelingOverland.image}
-                  alt="Victoria Falls gorge"
-                  loading="lazy"
-                  className="size-full object-cover"
-                />
-              </div>
+      {/* 4. Traveling Overland? — full-bleed leopard photo, fading into copy */}
+      <section className="relative isolate min-h-[28rem] overflow-hidden sm:min-h-[32rem]">
+        <img
+          src={travelingOverland.image}
+          alt="Leopard in a tree, Zambia"
+          loading="lazy"
+          className="absolute inset-0 size-full object-cover object-[18%_22%]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-b from-black/15 via-cream/55 to-cream sm:bg-linear-to-r sm:from-transparent sm:from-[22%] sm:via-cream/65 sm:via-[48%] sm:to-cream sm:to-[62%]"
+        />
 
-              {/* Center information segment */}
-              <div className="p-6 sm:p-8 lg:col-span-5 lg:p-10 flex flex-col justify-between">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <Reveal>
+            <div className="grid gap-8 sm:grid-cols-12 sm:gap-10">
+              <div className="hidden min-h-[240px] sm:col-span-5 sm:block" aria-hidden="true" />
+
+              <div className="flex flex-col justify-between sm:col-span-4">
                 <div>
                   <div className="flex items-center gap-3">
                     <span className="grid size-11 place-items-center rounded-full bg-sand text-copper">
                       <Compass className="size-5" aria-hidden="true" />
                     </span>
-                    <h3 className="font-display text-2xl font-bold text-primary">
+                    <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">
                       {travelingOverland.title}
                     </h3>
                   </div>
@@ -233,7 +237,6 @@ export function Zambia() {
                     {travelingOverland.description}
                   </p>
 
-                  {/* Country pills */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {travelingOverland.neighbours.map((country) => (
                       <span
@@ -251,8 +254,7 @@ export function Zambia() {
                 </p>
               </div>
 
-              {/* Right actions segment */}
-              <div className="bg-sand/30 border-t border-border/50 p-6 sm:p-8 lg:col-span-4 lg:border-t-0 lg:border-l lg:p-10 flex flex-col justify-between gap-5">
+              <div className="flex flex-col justify-between gap-5 sm:col-span-3">
                 <div>
                   <div className="flex items-start gap-3">
                     <MapPin className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
@@ -280,7 +282,6 @@ export function Zambia() {
                   </div>
                 </div>
 
-                {/* Tour Guide Service info notice */}
                 <div className="flex items-start gap-2.5 rounded-xl bg-sand/70 p-3.5">
                   <Info className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
                   <div>
@@ -298,25 +299,16 @@ export function Zambia() {
         </div>
       </section>
 
-      {/* 5. Practical Guide Callout Banner Section matching Image 3 with custom silhouette */}
-      <section
-        className="relative isolate overflow-hidden bg-cream py-16 sm:py-20 lg:py-28 border-t border-border/50"
-        style={{
-          backgroundImage: 'url(/Pictures/Background/zambia_practical_guide_bg.png)',
-          backgroundPosition: 'bottom center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-        }}
-      >
-        {/* Background silhouette overlay */}
+      {/* 5. Practical Guide — silhouette sits flush against the site footer */}
+      <section className="relative isolate mb-0 overflow-hidden bg-cream pt-16 sm:pt-20 lg:pt-24">
         <img
           src="/Pictures/Background/zambia_practical_guide_bg.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full object-cover object-bottom"
+          className="pointer-events-none absolute inset-0 -z-10 size-full object-cover object-bottom"
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-28 text-center sm:px-6 sm:pb-32 lg:px-8 lg:pb-36">
           <Reveal className="flex flex-col items-center">
             <span className="grid size-12 place-items-center rounded-full bg-sand text-copper shadow-xs">
               <BookOpen className="size-6" aria-hidden="true" />

@@ -453,7 +453,7 @@ export const TANZANIA_PAGE = {
   // uses them, same as the site-wide HERO_VIDEOS).
   hero: {
     titleLine1: 'Explore',
-    titleAccent: 'Tanzania',
+    titleAccent: 'Tanzania & Zanzibar',
     description:
       'From the wildlife-filled plains of the Serengeti and the slopes of Mount Kilimanjaro to the historic streets and turquoise waters of Zanzibar, Tanzania offers an extraordinary mix of safari, culture, coastline and adventure.',
   },

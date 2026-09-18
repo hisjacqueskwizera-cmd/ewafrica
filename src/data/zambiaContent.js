@@ -142,10 +142,10 @@ export const ZAMBIA_DATA = {
     neighbours: ['Tanzania', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
     note: 'Routes, transport connections and border procedures vary depending on your journey.',
     researchText:
-      'Rather than providing all the details here, we can research the specific route you are planning.',
+      '',
     planRouteTo: '/travel-planner?destination=zambia',
     borderGuideTo: '/travel-planner/border-crossing-guide?from=zambia',
-    tourGuideUnavailable: 'Tour Guide service is not available in Zambia at this time.',
+    tourGuideUnavailable: '',
   },
 
   practicalGuideBanner: {

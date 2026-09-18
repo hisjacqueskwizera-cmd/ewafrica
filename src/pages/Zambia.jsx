@@ -282,33 +282,23 @@ export function Zambia() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 rounded-xl bg-sand/70 p-3.5">
-                  <Info className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
-                      Tour Guide Service
-                    </p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      {travelingOverland.tourGuideUnavailable}
-                    </p>
-                  </div>
-                </div>
+
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 5. Practical Guide — silhouette sits flush against the site footer */}
-      <section className="relative isolate mb-0 overflow-hidden bg-cream pt-16 sm:pt-20 lg:pt-24">
+      {/* 5. Practical Guide — landscape strip pinned to the footer edge */}
+      <section className="relative isolate overflow-hidden bg-cream pt-16 sm:pt-20 lg:pt-24">
         <img
           src="/Pictures/Background/zambia_practical_guide_bg.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 size-full object-cover object-bottom"
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full"
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-28 text-center sm:px-6 sm:pb-32 lg:px-8 lg:pb-36">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-36 text-center sm:px-6 sm:pb-40 lg:px-8 lg:pb-44">
           <Reveal className="flex flex-col items-center">
             <span className="grid size-12 place-items-center rounded-full bg-sand text-copper shadow-xs">
               <BookOpen className="size-6" aria-hidden="true" />

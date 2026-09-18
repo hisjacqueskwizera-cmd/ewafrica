@@ -59,7 +59,12 @@ function DestinationCard({ d, hidden }) {
         aria-hidden="true"
       />
       <div className="absolute inset-x-0 bottom-0 p-6">
-        <h3 className="truncate text-2xl font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
+        {d.featured && (
+          <p className="truncate text-[0.65rem] font-bold uppercase tracking-[0.12em] text-primary-foreground/80">
+            {d.featuredLabel || 'Featured Country'}
+          </p>
+        )}
+        <h3 className="mt-1 truncate text-2xl font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
           {d.name}
         </h3>
         {d.note && (

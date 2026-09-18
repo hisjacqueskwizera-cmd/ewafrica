@@ -14,8 +14,11 @@ import { SectionMark } from './SectionMark.jsx'
 function GrowLine({ progress }) {
   return (
     <span
-      className="h-px flex-1 origin-left bg-copper/40"
-      style={{ transform: `scaleX(${progress})` }}
+      className="block h-[1.5px] w-full origin-left rounded-full bg-copper/60 shadow-[0_0_0_1px_rgba(208,121,54,0.15)]"
+      style={{
+        transform: `scaleX(${progress})`,
+        transformOrigin: 'left center',
+      }}
       aria-hidden="true"
     />
   )
@@ -36,10 +39,7 @@ export function HowItWorks() {
   // at once. Scrolling back up retreats it the same way, since it's a
   // direct function of scroll position, not a one-shot transition.
   const curveProgress = Math.min(1, progress / 0.3)
-  const segmentProgress = [
-    Math.min(1, Math.max(0, (progress - 0.3) / 0.35)),
-    Math.min(1, Math.max(0, (progress - 0.65) / 0.35)),
-  ]
+  const segmentProgress = Math.min(1, Math.max(0, (progress - 0.14) / 0.32))
 
   return (
     <div className="relative overflow-hidden pt-16 lg:pt-20">
@@ -88,9 +88,9 @@ export function HowItWorks() {
           const Icon = STEP_ICONS[step.icon] || MessageSquareText
 
           return (
-            <div key={step.title} className="flex flex-col items-center text-center">
+            <div key={step.title} className="relative flex flex-col items-center text-center">
               <div className="mb-6 flex justify-center">
-                <div className="grid size-16 place-items-center rounded-full border border-copper/60 bg-transparent text-copper shadow-sm">
+                <div className="relative z-10 grid size-16 place-items-center rounded-full border border-copper/60 bg-transparent text-copper shadow-sm">
                   <Icon className="size-7" strokeWidth={1.8} aria-hidden="true" />
                 </div>
               </div>
@@ -99,11 +99,6 @@ export function HowItWorks() {
                 <h3 className="whitespace-nowrap text-2xl font-semibold text-primary sm:text-[28px]">
                   {step.title}
                 </h3>
-                {index < HOW_IT_WORKS.length - 1 && (
-                  <div className="mt-4 w-full max-w-[220px]">
-                    <GrowLine progress={segmentProgress[index]} />
-                  </div>
-                )}
               </div>
               <Reveal delay={index * 150} once={false}>
                 <p className="mt-4 max-w-70 text-sm leading-relaxed text-muted-foreground sm:text-base">

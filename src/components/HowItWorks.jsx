@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, MessageSquareText, Search, Send } from 'lucide-react'
 import { HOW_IT_WORKS } from '../data/siteContent.js'
 import { useScrollProgress } from '../hooks/useScrollProgress.js'
 import { HashLink } from './HashLink.jsx'
@@ -21,6 +21,12 @@ function GrowLine({ progress }) {
   )
 }
 
+const STEP_ICONS = {
+  message: MessageSquareText,
+  search: Search,
+  handshake: Send,
+}
+
 export function HowItWorks() {
   const [rowRef, progress] = useScrollProgress()
   // One continuous sequence, apportioned across the row: the corner curve
@@ -36,9 +42,20 @@ export function HowItWorks() {
   ]
 
   return (
-    <div className="pt-16 lg:pt-20">
+    <div className="relative overflow-hidden pt-16 lg:pt-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-18%] top-1/2 hidden w-[58rem] -translate-y-1/2 opacity-100 md:block md:w-[62rem] lg:right-[-12%] lg:w-[72rem]"
+        style={{
+          backgroundImage: "url('/Pictures/HowWeGuideYourJourney/Map_Of_Africa.PNG')",
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'contain',
+          height: '42rem',
+        }}
+      />
       <SectionMark />
-      <div className="max-w-lg text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text-5xl">
+      <div className="relative z-10 max-w-lg text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text-5xl">
         <RevealText as="h2" text="How We Guide" className="text-primary" />
         <RevealText
           as="h2"
@@ -48,6 +65,11 @@ export function HowItWorks() {
         />
       </div>
 
+      <p className="relative z-10 mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+        From your first question to your next chapter, we provide independent guidance, local
+        insight, and practical support across Africa.
+      </p>
+
       {/* Each mini-heading is followed, in the same grid cell, by a
           straight rule that grows toward the next column — the rule and
           its cell share width with the paragraph grid below, so the two
@@ -55,29 +77,41 @@ export function HowItWorks() {
           this row has scrolled through the viewport: scroll down and you
           watch it draw from Tell Us through We Research and on to You
           Connect; scroll back up and it retreats the same way. */}
-      <div ref={rowRef} className="relative mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      <div ref={rowRef} className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
         <JourneyCurve
           progress={curveProgress}
           className="absolute -left-3 -top-14 hidden h-24 w-20 text-copper/40 sm:block lg:-top-16 lg:h-28 lg:w-24"
         />
 
-        {HOW_IT_WORKS.map((step, index) => (
-          <div key={step.title}>
-            <div className="flex items-baseline gap-4">
-              <h3 className="whitespace-nowrap text-2xl font-semibold text-primary sm:text-[28px]">
-                {step.title}
-              </h3>
-              {index < HOW_IT_WORKS.length - 1 && (
-                <GrowLine progress={segmentProgress[index]} />
-              )}
+        {HOW_IT_WORKS.map((step, index) => {
+          const Icon = STEP_ICONS[step.icon] || MessageSquareText
+
+          return (
+            <div key={step.title} className="flex flex-col items-center text-center">
+              <div className="mb-6 flex justify-center">
+                <div className="grid size-16 place-items-center rounded-full border border-copper/60 bg-transparent text-copper shadow-sm">
+                  <Icon className="size-7" strokeWidth={1.8} aria-hidden="true" />
+                </div>
+              </div>
+
+              <div className="flex w-full flex-col items-center justify-center">
+                <h3 className="whitespace-nowrap text-2xl font-semibold text-primary sm:text-[28px]">
+                  {step.title}
+                </h3>
+                {index < HOW_IT_WORKS.length - 1 && (
+                  <div className="mt-4 w-full max-w-[220px]">
+                    <GrowLine progress={segmentProgress[index]} />
+                  </div>
+                )}
+              </div>
+              <Reveal delay={index * 150} once={false}>
+                <p className="mt-4 max-w-70 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {step.description}
+                </p>
+              </Reveal>
             </div>
-            <Reveal delay={index * 150} once={false}>
-              <p className="mt-4 max-w-70 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {step.description}
-              </p>
-            </Reveal>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       <Reveal

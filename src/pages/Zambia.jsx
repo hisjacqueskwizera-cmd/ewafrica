@@ -10,7 +10,9 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useEffect } from 'react'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { ZAMBIA_DATA } from '../data/zambiaContent.js'
 
@@ -31,7 +33,6 @@ export function Zambia() {
     travelInZambia,
     servicesIntro,
     services,
-    overlandRoutesIntro,
     routes,
     travelingOverland,
     practicalGuideBanner,
@@ -39,62 +40,16 @@ export function Zambia() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* 1. Hero Section matching Image 3 */}
-      <section className="relative isolate flex min-h-[580px] h-[75vh] max-h-[800px] items-center overflow-hidden px-4 text-primary-foreground sm:px-6 lg:px-8">
-        <img
-          src={hero.image}
-          alt={hero.title}
-          loading="eager"
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
-        {/* Subtle dark gradient overlay so text is crisp */}
-        <div
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-black/60 via-black/35 to-black/45"
-          aria-hidden="true"
-        />
+      {/* 1. Hero — full-viewport height, same serif/italic fonts as every
+           other destination page (Ghana, Uganda, Malawi, etc.). */}
+      <DestinationHero
+        heading={`${hero.eyebrow} — ${hero.title}`}
+        description={hero.description}
+        backgroundImage={hero.image}
+        backgroundImageAlt="Victoria Falls, Zambia"
+      />
 
-        <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          {/* Left Hero Content */}
-          <Reveal delay={100} className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
-              {hero.eyebrow}
-            </span>
-            <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] text-balance text-primary-foreground sm:text-5xl lg:text-6xl">
-              {hero.title}
-            </h1>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/90 sm:text-base">
-              {hero.description}
-            </p>
-            <div className="mt-8 flex items-center gap-4">
-              <HashLink to="/zambia/practical-guide" className="btn-copper text-sm">
-                {hero.cta}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </HashLink>
-            </div>
-          </Reveal>
-
-          {/* Right Hero Quote & Location Badge */}
-          <Reveal delay={250} className="flex flex-col items-start lg:items-end">
-            <div className="text-left lg:text-right">
-              {hero.watermarkQuote.map((line) => (
-                <p
-                  key={line}
-                  className="font-display text-2xl sm:text-3xl italic leading-tight text-primary-foreground/95 drop-shadow-sm"
-                >
-                  {line}
-                </p>
-              ))}
-            </div>
-
-            <div className="mt-6 flex items-center gap-2 rounded-full bg-black/40 px-3.5 py-1.5 text-xs font-semibold text-primary-foreground/90 backdrop-blur-xs">
-              <MapPin className="size-3.5 text-gold" aria-hidden="true" />
-              <span>{hero.locationBadge}</span>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 2. Travel in Zambia Section matching Image 3 with custom safari silhouette background */}
+      {/* 2. Travel in Zambia Section — safari silhouette background */}
       <section
         id="travel-in-zambia"
         className="relative isolate overflow-hidden bg-cream py-16 lg:py-24"
@@ -105,14 +60,6 @@ export function Zambia() {
           backgroundSize: 'cover',
         }}
       >
-        {/* Background silhouette overlay */}
-        <img
-          src="/Pictures/Background/zambia_travel_section_bg.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full object-cover object-bottom"
-        />
-
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left Column: Text & CTA Button */}
@@ -144,9 +91,10 @@ export function Zambia() {
                 <Reveal key={card.id} delay={idx * 120}>
                   <HashLink
                     to={card.to}
-                    className="group flex items-center gap-4 sm:gap-6 rounded-3xl bg-card/95 backdrop-blur-xs p-4 sm:p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift border border-border/40"
+                    className="group flex items-stretch gap-0 rounded-2xl bg-card/95 backdrop-blur-xs shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift border border-border/30 overflow-hidden"
                   >
-                    <div className="size-24 sm:size-28 shrink-0 overflow-hidden rounded-2xl bg-sand">
+                    {/* Big landscape image */}
+                    <div className="w-40 sm:w-48 shrink-0 overflow-hidden bg-sand">
                       <img
                         src={card.image}
                         alt={card.title}
@@ -155,19 +103,21 @@ export function Zambia() {
                       />
                     </div>
 
-                    <div className="flex-1 min-w-0 pr-2">
-                      <h3 className="font-display text-lg sm:text-xl font-bold text-primary group-hover:text-copper transition-colors">
-                        {card.title}
-                      </h3>
-                      <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                        {card.description}
-                      </p>
-                    </div>
+                    <div className="flex flex-1 items-center gap-3 p-4 sm:p-5 min-w-0">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-display text-base sm:text-lg font-bold text-primary group-hover:text-copper transition-colors">
+                          {card.title}
+                        </h3>
+                        <p className="mt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                          {card.description}
+                        </p>
+                      </div>
 
-                    <div className="shrink-0">
-                      <span className="grid size-10 sm:size-11 place-items-center rounded-full bg-copper text-copper-foreground shadow-xs transition-transform duration-300 group-hover:scale-110">
-                        <ChevronRight className="size-5" aria-hidden="true" />
-                      </span>
+                      <div className="shrink-0">
+                        <span className="grid size-9 sm:size-10 place-items-center rounded-full bg-copper text-copper-foreground shadow-xs transition-transform duration-300 group-hover:scale-110">
+                          <ChevronRight className="size-4 sm:size-5" aria-hidden="true" />
+                        </span>
+                      </div>
                     </div>
                   </HashLink>
                 </Reveal>
@@ -245,53 +195,12 @@ export function Zambia() {
             })}
           </div>
 
-          {/* Popular Overland Routes Subsection */}
-          <div id="popular-overland-routes" className="mt-20">
-            <Reveal className="text-center">
-              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-copper">
-                {overlandRoutesIntro.heading}
-              </h3>
-              <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-                {overlandRoutesIntro.subtitle}
-              </p>
-            </Reveal>
-
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {routes.map((route, i) => (
-                <Reveal key={route.to} delay={i * 80}>
-                  <HashLink
-                    to={`/travel-planner/border-crossing-guide?from=zambia&to=${route.to.toLowerCase()}`}
-                    className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-cocoa shadow-card"
-                  >
-                    <img
-                      src={route.image}
-                      alt={`Zambia to ${route.to}`}
-                      loading="lazy"
-                      className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-108"
-                    />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
-                      aria-hidden="true"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 p-5">
-                      <h4 className="font-display text-lg font-bold text-primary-foreground">
-                        Zambia → {route.to}
-                      </h4>
-                      <p className="mt-1 line-clamp-2 text-xs text-primary-foreground/80">
-                        {route.text}
-                      </p>
-                      <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground/90 transition-colors group-hover:text-gold">
-                        BORDER CROSSING GUIDE
-                        <ArrowRight className="size-3.5" aria-hidden="true" />
-                      </span>
-                    </div>
-                  </HashLink>
-                </Reveal>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* Popular overland routes — shared with every other country page,
+          see RouteCard.jsx. */}
+      <OverlandRoutesSection countryName="Zambia" slug="zambia" routes={routes} />
 
       {/* 4. Traveling Overland? Banner Box matching Image 3 */}
       <section className="pb-16 sm:pb-20 lg:pb-24">
@@ -390,7 +299,23 @@ export function Zambia() {
       </section>
 
       {/* 5. Practical Guide Callout Banner Section matching Image 3 with custom silhouette */}
-      <section className="relative isolate overflow-hidden bg-cream/80 py-16 sm:py-20 lg:py-24 border-t border-border/50">
+      <section
+        className="relative isolate overflow-hidden bg-cream py-16 sm:py-20 lg:py-28 border-t border-border/50"
+        style={{
+          backgroundImage: 'url(/Pictures/Background/zambia_practical_guide_bg.png)',
+          backgroundPosition: 'bottom center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+        }}
+      >
+        {/* Background silhouette overlay */}
+        <img
+          src="/Pictures/Background/zambia_practical_guide_bg.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full object-cover object-bottom"
+        />
+
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Reveal className="flex flex-col items-center">
             <span className="grid size-12 place-items-center rounded-full bg-sand text-copper shadow-xs">
@@ -415,18 +340,6 @@ export function Zambia() {
               </HashLink>
             </div>
           </Reveal>
-        </div>
-
-        {/* User-provided background silhouette at bottom of practical guide banner */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-0 h-40 sm:h-52 lg:h-60 opacity-80"
-          aria-hidden="true"
-        >
-          <img
-            src={practicalGuideBanner.backgroundSilhouette}
-            alt=""
-            className="size-full object-cover object-bottom"
-          />
         </div>
       </section>
     </div>

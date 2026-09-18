@@ -8,7 +8,7 @@ export const ZAMBIA_DATA = {
     cta: 'Explore Zambia',
     watermarkQuote: ['Explore new places.', 'Discover new possibilities.'],
     locationBadge: 'Victoria Falls, Zambia',
-    image: '/Pictures/zambia/victoria_falls.jpg',
+    image: '/Pictures/Hero_Zambia.jpeg',
   },
 
   travelInZambia: {

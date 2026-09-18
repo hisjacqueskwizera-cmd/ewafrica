@@ -3213,7 +3213,7 @@ export const TOUR_GUIDE_PAGES = {
 // already draw from.
 export const BORDER_CROSSING_PAGE = {
   hero: {
-    badge: 'Travel Planner',
+    badge: 'Border Crossing',
     titleLine1: 'Border Crossing',
     titleAccent: 'Guide',
     tagline: ['Practical guidance for crossing one or multiple borders.'],

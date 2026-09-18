@@ -1,133 +1,190 @@
 import {
   ArrowRight,
-  Banknote,
   BookOpen,
-  Bus,
-  Camera,
-  Car,
   CheckCircle2,
-  Clock,
-  CloudRain,
-  Coins,
+  ChevronRight,
+  Compass,
   FileText,
-  Globe2,
-  Handshake,
-  Heart,
   Info,
-  PawPrint,
-  Route as RouteIcon,
-  Shield,
+  MapPin,
   ShieldCheck,
-  Signpost,
-  Smartphone,
-  Sun,
-  Thermometer,
-  Users,
-  Waves,
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { HashLink } from '../components/HashLink.jsx'
-import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
-import { ZAMBIA_PAGE } from '../data/siteContent.js'
+import { ZAMBIA_DATA } from '../data/zambiaContent.js'
 
-const ICONS = {
-  Sun,
-  Thermometer,
-  CloudRain,
-  Waves,
-  Clock,
-  Banknote,
-  Signpost,
-  PawPrint,
-  Heart,
+const SERVICE_ICONS = {
   FileText,
-  Bus,
-  RouteIcon,
-  Shield,
+  Compass,
   ShieldCheck,
-  Users,
-  Globe2,
-  Handshake,
-  BookOpen,
 }
 
 export function Zambia() {
   useEffect(() => {
-    document.title = 'Travel Services for Zambia | East-West Africa Link'
+    document.title = 'Zambia — A Land of Natural Beauty and Opportunity | East-West Africa Link'
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
   const {
-    landingHero,
+    hero,
+    travelInZambia,
     servicesIntro,
     services,
+    overlandRoutesIntro,
     routes,
-    landingTrust,
-    closing,
-    seasons,
-    beforeYouGo,
-    places,
-    currency,
-    simCards,
-    gettingAround,
-    overland,
-    tips,
-    helpWith,
-    helpPhoto,
-  } = ZAMBIA_PAGE
+    travelingOverland,
+    practicalGuideBanner,
+  } = ZAMBIA_DATA
 
   return (
-    <>
-      {/* Hero — same full-viewport height, flat cocoa tint, serif display
-          heading (same size scale) and single blur-fade reveal as every
-          other destination page's DestinationHero, just composed inline
-          here since this page also carries an eyebrow/tagline and a script
-          watermark column that DestinationHero doesn't have a slot for. */}
-      <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-4 text-primary-foreground sm:px-6 lg:px-8">
+    <div className="bg-background min-h-screen">
+      {/* 1. Hero Section matching Image 3 */}
+      <section className="relative isolate flex min-h-[580px] h-[75vh] max-h-[800px] items-center overflow-hidden px-4 text-primary-foreground sm:px-6 lg:px-8">
         <img
-          src={landingHero.image}
-          alt={landingHero.imageAlt}
+          src={hero.image}
+          alt={hero.title}
           loading="eager"
           className="absolute inset-0 -z-10 size-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-cocoa/45" aria-hidden="true" />
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <Reveal delay={150} blur>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
-              {landingHero.eyebrow}
-            </p>
-            <h1 className="mt-3 font-display text-[3rem] font-normal leading-[1.1] text-balance sm:text-[4rem] lg:text-[5.375rem]">
-              {landingHero.title}
+        {/* Subtle dark gradient overlay so text is crisp */}
+        <div
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-black/60 via-black/35 to-black/45"
+          aria-hidden="true"
+        />
+
+        <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          {/* Left Hero Content */}
+          <Reveal delay={100} className="max-w-2xl">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
+              {hero.eyebrow}
+            </span>
+            <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] text-balance text-primary-foreground sm:text-5xl lg:text-6xl">
+              {hero.title}
             </h1>
-            <p className="mt-4 text-lg font-semibold sm:text-xl">{landingHero.tagline}</p>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/85 sm:text-base">
-              {landingHero.description}
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/90 sm:text-base">
+              {hero.description}
             </p>
+            <div className="mt-8 flex items-center gap-4">
+              <HashLink to="/zambia/practical-guide" className="btn-copper text-sm">
+                {hero.cta}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </HashLink>
+            </div>
           </Reveal>
-          <Reveal delay={350} blur className="hidden text-right lg:block">
-            <p className="font-display text-4xl italic text-primary-foreground/90">
-              {landingHero.watermark}
-            </p>
-            <div className="mt-3 ml-auto h-px w-14 bg-gold" aria-hidden="true" />
-            <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground/80">
-              {landingHero.watermarkCaption.map((line) => (
-                <span key={line} className="block">
+
+          {/* Right Hero Quote & Location Badge */}
+          <Reveal delay={250} className="flex flex-col items-start lg:items-end">
+            <div className="text-left lg:text-right">
+              {hero.watermarkQuote.map((line) => (
+                <p
+                  key={line}
+                  className="font-display text-2xl sm:text-3xl italic leading-tight text-primary-foreground/95 drop-shadow-sm"
+                >
                   {line}
-                </span>
+                </p>
               ))}
-            </p>
+            </div>
+
+            <div className="mt-6 flex items-center gap-2 rounded-full bg-black/40 px-3.5 py-1.5 text-xs font-semibold text-primary-foreground/90 backdrop-blur-xs">
+              <MapPin className="size-3.5 text-gold" aria-hidden="true" />
+              <span>{hero.locationBadge}</span>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Explore Our Services */}
-      <section className="py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <Reveal>
-            <h2 className="text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
+      {/* 2. Travel in Zambia Section matching Image 3 with custom safari silhouette background */}
+      <section
+        id="travel-in-zambia"
+        className="relative isolate overflow-hidden bg-cream py-16 lg:py-24"
+        style={{
+          backgroundImage: 'url(/Pictures/Background/zambia_travel_section_bg.png)',
+          backgroundPosition: 'bottom center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+        }}
+      >
+        {/* Background silhouette overlay */}
+        <img
+          src="/Pictures/Background/zambia_travel_section_bg.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full object-cover object-bottom"
+        />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            {/* Left Column: Text & CTA Button */}
+            <div className="lg:col-span-6 relative z-10">
+              <Reveal>
+                <h2 className="font-display text-3xl font-bold text-primary sm:text-4xl lg:text-5xl">
+                  {travelInZambia.heading}
+                </h2>
+                <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-copper">
+                  {travelInZambia.eyebrow}
+                </p>
+                <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {travelInZambia.paragraphs.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+                <div className="mt-8">
+                  <HashLink to="/zambia/practical-guide" className="btn-copper text-sm">
+                    {travelInZambia.cta}
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </HashLink>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Right Column: 3 Horizontal Highlight Cards */}
+            <div className="lg:col-span-6 relative z-10 space-y-4">
+              {travelInZambia.cards.map((card, idx) => (
+                <Reveal key={card.id} delay={idx * 120}>
+                  <HashLink
+                    to={card.to}
+                    className="group flex items-center gap-4 sm:gap-6 rounded-3xl bg-card/95 backdrop-blur-xs p-4 sm:p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift border border-border/40"
+                  >
+                    <div className="size-24 sm:size-28 shrink-0 overflow-hidden rounded-2xl bg-sand">
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        loading="lazy"
+                        className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-108"
+                      />
+                    </div>
+
+                    <div className="flex-1 min-w-0 pr-2">
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-primary group-hover:text-copper transition-colors">
+                        {card.title}
+                      </h3>
+                      <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-2">
+                        {card.description}
+                      </p>
+                    </div>
+
+                    <div className="shrink-0">
+                      <span className="grid size-10 sm:size-11 place-items-center rounded-full bg-copper text-copper-foreground shadow-xs transition-transform duration-300 group-hover:scale-110">
+                        <ChevronRight className="size-5" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </HashLink>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Explore Our Services Section */}
+      <section id="services" className="py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="text-center">
+            <h2 className="font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">
               {servicesIntro.heading}
             </h2>
-            <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-copper">
+            <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-copper">
               {servicesIntro.eyebrow}
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -135,13 +192,13 @@ export function Zambia() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 text-left sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => {
-              const Icon = ICONS[service.icon]
+              const Icon = SERVICE_ICONS[service.icon] || FileText
               return (
-                <Reveal key={service.title} delay={i * 100}>
-                  <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
-                    <div className="aspect-4/3 overflow-hidden">
+                <Reveal key={service.title} delay={i * 100} className="flex h-full">
+                  <article className="flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-shadow duration-300 hover:shadow-lift">
+                    <div className="relative aspect-4/3 w-full overflow-hidden bg-sand">
                       <img
                         src={service.image}
                         alt=""
@@ -150,31 +207,36 @@ export function Zambia() {
                         className="size-full object-cover"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col items-center p-6 pt-0 text-center">
-                      <span className="relative z-10 -mt-7 grid size-14 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground shadow-card">
+
+                    <div className="flex flex-1 flex-col items-center p-6 pt-0 text-center sm:p-7 sm:pt-0">
+                      <span className="relative z-10 -mt-7 grid size-14 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground shadow-card border-4 border-card">
                         <Icon className="size-6" aria-hidden="true" />
                       </span>
-                      <h3 className="mt-4 text-xl font-bold text-primary">{service.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      <h3 className="mt-4 font-display text-xl font-bold text-primary">
+                        {service.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">
                         {service.description}
                       </p>
-                      <ul className="mt-4 flex-1 space-y-1.5 self-stretch text-left">
+
+                      <ul className="mt-5 flex-1 space-y-2 self-stretch text-left">
                         {service.items.map((item) => (
                           <li
                             key={item}
-                            className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground"
+                            className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-muted-foreground"
                           >
                             <CheckCircle2
-                              className="mt-0.5 size-3.5 shrink-0 text-copper"
+                              className="mt-0.5 size-4 shrink-0 text-copper"
                               aria-hidden="true"
                             />
-                            {item}
+                            <span>{item}</span>
                           </li>
                         ))}
                       </ul>
-                      <HashLink to={service.to} className="btn-copper mt-5 w-full justify-center">
+
+                      <HashLink to={service.to} className="btn-copper mt-6 w-full justify-center text-xs py-2.5">
                         View Details
-                        <ArrowRight className="size-4" aria-hidden="true" />
+                        <ArrowRight className="size-3.5" aria-hidden="true" />
                       </HashLink>
                     </div>
                   </article>
@@ -182,230 +244,144 @@ export function Zambia() {
               )
             })}
           </div>
+
+          {/* Popular Overland Routes Subsection */}
+          <div id="popular-overland-routes" className="mt-20">
+            <Reveal className="text-center">
+              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-copper">
+                {overlandRoutesIntro.heading}
+              </h3>
+              <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                {overlandRoutesIntro.subtitle}
+              </p>
+            </Reveal>
+
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {routes.map((route, i) => (
+                <Reveal key={route.to} delay={i * 80}>
+                  <HashLink
+                    to={`/travel-planner/border-crossing-guide?from=zambia&to=${route.to.toLowerCase()}`}
+                    className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-cocoa shadow-card"
+                  >
+                    <img
+                      src={route.image}
+                      alt={`Zambia to ${route.to}`}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-108"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-5">
+                      <h4 className="font-display text-lg font-bold text-primary-foreground">
+                        Zambia → {route.to}
+                      </h4>
+                      <p className="mt-1 line-clamp-2 text-xs text-primary-foreground/80">
+                        {route.text}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground/90 transition-colors group-hover:text-gold">
+                        BORDER CROSSING GUIDE
+                        <ArrowRight className="size-3.5" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </HashLink>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Popular overland routes — shared with every other country page,
-          see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName="Zambia" slug="zambia" routes={routes} />
-
-      {/* Trust row — flat, dividers-only row matching the reference. */}
-      <section className="border-y border-border bg-cream py-10">
+      {/* 4. Traveling Overland? Banner Box matching Image 3 */}
+      <section className="pb-16 sm:pb-20 lg:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
-            {landingTrust.map((item) => {
-              const Icon = ICONS[item.icon]
-              return (
-                <div key={item.title} className="flex items-center justify-center gap-3 lg:px-6">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <p className="text-sm font-bold leading-snug text-primary">
-                    {item.title}
-                    <br />
-                    {item.title2}
-                  </p>
-                </div>
-              )
-            })}
-          </Reveal>
-        </div>
-      </section>
+          <Reveal>
+            <div className="overflow-hidden rounded-3xl bg-card shadow-card border border-border/60 lg:grid lg:grid-cols-12">
+              {/* Left photo segment */}
+              <div className="relative min-h-[220px] lg:col-span-3 lg:min-h-full">
+                <img
+                  src={travelingOverland.image}
+                  alt="Victoria Falls gorge"
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
+              </div>
 
-      {/* When to Visit */}
-      <section className="py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex items-center justify-center gap-3">
-            <span className="grid size-9 place-items-center rounded-full bg-cocoa text-primary-foreground">
-              <Camera className="size-4" aria-hidden="true" />
-            </span>
-            <h2 className="text-xl font-bold text-primary sm:text-2xl">When to Visit</h2>
-          </Reveal>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {seasons.map((season, i) => {
-              const Icon = ICONS[season.icon]
-              return (
-                <Reveal key={season.period} delay={i * 90}>
-                  <div className="flex h-full flex-col rounded-2xl bg-card p-6 shadow-card">
-                    <Icon className="size-6 text-copper" aria-hidden="true" />
-                    <span className="mt-3 text-xs font-bold uppercase tracking-[0.1em] text-copper">
-                      {season.period}
+              {/* Center information segment */}
+              <div className="p-6 sm:p-8 lg:col-span-5 lg:p-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-11 place-items-center rounded-full bg-sand text-copper">
+                      <Compass className="size-5" aria-hidden="true" />
                     </span>
-                    <h3 className="mt-1 text-base font-bold text-primary">{season.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                      {season.text}
+                    <h3 className="font-display text-2xl font-bold text-primary">
+                      {travelingOverland.title}
+                    </h3>
+                  </div>
+
+                  <p className="mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                    {travelingOverland.description}
+                  </p>
+
+                  {/* Country pills */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {travelingOverland.neighbours.map((country) => (
+                      <span
+                        key={country}
+                        className="rounded-full border border-border bg-cream/70 px-3 py-1 text-xs font-semibold text-primary"
+                      >
+                        {country}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="mt-6 text-xs italic text-muted-foreground">
+                  {travelingOverland.note}
+                </p>
+              </div>
+
+              {/* Right actions segment */}
+              <div className="bg-sand/30 border-t border-border/50 p-6 sm:p-8 lg:col-span-4 lg:border-t-0 lg:border-l lg:p-10 flex flex-col justify-between gap-5">
+                <div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
+                    <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                      {travelingOverland.researchText}
                     </p>
                   </div>
-                </Reveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
 
-      {/* Before You Go / Where to Go / Money & Getting Around */}
-      <section className="bg-cream py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <Reveal className="flex h-full flex-col rounded-3xl bg-card p-6 shadow-card sm:p-7">
-              <span className="grid size-11 place-items-center rounded-full bg-cocoa text-primary-foreground">
-                <Globe2 className="size-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-4 text-base font-bold text-primary">Before You Go</h3>
-              <p className="mt-3 text-xs font-bold uppercase tracking-[0.1em] text-copper">
-                Visa &amp; Entry
-              </p>
-              <div className="mt-2 flex-1 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                {beforeYouGo.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-              <HashLink
-                to="/#contact"
-                className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Get Personal Visa Guidance
-                <ArrowRight className="size-3.5" aria-hidden="true" />
-              </HashLink>
-            </Reveal>
+                  <div className="mt-6 flex flex-col gap-3">
+                    <HashLink
+                      to={travelingOverland.planRouteTo}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cocoa px-5 py-2.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-xs transition-transform hover:-translate-y-0.5"
+                    >
+                      Plan My Route
+                      <ArrowRight className="size-3.5" aria-hidden="true" />
+                    </HashLink>
 
-            <Reveal delay={90} className="flex h-full flex-col rounded-3xl bg-card p-6 shadow-card sm:p-7">
-              <span className="grid size-11 place-items-center rounded-full bg-cocoa text-primary-foreground">
-                <Camera className="size-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-4 text-base font-bold text-primary">Where to Go</h3>
-              <ul className="mt-3 flex-1 space-y-3">
-                {places.map((place) => (
-                  <li key={place.name}>
-                    <p className="text-sm font-bold text-primary">{place.name}</p>
-                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                      {place.text}
+                    <HashLink
+                      to={travelingOverland.borderGuideTo}
+                      className="btn-copper w-full justify-center text-xs sm:text-sm py-2.5"
+                    >
+                      Get a Border Crossing Guide
+                      <ArrowRight className="size-3.5" aria-hidden="true" />
+                    </HashLink>
+                  </div>
+                </div>
+
+                {/* Tour Guide Service info notice */}
+                <div className="flex items-start gap-2.5 rounded-xl bg-sand/70 p-3.5">
+                  <Info className="size-4 shrink-0 text-copper mt-0.5" aria-hidden="true" />
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                      Tour Guide Service
                     </p>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            <Reveal delay={180} className="flex h-full flex-col rounded-3xl bg-card p-6 shadow-card sm:p-7">
-              <span className="grid size-11 place-items-center rounded-full bg-cocoa text-primary-foreground">
-                <Car className="size-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-4 text-base font-bold text-primary">
-                Money, SIM Cards &amp; Getting Around
-              </h3>
-
-              <div className="mt-3 flex items-start gap-2">
-                <Coins className="mt-0.5 size-4 shrink-0 text-copper" aria-hidden="true" />
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-copper">Currency</p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{currency}</p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-start gap-2">
-                <Smartphone className="mt-0.5 size-4 shrink-0 text-copper" aria-hidden="true" />
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-copper">
-                    SIM Cards &amp; Data
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{simCards}</p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-start gap-2">
-                <Bus className="mt-0.5 size-4 shrink-0 text-copper" aria-hidden="true" />
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-copper">
-                    Getting Around
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    Travel in Zambia may involve:
-                  </p>
-                  <ul className="mt-1 grid grid-cols-1 gap-x-4 gap-y-1 text-xs text-muted-foreground sm:grid-cols-2">
-                    {gettingAround.map((item) => (
-                      <li key={item} className="flex items-start gap-1.5">
-                        <span className="mt-1 size-1 shrink-0 rounded-full bg-copper" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-2 text-xs italic leading-relaxed text-muted-foreground">
-                    Distances can be long — allow enough time between destinations.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Traveling overland */}
-      <section className="py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="overflow-hidden rounded-3xl shadow-lift lg:grid lg:grid-cols-5">
-            <div className="relative isolate overflow-hidden p-8 text-primary-foreground sm:p-10 lg:col-span-3">
-              <img
-                src={overland.image}
-                alt={overland.imageAlt}
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 size-full object-cover"
-              />
-              <div className="absolute inset-0 -z-10 bg-cocoa/80" aria-hidden="true" />
-              <span className="grid size-11 place-items-center rounded-full border-2 border-copper text-copper">
-                <Signpost className="size-5" aria-hidden="true" />
-              </span>
-              <h2 className="mt-4 text-xl font-bold sm:text-2xl">Traveling Overland?</h2>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-primary-foreground/80">
-                {overland.text}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {overland.neighbours.map((country) => (
-                  <span
-                    key={country}
-                    className="rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-semibold text-primary-foreground"
-                  >
-                    {country}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-4 max-w-md text-xs italic leading-relaxed text-primary-foreground/70">
-                {overland.note}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4 bg-card p-8 sm:p-10 lg:col-span-2">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-sand text-copper">
-                <RouteIcon className="size-5" aria-hidden="true" />
-              </span>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Rather than providing all the details here, we can research the specific route you
-                are planning.
-              </p>
-              <HashLink
-                to="/travel-planner?destination=zambia"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-cocoa px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Plan My Route
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </HashLink>
-              <HashLink
-                to="/travel-planner/border-crossing-guide?from=zambia"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-copper px-5 py-2.5 text-sm font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Get a Border Crossing Guide
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </HashLink>
-
-              <div className="mt-2 flex items-start gap-3 rounded-xl bg-sand p-4">
-                <Info className="mt-0.5 size-4 shrink-0 text-copper" aria-hidden="true" />
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.08em] text-primary">
-                    Tour Guide Service
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    Tour Guide service is not available in Zambia at this time.
-                  </p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {travelingOverland.tourGuideUnavailable}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -413,116 +389,46 @@ export function Zambia() {
         </div>
       </section>
 
-      {/* First-time traveler tips */}
-      <section className="bg-cream py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex items-center justify-center gap-3">
-            <span className="grid size-9 place-items-center rounded-full bg-cocoa text-primary-foreground">
-              <Info className="size-4" aria-hidden="true" />
+      {/* 5. Practical Guide Callout Banner Section matching Image 3 with custom silhouette */}
+      <section className="relative isolate overflow-hidden bg-cream/80 py-16 sm:py-20 lg:py-24 border-t border-border/50">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <Reveal className="flex flex-col items-center">
+            <span className="grid size-12 place-items-center rounded-full bg-sand text-copper shadow-xs">
+              <BookOpen className="size-6" aria-hidden="true" />
             </span>
-            <h2 className="text-xl font-bold text-primary sm:text-2xl">First-Time Traveler Tips</h2>
-          </Reveal>
-
-          <div className="mt-10 grid gap-8 sm:grid-cols-3 lg:grid-cols-6">
-            {tips.map((tip, i) => {
-              const Icon = ICONS[tip.icon]
-              return (
-                <Reveal key={tip.title} delay={i * 70} className="flex flex-col items-center text-center">
-                  <Icon className="size-6 text-copper" aria-hidden="true" />
-                  <h3 className="mt-3 text-sm font-bold text-primary">{tip.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{tip.text}</p>
-                </Reveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Not sure where to start? */}
-      <section className="py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="overflow-hidden rounded-3xl bg-cocoa text-primary-foreground shadow-card">
-            <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_1.2fr_0.8fr] lg:items-center">
-              <div className="flex flex-col gap-3">
-                <span className="grid size-12 shrink-0 place-items-center rounded-full border-2 border-copper text-copper">
-                  <Users className="size-5" aria-hidden="true" />
-                </span>
-                <span className="section-eyebrow !text-gold">Not Sure Where to Start?</span>
-                <p className="text-sm leading-relaxed text-primary-foreground/80">
-                  Tell us where you are traveling, when you plan to go and what you need help with.
-                </p>
-                <HashLink
-                  to="/#contact"
-                  className="mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-semibold text-copper-foreground transition-transform hover:-translate-y-0.5"
-                >
-                  Get Personalized Guidance
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </HashLink>
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold text-primary-foreground">
-                  East-West Africa Link can help with:
-                </p>
-                <div className="mt-5 grid grid-cols-3 gap-4">
-                  {helpWith.map((item) => {
-                    const Icon = ICONS[item.icon]
-                    return (
-                      <div key={item.label} className="flex flex-col items-center gap-2 text-center">
-                        <span className="grid size-11 place-items-center rounded-full border-2 border-copper text-copper">
-                          <Icon className="size-5" aria-hidden="true" />
-                        </span>
-                        <span className="text-xs font-semibold text-primary-foreground">
-                          {item.label}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="hidden aspect-square overflow-hidden rounded-2xl lg:block">
-                <img src={helpPhoto} alt="" aria-hidden="true" className="size-full object-cover" />
-              </div>
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+              {practicalGuideBanner.title}
+            </h2>
+            <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-copper">
+              {practicalGuideBanner.eyebrow}
+            </p>
+            <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground">
+              {practicalGuideBanner.description}
+            </p>
+            <div className="mt-8">
+              <HashLink
+                to={practicalGuideBanner.to}
+                className="btn-copper px-8 py-3.5 text-sm sm:text-base"
+              >
+                {practicalGuideBanner.cta}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </HashLink>
             </div>
           </Reveal>
         </div>
-      </section>
 
-      {/* Closing — full-bleed photo band with a script watermark, closing
-          the landing page the way it opened. */}
-      <section className="relative isolate overflow-hidden px-4 py-16 text-primary-foreground sm:px-6 lg:px-8 lg:py-20">
-        <img
-          src={closing.image}
-          alt={closing.imageAlt}
-          loading="lazy"
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
-        <div className="absolute inset-0 -z-10 bg-cocoa/55" aria-hidden="true" />
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <Reveal className="max-w-lg">
-            <p className="font-display text-3xl italic text-primary-foreground/90">
-              {closing.watermark}
-            </p>
-            <h2 className="mt-3 text-xl font-bold uppercase tracking-[0.04em] sm:text-2xl">
-              {closing.heading}
-            </h2>
-            <div className="mt-3 h-px w-14 bg-gold" aria-hidden="true" />
-            <p className="mt-4 text-sm leading-relaxed text-primary-foreground/85 sm:text-base">
-              {closing.body}
-            </p>
-          </Reveal>
-          <Reveal delay={120} className="border-l-2 border-gold py-1 pl-5">
-            <p className="font-display text-lg italic leading-snug sm:text-xl">
-              {closing.quote.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </p>
-          </Reveal>
+        {/* User-provided background silhouette at bottom of practical guide banner */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-0 h-40 sm:h-52 lg:h-60 opacity-80"
+          aria-hidden="true"
+        >
+          <img
+            src={practicalGuideBanner.backgroundSilhouette}
+            alt=""
+            className="size-full object-cover object-bottom"
+          />
         </div>
       </section>
-    </>
+    </div>
   )
 }

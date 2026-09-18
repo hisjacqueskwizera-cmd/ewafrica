@@ -37,6 +37,7 @@ import { TravelPlanner } from './pages/TravelPlanner.jsx'
 import { TravelPlannerServiceDetails } from './pages/TravelPlannerServiceDetails.jsx'
 import { Uganda } from './pages/Uganda.jsx'
 import { Zambia } from './pages/Zambia.jsx'
+import { ZambiaPracticalGuide } from './pages/ZambiaPracticalGuide.jsx'
 import { Confirmation as BeforeYouBookConfirmation } from './pages/before-you-book/Confirmation.jsx'
 import { Payment as BeforeYouBookPayment } from './pages/before-you-book/Payment.jsx'
 import { RequestForm as BeforeYouBookRequestForm } from './pages/before-you-book/RequestForm.jsx'
@@ -247,6 +248,7 @@ function App() {
           <Route path="/tanzania" element={<Tanzania />} />
           <Route path="/malawi" element={<Malawi />} />
           <Route path="/zambia" element={<Zambia />} />
+          <Route path="/zambia/practical-guide" element={<ZambiaPracticalGuide />} />
           <Route path="/uganda" element={<Uganda />} />
           <Route path="/rwanda" element={<Rwanda />} />
           <Route path="/senegal" element={<Senegal />} />

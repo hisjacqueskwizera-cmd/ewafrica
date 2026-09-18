@@ -63,7 +63,7 @@ export function BorderCrossingGuide() {
           </Link>
           <ChevronRight className="size-3" aria-hidden="true" />
           <Link to="/travel-planner" className="hover:text-copper">
-            Travel Planner
+            Border Crossing
           </Link>
           <ChevronRight className="size-3" aria-hidden="true" />
           <span className="font-semibold text-primary">Border Crossing Guide</span>
@@ -218,7 +218,7 @@ export function BorderCrossingGuide() {
               to="/travel-planner"
               className="text-sm font-semibold text-primary hover:text-copper"
             >
-              ← Back to Travel Planner
+              ← Back to Border Crossing
             </Link>
             <p className="mt-6 text-base italic text-muted-foreground">{closing}</p>
           </Reveal>

@@ -166,31 +166,62 @@ export function Benin() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
-            {places.map((place, i) => (
-              <Reveal key={place.name} delay={i * 90}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-card shadow-card transition-transform duration-300 hover:-translate-y-1 xl:min-h-[430px]">
-                  <div className="relative aspect-[5/4] overflow-hidden sm:aspect-[4/3] xl:aspect-[4/5]">
-                    <img
-                      src={place.image ?? '/Pictures/countries/Benin.jpg'}
-                      alt={place.imageAlt ?? place.name}
-                      loading="lazy"
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-cocoa/35 via-transparent to-transparent" aria-hidden="true" />
-                    <span className="absolute left-4 top-4 grid size-12 shrink-0 place-items-center rounded-full bg-white/85 text-copper shadow-card ring-2 ring-white/60 backdrop-blur-sm">
-                      <MapPin className="size-5" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
-                    <h3 className="text-xl font-bold text-primary sm:text-[1.35rem]">{place.name}</h3>
-                    <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
-                      {place.text}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+          <div className="mt-10 space-y-0">
+            <div className="grid gap-0 lg:grid-cols-3">
+              {places.slice(0, 3).map((place, i) => (
+                <Reveal key={place.name} delay={i * 90}>
+                  <article className="group flex h-full flex-col overflow-hidden border-b border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:border-b-0 lg:last:border-r-0 lg:first:border-l-0">
+                    <div className="relative aspect-[7/5] overflow-hidden">
+                      <img
+                        src={place.image ?? '/Pictures/countries/Benin.jpg'}
+                        alt={place.imageAlt ?? place.name}
+                        loading="lazy"
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute left-4 top-4 grid size-10 shrink-0 place-items-center rounded-full bg-white/80 text-copper shadow-card ring-2 ring-white/70 backdrop-blur-sm">
+                        <MapPin className="size-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-3 px-4 pb-5 pt-4">
+                      <h3 className="text-lg font-bold uppercase tracking-[0.08em] text-primary sm:text-[1.35rem]">
+                        {place.name}
+                      </h3>
+                      <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
+                        {place.text}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <div className="grid gap-0 lg:grid-cols-2">
+              {places.slice(3).map((place, i) => (
+                <Reveal key={place.name} delay={(i + 3) * 90}>
+                  <article className="group flex h-full flex-col overflow-hidden border-t border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:last:border-r-0 lg:first:border-l-0">
+                    <div className="relative aspect-[7/5] overflow-hidden">
+                      <img
+                        src={place.image ?? '/Pictures/countries/Benin.jpg'}
+                        alt={place.imageAlt ?? place.name}
+                        loading="lazy"
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute left-4 top-4 grid size-10 shrink-0 place-items-center rounded-full bg-white/80 text-copper shadow-card ring-2 ring-white/70 backdrop-blur-sm">
+                        <MapPin className="size-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-3 px-4 pb-5 pt-4">
+                      <h3 className="text-lg font-bold uppercase tracking-[0.08em] text-primary sm:text-[1.35rem]">
+                        {place.name}
+                      </h3>
+                      <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
+                        {place.text}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -1498,13 +1498,13 @@ export const BENIN_PAGE = {
     {
       name: 'Ouidah',
       text: 'Historic city and birthplace of Vodun (Voodoo). Visit the Door of No Return and its museums.',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/Benin_Side_Image.JPG',
       imageAlt: 'Historic Ouidah and the coastal heritage of Benin',
     },
     {
       name: 'Ganvié',
       text: 'The "Venice of Africa" — a stilt village on Lake Nokoué.',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/Benin_Landing_Hero.JPG',
       imageAlt: 'Stilt village homes on Lake Nokoué in Benin',
     },
     {
@@ -1516,13 +1516,13 @@ export const BENIN_PAGE = {
     {
       name: 'Parakou & Atacora',
       text: "Discover northern Benin's culture, landscapes, and traditional villages.",
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/Benin/Benin_Hero.jpg',
       imageAlt: 'Northern Benin landscapes and villages',
     },
     {
       name: 'Grand-Popo',
       text: 'Relax on beautiful beaches and enjoy a laid-back coastal atmosphere.',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/Benin_Side_Image.JPG',
       imageAlt: 'Coastal beach setting in Grand-Popo, Benin',
     },
   ],

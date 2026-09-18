@@ -405,7 +405,7 @@ export const ZAMBIA_DATA = {
         title: 'Authentic Experiences',
         description:
           'Warm and welcoming people, rich cultures, and vibrant local communities make Zambia a place for meaningful travel experiences and lasting connections.',
-        image: '/Pictures/zambia/Zambia_Cards_PRG.JPG',
+        image: '/Pictures/zambia/Zambiaaaa_People.jpg',
       },
     ],
   },

@@ -13,7 +13,7 @@ export function TrustStrip() {
   return (
     <section className="pb-10 lg:pb-10">
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
-        <Reveal className="flex flex-col gap-1">
+        <Reveal className="ml-[1.2rem] flex flex-col gap-1 sm:ml-[1.5rem] lg:ml-[2rem]">
           <h2 className="shrink-0 whitespace-nowrap text-2xl leading-[1.15] text-primary">
             Trust,
             <span className="italic font-medium"> Built Over Time</span>

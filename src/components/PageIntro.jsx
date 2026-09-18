@@ -72,7 +72,7 @@ export function PageIntro({
   return (
     <section
       id={id}
-      className="relative flex min-h-[640px] items-center overflow-hidden text-primary-foreground sm:min-h-[92vh]"
+      className="relative flex h-svh min-h-[600px] items-center overflow-hidden text-primary-foreground"
     >
       {backgroundImage ? (
         <img

@@ -99,7 +99,7 @@ export const COUNTRIES = [
     slug: 'rwanda',
     name: 'Rwanda',
     region: 'east',
-    note: 'Land of a thousand hills',
+    note: 'Land of a Thousand Hills',
     to: '/rwanda',
     tone: 'navy',
     image: '/Pictures/countries/Rwanda.jpg',
@@ -1430,8 +1430,8 @@ export const SENEGAL_PAGE = {
 // Benin" destinations grid the generic template has no room for.
 export const BENIN_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/countries/Benin.jpg',
-    backgroundImageAlt: 'Colorful pirogue boats beside a coastal fort in Benin',
+    backgroundImage: '/Pictures/Benin/Benin_Hero.jpg',
+    backgroundImageAlt: 'Benin hero portrait',
     heading: 'Explore Benin',
     description:
       'From the historic streets of Ouidah and the stilt village of Ganvié to the energy of Cotonou and the royal heritage of Abomey, Benin offers a fascinating journey through history, culture, tradition and everyday West African life.',
@@ -1498,16 +1498,32 @@ export const BENIN_PAGE = {
     {
       name: 'Ouidah',
       text: 'Historic city and birthplace of Vodun (Voodoo). Visit the Door of No Return and its museums.',
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'Historic Ouidah and the coastal heritage of Benin',
     },
-    { name: 'Ganvié', text: 'The "Venice of Africa" — a stilt village on Lake Nokoué.' },
-    { name: 'Abomey', text: 'Home to the Royal Palaces, a UNESCO World Heritage Site.' },
+    {
+      name: 'Ganvié',
+      text: 'The "Venice of Africa" — a stilt village on Lake Nokoué.',
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'Stilt village homes on Lake Nokoué in Benin',
+    },
+    {
+      name: 'Abomey',
+      text: 'Home to the Royal Palaces, a UNESCO World Heritage Site.',
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'Royal palaces and historical heritage in Abomey',
+    },
     {
       name: 'Parakou & Atacora',
       text: "Discover northern Benin's culture, landscapes, and traditional villages.",
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'Northern Benin landscapes and villages',
     },
     {
       name: 'Grand-Popo',
       text: 'Relax on beautiful beaches and enjoy a laid-back coastal atmosphere.',
+      image: '/Pictures/countries/Benin.jpg',
+      imageAlt: 'Coastal beach setting in Grand-Popo, Benin',
     },
   ],
   routes: [

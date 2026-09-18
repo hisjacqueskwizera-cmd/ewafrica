@@ -156,7 +156,7 @@ export function Benin() {
 
       {/* Where to go — real Benin destinations. */}
       <section className="bg-cream py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
               Where to Go in Benin
@@ -166,18 +166,29 @@ export function Benin() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
             {places.map((place, i) => (
               <Reveal key={place.name} delay={i * 90}>
-                <div className="flex h-full flex-col gap-2 rounded-2xl bg-card p-5 shadow-card">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-sand text-copper">
-                    <MapPin className="size-4" aria-hidden="true" />
-                  </span>
-                  <h3 className="text-sm font-bold text-primary">{place.name}</h3>
-                  <p className="flex-1 text-xs leading-relaxed text-muted-foreground">
-                    {place.text}
-                  </p>
-                </div>
+                <article className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-card shadow-card transition-transform duration-300 hover:-translate-y-1 xl:min-h-[430px]">
+                  <div className="relative aspect-[5/4] overflow-hidden sm:aspect-[4/3] xl:aspect-[4/5]">
+                    <img
+                      src={place.image ?? '/Pictures/countries/Benin.jpg'}
+                      alt={place.imageAlt ?? place.name}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-cocoa/35 via-transparent to-transparent" aria-hidden="true" />
+                    <span className="absolute left-4 top-4 grid size-12 shrink-0 place-items-center rounded-full bg-white/85 text-copper shadow-card ring-2 ring-white/60 backdrop-blur-sm">
+                      <MapPin className="size-5" aria-hidden="true" />
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
+                    <h3 className="text-xl font-bold text-primary sm:text-[1.35rem]">{place.name}</h3>
+                    <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
+                      {place.text}
+                    </p>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>

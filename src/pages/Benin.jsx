@@ -55,6 +55,25 @@ function CardCta({ to, children }) {
 export function Benin() {
   useEffect(() => {
     document.title = 'Explore Benin | East-West Africa Link'
+
+    const galleryItems = document.querySelectorAll('.gallery-item')
+    if (!galleryItems.length) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.18 },
+    )
+
+    galleryItems.forEach((item) => observer.observe(item))
+
+    return () => observer.disconnect()
   }, [])
 
   const { hero, services, places, routes, guide, closing, trust, farewell } = BENIN_PAGE
@@ -73,7 +92,7 @@ export function Benin() {
       <section className="bg-cream py-10 sm:py-12 lg:py-16">
         <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
           <div className="grid gap-px lg:grid-cols-[1.8fr_0.9fr_0.9fr]">
-            <Reveal className="group overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5">
+            <Reveal className="gallery-item group overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5" style={{ '--delay': '0ms' }}>
               <div className="relative h-full min-h-[430px] overflow-hidden">
                 <img
                   src="/Pictures/Benin/Benin_Hero.jpg"
@@ -88,8 +107,8 @@ export function Benin() {
               {['/Pictures/Benin_Side_Image.JPG', '/Pictures/Benin_Landing_Hero.JPG'].map((src, index) => (
                 <Reveal
                   key={src}
-                  delay={index * 110}
-                  className="group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                  className="gallery-item group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                  style={{ '--delay': `${(index + 1) * 100}ms` }}
                 >
                   <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
                     <img
@@ -107,8 +126,8 @@ export function Benin() {
               {['/Pictures/Benin/Back_River.jpg', '/Pictures/countries/Benin.jpg'].map((src, index) => (
                 <Reveal
                   key={src}
-                  delay={(index + 2) * 110}
-                  className="group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                  className="gallery-item group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
+                  style={{ '--delay': `${(index + 3) * 100}ms` }}
                 >
                   <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
                     <img

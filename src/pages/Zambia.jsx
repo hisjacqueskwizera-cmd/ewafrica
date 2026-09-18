@@ -44,7 +44,7 @@ export function Zambia() {
            other destination page (Ghana, Uganda, Malawi, etc.). */}
       <DestinationHero
         heading={`${hero.eyebrow} — ${hero.title}`}
-        headingClassName="font-display text-[2.1rem] font-normal leading-[1.1] text-balance text-white sm:text-[2.8rem] lg:text-[3.76rem]"
+        headingClassName="font-display text-[1.65rem] font-normal leading-[1.05] text-balance text-white sm:text-[2.2rem] lg:text-[3rem]"
         description={hero.description}
         backgroundImage={hero.image}
         backgroundImageAlt="Victoria Falls, Zambia"

@@ -45,13 +45,14 @@ export function HowItWorks() {
     <div className="relative overflow-hidden pt-16 lg:pt-20">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-[-52%] top-1/2 hidden w-[90rem] -translate-y-1/2 opacity-100 md:block md:right-[-48%] md:w-[94rem] lg:right-[-40%] lg:w-[110rem]"
+        className="pointer-events-none absolute right-[-46rem] top-[64%] hidden -translate-y-1/2 opacity-50 md:block md:right-[-42rem] md:top-[62%] lg:right-[-36rem] lg:top-[64%]"
         style={{
           backgroundImage: "url('/Pictures/HowWeGuideYourJourney/Map_Of_Africa.PNG')",
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',
-          height: '56rem',
+          width: '110rem',
+          height: '68rem',
         }}
       />
       <SectionMark />

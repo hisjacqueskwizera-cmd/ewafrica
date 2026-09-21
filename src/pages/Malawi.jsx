@@ -34,6 +34,45 @@ const MALAWI_GALLERY_TILES = [
     title: 'Lake Malawi',
     subtitle: "The MV Ilala crossing Africa's warm heart",
   },
+  {
+    src: '/Pictures/Malawi/Gallery/majete_elephants.jpg',
+    alt: 'Elephants along the Shire River in Majete Wildlife Reserve, Malawi',
+    title: 'Majete Wildlife Reserve',
+    subtitle: 'Elephants along the Shire River',
+  },
+  {
+    src: '/Pictures/Malawi/Gallery/lake_malawi_sunset.jpg',
+    alt: 'Sunset over Lake Malawi framed by a palm tree',
+    title: 'Lake Malawi',
+    subtitle: "Sunset over Africa's warm heart",
+  },
+  {
+    src: '/Pictures/Malawi/Gallery/likoma_cathedral.jpg',
+    alt: "St Peter's Cathedral on Likoma Island, Lake Malawi",
+    title: 'Likoma Island',
+    subtitle: "St Peter's Cathedral, a lakeside landmark",
+  },
+  {
+    src: '/Pictures/Malawi/Gallery/tea_plantation.jpg',
+    alt: 'Rolling tea plantations in the Malawian highlands',
+    title: 'Highland Tea Estates',
+    subtitle: 'Rolling tea plantations in the highlands',
+  },
+]
+
+const MALAWI_GALLERY_EXTRA_TILES = [
+  {
+    src: '/Pictures/Malawi/Gallery/majete_zebras.jpg',
+    alt: 'Zebras at dawn in Majete Wildlife Reserve, Malawi',
+    title: 'Majete Wildlife Reserve',
+    subtitle: 'Zebras grazing at first light',
+  },
+  {
+    src: '/Pictures/Malawi/Gallery/usisya_village.jpg',
+    alt: 'Usisya village and Lake Malawi seen from the highlands above',
+    title: 'Usisya',
+    subtitle: 'A remote lakeshore village seen from above',
+  },
 ]
 
 const ICONS = {
@@ -95,7 +134,8 @@ export function Malawi() {
         heading="A Glimpse of Malawi"
         subheading="Africa's warm heart, one great lake — a first look at the sights waiting across Malawi."
         tiles={MALAWI_GALLERY_TILES}
-        variant="single"
+        variant="mosaic"
+        extraTiles={MALAWI_GALLERY_EXTRA_TILES}
       />
 
       {/* Travel Services in Malawi — three cards, no Independent Tour

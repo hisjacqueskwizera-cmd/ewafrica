@@ -1,10 +1,9 @@
-import { ArrowRight, Pause, Play, X } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
-import { RWANDA_PAGE } from '../data/siteContent.js'
 
 // Header is a fixed 84px bar (see Header.jsx); RwandaSubNav sticks directly
 // under it (also 56px tall), and every stacked gallery section sticks under
@@ -12,6 +11,60 @@ import { RWANDA_PAGE } from '../data/siteContent.js'
 const HEADER_HEIGHT = 84
 const SUBNAV_HEIGHT = 56
 const STACK_TOP = HEADER_HEIGHT + SUBNAV_HEIGHT
+
+// One flat list of every photo (not video) tile, in on-page order, so the
+// full-screen Lightbox can step forward/back through them regardless of
+// which row a photo happens to sit in.
+const PHOTOS = [
+  {
+    src: '/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg',
+    alt: "Aerial panorama of Lake Kivu's islands and green hills",
+    title: 'Lake Kivu',
+    subtitle: 'Stunning lake views, rolling green hills and peaceful lakeside towns.',
+  },
+  {
+    src: '/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg',
+    alt: 'Canopy walkway suspended above Nyungwe Forest National Park',
+    title: 'Nyungwe National Park',
+    subtitle: "Walk above the rainforest on one of Africa's most spectacular canopy walkways.",
+  },
+  {
+    src: '/Rwanda_Gallery/Calture/IMG_4973_web.jpg',
+    alt: 'Intore dancers performing a traditional Rwandan dance',
+    title: 'Rwandan Culture',
+    subtitle: 'Music, dance and traditions that inspire.',
+  },
+  {
+    src: '/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg',
+    alt: 'Rolling tea plantation hills at sunset in Rwanda',
+    title: 'Tea Plantations',
+    subtitle: "Lush green hills and some of the world's finest tea.",
+  },
+  {
+    src: '/Rwanda_Gallery/Butaro/IMG_5203_web.jpg',
+    alt: 'Volcano and lake view from the Butaro highlands in northern Rwanda',
+    title: 'Butaro Highlands',
+    subtitle: 'Cool mountains, fresh air and breathtaking views in northern Rwanda.',
+  },
+  {
+    src: '/Rwanda_Gallery/Akagera/IMG_5239_web.jpg',
+    alt: 'Savannah, lakes and wetlands of Akagera National Park',
+    title: 'Akagera National Park',
+    subtitle: "Wide savannah landscapes, lakes and wetlands in Rwanda's eastern wilderness.",
+  },
+  {
+    src: '/Rwanda_Gallery/Akagera/IMG_5300_web.jpg',
+    alt: 'Two rhinos grazing beside a lake in Akagera National Park',
+    title: 'Akagera National Park',
+    subtitle: 'Rhinos, brought back from the brink of disappearance.',
+  },
+  {
+    src: '/Rwanda_Gallery/Akagera/IMG_5301_web.jpg',
+    alt: 'Giraffes among acacia trees in Akagera National Park',
+    title: 'Akagera National Park',
+    subtitle: 'Giraffes roaming the savannah hills.',
+  },
+]
 
 /**
  * Pins its children under the header + sub-nav as the user scrolls, so the
@@ -107,11 +160,12 @@ function VideoTile({ src, poster, alt, title, subtitle, className = '' }) {
   )
 }
 
-function PhotoTile({ src, alt, title, subtitle, className = '', onExpand }) {
+function PhotoTile({ photo, className = '', onExpand }) {
+  const { src, alt, title, subtitle } = photo
   return (
     <button
       type="button"
-      onClick={() => onExpand?.({ src, alt, title, subtitle })}
+      onClick={() => onExpand?.(photo)}
       aria-label={`View ${title} full screen`}
       className={`group relative block w-full cursor-zoom-in overflow-hidden border border-cocoa/10 bg-[#f4efe8] shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift ${className}`}
     >
@@ -137,18 +191,28 @@ function PhotoTile({ src, alt, title, subtitle, className = '', onExpand }) {
   )
 }
 
+// Swipe distance (px) that counts as an intentional slide rather than a tap
+// or scroll wobble.
+const SWIPE_THRESHOLD = 50
+
 /**
- * Full-screen lightbox for a clicked PhotoTile — plain `fixed` overlay
- * (not a portal) works fine here since it's rendered at the top level of
- * RwandaGallery, outside every Reveal wrapper; a `transform` on an
- * ancestor would otherwise re-anchor a `fixed` child to that ancestor
+ * Full-screen lightbox for a clicked PhotoTile — steps through every photo
+ * in the gallery (see PHOTOS) via on-screen Previous/Next arrows (desktop),
+ * left/right swipes (touch devices), or the arrow keys. Plain `fixed`
+ * overlay (not a portal) works fine here since it's rendered at the top
+ * level of RwandaGallery, outside every Reveal wrapper; a `transform` on
+ * an ancestor would otherwise re-anchor a `fixed` child to that ancestor
  * instead of the viewport.
  */
-function Lightbox({ image, onClose }) {
+function Lightbox({ index, onClose, onNext, onPrev }) {
+  const touchStartX = useRef(null)
+
   useEffect(() => {
-    if (!image) return undefined
+    if (index === null) return undefined
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
+      if (event.key === 'ArrowRight') onNext()
+      if (event.key === 'ArrowLeft') onPrev()
     }
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
@@ -156,14 +220,29 @@ function Lightbox({ image, onClose }) {
       document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = ''
     }
-  }, [image, onClose])
+  }, [index, onClose, onNext, onPrev])
 
-  if (!image) return null
+  if (index === null) return null
+  const image = PHOTOS[index]
+
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX
+  }
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return
+    const deltaX = event.changedTouches[0].clientX - touchStartX.current
+    if (deltaX > SWIPE_THRESHOLD) onPrev()
+    else if (deltaX < -SWIPE_THRESHOLD) onNext()
+    touchStartX.current = null
+  }
 
   return (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4 sm:p-8"
       onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <button
         type="button"
@@ -173,6 +252,32 @@ function Lightbox({ image, onClose }) {
       >
         <X className="size-5" aria-hidden="true" />
       </button>
+
+      {/* Previous/Next — desktop-only; touch devices use the swipe
+          gesture instead (see handleTouchStart/handleTouchEnd above). */}
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation()
+          onPrev()
+        }}
+        aria-label="Previous image"
+        className="absolute left-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:left-6 sm:grid"
+      >
+        <ChevronLeft className="size-6" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation()
+          onNext()
+        }}
+        aria-label="Next image"
+        className="absolute right-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:right-6 sm:grid"
+      >
+        <ChevronRight className="size-6" aria-hidden="true" />
+      </button>
+
       <img
         src={image.src}
         alt={image.alt}
@@ -185,9 +290,23 @@ function Lightbox({ image, onClose }) {
       >
         <p className="font-display text-lg font-bold text-white sm:text-xl">{image.title}</p>
         <p className="mt-1 text-xs text-white/80 sm:text-sm">{image.subtitle}</p>
+        <p className="mt-2 text-[11px] uppercase tracking-wider text-white/50">
+          {index + 1} / {PHOTOS.length}
+        </p>
       </div>
     </div>
   )
+}
+
+// Decorative leaf-frame vignette applied behind every Rwanda page — the
+// PNG's transparent center lets the page's own background color show
+// through; only its corners carry any artwork.
+const RWANDA_PAGE_BACKGROUND = {
+  backgroundImage: 'url(/Pictures/Background/Rwanda_Background.PNG)',
+  backgroundPosition: 'top center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  backgroundAttachment: 'fixed',
 }
 
 export function RwandaGallery() {
@@ -196,19 +315,21 @@ export function RwandaGallery() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
-  const { hero } = RWANDA_PAGE
-  const [lightboxImage, setLightboxImage] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+  const showNext = () => setLightboxIndex((i) => (i + 1) % PHOTOS.length)
+  const showPrev = () => setLightboxIndex((i) => (i - 1 + PHOTOS.length) % PHOTOS.length)
+  const openAt = (photo) => setLightboxIndex(PHOTOS.indexOf(photo))
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-background min-h-screen" style={RWANDA_PAGE_BACKGROUND}>
       {/* Hero — the same full-viewport hero every destination page shares;
           the global Header goes transparent on top of it (see
           TRANSPARENT_HERO_ROUTES in Header.jsx). */}
       <DestinationHero
         heading="Explore Rwanda"
-        description={`${hero.subheading}. ${hero.description}`}
-        backgroundImage={hero.image}
-        backgroundImageAlt={hero.imageAlt}
+        description="A closer look at the landscapes, wildlife and culture that make Rwanda unforgettable."
+        backgroundImage="/Pictures/Background/GalleryHero_Section.JPG"
+        backgroundImageAlt="Aerial view of terraced green hills in Rwanda"
         overlayClassName="bg-black/35"
       />
 
@@ -279,21 +400,15 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg"
-                  alt="Aerial panorama of Lake Kivu's islands and green hills"
-                  title="Lake Kivu"
-                  subtitle="Stunning lake views, rolling green hills and peaceful lakeside towns."
+                  photo={PHOTOS[0]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg"
-                  alt="Canopy walkway suspended above Nyungwe Forest National Park"
-                  title="Nyungwe National Park"
-                  subtitle="Walk above the rainforest on one of Africa's most spectacular canopy walkways."
+                  photo={PHOTOS[1]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
@@ -304,14 +419,7 @@ export function RwandaGallery() {
               Nyungwe, and bigger than the paired rows around it. */}
           <StackSection className="bg-background">
             <Reveal once={false}>
-              <PhotoTile
-                onExpand={setLightboxImage}
-                src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
-                alt="Intore dancers performing a traditional Rwandan dance"
-                title="Rwandan Culture"
-                subtitle="Music, dance and traditions that inspire."
-                className="aspect-[3/2]"
-              />
+              <PhotoTile photo={PHOTOS[2]} onExpand={openAt} className="aspect-[3/2]" />
             </Reveal>
           </StackSection>
 
@@ -321,21 +429,15 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg"
-                  alt="Rolling tea plantation hills at sunset in Rwanda"
-                  title="Tea Plantations"
-                  subtitle="Lush green hills and some of the world's finest tea."
+                  photo={PHOTOS[3]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Butaro/IMG_5203_web.jpg"
-                  alt="Volcano and lake view from the Butaro highlands in northern Rwanda"
-                  title="Butaro Highlands"
-                  subtitle="Cool mountains, fresh air and breathtaking views in northern Rwanda."
+                  photo={PHOTOS[4]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
@@ -347,11 +449,8 @@ export function RwandaGallery() {
           <StackSection className="bg-background">
             <Reveal once={false}>
               <PhotoTile
-                onExpand={setLightboxImage}
-                src="/Rwanda_Gallery/Akagera/IMG_5239_web.jpg"
-                alt="Savannah, lakes and wetlands of Akagera National Park"
-                title="Akagera National Park"
-                subtitle="Wide savannah landscapes, lakes and wetlands in Rwanda's eastern wilderness."
+                photo={PHOTOS[5]}
+                onExpand={openAt}
                 className="h-[300px] sm:h-[380px] lg:h-[460px]"
               />
             </Reveal>
@@ -362,21 +461,15 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Akagera/IMG_5300_web.jpg"
-                  alt="Two rhinos grazing beside a lake in Akagera National Park"
-                  title="Akagera National Park"
-                  subtitle="Rhinos, brought back from the brink of disappearance."
+                  photo={PHOTOS[6]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
-                  onExpand={setLightboxImage}
-                  src="/Rwanda_Gallery/Akagera/IMG_5301_web.jpg"
-                  alt="Giraffes among acacia trees in Akagera National Park"
-                  title="Akagera National Park"
-                  subtitle="Giraffes roaming the savannah hills."
+                  photo={PHOTOS[7]}
+                  onExpand={openAt}
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
@@ -386,12 +479,12 @@ export function RwandaGallery() {
       </main>
 
       {/* Closing banner */}
-      <section className="relative z-10 border-t border-border/60 bg-[#eef4ea] py-8">
+      <section className="relative z-10 border-t border-border/60 bg-cream py-8">
         <div className="mx-auto flex w-[95%] flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-2xl italic text-primary">Rwanda</p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-copper">
-              A Remarkable Journey Awaits
+            <p className="max-w-md text-xs font-semibold uppercase tracking-[0.14em] text-copper sm:text-[13px]">
+              Where misty hills, ancient wildlife, and serene waters meet timeless culture.
             </p>
           </div>
           <HashLink
@@ -404,7 +497,7 @@ export function RwandaGallery() {
         </div>
       </section>
 
-      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
+      <Lightbox index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNext={showNext} onPrev={showPrev} />
     </div>
   )
 }

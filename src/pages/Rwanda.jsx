@@ -16,13 +16,13 @@ const RWANDA_GALLERY_TILES = [
     src: '/Pictures/countries/Rwandaa.jpg',
     alt: 'Mountain gorilla in Volcanoes National Park, Rwanda',
     title: 'Mountain Gorillas',
-    subtitle: "Volcanoes National Park's icons",
+    subtitle: "Volcanoes National Park",
   },
   {
     src: '/Pictures/Rwanda/Rwanda_GCard.JPG',
     alt: 'Kibuye lakeside scenery in Rwanda',
     title: 'Kibuye',
-    subtitle: 'Where Rwanda comes to Breath',
+    subtitle: 'Where Rwanda comes to Breathe',
   },
 ]
 

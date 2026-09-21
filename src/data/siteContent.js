@@ -2890,10 +2890,9 @@ export const EXPLORE_PAGE = {
         'Complete Ghana Relocation Package',
       ],
       description: [
-        "Ghana is one of West Africa's most welcoming and culturally rich destinations, where vibrant cities, historic coastal towns, beautiful beaches, traditional communities, and a powerful sense of heritage come together.",
-        "Explore the energy of Accra, the history of Cape Coast and Elmina, the beauty of Ghana's coastline and countryside, and the traditions that make the country such a distinctive place to visit, live, and explore new opportunities.",
-        'For many travelers — especially members of the African diaspora — Ghana offers something deeper: a chance to reconnect with history and heritage, build meaningful connections, and experience West Africa in a more personal way.',
+        'From Accra and Cape Coast to Kumasi and the Volta Region, explore Ghana with practical guidance for independent travel and relocation.',
       ],
+      locationCaption: 'Cape Coast Castle, Ghana',
     },
     countries: [
       { slug: 'senegal', services: EXPLORE_SERVICES },

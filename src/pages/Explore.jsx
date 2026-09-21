@@ -82,17 +82,20 @@ function ServiceList({ items, className = '' }) {
 // over the gradient.
 //
 // A featured card (Tanzania, Ghana) spans more columns, also carries its
-// description and an optional badge, and adds a left-hand gradient so its
-// longer copy stays readable. Its services can come as labelled groups
-// (Ghana's travel vs relocation) instead of one list.
-//
-// A featured card with `imageSide: 'right'` (Ghana, whose photo is a tall
-// portrait) shows its photo whole and uncovered in its own panel on the
-// right — on top on phones — instead of cropping it into a darkened
-// full-bleed background. Behind the copy sits the card's own
-// `backgroundImage` when it has one (Ghana: Cape Coast Castle), shaded
-// darkest on the left for readable text — otherwise a blurred, dimmed copy
-// of the portrait, so the card still reads as one piece.
+// description and an optional badge, and renders its CTA as a solid gold
+// pill rather than the plain text+arrow row every other card uses. Its
+// services can come as labelled groups (Ghana's travel vs relocation)
+// instead of one list, in which case a vertical rule separates the two
+// columns. Its dark fade sits only behind the text block itself — not
+// smeared across the whole photo — so pass `strongOverlay` for a featured
+// card whose text block needs a darker shade to stay readable over a
+// busier photo (Ghana's). Pass `descriptionFirst` to render the
+// description paragraph(s) above the services instead of below (Ghana's
+// own reference layout — Tanzania keeps services first), and `liftText`
+// to lift the whole text block up off the card's bottom edge (Ghana's
+// reference has noticeably more breathing room there than Tanzania's).
+// `locationCaption` (with a pin icon) pins a "Place, Country" caption to
+// the card's bottom-left corner.
 //
 // Cards take a min-height rather than a fixed aspect ratio so every card
 // stretches to its grid row instead of one sitting shorter than its
@@ -101,80 +104,38 @@ function DestinationCountryCard({ country, featured = false }) {
   const cta = ctaFor(country)
   const serviceGroups = country.serviceGroups ?? [{ items: country.services }]
   const grouped = serviceGroups.length > 1
-  const sidePortrait = featured && country.imageSide === 'right'
+
+  const Description = () =>
+    country.description && (
+      <div className="mt-4 max-w-sm space-y-2 text-sm leading-relaxed text-primary-foreground/80">
+        {country.description.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+    )
 
   return (
     <HashLink
       id={country.slug}
       to={cta.to}
-      className={`group relative flex h-full min-h-[690px] scroll-mt-28 overflow-hidden bg-cocoa ${
-        sidePortrait ? 'flex-col-reverse lg:flex-row' : 'flex-col justify-end'
-      }`}
+      className="group relative flex h-full min-h-[690px] scroll-mt-28 flex-col justify-end overflow-hidden bg-cocoa"
     >
-      {sidePortrait ? (
-        <>
-          {country.backgroundImage ? (
-            <>
-              <img
-                src={country.backgroundImage}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
-              />
-              {/* On phones/tablets the copy spans the whole card width, so the
-                  photo gets an even shade; on desktop it's darkest behind the
-                  copy on the left and eases off to the right so the photo
-                  still reads clearly around the portrait. */}
-              <div
-                className="absolute inset-0 bg-black/65 lg:bg-transparent lg:bg-linear-to-r lg:from-black/80 lg:via-black/60 lg:to-black/20"
-                aria-hidden="true"
-              />
-            </>
-          ) : (
-            <>
-              <img
-                src={country.image}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="absolute inset-0 size-full scale-110 object-cover opacity-35 blur-2xl"
-              />
-              <div
-                className="absolute inset-0 bg-linear-to-r from-black/85 via-black/65 to-black/45"
-                aria-hidden="true"
-              />
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          <img
-            src={country.image}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
-          />
-          <div
-            className={`absolute inset-0 bg-linear-to-t ${
-              featured
-                ? 'from-black/70 via-black/40 to-black/5'
-                : 'from-black/80 via-black/25 to-transparent'
-            }`}
-            aria-hidden="true"
-          />
-          {featured && (
-            <div
-              className="absolute inset-0 bg-linear-to-r from-black/45 via-black/15 to-transparent"
-              aria-hidden="true"
-            />
-          )}
-          <div
-            className="absolute inset-0 bg-black opacity-0 transition-opacity duration-[450ms] ease-out group-hover:opacity-[0.45]"
-            aria-hidden="true"
-          />
-        </>
+      <img
+        src={country.image}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
+      />
+      {/* Non-featured cards keep the classic bottom-up fade behind their
+          short title; featured cards fade only behind their own text
+          block below (not the whole photo) — see that block's own
+          background. */}
+      {!featured && (
+        <div
+          className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-transparent"
+          aria-hidden="true"
+        />
       )}
       {country.badge && (
         <span className="absolute top-5 left-6 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground sm:left-8">
@@ -183,9 +144,23 @@ function DestinationCountryCard({ country, featured = false }) {
       )}
 
       <div
-        className={`relative p-6 ${featured ? 'sm:p-8' : ''} ${
-          sidePortrait ? 'flex flex-1 flex-col justify-end' : featured ? 'max-w-3xl' : ''
-        }`}
+        className={`relative p-6 ${featured ? 'sm:p-8' : ''} ${featured ? 'max-w-3xl' : ''} ${
+          country.locationCaption ? 'pb-11 sm:pb-12' : ''
+        } ${country.liftText ? 'mb-[6cm]' : ''}`}
+        style={
+          featured
+            ? {
+                // A radial glow anchored at the text block's bottom-left
+                // (roughly where the copy is densest) fades outward in
+                // every direction, so it blends into the photo instead of
+                // ending in a hard rectangular edge the way a plain
+                // linear/box gradient would.
+                backgroundImage: `radial-gradient(120% 110% at 0% 100%, rgba(0,0,0,${
+                  country.strongOverlay ? 0.8 : 0.65
+                }) 0%, rgba(0,0,0,${country.strongOverlay ? 0.5 : 0.35}) 45%, rgba(0,0,0,0) 85%)`,
+              }
+            : undefined
+        }
       >
         <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
           <Flag slug={country.slug} />
@@ -193,13 +168,30 @@ function DestinationCountryCard({ country, featured = false }) {
             <CountryName name={country.name} />
           </h3>
         </div>
-        {country.note && (
-          <p className="mt-1 truncate text-sm text-primary-foreground/80">{country.note}</p>
-        )}
+        {country.note &&
+          (featured ? (
+            <>
+              <p className="mt-1 font-display text-lg font-bold text-primary-foreground sm:text-xl">
+                {country.note}
+              </p>
+              <span className="mt-3 block h-0.5 w-14 bg-gold" aria-hidden="true" />
+            </>
+          ) : (
+            <p className="mt-1 truncate text-sm text-primary-foreground/80">{country.note}</p>
+          ))}
 
-        <div className={`mt-4 grid gap-x-8 gap-y-4 ${grouped ? 'sm:grid-cols-2' : ''}`}>
-          {serviceGroups.map((group) => (
-            <div key={group.label ?? 'services'}>
+        {featured && country.descriptionFirst && <Description />}
+
+        <div
+          className={`mt-4 grid gap-y-4 ${
+            grouped ? 'sm:grid-cols-2 sm:divide-x sm:divide-primary-foreground/25' : 'gap-x-8'
+          }`}
+        >
+          {serviceGroups.map((group, i) => (
+            <div
+              key={group.label ?? 'services'}
+              className={grouped ? (i === 0 ? 'sm:pr-8' : 'sm:pl-8') : ''}
+            >
               {group.label && (
                 <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold">
                   {group.label}
@@ -213,20 +205,27 @@ function DestinationCountryCard({ country, featured = false }) {
           ))}
         </div>
 
-        {featured && (
-          <div className="mt-4 space-y-2 text-sm leading-relaxed text-primary-foreground/80">
-            {country.description.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        )}
+        {featured && !country.descriptionFirst && <Description />}
 
-        <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
-          {cta.label}
-          <ArrowRight className="size-3.5" aria-hidden="true" />
-        </span>
+        {featured ? (
+          <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gold px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-cocoa shadow-card transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
+            {cta.label}
+            <ArrowRight className="size-3.5" aria-hidden="true" />
+          </span>
+        ) : (
+          <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
+            {cta.label}
+            <ArrowRight className="size-3.5" aria-hidden="true" />
+          </span>
+        )}
       </div>
 
+      {country.locationCaption && (
+        <div className="absolute bottom-5 left-6 z-10 flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80 sm:bottom-6 sm:left-8">
+          <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+          {country.locationCaption}
+        </div>
+      )}
     </HashLink>
   )
 }
@@ -256,7 +255,12 @@ export function Explore() {
   const [featuredEast, ...otherEast] = east.countries.map(withCountry)
   const ghana = {
     ...withCountry(west.featured),
-    imageSide: 'right',
+    // Full-bleed Cape Coast Castle photo, same treatment as every other
+    // featured card — not the old side-portrait panel.
+    image: west.featured.backgroundImage,
+    strongOverlay: true,
+    descriptionFirst: true,
+    liftText: true,
     serviceGroups: [
       { label: 'Travel Services', items: west.featured.travelServices },
       { label: 'Relocation & Living in Ghana', items: west.featured.relocationServices },

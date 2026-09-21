@@ -67,8 +67,9 @@ export function HowItWorks() {
       </div>
 
       <p className="relative z-10 mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-        From your first question to your next chapter, we provide independent guidance, local
-        insight, and practical support across Africa.
+        From your first question to your next chapter, we provide independent guidance,
+        <br />
+        local insight, and practical support across Africa.
       </p>
 
       {/* Each mini-heading is followed, in the same grid cell, by a

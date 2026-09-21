@@ -218,7 +218,7 @@ export function TravelPlanner() {
           {!isLocked && (
             <Reveal delay={150}>
               <div className="mx-auto mt-8 flex max-w-xs flex-col items-center gap-2">
-                <span className="font-bold text-primary" style={{ fontSize: "25px" }}> Your Destination:</span>
+                <span className="font-bold text-primary" style={{ fontSize: "14px" }}> Your Destination:</span>
                 <DestinationPicker
                   countries={COUNTRIES}
                   values={destinationSlugs}

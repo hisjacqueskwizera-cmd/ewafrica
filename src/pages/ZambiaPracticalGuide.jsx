@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { ZAMBIA_DATA } from '../data/zambiaContent.js'
@@ -35,6 +36,15 @@ export function ZambiaPracticalGuide() {
 
   return (
     <div className="bg-background min-h-screen">
+      {/* Hero — the same full-viewport hero every destination page shares. */}
+      <DestinationHero
+        heading="Zambia Practical Guide"
+        description="Everything you need to plan a smooth, confident trip — from Victoria Falls and safari country to money, transport and border crossings."
+        backgroundImage="/Pictures/zambia/Hero_Section/Zambia_Pr_Hero_Section.JPG"
+        backgroundImageAlt="The Zambezi River rushing through the Batoka Gorge below Victoria Falls, Zambia"
+        overlayClassName="bg-black/40"
+      />
+
       {/* Subtle top sub-nav / breadcrumb */}
       <div className="border-b border-border/60 bg-cream/70 py-3.5 backdrop-blur-xs">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">

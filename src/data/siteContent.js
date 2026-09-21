@@ -1526,7 +1526,7 @@ export const BENIN_PAGE = {
       imageAlt: 'Coastal beach setting in Grand-Popo, Benin',
     },
     {
-      name: 'Black River (La Rivière Noire) — Adjarra',
+      name: 'La Rivière Noire — Adjarra',
       text: 'Take a traditional canoe trip along a mysterious river surrounded by raffia palms and unspoiled nature, offering a landscape as peaceful as it is spectacular.',
       image: '/Pictures/Benin/Back_River.jpg',
       imageAlt: 'Riverfront scenery in Black River Adjarra',

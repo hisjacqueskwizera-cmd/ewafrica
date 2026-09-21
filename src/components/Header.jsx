@@ -35,6 +35,7 @@ const TRANSPARENT_HERO_ROUTES = [
   '/ghana',
   '/malawi',
   '/zambia',
+  '/zambia/practical-guide',
   '/uganda',
   '/rwanda',
   '/rwanda/gallery',

@@ -1,4 +1,4 @@
-import { ArrowRight, Pause, Play } from 'lucide-react'
+import { ArrowRight, Pause, Play, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
@@ -107,10 +107,13 @@ function VideoTile({ src, poster, alt, title, subtitle, className = '' }) {
   )
 }
 
-function PhotoTile({ src, alt, title, subtitle, className = '' }) {
+function PhotoTile({ src, alt, title, subtitle, className = '', onExpand }) {
   return (
-    <div
-      className={`group relative w-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift ${className}`}
+    <button
+      type="button"
+      onClick={() => onExpand?.({ src, alt, title, subtitle })}
+      aria-label={`View ${title} full screen`}
+      className={`group relative block w-full cursor-zoom-in overflow-hidden border border-cocoa/10 bg-[#f4efe8] shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift ${className}`}
     >
       <img
         src={src}
@@ -122,13 +125,66 @@ function PhotoTile({ src, alt, title, subtitle, className = '' }) {
         className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"
         aria-hidden="true"
       />
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+      <div className="absolute inset-x-0 bottom-0 p-4 text-left sm:p-5">
         <h3 className="font-display text-base font-bold text-white drop-shadow-sm sm:text-lg lg:text-xl">
           {title}
         </h3>
         <p className="mt-1 text-[11px] leading-snug text-white/85 sm:text-xs lg:text-sm">
           {subtitle}
         </p>
+      </div>
+    </button>
+  )
+}
+
+/**
+ * Full-screen lightbox for a clicked PhotoTile — plain `fixed` overlay
+ * (not a portal) works fine here since it's rendered at the top level of
+ * RwandaGallery, outside every Reveal wrapper; a `transform` on an
+ * ancestor would otherwise re-anchor a `fixed` child to that ancestor
+ * instead of the viewport.
+ */
+function Lightbox({ image, onClose }) {
+  useEffect(() => {
+    if (!image) return undefined
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [image, onClose])
+
+  if (!image) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4 sm:p-8"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close full-screen view"
+        className="absolute right-4 top-4 grid size-11 place-items-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10 sm:right-6 sm:top-6"
+      >
+        <X className="size-5" aria-hidden="true" />
+      </button>
+      <img
+        src={image.src}
+        alt={image.alt}
+        onClick={(event) => event.stopPropagation()}
+        className="max-h-full max-w-full object-contain"
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center"
+        aria-hidden="true"
+      >
+        <p className="font-display text-lg font-bold text-white sm:text-xl">{image.title}</p>
+        <p className="mt-1 text-xs text-white/80 sm:text-sm">{image.subtitle}</p>
       </div>
     </div>
   )
@@ -141,6 +197,7 @@ export function RwandaGallery() {
   }, [])
 
   const { hero } = RWANDA_PAGE
+  const [lightboxImage, setLightboxImage] = useState(null)
 
   return (
     <div className="bg-background min-h-screen">
@@ -163,19 +220,19 @@ export function RwandaGallery() {
       {/* Page header — id/scroll-mt pair is the sub-nav's "Photo & Video
           Gallery" tab target, so clicking it lands just under the hero
           instead of at the very top of it. */}
-      <section id="gallery-overview" className="scroll-mt-[140px] border-b border-border/60 bg-[#eef4ea] py-10 sm:py-12">
+      <section id="gallery-overview" className="scroll-mt-[140px] bg-cocoa py-10 sm:py-12">
         <div className="mx-auto flex w-[95%] flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <Reveal once={false}>
-            <h1 className="font-display text-3xl font-bold text-primary sm:text-4xl">
+            <h1 className="font-display text-3xl font-bold text-primary-foreground sm:text-4xl">
               Rwanda Photo &amp; Video Gallery
             </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-primary-foreground/80 sm:text-base">
               A glimpse into Rwanda&rsquo;s incredible landscapes, wildlife, and culture.
             </p>
           </Reveal>
           <Reveal once={false} delay={100} className="shrink-0 text-left sm:text-right">
-            <p className="font-display text-2xl italic text-primary">Rwanda</p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-copper">
+            <p className="font-display text-2xl italic text-gold">Rwanda</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground/70">
               A Remarkable Journey Awaits
             </p>
           </Reveal>
@@ -222,6 +279,7 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg"
                   alt="Aerial panorama of Lake Kivu's islands and green hills"
                   title="Lake Kivu"
@@ -231,6 +289,7 @@ export function RwandaGallery() {
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg"
                   alt="Canopy walkway suspended above Nyungwe Forest National Park"
                   title="Nyungwe National Park"
@@ -246,11 +305,12 @@ export function RwandaGallery() {
           <StackSection className="bg-background">
             <Reveal once={false}>
               <PhotoTile
+                onExpand={setLightboxImage}
                 src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
                 alt="Intore dancers performing a traditional Rwandan dance"
                 title="Rwandan Culture"
                 subtitle="Music, dance and traditions that inspire."
-                className="h-[340px] sm:h-[440px] lg:h-[540px]"
+                className="aspect-[3/2]"
               />
             </Reveal>
           </StackSection>
@@ -261,6 +321,7 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg"
                   alt="Rolling tea plantation hills at sunset in Rwanda"
                   title="Tea Plantations"
@@ -270,6 +331,7 @@ export function RwandaGallery() {
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Butaro/IMG_5203_web.jpg"
                   alt="Volcano and lake view from the Butaro highlands in northern Rwanda"
                   title="Butaro Highlands"
@@ -285,6 +347,7 @@ export function RwandaGallery() {
           <StackSection className="bg-background">
             <Reveal once={false}>
               <PhotoTile
+                onExpand={setLightboxImage}
                 src="/Rwanda_Gallery/Akagera/IMG_5239_web.jpg"
                 alt="Savannah, lakes and wetlands of Akagera National Park"
                 title="Akagera National Park"
@@ -299,6 +362,7 @@ export function RwandaGallery() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Akagera/IMG_5300_web.jpg"
                   alt="Two rhinos grazing beside a lake in Akagera National Park"
                   title="Akagera National Park"
@@ -308,6 +372,7 @@ export function RwandaGallery() {
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
+                  onExpand={setLightboxImage}
                   src="/Rwanda_Gallery/Akagera/IMG_5301_web.jpg"
                   alt="Giraffes among acacia trees in Akagera National Park"
                   title="Akagera National Park"
@@ -338,6 +403,8 @@ export function RwandaGallery() {
           </HashLink>
         </div>
       </section>
+
+      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
     </div>
   )
 }

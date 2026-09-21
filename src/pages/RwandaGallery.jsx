@@ -1,31 +1,17 @@
-import { ArrowRight, Camera, Compass, Leaf, Pause, Play, Users } from 'lucide-react'
+import { ArrowRight, Pause, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
-// Header is a fixed 84px bar (see Header.jsx); the sub-nav sticks directly
-// under it, and every stacked gallery section sticks under the sub-nav in
-// turn — see the "stack" comment further down.
+// Header is a fixed 84px bar (see Header.jsx); RwandaSubNav sticks directly
+// under it (also 56px tall), and every stacked gallery section sticks under
+// the sub-nav in turn — see the "stack" comment further down.
 const HEADER_HEIGHT = 84
 const SUBNAV_HEIGHT = 56
 const STACK_TOP = HEADER_HEIGHT + SUBNAV_HEIGHT
-
-const NAV_TABS = [
-  { label: 'Overview', to: '/rwanda' },
-  { label: 'Services', to: '/rwanda#rwanda-services' },
-  { label: 'Popular Routes', to: '/rwanda#popular-routes' },
-  { label: 'Photo & Video Gallery', to: '/rwanda/gallery', active: true },
-  { label: 'Practical Guide', to: '/rwanda/practical-guide' },
-]
-
-const HIGHLIGHTS = [
-  { icon: Leaf, label: 'Nature' },
-  { icon: Users, label: 'Culture' },
-  { icon: Compass, label: 'Adventure' },
-  { icon: Camera, label: 'Real Connections' },
-]
 
 /**
  * Pins its children under the header + sub-nav as the user scrolls, so the
@@ -53,7 +39,7 @@ function StackSection({ children, className = '' }) {
 
 function VideoTile({ src, poster, alt, title, subtitle, className = '' }) {
   const videoRef = useRef(null)
-  const [playing, setPlaying] = useState(false)
+  const [playing, setPlaying] = useState(true)
 
   const toggle = () => {
     const video = videoRef.current
@@ -76,10 +62,11 @@ function VideoTile({ src, poster, alt, title, subtitle, className = '' }) {
         src={src}
         poster={poster}
         aria-label={alt}
+        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         onPause={() => setPlaying(false)}
         onPlay={() => setPlaying(true)}
         className="size-full object-cover object-center"
@@ -165,35 +152,13 @@ export function RwandaGallery() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
+        overlayClassName="bg-black/35"
       />
 
-      {/* Sub-nav — mirrors the tabs a visitor would expect after Rwanda's
-          hero (Overview / Services / Popular Routes / Gallery / Practical
-          Guide). Sticks directly under the fixed 84px header, with this
-          page's tab marked active. */}
-      <div
-        className="sticky z-30 border-b border-border/70 bg-cream/95 backdrop-blur-sm"
-        style={{ top: HEADER_HEIGHT }}
-      >
-        <nav
-          className="mx-auto flex h-14 w-[95%] items-center gap-6 overflow-x-auto text-sm font-semibold lg:justify-center"
-          aria-label="Rwanda page sections"
-        >
-          {NAV_TABS.map((tab) => (
-            <HashLink
-              key={tab.label}
-              to={tab.to}
-              className={`shrink-0 whitespace-nowrap border-b-2 pb-1 transition-colors ${
-                tab.active
-                  ? 'border-copper text-primary'
-                  : 'border-transparent text-muted-foreground hover:text-primary'
-              }`}
-            >
-              {tab.label}
-            </HashLink>
-          ))}
-        </nav>
-      </div>
+      {/* Sub-nav — shared across every Rwanda page (Overview, Gallery,
+          Practical Guide) so it stays visible and consistent as visitors
+          move between them. Sticks directly under the fixed 84px header. */}
+      <RwandaSubNav />
 
       {/* Page header */}
       <section className="border-b border-border/60 bg-[#eef4ea] py-10 sm:py-12">
@@ -220,44 +185,18 @@ export function RwandaGallery() {
           next block sliding over it, all the way through the page. */}
       <main>
         <div className="mx-auto w-[95%] py-3">
-          {/* 1. Hero banner — intro copy + highlight icons above the gorilla
-              video, which is shown at its own full native aspect ratio
-              (no cropping) rather than squeezed into a fixed height. */}
+          {/* 1. Gorilla video — full-width, own native 16:9 aspect ratio
+              (no cropping), autoplaying muted and looping. */}
           <StackSection className="bg-background">
             <Reveal once={false} big>
-              <div className="overflow-hidden border border-cocoa/10 bg-cocoa text-primary-foreground shadow-card">
-                <div className="flex flex-col gap-6 p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-                  <div>
-                    <h2 className="font-display text-3xl font-black uppercase leading-none sm:text-4xl">
-                      Rwanda Gallery
-                    </h2>
-                    <span className="mt-4 block h-1 w-14 bg-copper" aria-hidden="true" />
-                    <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/85">
-                      Extraordinary people. Breathtaking places. Unforgettable experiences.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-x-8 gap-y-4">
-                    {HIGHLIGHTS.map((item) => (
-                      <div key={item.label} className="flex items-center gap-3 text-copper">
-                        <item.icon className="size-5" aria-hidden="true" />
-                        <span className="text-sm font-semibold uppercase tracking-wide text-primary-foreground">
-                          {item.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <VideoTile
-                  src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
-                  poster="/Rwanda_Gallery/Gorilla/gorilla_poster.jpg"
-                  alt="Mountain gorilla walking near a pool of water in Rwanda"
-                  title="Volcanoes National Park"
-                  subtitle="Home to Rwanda's mountain gorillas."
-                  className="aspect-video border-none"
-                />
-              </div>
+              <VideoTile
+                src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
+                poster="/Rwanda_Gallery/Gorilla/gorilla_poster.jpg"
+                alt="Mountain gorilla walking near a pool of water in Rwanda"
+                title="Volcanoes National Park"
+                subtitle="Home to Rwanda's mountain gorillas."
+                className="aspect-video"
+              />
             </Reveal>
           </StackSection>
 

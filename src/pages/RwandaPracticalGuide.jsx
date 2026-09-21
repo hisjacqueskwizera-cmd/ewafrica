@@ -1,5 +1,4 @@
 import {
-  ArrowLeft,
   ArrowRight,
   Calendar,
   Car,
@@ -13,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_DATA } from '../data/rwandaContent.js'
 
 const ICONS = {
@@ -35,21 +35,10 @@ export function RwandaPracticalGuide() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Subtle top sub-nav / breadcrumb */}
-      <div className="border-b border-border/60 bg-cream/70 py-3.5 backdrop-blur-xs">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <HashLink
-            to="/rwanda"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground transition-colors hover:text-copper"
-          >
-            <ArrowLeft className="size-3.5" aria-hidden="true" />
-            Back to Rwanda Overview
-          </HashLink>
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-copper">
-            Rwanda Practical Guide
-          </span>
-        </div>
-      </div>
+      {/* Sub-nav — shared across every Rwanda page (Overview, Gallery,
+          Practical Guide) so it stays visible and consistent as visitors
+          move between them. Sticks directly under the fixed 84px header. */}
+      <RwandaSubNav />
 
       {/* Intro */}
       <section className="relative overflow-hidden pt-14 pb-4 sm:pt-16">

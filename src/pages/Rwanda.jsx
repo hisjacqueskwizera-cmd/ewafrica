@@ -5,6 +5,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Map, Signpost, Users, ShieldCheck, Mail, Plane }
@@ -41,7 +42,10 @@ export function Rwanda() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
+        overlayClassName="bg-black/35"
       />
+
+      <RwandaSubNav />
 
       <PhotoGallerySection
         heading="A Glimpse of Rwanda"
@@ -52,7 +56,7 @@ export function Rwanda() {
       />
 
       {/* Our Services for Rwanda */}
-      <section id="rwanda-services" className="scroll-mt-28 py-16 lg:py-20">
+      <section id="rwanda-services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="mx-auto flex items-center justify-center gap-3">

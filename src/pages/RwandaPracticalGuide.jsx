@@ -13,6 +13,7 @@ import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RwandaPageBackground } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_DATA } from '../data/rwandaContent.js'
 import { RWANDA_PAGE } from '../data/siteContent.js'
@@ -22,17 +23,6 @@ const ICONS = {
   Car,
   Coins,
   ShieldCheck,
-}
-
-// Decorative leaf-frame vignette applied behind every Rwanda page — the
-// PNG's transparent center lets the page's own background color show
-// through; only its corners carry any artwork.
-const RWANDA_PAGE_BACKGROUND = {
-  backgroundImage: 'url(/Pictures/Background/Rwanda_Background.PNG)',
-  backgroundPosition: 'top center',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundAttachment: 'fixed',
 }
 
 export function RwandaPracticalGuide() {
@@ -48,7 +38,9 @@ export function RwandaPracticalGuide() {
   const [selectedPlan, setSelectedPlan] = useState(null)
 
   return (
-    <div className="bg-background min-h-screen" style={RWANDA_PAGE_BACKGROUND}>
+    <div className="bg-background min-h-screen">
+      <RwandaPageBackground />
+
       {/* Hero — the same full-viewport hero every other Rwanda page shares. */}
       <DestinationHero
         heading="Explore Rwanda"

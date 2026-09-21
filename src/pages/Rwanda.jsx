@@ -5,21 +5,11 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RwandaPageBackground } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Map, Signpost, Users, ShieldCheck, Mail, Plane }
-
-// Decorative leaf-frame vignette applied behind every Rwanda page — the
-// PNG's transparent center lets the page's own background color show
-// through; only its corners carry any artwork.
-const RWANDA_PAGE_BACKGROUND = {
-  backgroundImage: 'url(/Pictures/Background/Rwanda_Background.PNG)',
-  backgroundPosition: 'top center',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundAttachment: 'fixed',
-}
 
 const RWANDA_GALLERY_TILES = [
   {
@@ -44,7 +34,9 @@ export function Rwanda() {
   const { hero, services, routes, benefits, closing } = RWANDA_PAGE
 
   return (
-    <div className="bg-background" style={RWANDA_PAGE_BACKGROUND}>
+    <div className="bg-background">
+      <RwandaPageBackground />
+
       {/* Hero — the same full-viewport hero every destination page shares,
           lifted from About Us. Rwanda's "Land of a Thousand Hills"
           subheading folds into the description paragraph. */}

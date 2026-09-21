@@ -119,6 +119,11 @@ function DestinationCountryCard({ country, featured = false }) {
       id={country.slug}
       to={cta.to}
       className="group relative flex h-full min-h-[690px] scroll-mt-28 flex-col justify-end overflow-hidden bg-cocoa"
+      // Inherited by every text node in the card (text-shadow is an
+      // inherited CSS property) — a soft 50%-opacity shadow so white text
+      // stays readable over the photo's brighter areas, not just where
+      // the dark overlay sits.
+      style={{ textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}
     >
       <img
         src={country.image}
@@ -149,7 +154,7 @@ function DestinationCountryCard({ country, featured = false }) {
         />
       )}
       {country.badge && (
-        <span className="absolute top-5 left-6 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground sm:left-8">
+        <span className="absolute top-[3cm] left-6 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground sm:left-8 sm:top-[3cm]">
           {country.badge}
         </span>
       )}
@@ -158,77 +163,83 @@ function DestinationCountryCard({ country, featured = false }) {
         className={`relative p-6 ${featured ? 'sm:p-8' : ''} ${featured ? 'max-w-3xl' : ''} ${
           country.locationCaption ? 'pb-11 sm:pb-12' : ''
         } ${country.liftText ? 'mb-[3cm]' : ''}`}
-        style={
-          featured
-            ? {
-                // A radial glow anchored at the text block's bottom-left
-                // (roughly where the copy is densest) fades outward in
-                // every direction, so it blends into the photo instead of
-                // ending in a hard rectangular edge the way a plain
-                // linear/box gradient would.
-                backgroundImage: `radial-gradient(120% 110% at 0% 100%, rgba(0,0,0,${
-                  country.strongOverlay ? 0.8 : 0.65
-                }) 0%, rgba(0,0,0,${country.strongOverlay ? 0.5 : 0.35}) 45%, rgba(0,0,0,0) 85%)`,
-              }
-            : undefined
-        }
       >
-        <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
-          <Flag slug={country.slug} />
-          <h3 className="truncate text-2xl font-semibold text-primary-foreground">
-            <CountryName name={country.name} />
-          </h3>
-        </div>
-        {country.note &&
-          (featured ? (
-            <>
-              <p className="mt-1 font-display text-lg font-bold text-primary-foreground sm:text-xl">
-                {country.note}
-              </p>
-              <span className="mt-3 block h-0.5 w-14 bg-gold" aria-hidden="true" />
-            </>
-          ) : (
-            <p className="mt-1 truncate text-sm text-primary-foreground/80">{country.note}</p>
-          ))}
-
-        {featured && country.descriptionFirst && <Description />}
-
-        <div
-          className={`mt-4 grid gap-y-4 ${
-            grouped ? 'sm:grid-cols-2 sm:divide-x sm:divide-primary-foreground/25' : 'gap-x-8'
-          }`}
-        >
-          {serviceGroups.map((group, i) => (
-            <div
-              key={group.label ?? 'services'}
-              className={grouped ? (i === 0 ? 'sm:pr-8' : 'sm:pl-8') : ''}
-            >
-              {group.label && (
-                <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold">
-                  {group.label}
-                </p>
-              )}
-              <ServiceList
-                items={group.items}
-                className={featured && !grouped ? 'gap-x-6 sm:columns-2' : ''}
-              />
-            </div>
-          ))}
-        </div>
-
-        {featured && !country.descriptionFirst && <Description />}
-
-        {featured ? (
-          <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gold px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-cocoa shadow-card transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
-            {cta.label}
-            <ArrowRight className="size-3.5" aria-hidden="true" />
-          </span>
-        ) : (
-          <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
-            {cta.label}
-            <ArrowRight className="size-3.5" aria-hidden="true" />
-          </span>
+        {featured && (
+          // The glow's own box deliberately bleeds well past the text on
+          // every side (including down past the block's bottom edge) and
+          // fades to fully transparent before reaching that bled edge —
+          // so there's no boundary left anywhere for a hard cut to show
+          // against the photo, in any direction.
+          <div
+            aria-hidden="true"
+            className="absolute -inset-x-12 -inset-y-16 sm:-inset-x-20 sm:-inset-y-24"
+            style={{
+              backgroundImage: `radial-gradient(closest-side, rgba(0,0,0,${
+                country.strongOverlay ? 0.85 : 0.7
+              }) 0%, rgba(0,0,0,${
+                country.strongOverlay ? 0.5 : 0.35
+              }) 40%, rgba(0,0,0,0) 100%)`,
+            }}
+          />
         )}
+        <div className="relative">
+          <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
+            <Flag slug={country.slug} />
+            <h3 className="truncate text-2xl font-semibold text-primary-foreground">
+              <CountryName name={country.name} />
+            </h3>
+          </div>
+          {country.note &&
+            (featured ? (
+              <>
+                <p className="mt-1 font-display text-lg font-bold text-primary-foreground sm:text-xl">
+                  {country.note}
+                </p>
+                <span className="mt-3 block h-0.5 w-14 bg-gold" aria-hidden="true" />
+              </>
+            ) : (
+              <p className="mt-1 truncate text-sm text-primary-foreground/80">{country.note}</p>
+            ))}
+
+          {featured && country.descriptionFirst && <Description />}
+
+          <div
+            className={`mt-4 grid gap-y-4 ${
+              grouped ? 'sm:grid-cols-2 sm:divide-x sm:divide-primary-foreground/25' : 'gap-x-8'
+            }`}
+          >
+            {serviceGroups.map((group, i) => (
+              <div
+                key={group.label ?? 'services'}
+                className={grouped ? (i === 0 ? 'sm:pr-4' : 'sm:pl-4') : ''}
+              >
+                {group.label && (
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold">
+                    {group.label}
+                  </p>
+                )}
+                <ServiceList
+                  items={group.items}
+                  className={featured && !grouped ? 'gap-x-6 sm:columns-2' : ''}
+                />
+              </div>
+            ))}
+          </div>
+
+          {featured && !country.descriptionFirst && <Description />}
+
+          {featured ? (
+            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gold px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-cocoa shadow-card transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
+              {cta.label}
+              <ArrowRight className="size-3.5" aria-hidden="true" />
+            </span>
+          ) : (
+            <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-foreground/90 transition-colors group-hover:text-gold">
+              {cta.label}
+              <ArrowRight className="size-3.5" aria-hidden="true" />
+            </span>
+          )}
+        </div>
       </div>
 
       {country.locationCaption && (

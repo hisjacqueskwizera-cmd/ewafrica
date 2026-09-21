@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
-import { RwandaPageBackground } from '../components/RwandaPageBackground.jsx'
+import { RWANDA_PAGE_BACKGROUND_STYLE } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 
 // Header is a fixed 84px bar (see Header.jsx); RwandaSubNav sticks directly
@@ -313,9 +313,7 @@ export function RwandaGallery() {
   const openAt = (photo) => setLightboxIndex(PHOTOS.indexOf(photo))
 
   return (
-    <div className="bg-background min-h-screen">
-      <RwandaPageBackground />
-
+    <div className="bg-background min-h-screen" style={RWANDA_PAGE_BACKGROUND_STYLE}>
       {/* Hero — the same full-viewport hero every destination page shares;
           the global Header goes transparent on top of it (see
           TRANSPARENT_HERO_ROUTES in Header.jsx). */}

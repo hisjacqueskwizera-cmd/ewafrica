@@ -5,7 +5,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
-import { RwandaPageBackground } from '../components/RwandaPageBackground.jsx'
+import { RWANDA_PAGE_BACKGROUND_STYLE } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
@@ -34,9 +34,7 @@ export function Rwanda() {
   const { hero, services, routes, benefits, closing } = RWANDA_PAGE
 
   return (
-    <div className="bg-background">
-      <RwandaPageBackground />
-
+    <div className="bg-background" style={RWANDA_PAGE_BACKGROUND_STYLE}>
       {/* Hero — the same full-viewport hero every destination page shares,
           lifted from About Us. Rwanda's "Land of a Thousand Hills"
           subheading folds into the description paragraph. */}

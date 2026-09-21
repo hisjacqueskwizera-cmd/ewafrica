@@ -13,7 +13,7 @@ import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
-import { RwandaPageBackground } from '../components/RwandaPageBackground.jsx'
+import { RWANDA_PAGE_BACKGROUND_STYLE } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_DATA } from '../data/rwandaContent.js'
 import { RWANDA_PAGE } from '../data/siteContent.js'
@@ -38,9 +38,7 @@ export function RwandaPracticalGuide() {
   const [selectedPlan, setSelectedPlan] = useState(null)
 
   return (
-    <div className="bg-background min-h-screen">
-      <RwandaPageBackground />
-
+    <div className="bg-background min-h-screen" style={RWANDA_PAGE_BACKGROUND_STYLE}>
       {/* Hero — the same full-viewport hero every other Rwanda page shares. */}
       <DestinationHero
         heading="Explore Rwanda"

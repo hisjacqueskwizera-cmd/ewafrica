@@ -152,7 +152,7 @@ export const ZAMBIA_DATA = {
     title: 'Practical Guide',
     eyebrow: 'PRACTICAL INFORMATION FOR YOUR ZAMBIA JOURNEY',
     description:
-      'Our separate Zambia Practical Guide brings together everything you need to know for a smooth and rewarding trip, longer stays, or business ventures in Zambia.',
+      'Our Zambia Practical Guide brings together useful information to help you prepare for travel, longer stays, and independent journeys throughout Zambia.',
     cta: 'Read the Zambia Practical Guide',
     to: '/zambia/practical-guide',
     backgroundSilhouette: '/Pictures/Background/zambia_practical_guide_bg.png',
@@ -423,7 +423,7 @@ export const ZAMBIA_DATA = {
       to: '/travel-planner',
     },
     leftWatermark: ['Zambia', 'More to Explore'],
-    rightWatermark: ['People', 'Nature', 'Culture', 'Opportunity', 'Zambia'],
+    rightWatermark: ['People', 'Nature', 'Culture', 'Opportunity', 'Discovery'],
     backgroundImage: '/Pictures/zambia/traveling_overland_leopard.jpg',
   },
 }

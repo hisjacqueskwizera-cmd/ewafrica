@@ -165,20 +165,17 @@ function DestinationCountryCard({ country, featured = false }) {
         } ${country.liftText ? 'mb-[3cm]' : ''}`}
       >
         {featured && (
-          // The glow's own box deliberately bleeds well past the text on
-          // every side (including down past the block's bottom edge) and
-          // fades to fully transparent before reaching that bled edge —
-          // so there's no boundary left anywhere for a hard cut to show
-          // against the photo, in any direction.
+          // A solid dark panel roughly matching the text block's own
+          // footprint (a small -inset bleed, not a huge one) so the shade
+          // actually spreads evenly under the whole block instead of
+          // concentrating in one radial "hot spot" — the blur filter then
+          // softens just its outer edge into the photo, so there's still
+          // no hard cut anywhere.
           <div
             aria-hidden="true"
-            className="absolute -inset-x-12 -inset-y-16 sm:-inset-x-20 sm:-inset-y-24"
+            className="absolute -inset-6 rounded-[2rem] blur-2xl sm:-inset-8"
             style={{
-              backgroundImage: `radial-gradient(closest-side, rgba(0,0,0,${
-                country.strongOverlay ? 0.85 : 0.7
-              }) 0%, rgba(0,0,0,${
-                country.strongOverlay ? 0.5 : 0.35
-              }) 40%, rgba(0,0,0,0) 100%)`,
+              backgroundColor: `rgba(0,0,0,${country.strongOverlay ? 0.75 : 0.55})`,
             }}
           />
         )}
@@ -205,14 +202,13 @@ function DestinationCountryCard({ country, featured = false }) {
 
           <div
             className={`mt-4 grid gap-y-4 ${
-              grouped ? 'sm:grid-cols-2 sm:divide-x sm:divide-primary-foreground/25' : 'gap-x-8'
+              grouped
+                ? 'sm:grid-cols-2 sm:gap-x-[3cm] sm:divide-x sm:divide-primary-foreground/25'
+                : 'gap-x-8'
             }`}
           >
-            {serviceGroups.map((group, i) => (
-              <div
-                key={group.label ?? 'services'}
-                className={grouped ? (i === 0 ? 'sm:pr-4' : 'sm:pl-4') : ''}
-              >
+            {serviceGroups.map((group) => (
+              <div key={group.label ?? 'services'}>
                 {group.label && (
                   <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-gold">
                     {group.label}

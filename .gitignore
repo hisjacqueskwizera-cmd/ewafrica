@@ -17,6 +17,13 @@ dist-ssr
 # version control.
 video-backups/
 
+# Raw source photos/videos for the Rwanda and Tanzania galleries, moved
+# out of public/ so the deployed build doesn't ship them — the site only
+# ever references the resized/compressed copies under public/. Large
+# binaries, not meant for version control.
+Rwanda_Gallery_originals/
+Tanzania_Gallery_originals/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

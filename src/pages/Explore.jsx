@@ -137,6 +137,17 @@ function DestinationCountryCard({ country, featured = false }) {
           aria-hidden="true"
         />
       )}
+      {/* A featured card whose text is lifted off the bottom edge
+          (liftText) leaves a gap of plain photo between the text block's
+          own glow and the card's true bottom edge — this gentle strip
+          fades that gap smoothly too, so the location caption sitting
+          down there still reads clearly and nothing cuts off sharply. */}
+      {featured && country.liftText && (
+        <div
+          className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/55 to-transparent"
+          aria-hidden="true"
+        />
+      )}
       {country.badge && (
         <span className="absolute top-5 left-6 z-10 rounded-full bg-copper px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-copper-foreground sm:left-8">
           {country.badge}
@@ -146,7 +157,7 @@ function DestinationCountryCard({ country, featured = false }) {
       <div
         className={`relative p-6 ${featured ? 'sm:p-8' : ''} ${featured ? 'max-w-3xl' : ''} ${
           country.locationCaption ? 'pb-11 sm:pb-12' : ''
-        } ${country.liftText ? 'mb-[6cm]' : ''}`}
+        } ${country.liftText ? 'mb-[3cm]' : ''}`}
         style={
           featured
             ? {

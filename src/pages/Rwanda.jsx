@@ -47,6 +47,11 @@ export function Rwanda() {
 
       <RwandaSubNav />
 
+      {/* Anchor the sub-nav's "Overview" tab targets — landing here (just
+          under the hero + sub-nav) rather than back at the top of the
+          hero photo. */}
+      <div id="rwanda-overview" className="scroll-mt-[140px]" />
+
       <PhotoGallerySection
         heading="A Glimpse of Rwanda"
         subheading="Mountain gorillas and rolling green hills — a first look at the sights waiting across Rwanda."

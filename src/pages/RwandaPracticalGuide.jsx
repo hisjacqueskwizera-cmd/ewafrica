@@ -10,10 +10,12 @@ import {
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
 import { RWANDA_DATA } from '../data/rwandaContent.js'
+import { RWANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = {
   Calendar,
@@ -29,19 +31,31 @@ export function RwandaPracticalGuide() {
   }, [])
 
   const { topPlaces, planJourney, whyExplore, readyToExplore } = RWANDA_DATA
+  const { hero } = RWANDA_PAGE
 
   const [selectedPlace, setSelectedPlace] = useState(null)
   const [selectedPlan, setSelectedPlan] = useState(null)
 
   return (
     <div className="bg-background min-h-screen">
+      {/* Hero — the same full-viewport hero every other Rwanda page shares. */}
+      <DestinationHero
+        heading="Explore Rwanda"
+        description={`${hero.subheading}. ${hero.description}`}
+        backgroundImage={hero.image}
+        backgroundImageAlt={hero.imageAlt}
+        overlayClassName="bg-black/35"
+      />
+
       {/* Sub-nav — shared across every Rwanda page (Overview, Gallery,
           Practical Guide) so it stays visible and consistent as visitors
           move between them. Sticks directly under the fixed 84px header. */}
       <RwandaSubNav />
 
-      {/* Intro */}
-      <section className="relative overflow-hidden pt-14 pb-4 sm:pt-16">
+      {/* Intro — id/scroll-mt pair is the sub-nav's "Practical Guide" tab
+          target, so clicking it lands just under the hero instead of at
+          the very top of it. */}
+      <section id="guide-overview" className="relative scroll-mt-[140px] overflow-hidden pt-14 pb-4 sm:pt-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-20 top-0 size-64 animate-float rounded-full bg-copper/10 blur-3xl"

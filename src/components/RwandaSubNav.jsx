@@ -7,23 +7,29 @@ import { HashLink } from './HashLink.jsx'
 // this nav itself.
 const HEADER_HEIGHT = 84
 
+// Every tab's target sits just under the hero + this sub-nav (not the very
+// top of the hero) — see the id + `scroll-mt` pair each page gives its
+// first content section (rwanda-overview / gallery-overview /
+// guide-overview) — so clicking a tab (even from another Rwanda page)
+// lands on the actual content, not back at the top of a hero photo.
 const TABS = [
-  { label: 'Overview', to: '/rwanda' },
+  { label: 'Overview', to: '/rwanda#rwanda-overview' },
   { label: 'Services', to: '/rwanda#rwanda-services' },
   { label: 'Popular Routes', to: '/rwanda#popular-routes' },
-  { label: 'Photo & Video Gallery', to: '/rwanda/gallery' },
-  { label: 'Practical Guide', to: '/rwanda/practical-guide' },
+  { label: 'Photo & Video Gallery', to: '/rwanda/gallery#gallery-overview' },
+  { label: 'Practical Guide', to: '/rwanda/practical-guide#guide-overview' },
 ]
 
 function isActive(tab, pathname, hash) {
-  if (tab.to.includes('#')) {
-    const [tabPath, tabHash] = tab.to.split('#')
-    return pathname === tabPath && hash === `#${tabHash}`
-  }
-  if (tab.to === '/rwanda') {
-    return pathname === '/rwanda' && !hash
-  }
-  return pathname === tab.to
+  const [tabPath, tabHash] = tab.to.split('#')
+  if (tabPath !== pathname) return false
+  // /rwanda hosts three tabs (Overview / Services / Popular Routes), so
+  // its own hash has to disambiguate between them. Gallery and Practical
+  // Guide each have the whole page to themselves — any hash on their path
+  // still means that tab is the active one.
+  if (tabPath !== '/rwanda') return true
+  if (tab.label === 'Overview') return !hash || hash === '#rwanda-overview'
+  return hash === `#${tabHash}`
 }
 
 export function RwandaSubNav() {

@@ -38,6 +38,7 @@ const TRANSPARENT_HERO_ROUTES = [
   '/uganda',
   '/rwanda',
   '/rwanda/gallery',
+  '/rwanda/practical-guide',
   '/gambia',
   '/senegal',
   '/benin',

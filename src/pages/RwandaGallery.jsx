@@ -160,8 +160,10 @@ export function RwandaGallery() {
           move between them. Sticks directly under the fixed 84px header. */}
       <RwandaSubNav />
 
-      {/* Page header */}
-      <section className="border-b border-border/60 bg-[#eef4ea] py-10 sm:py-12">
+      {/* Page header — id/scroll-mt pair is the sub-nav's "Photo & Video
+          Gallery" tab target, so clicking it lands just under the hero
+          instead of at the very top of it. */}
+      <section id="gallery-overview" className="scroll-mt-[140px] border-b border-border/60 bg-[#eef4ea] py-10 sm:py-12">
         <div className="mx-auto flex w-[95%] flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <Reveal once={false}>
             <h1 className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -239,7 +241,21 @@ export function RwandaGallery() {
             </div>
           </StackSection>
 
-          {/* 4. Tea Plantations / Butaro Highlands (swapped with Akagera,
+          {/* 4. Rwandan Culture — full width, right under Lake Kivu /
+              Nyungwe, and bigger than the paired rows around it. */}
+          <StackSection className="bg-background">
+            <Reveal once={false}>
+              <PhotoTile
+                src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
+                alt="Intore dancers performing a traditional Rwandan dance"
+                title="Rwandan Culture"
+                subtitle="Music, dance and traditions that inspire."
+                className="h-[340px] sm:h-[440px] lg:h-[540px]"
+              />
+            </Reveal>
+          </StackSection>
+
+          {/* 5. Tea Plantations / Butaro Highlands (swapped with Akagera,
               which now runs full-width below). */}
           <StackSection className="bg-background">
             <div className="grid gap-3 sm:grid-cols-2">
@@ -264,7 +280,7 @@ export function RwandaGallery() {
             </div>
           </StackSection>
 
-          {/* 5. Akagera National Park — full width (swapped with Butaro,
+          {/* 6. Akagera National Park — full width (swapped with Butaro,
               which now runs in the row above). */}
           <StackSection className="bg-background">
             <Reveal once={false}>
@@ -278,24 +294,24 @@ export function RwandaGallery() {
             </Reveal>
           </StackSection>
 
-          {/* 6. Rwandan Culture / Kigali skyline — new closing row. */}
+          {/* 7. Akagera National Park — two more animal sightings. */}
           <StackSection className="bg-background">
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
-                  src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
-                  alt="Intore dancers performing a traditional Rwandan dance"
-                  title="Rwandan Culture"
-                  subtitle="Music, dance and traditions that inspire."
+                  src="/Rwanda_Gallery/Akagera/IMG_5300_web.jpg"
+                  alt="Two rhinos grazing beside a lake in Akagera National Park"
+                  title="Akagera National Park"
+                  subtitle="Rhinos, brought back from the brink of disappearance."
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>
               <Reveal once={false} delay={250}>
                 <PhotoTile
-                  src="/Rwanda_Gallery/Kigali City/kigali_poster.jpg"
-                  alt="Aerial skyline view of Kigali, Rwanda"
-                  title="Kigali Skyline"
-                  subtitle="A closer look at Rwanda's capital."
+                  src="/Rwanda_Gallery/Akagera/IMG_5301_web.jpg"
+                  alt="Giraffes among acacia trees in Akagera National Park"
+                  title="Akagera National Park"
+                  subtitle="Giraffes roaming the savannah hills."
                   className="h-[260px] sm:h-[320px] lg:h-[380px]"
                 />
               </Reveal>

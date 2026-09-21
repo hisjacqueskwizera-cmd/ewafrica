@@ -78,11 +78,13 @@ const PHOTOS = [
  * until the very end of the whole gallery. The outer `relative` div here
  * is that per-section containing block; its bottom padding is the extra
  * scroll "runway" the section stays pinned for before the next one
- * arrives and covers it.
+ * arrives and covers it — kept equal to the 12px (`gap-3`) separator
+ * between side-by-side tiles within a row, so the horizontal gap between
+ * stacked sections matches the vertical gap between columns.
  */
 function StackSection({ children, className = '' }) {
   return (
-    <div className="relative pb-14 sm:pb-20 lg:pb-24">
+    <div className="relative pb-3">
       <div className={`sticky ${className}`} style={{ top: STACK_TOP }}>
         {children}
       </div>

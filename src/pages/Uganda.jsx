@@ -2,11 +2,21 @@ import { ArrowRight, BookOpen, Bus, Car, CheckCircle2, FileText, Users } from 'l
 import { useEffect } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { UGANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Bus, Car, Users }
+
+const UGANDA_GALLERY_TILES = [
+  {
+    src: '/Pictures/countries/Uganda.jpg',
+    alt: 'Terraced hills and a volcano at sunrise in southwestern Uganda',
+    title: 'The Pearl of Africa',
+    subtitle: 'Terraced hills, volcanoes and sunrise mist',
+  },
+]
 
 export function Uganda() {
   useEffect(() => {
@@ -24,6 +34,13 @@ export function Uganda() {
         description={hero.description}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Uganda"
+        subheading="Terraced green hills and misty volcanoes — a first look at the sights waiting across Uganda."
+        tiles={UGANDA_GALLERY_TILES}
+        variant="single"
       />
 
       {/* Travel Services in Uganda — same card shape as every other

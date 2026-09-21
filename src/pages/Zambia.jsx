@@ -12,9 +12,43 @@ import {
 import { useEffect } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { ZAMBIA_DATA } from '../data/zambiaContent.js'
+
+const ZAMBIA_GALLERY_TILES = [
+  {
+    src: '/Pictures/zambia/victoria_falls.jpg',
+    alt: 'Victoria Falls on the Zambezi River, Zambia',
+    title: 'Victoria Falls',
+    subtitle: 'The Smoke That Thunders',
+  },
+  {
+    src: '/Pictures/zambia/leopard.jpg',
+    alt: 'Leopard in South Luangwa National Park, Zambia',
+    title: 'South Luangwa',
+    subtitle: 'Premier walking-safari wildlife',
+  },
+  {
+    src: '/Pictures/zambia/lake_kariba.jpg',
+    alt: 'Lake Kariba at sunset, Zambia',
+    title: 'Lake Kariba',
+    subtitle: 'Tranquil houseboat escapes',
+  },
+  {
+    src: '/Pictures/zambia/elephants_savanna.jpg',
+    alt: 'Elephant herd in the Zambian savanna',
+    title: 'Elephant Herds',
+    subtitle: 'Wild Zambia, up close',
+  },
+  {
+    src: '/Pictures/zambia/Zambiaaaa_People.jpg',
+    alt: 'Traditional dancers in ceremonial dress, Zambia',
+    title: 'Zambian Culture',
+    subtitle: 'Vibrant traditions, living heritage',
+  },
+]
 
 const SERVICE_ICONS = {
   FileText,
@@ -49,6 +83,13 @@ export function Zambia() {
         backgroundImage={hero.image}
         backgroundImageAlt="Victoria Falls, Zambia"
         overlayClassName="bg-black/35"
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Zambia"
+        subheading="Thundering falls, walking safaris and vibrant culture — a first look at the sights and stories waiting across Zambia."
+        tiles={ZAMBIA_GALLERY_TILES}
+        variant="mosaic"
       />
 
       {/* 2. Travel in Zambia Section — safari silhouette background */}

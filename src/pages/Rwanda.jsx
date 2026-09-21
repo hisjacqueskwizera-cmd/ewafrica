@@ -2,11 +2,27 @@ import { ArrowRight, CheckCircle2, FileText, Mail, Map, Plane, ShieldCheck, Sign
 import { useEffect } from 'react'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Map, Signpost, Users, ShieldCheck, Mail, Plane }
+
+const RWANDA_GALLERY_TILES = [
+  {
+    src: '/Pictures/countries/Rwandaa.jpg',
+    alt: 'Mountain gorilla in Volcanoes National Park, Rwanda',
+    title: 'Mountain Gorillas',
+    subtitle: "Volcanoes National Park's icons",
+  },
+  {
+    src: '/Pictures/countries/Rwanda.jpg',
+    alt: 'Misty green hills at sunrise in Rwanda',
+    title: 'Land of a Thousand Hills',
+    subtitle: "Rwanda's dramatic highlands",
+  },
+]
 
 export function Rwanda() {
   useEffect(() => {
@@ -25,6 +41,13 @@ export function Rwanda() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Rwanda"
+        subheading="Mountain gorillas and rolling green hills — a first look at the sights waiting across Rwanda."
+        tiles={RWANDA_GALLERY_TILES}
+        variant="duo"
       />
 
       {/* Our Services for Rwanda */}

@@ -14,6 +14,7 @@ import {
 import { useEffect } from 'react'
 import { DestinationHero } from './DestinationHero.jsx'
 import { HashLink } from './HashLink.jsx'
+import { PhotoGallerySection } from './PhotoGallery.jsx'
 import { OverlandRoutesSection } from './RouteCard.jsx'
 import { Reveal } from './Reveal.jsx'
 
@@ -56,9 +57,11 @@ function CardCta({ to, children }) {
  * (an array in HERO_VIDEOS' shape) for a page that rotates its own
  * dedicated clips instead of a static photo — Tanzania's the only one
  * that has any right now; everyone else's `hero` carries a plain
- * `backgroundImage`.
+ * `backgroundImage`. Pass `gallery` (shape: { heading, subheading, tiles,
+ * variant }, see PhotoGallery.jsx) for a "Gallery" section right under the
+ * hero — omit it for a country with no dedicated photo set yet.
  */
-export function DestinationPage({ documentTitle, countryName, slug, data, heroVideos }) {
+export function DestinationPage({ documentTitle, countryName, slug, data, heroVideos, gallery }) {
   useEffect(() => {
     document.title = documentTitle
   }, [documentTitle])
@@ -76,6 +79,8 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
         backgroundImageAlt={hero.backgroundImageAlt}
         backgroundVideos={heroVideos}
       />
+
+      {gallery && <PhotoGallerySection {...gallery} />}
 
       {/* Travel Services — a dashed-rule-flanked label rather than the
           site's usual SectionTitle, since these cards are the page's real

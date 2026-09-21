@@ -22,7 +22,41 @@ import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { GHANA_PAGE } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+
+const GHANA_GALLERY_TILES = [
+  {
+    src: '/Pictures/Ghana_Landing_Hero.JPG',
+    alt: 'Independence Arch in Accra, Ghana',
+    title: 'Independence Arch',
+    subtitle: 'Freedom and Justice, Accra',
+  },
+  {
+    src: '/Pictures/Ghana_Abode.JPG',
+    alt: 'Elmina Castle on the Ghanaian coast',
+    title: 'Elmina Castle',
+    subtitle: "Ghana's storied coastal fortress",
+  },
+  {
+    src: '/Pictures/Ghana_Side_Image.JPG',
+    alt: 'Cape Coast Castle overlooking the Atlantic Ocean',
+    title: 'Cape Coast Castle',
+    subtitle: 'History overlooking the Atlantic',
+  },
+  {
+    src: '/Pictures/Ghana_Background_22.jpg',
+    alt: 'Inside the dungeons of a Ghanaian coastal castle',
+    title: 'Castle Dungeons',
+    subtitle: 'A solemn chapter, never forgotten',
+  },
+  {
+    src: '/Pictures/image_Ghana.webp',
+    alt: 'Statue of Kwame Nkrumah at Kwame Nkrumah Memorial Park, Accra',
+    title: 'Kwame Nkrumah Memorial',
+    subtitle: "Honoring Ghana's independence leader",
+  },
+]
 
 const ICONS = {
   FileText,
@@ -80,6 +114,13 @@ export function Ghana() {
         description={`${hero.subheading} ${hero.description}`}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Ghana"
+        subheading="Storied coastal castles, independence heritage and living history — a first look at the sights waiting across Ghana."
+        tiles={GHANA_GALLERY_TILES}
+        variant="mosaic"
       />
 
       {/* Travel Services in Ghana — the same four cards every other

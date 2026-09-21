@@ -19,9 +19,19 @@ import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { SENEGAL_PAGE } from '../data/siteContent.js'
+
+const SENEGAL_GALLERY_TILES = [
+  {
+    src: '/Pictures/countries/Senegal.webp',
+    alt: 'Baobab tree silhouetted at sunset in Senegal',
+    title: 'Baobab Country',
+    subtitle: 'Iconic silhouettes at golden hour',
+  },
+]
 
 const ICONS = {
   FileText,
@@ -66,6 +76,13 @@ export function Senegal() {
         description={hero.description}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Senegal"
+        subheading="Golden light, red earth and iconic baobabs — a first look at the sights waiting across Senegal."
+        tiles={SENEGAL_GALLERY_TILES}
+        variant="single"
       />
 
       {/* Travel Services in Senegal */}

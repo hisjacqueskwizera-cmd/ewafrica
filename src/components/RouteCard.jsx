@@ -119,7 +119,7 @@ export function RouteCardButton({
  */
 export function OverlandRoutesSection({ countryName, slug, routes, extraCard }) {
   return (
-    <section className="overflow-hidden py-16 lg:py-20">
+    <section id="popular-routes" className="scroll-mt-28 overflow-hidden py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
           <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">

@@ -18,9 +18,19 @@ import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { GAMBIA_PAGE } from '../data/siteContent.js'
+
+const GAMBIA_GALLERY_TILES = [
+  {
+    src: '/Pictures/countries/The gambia.jpg',
+    alt: 'Fishermen in traditional boats on the Gambia River',
+    title: 'The Gambia River',
+    subtitle: 'Life along West Africa’s river highway',
+  },
+]
 
 const ICONS = {
   FileText,
@@ -65,6 +75,13 @@ export function Gambia() {
         description={`${hero.subheading[0]} ${hero.subheading[1]} ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of The Gambia"
+        subheading="River life, warm smiles and West Africa's smallest mainland country — a first look at what awaits."
+        tiles={GAMBIA_GALLERY_TILES}
+        variant="single"
       />
 
       {/* Travel Services in The Gambia */}

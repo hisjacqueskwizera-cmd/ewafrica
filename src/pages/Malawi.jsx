@@ -22,9 +22,19 @@ import { Accordion } from '../components/Accordion.jsx'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection, RouteCardButton } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { MALAWI_PAGE } from '../data/siteContent.js'
+
+const MALAWI_GALLERY_TILES = [
+  {
+    src: '/Pictures/Malawi_Hero_Section.JPG',
+    alt: 'The MV Ilala ferry crossing Lake Malawi',
+    title: 'Lake Malawi',
+    subtitle: "The MV Ilala crossing Africa's warm heart",
+  },
+]
 
 const ICONS = {
   FileText,
@@ -79,6 +89,13 @@ export function Malawi() {
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
         overlay={false}
+      />
+
+      <PhotoGallerySection
+        heading="A Glimpse of Malawi"
+        subheading="Africa's warm heart, one great lake — a first look at the sights waiting across Malawi."
+        tiles={MALAWI_GALLERY_TILES}
+        variant="single"
       />
 
       {/* Travel Services in Malawi — three cards, no Independent Tour

@@ -111,6 +111,42 @@ export function Rwanda() {
           see RouteCard.jsx. */}
       <OverlandRoutesSection countryName="Rwanda" slug="rwanda" routes={routes} />
 
+      <section className="bg-cream py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="overflow-hidden rounded-[2rem] border border-cocoa/10 bg-[#edf4ef] shadow-card">
+            <div className="grid gap-0 lg:grid-cols-[1.3fr_0.7fr]">
+              <div className="p-8 sm:p-10 lg:p-12">
+                <span className="inline-flex items-center gap-2 rounded-full border border-cocoa/20 bg-white/70 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-cocoa">
+                  Practical Guide
+                </span>
+                <h2 className="mt-5 text-3xl font-bold text-primary sm:text-4xl">
+                  Rwanda, made simple.
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  A practical, easy-to-follow guide covering when to visit, what to pack, how to get around, and what to know before you travel.
+                </p>
+                <HashLink
+                  to="/rwanda/practical-guide"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  Read the Practical Guide
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </HashLink>
+              </div>
+
+              <div className="relative min-h-[260px] bg-cocoa">
+                <img
+                  src="/Pictures/countries/Rwandaa.jpg"
+                  alt="Rwanda mountains and lakes"
+                  loading="lazy"
+                  className="size-full object-cover opacity-80"
+                />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Benefits row — same flat, outline-icon treatment as the trust row
           elsewhere, just different content: what makes this service worth
           using, not general trust statements. */}

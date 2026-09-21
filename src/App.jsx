@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
@@ -30,6 +30,7 @@ import { RelocationFullDetails } from './pages/RelocationFullDetails.jsx'
 import { RelocationPackage } from './pages/RelocationPackage.jsx'
 import { RightOfAbodeGuidance } from './pages/RightOfAbodeGuidance.jsx'
 import { Rwanda } from './pages/Rwanda.jsx'
+import { RwandaPracticalGuide } from './pages/RwandaPracticalGuide.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
 import { TravelAudit } from './pages/TravelAudit.jsx'
@@ -251,6 +252,15 @@ function App() {
           <Route path="/zambia/practical-guide" element={<ZambiaPracticalGuide />} />
           <Route path="/uganda" element={<Uganda />} />
           <Route path="/rwanda" element={<Rwanda />} />
+          <Route path="/rwanda/practical-guide" element={<RwandaPracticalGuide />} />
+          <Route
+            path="/rwanda/practical-guide/places"
+            element={<Navigate to="/rwanda/practical-guide" replace />}
+          />
+          <Route
+            path="/rwanda/practical-guide/experience"
+            element={<Navigate to="/rwanda/practical-guide" replace />}
+          />
           <Route path="/senegal" element={<Senegal />} />
           <Route path="/benin" element={<Benin />} />
           <Route path="/gambia" element={<Gambia />} />

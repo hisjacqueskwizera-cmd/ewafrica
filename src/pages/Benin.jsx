@@ -20,6 +20,7 @@ import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
+import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { BENIN_PAGE } from '../data/siteContent.js'
@@ -40,6 +41,39 @@ const ICONS = {
   MapPin,
 }
 
+const BENIN_GALLERY_TILES = [
+  {
+    src: '/Pictures/Benin/Benin_Hero.jpg',
+    alt: 'Sailing pirogue on Lake Nokoué, Benin',
+    title: 'Lake Nokoué',
+    subtitle: 'Sailing pirogues, timeless waterways',
+  },
+  {
+    src: '/Pictures/Benin_Landing_Hero.JPG',
+    alt: 'Ganvié stilt village on the water in Benin',
+    title: 'Ganvié',
+    subtitle: "Africa's Venice, a village on stilts",
+  },
+  {
+    src: '/Pictures/Benin_Side_Image.JPG',
+    alt: 'Traditional Vodun fetish statues in Benin',
+    title: 'Vodun Heritage',
+    subtitle: 'Sacred rites, living spirituality',
+  },
+  {
+    src: '/Pictures/Benin/Back_River.jpg',
+    alt: 'Palm-lined river channel in Benin',
+    title: 'Palm-lined Waterways',
+    subtitle: 'Quiet channels, lush scenery',
+  },
+  {
+    src: '/Pictures/countries/Benin.jpg',
+    alt: 'Beninese woman in traditional dress with her child',
+    title: 'Beninese Culture',
+    subtitle: 'Warmth, tradition, living heritage',
+  },
+]
+
 function CardCta({ to, children }) {
   return (
     <HashLink
@@ -55,25 +89,6 @@ function CardCta({ to, children }) {
 export function Benin() {
   useEffect(() => {
     document.title = 'Explore Benin | East-West Africa Link'
-
-    const galleryItems = document.querySelectorAll('.gallery-item')
-    if (!galleryItems.length) return undefined
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.18 },
-    )
-
-    galleryItems.forEach((item) => observer.observe(item))
-
-    return () => observer.disconnect()
   }, [])
 
   const { hero, services, places, routes, guide, closing, trust, farewell } = BENIN_PAGE
@@ -89,66 +104,18 @@ export function Benin() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
-      <section className="bg-cream py-10 sm:py-12 lg:py-16">
-        <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-px lg:grid-cols-[1.8fr_0.9fr_0.9fr]">
-            <Reveal className="gallery-item group overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5" style={{ '--delay': '0ms' }}>
-              <div className="relative h-full min-h-[430px] overflow-hidden">
-                <img
-                  src="/Pictures/Benin/Benin_Hero.jpg"
-                  alt="Historic Benin coastline and architecture"
-                  loading="lazy"
-                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-            </Reveal>
-
-            <div className="grid h-full gap-px">
-              {['/Pictures/Benin_Side_Image.JPG', '/Pictures/Benin_Landing_Hero.JPG'].map((src, index) => (
-                <Reveal
-                  key={src}
-                  className="gallery-item group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
-                  style={{ '--delay': `${(index + 1) * 100}ms` }}
-                >
-                  <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
-                    <img
-                      src={src}
-                      alt="Benin landscape"
-                      loading="lazy"
-                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <div className="grid h-full gap-px">
-              {['/Pictures/Benin/Back_River.jpg', '/Pictures/countries/Benin.jpg'].map((src, index) => (
-                <Reveal
-                  key={src}
-                  className="gallery-item group h-full overflow-hidden border border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5"
-                  style={{ '--delay': `${(index + 3) * 100}ms` }}
-                >
-                  <div className="relative h-[calc((430px-16px)/2)] overflow-hidden">
-                    <img
-                      src={src}
-                      alt="Benin landscape"
-                      loading="lazy"
-                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <PhotoGallerySection
+        heading="A Glimpse of Benin"
+        subheading="Stilt villages, sacred traditions and waterways — a first look at the sights and stories waiting across Benin."
+        tiles={BENIN_GALLERY_TILES}
+        variant="mosaic"
+      />
 
       {/* Travel Services in Benin — four cards, including Independent Tour
           Guides. */}
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex items-center justify-center gap-4">
+          <Reveal once={false} className="flex items-center justify-center gap-4">
             <span
               className="hidden h-px max-w-24 flex-1 border-t border-dashed border-copper/50 sm:block"
               aria-hidden="true"
@@ -166,7 +133,7 @@ export function Benin() {
             {services.map((service, i) => {
               const Icon = ICONS[service.icon]
               return (
-                <Reveal key={service.title} delay={i * 90}>
+                <Reveal key={service.title} once={false} delay={i * 90}>
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
                     <div className="aspect-4/3 overflow-hidden rounded-t-3xl">
                       <img
@@ -227,7 +194,7 @@ export function Benin() {
       {/* Where to go — real Benin destinations. */}
       <section className="bg-cream py-16 lg:py-20">
         <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center">
+          <Reveal once={false} className="text-center">
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
               Where to Go in Benin
             </h2>
@@ -239,7 +206,7 @@ export function Benin() {
           <div className="mt-10 space-y-0">
             <div className="grid gap-0 lg:grid-cols-3">
               {places.slice(0, 3).map((place, i) => (
-                <Reveal key={place.name} delay={i * 90}>
+                <Reveal key={place.name} once={false} delay={i * 90}>
                   <article className="group flex h-full flex-col overflow-hidden border-b border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:border-b-0 lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
@@ -267,7 +234,7 @@ export function Benin() {
 
             <div className="grid gap-0 lg:grid-cols-3">
               {places.slice(3).map((place, i) => (
-                <Reveal key={place.name} delay={(i + 3) * 90}>
+                <Reveal key={place.name} once={false} delay={(i + 3) * 90}>
                   <article className="group flex h-full flex-col overflow-hidden border-t border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
@@ -303,7 +270,7 @@ export function Benin() {
       {/* Practical guide preview — an accordion of real topic summaries. */}
       <section className="bg-cream py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="overflow-hidden rounded-3xl bg-card shadow-lift lg:flex lg:items-stretch">
+          <Reveal once={false} className="overflow-hidden rounded-3xl bg-card shadow-lift lg:flex lg:items-stretch">
             <div className="p-8 sm:p-10 lg:w-3/5 lg:p-12">
               <div className="flex items-center gap-3">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground">
@@ -337,7 +304,7 @@ export function Benin() {
       {/* Need Personalized Guidance? */}
       <section className="pb-16 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="overflow-hidden rounded-3xl bg-cocoa text-primary-foreground shadow-card">
+          <Reveal once={false} className="overflow-hidden rounded-3xl bg-cocoa text-primary-foreground shadow-card">
             <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
               <div className="flex flex-col gap-3">
                 <span className="grid size-12 shrink-0 place-items-center rounded-full border-2 border-copper text-copper">
@@ -359,17 +326,19 @@ export function Benin() {
                   East-West Africa Link can help with:
                 </p>
                 <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                  {closing.helpWith.map((item) => {
+                  {closing.helpWith.map((item, i) => {
                     const Icon = ICONS[item.icon]
                     return (
-                      <div key={item.label} className="flex flex-col items-center gap-2 text-center">
-                        <span className="grid size-11 place-items-center rounded-full border-2 border-copper text-copper">
-                          <Icon className="size-5" aria-hidden="true" />
-                        </span>
-                        <span className="text-xs font-semibold text-primary-foreground">
-                          {item.label}
-                        </span>
-                      </div>
+                      <Reveal key={item.label} once={false} delay={i * 90}>
+                        <div className="flex flex-col items-center gap-2 text-center">
+                          <span className="grid size-11 place-items-center rounded-full border-2 border-copper text-copper">
+                            <Icon className="size-5" aria-hidden="true" />
+                          </span>
+                          <span className="text-xs font-semibold text-primary-foreground">
+                            {item.label}
+                          </span>
+                        </div>
+                      </Reveal>
                     )
                   })}
                 </div>
@@ -383,22 +352,24 @@ export function Benin() {
           destination page. */}
       <section className="bg-cream pb-16 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
-            {trust.map((item) => {
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
+            {trust.map((item, i) => {
               const Icon = ICONS[item.icon]
               return (
-                <div key={item.title} className="flex flex-col items-center gap-3 text-center lg:px-6">
-                  <span className="grid size-12 place-items-center rounded-full border-2 border-copper text-copper">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-bold text-primary">{item.title}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{item.text}</p>
+                <Reveal key={item.title} once={false} delay={i * 90} className="lg:px-6">
+                  <div className="flex flex-col items-center gap-3 text-center">
+                    <span className="grid size-12 place-items-center rounded-full border-2 border-copper text-copper">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-bold text-primary">{item.title}</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">{item.text}</p>
+                    </div>
                   </div>
-                </div>
+                </Reveal>
               )
             })}
-          </Reveal>
+          </div>
         </div>
       </section>
 

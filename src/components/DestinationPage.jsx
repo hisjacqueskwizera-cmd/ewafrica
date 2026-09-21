@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import { isValidElement, useEffect } from 'react'
 import { DestinationHero } from './DestinationHero.jsx'
 import { HashLink } from './HashLink.jsx'
 import { PhotoGallerySection } from './PhotoGallery.jsx'
@@ -57,9 +57,13 @@ function CardCta({ to, children }) {
  * (an array in HERO_VIDEOS' shape) for a page that rotates its own
  * dedicated clips instead of a static photo — Tanzania's the only one
  * that has any right now; everyone else's `hero` carries a plain
- * `backgroundImage`. Pass `gallery` (shape: { heading, subheading, tiles,
- * variant }, see PhotoGallery.jsx) for a "Gallery" section right under the
- * hero — omit it for a country with no dedicated photo set yet.
+ * `backgroundImage`. Pass `gallery` for a "Gallery" section right under
+ * the hero — omit it for a country with no dedicated photo set yet. It's
+ * either a data object (shape: { heading, subheading, tiles, variant },
+ * see PhotoGallery.jsx) rendered through the shared PhotoGallerySection,
+ * or, for a country whose gallery needs its own layout/behaviour (video
+ * tiles, a full-screen lightbox — Tanzania's the first), an already-built
+ * React element rendered as-is instead.
  */
 export function DestinationPage({ documentTitle, countryName, slug, data, heroVideos, gallery }) {
   useEffect(() => {
@@ -80,7 +84,7 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
         backgroundVideos={heroVideos}
       />
 
-      {gallery && <PhotoGallerySection {...gallery} />}
+      {gallery && (isValidElement(gallery) ? gallery : <PhotoGallerySection {...gallery} />)}
 
       {/* Travel Services — a dashed-rule-flanked label rather than the
           site's usual SectionTitle, since these cards are the page's real

@@ -56,7 +56,7 @@ export const COUNTRIES = [
   },
   {
     slug: 'tanzania',
-    name: 'Tanzania',
+    name: 'Tanzania & Zanzibar',
     region: 'east',
     note: 'Land of Kilimanjaro, Serengeti and Zanzibar',
     displayName: 'Tanzania (Zanzibar)',
@@ -522,10 +522,10 @@ export const TANZANIA_PAGE = {
     },
   ],
   guide: {
-    eyebrow: 'First Time in Tanzania?',
-    heading: 'A Practical Guide for First-Time Travellers to Tanzania',
+    eyebrow: 'First Time in Tanzania & Zanzibar?',
+    heading: 'A Practical Guide for First-Time Travellers to Tanzania & Zanzibar',
     intro:
-      'Our Tanzania Travel Guide covers everything you need to know before you arrive, including:',
+      'Our Tanzania & Zanzibar Travel Guide covers everything you need to know before you arrive, including:',
     items: [
       'When to visit',
       'Places to visit',
@@ -538,7 +538,7 @@ export const TANZANIA_PAGE = {
       'Getting around',
       'Practical travel tips',
     ],
-    cta: { label: 'Read the Tanzania Travel Guide', to: '/#contact' },
+    cta: { label: 'Read the Tanzania & Zanzibar Travel Guide', to: '/#contact' },
     image: '/Pictures/countries/Tanzania.jpg',
     imageAlt: 'Safari vehicle and lions on the Tanzanian savanna',
   },
@@ -587,7 +587,7 @@ export const TANZANIA_PAGE = {
     {
       icon: 'Globe2',
       title: 'Travel Your Way',
-      text: 'Independent travel support so you can explore Tanzania on your own terms.',
+      text: 'Independent travel support so you can explore Tanzania & Zanzibar on your own terms.',
     },
     {
       icon: 'Handshake',
@@ -596,7 +596,7 @@ export const TANZANIA_PAGE = {
     },
   ],
   farewell: {
-    heading: 'Karibu Tanzania. 🇹🇿',
+    heading: 'Karibu Tanzania & Zanzibar. 🇹🇿',
     text: 'Come prepared, travel with an open mind, and give yourself enough time to experience the country beyond the famous destinations.',
   },
 }
@@ -730,7 +730,7 @@ export const ZAMBIA_PAGE = {
   // real photo in this project.
   routes: [
     {
-      to: 'Tanzania',
+      to: 'Tanzania & Zanzibar',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
     },
@@ -835,7 +835,7 @@ export const ZAMBIA_PAGE = {
     image: '/Pictures/countries/Zambia.jpg',
     imageAlt: 'Victoria Falls Bridge over the Zambezi gorge, the border crossing between Zambia and Zimbabwe',
     text: 'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',
-    neighbours: ['Tanzania', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
+    neighbours: ['Tanzania & Zanzibar', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
     note: 'Routes, transport connections and border procedures vary depending on your journey.',
   },
   tips: [
@@ -944,7 +944,7 @@ export const MALAWI_PAGE = {
   ],
   routes: [
     {
-      to: 'Tanzania',
+      to: 'Tanzania & Zanzibar',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Kasumulu or Karonga border — a scenic route along Lake Malawi.',
     },
@@ -1157,7 +1157,7 @@ export const UGANDA_PAGE = {
       text: 'A scenic and popular route through beautiful highlands and rolling hills.',
     },
     {
-      to: 'Tanzania',
+      to: 'Tanzania & Zanzibar',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'A well-traveled route with good transport options and stunning landscapes.',
     },
@@ -1244,7 +1244,7 @@ export const RWANDA_PAGE = {
       text: 'A popular route through beautiful highlands, connecting Kigali with southwestern Uganda.',
     },
     {
-      to: 'Tanzania',
+      to: 'Tanzania & Zanzibar',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Overland connections through the Kagera region, linking Rwanda with northwestern Tanzania.',
     },
@@ -2858,11 +2858,12 @@ export const EXPLORE_PAGE = {
     countries: [
       {
         slug: 'tanzania',
+        name: 'Tanzania & Zanzibar',
+        image: '/Pictures/Tanzania/Tanzania_Card.PNG',
         services: EXPLORE_SERVICES_WITH_GUIDES,
         description: [
-          "Tanzania is one of East Africa's most diverse destinations, known for its wildlife, dramatic landscapes, rich cultures, and Indian Ocean coastline. It is also home to Zanzibar, the legendary island destination just off the Tanzanian coast.",
-          'Zanzibar is the ultimate Indian Ocean experience, combining white-sand beaches, turquoise waters, centuries of Swahili history, and a distinctive blend of African, Arab, and Indian influences. Explore the historic streets of Stone Town, the beaches of Nungwi and Kendwa, the marine world around Mnemba Atoll, colorful local markets, spice farms, and unforgettable Indian Ocean sunsets.',
-          'East-West Africa Link offers travel guidance throughout Tanzania, with local guide services available in Zanzibar.',
+          "Tanzania is one of East Africa's most rewarding destinations, known for its wildlife, dramatic landscapes, rich cultures, and Indian Ocean coastline. Zanzibar adds white-sand beaches, turquoise waters, and centuries of Swahili history.",
+          'From safari adventures and Mount Kilimanjaro to Stone Town and island sunsets, Tanzania & Zanzibar offer one incredible journey across mainland and coast.',
         ],
       },
       { slug: 'rwanda', services: EXPLORE_SERVICES },

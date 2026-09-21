@@ -113,7 +113,7 @@ export const ZAMBIA_DATA = {
 
   routes: [
     {
-      to: 'Tanzania',
+      to: 'Tanzania & Zanzibar',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
     },
@@ -139,7 +139,7 @@ export const ZAMBIA_DATA = {
     title: 'Traveling Overland?',
     description:
       'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',
-    neighbours: ['Tanzania', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
+    neighbours: ['Tanzania & Zanzibar', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
     note: 'Routes, transport connections and border procedures vary depending on your journey.',
     researchText:
       '',

@@ -34,6 +34,19 @@ function ctaFor(country) {
     : { to: country.to, label: `Explore ${country.name}` }
 }
 
+// Countries branded with a companion destination (currently just "Tanzania
+// & Zanzibar") get that second half picked out in gold rather than shown
+// as plain white text like the rest of the name.
+function CountryName({ name }) {
+  const [before, after] = name.split(' & ')
+  if (!after) return name
+  return (
+    <>
+      {before} &amp; <span className="text-gold">{after}</span>
+    </>
+  )
+}
+
 function Flag({ slug }) {
   return (
     <img
@@ -146,14 +159,14 @@ function DestinationCountryCard({ country, featured = false }) {
           <div
             className={`absolute inset-0 bg-linear-to-t ${
               featured
-                ? 'from-black/90 via-black/60 to-black/15'
-                : 'from-black/90 via-black/35 to-transparent'
+                ? 'from-black/70 via-black/40 to-black/5'
+                : 'from-black/80 via-black/25 to-transparent'
             }`}
             aria-hidden="true"
           />
           {featured && (
             <div
-              className="absolute inset-0 bg-linear-to-r from-black/60 via-black/20 to-transparent"
+              className="absolute inset-0 bg-linear-to-r from-black/45 via-black/15 to-transparent"
               aria-hidden="true"
             />
           )}
@@ -177,7 +190,7 @@ function DestinationCountryCard({ country, featured = false }) {
         <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
           <Flag slug={country.slug} />
           <h3 className="truncate text-2xl font-semibold text-primary-foreground">
-            {country.name}
+            <CountryName name={country.name} />
           </h3>
         </div>
         {country.note && (

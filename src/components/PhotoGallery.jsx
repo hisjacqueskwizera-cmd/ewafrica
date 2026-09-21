@@ -1,3 +1,5 @@
+import { ArrowRight } from 'lucide-react'
+import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
 
 /**
@@ -44,8 +46,12 @@ export function GalleryTile({ src, alt, title, subtitle, className = '' }) {
  * - "single" (1 photo): one full-width landscape tile, for countries with
  *   only one usable photo in the project so far (Malawi, Senegal, Gambia,
  *   Uganda).
+ *
+ * Pass `viewAllLink` (shape: { label, to }) when the country has a
+ * dedicated full gallery page worth linking to, e.g. Rwanda's
+ * /rwanda/gallery — omit it for countries without one yet.
  */
-export function PhotoGallerySection({ heading, subheading, tiles, variant = 'mosaic' }) {
+export function PhotoGallerySection({ heading, subheading, tiles, variant = 'mosaic', viewAllLink }) {
   return (
     <section className="bg-cream py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
@@ -74,6 +80,18 @@ export function PhotoGallerySection({ heading, subheading, tiles, variant = 'mos
       {variant === 'mosaic' && <MosaicLayout tiles={tiles} />}
       {variant === 'duo' && <DuoLayout tiles={tiles} />}
       {variant === 'single' && <SingleLayout tiles={tiles} />}
+
+      {viewAllLink && (
+        <Reveal once={false} delay={200} className="mt-8 text-center">
+          <HashLink
+            to={viewAllLink.to}
+            className="inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+          >
+            {viewAllLink.label}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </HashLink>
+        </Reveal>
+      )}
     </section>
   )
 }

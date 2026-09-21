@@ -30,6 +30,7 @@ import { RelocationFullDetails } from './pages/RelocationFullDetails.jsx'
 import { RelocationPackage } from './pages/RelocationPackage.jsx'
 import { RightOfAbodeGuidance } from './pages/RightOfAbodeGuidance.jsx'
 import { Rwanda } from './pages/Rwanda.jsx'
+import { RwandaGallery } from './pages/RwandaGallery.jsx'
 import { RwandaPracticalGuide } from './pages/RwandaPracticalGuide.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
@@ -252,6 +253,7 @@ function App() {
           <Route path="/zambia/practical-guide" element={<ZambiaPracticalGuide />} />
           <Route path="/uganda" element={<Uganda />} />
           <Route path="/rwanda" element={<Rwanda />} />
+          <Route path="/rwanda/gallery" element={<RwandaGallery />} />
           <Route path="/rwanda/practical-guide" element={<RwandaPracticalGuide />} />
           <Route
             path="/rwanda/practical-guide/places"

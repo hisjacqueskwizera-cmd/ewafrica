@@ -48,6 +48,7 @@ export function Rwanda() {
         subheading="Mountain gorillas and rolling green hills — a first look at the sights waiting across Rwanda."
         tiles={RWANDA_GALLERY_TILES}
         variant="duo"
+        viewAllLink={{ label: 'View Full Photo & Video Gallery', to: '/rwanda/gallery' }}
       />
 
       {/* Our Services for Rwanda */}

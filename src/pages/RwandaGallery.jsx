@@ -1,7 +1,16 @@
 import { ArrowRight, Camera, Compass, Leaf, Pause, Play, Users } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { RWANDA_PAGE } from '../data/siteContent.js'
+
+// Header is a fixed 84px bar (see Header.jsx); the sub-nav sticks directly
+// under it, and every stacked gallery section sticks under the sub-nav in
+// turn — see the "stack" comment further down.
+const HEADER_HEIGHT = 84
+const SUBNAV_HEIGHT = 56
+const STACK_TOP = HEADER_HEIGHT + SUBNAV_HEIGHT
 
 const NAV_TABS = [
   { label: 'Overview', to: '/rwanda' },
@@ -17,6 +26,30 @@ const HIGHLIGHTS = [
   { icon: Compass, label: 'Adventure' },
   { icon: Camera, label: 'Real Connections' },
 ]
+
+/**
+ * Pins its children under the header + sub-nav as the user scrolls, so the
+ * next stack section slides up and covers it — a "stacking cards" scroll
+ * effect. Requires an opaque background (passed via `className`) so the
+ * covering section fully hides whatever is stacked beneath it.
+ *
+ * Each section needs its OWN containing block for `sticky` to release at
+ * the right moment — sharing one flex/grid parent across all sections
+ * would make them all share a single containing block and never let go
+ * until the very end of the whole gallery. The outer `relative` div here
+ * is that per-section containing block; its bottom padding is the extra
+ * scroll "runway" the section stays pinned for before the next one
+ * arrives and covers it.
+ */
+function StackSection({ children, className = '' }) {
+  return (
+    <div className="relative pb-14 sm:pb-20 lg:pb-24">
+      <div className={`sticky ${className}`} style={{ top: STACK_TOP }}>
+        {children}
+      </div>
+    </div>
+  )
+}
 
 function VideoTile({ src, poster, alt, title, subtitle, className = '' }) {
   const videoRef = useRef(null)
@@ -120,13 +153,32 @@ export function RwandaGallery() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
+  const { hero } = RWANDA_PAGE
+
   return (
     <div className="bg-background min-h-screen">
+      {/* Hero — the same full-viewport hero every destination page shares;
+          the global Header goes transparent on top of it (see
+          TRANSPARENT_HERO_ROUTES in Header.jsx). */}
+      <DestinationHero
+        heading="Explore Rwanda"
+        description={`${hero.subheading}. ${hero.description}`}
+        backgroundImage={hero.image}
+        backgroundImageAlt={hero.imageAlt}
+      />
+
       {/* Sub-nav — mirrors the tabs a visitor would expect after Rwanda's
           hero (Overview / Services / Popular Routes / Gallery / Practical
-          Guide), with this page's tab marked active. */}
-      <div className="sticky top-0 z-30 border-b border-border/70 bg-cream/95 backdrop-blur-sm">
-        <nav className="mx-auto flex max-w-7xl items-center gap-6 overflow-x-auto px-4 py-4 text-sm font-semibold sm:px-6 lg:justify-center lg:px-8">
+          Guide). Sticks directly under the fixed 84px header, with this
+          page's tab marked active. */}
+      <div
+        className="sticky z-30 border-b border-border/70 bg-cream/95 backdrop-blur-sm"
+        style={{ top: HEADER_HEIGHT }}
+      >
+        <nav
+          className="mx-auto flex h-14 w-[95%] items-center gap-6 overflow-x-auto text-sm font-semibold lg:justify-center"
+          aria-label="Rwanda page sections"
+        >
           {NAV_TABS.map((tab) => (
             <HashLink
               key={tab.label}
@@ -145,7 +197,7 @@ export function RwandaGallery() {
 
       {/* Page header */}
       <section className="border-b border-border/60 bg-[#eef4ea] py-10 sm:py-12">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 sm:flex-row sm:items-end sm:justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-[95%] flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <Reveal once={false}>
             <h1 className="font-display text-3xl font-bold text-primary sm:text-4xl">
               Rwanda Photo &amp; Video Gallery
@@ -163,136 +215,159 @@ export function RwandaGallery() {
         </div>
       </section>
 
-      {/* Gallery grid */}
-      <main className="py-10 sm:py-12">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8">
-          {/* 1. Hero banner — gorilla video + intro copy + highlight icons */}
-          <Reveal once={false} big>
-            <div className="relative grid overflow-hidden border border-cocoa/10 bg-cocoa text-primary-foreground shadow-card lg:grid-cols-[1fr_1.3fr_0.7fr]">
-              <div className="relative z-10 flex flex-col justify-center gap-4 bg-cocoa/95 p-8 sm:p-10 lg:bg-transparent lg:bg-gradient-to-r lg:from-cocoa lg:via-cocoa/90 lg:to-transparent">
-                <h2 className="font-display text-3xl font-black uppercase leading-none sm:text-4xl">
-                  Rwanda
-                  <br />
-                  Gallery
-                </h2>
-                <span className="h-1 w-14 bg-copper" aria-hidden="true" />
-                <p className="max-w-xs text-sm leading-relaxed text-primary-foreground/85">
-                  Extraordinary people.
-                  <br />
-                  Breathtaking places.
-                  <br />
-                  Unforgettable experiences.
-                </p>
-              </div>
-
-              <VideoTile
-                src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
-                poster="/Rwanda_Gallery/Gorilla/gorilla_poster.jpg"
-                alt="Mountain gorilla walking near a pool of water in Rwanda"
-                title=""
-                subtitle=""
-                className="h-[280px] border-none sm:h-[360px] lg:h-[420px]"
-              />
-
-              <div className="hidden flex-col justify-center gap-4 p-8 lg:flex">
-                {HIGHLIGHTS.map((item) => (
-                  <div key={item.label} className="flex items-center gap-3 text-copper">
-                    <item.icon className="size-5" aria-hidden="true" />
-                    <span className="text-sm font-semibold uppercase tracking-wide text-primary-foreground">
-                      {item.label}
-                    </span>
+      {/* Gallery — each block below is pinned in turn (StackSection) so it
+          scrolls up, sticks under the sub-nav, and is then covered by the
+          next block sliding over it, all the way through the page. */}
+      <main>
+        <div className="mx-auto w-[95%] py-3">
+          {/* 1. Hero banner — intro copy + highlight icons above the gorilla
+              video, which is shown at its own full native aspect ratio
+              (no cropping) rather than squeezed into a fixed height. */}
+          <StackSection className="bg-background">
+            <Reveal once={false} big>
+              <div className="overflow-hidden border border-cocoa/10 bg-cocoa text-primary-foreground shadow-card">
+                <div className="flex flex-col gap-6 p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <h2 className="font-display text-3xl font-black uppercase leading-none sm:text-4xl">
+                      Rwanda Gallery
+                    </h2>
+                    <span className="mt-4 block h-1 w-14 bg-copper" aria-hidden="true" />
+                    <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/85">
+                      Extraordinary people. Breathtaking places. Unforgettable experiences.
+                    </p>
                   </div>
-                ))}
-                <p className="mt-3 max-w-[180px] text-xs leading-relaxed text-primary-foreground/70">
-                  Discover the beauty, diversity and spirit of Rwanda.
-                </p>
-              </div>
-            </div>
-          </Reveal>
 
-          {/* 2. Kigali City — full-width video */}
-          <Reveal once={false} delay={100}>
-            <VideoTile
-              src="/Rwanda_Gallery/Kigali City/kigali.mp4"
-              poster="/Rwanda_Gallery/Kigali City/kigali_poster.jpg"
-              alt="Aerial view of Kigali city skyline at dusk"
-              title="Kigali"
-              subtitle="A vibrant, modern capital with a warm welcome and a bright future."
-              className="h-[260px] sm:h-[340px] lg:h-[420px]"
-            />
-          </Reveal>
+                  <div className="flex flex-wrap gap-x-8 gap-y-4">
+                    {HIGHLIGHTS.map((item) => (
+                      <div key={item.label} className="flex items-center gap-3 text-copper">
+                        <item.icon className="size-5" aria-hidden="true" />
+                        <span className="text-sm font-semibold uppercase tracking-wide text-primary-foreground">
+                          {item.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <VideoTile
+                  src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
+                  poster="/Rwanda_Gallery/Gorilla/gorilla_poster.jpg"
+                  alt="Mountain gorilla walking near a pool of water in Rwanda"
+                  title="Volcanoes National Park"
+                  subtitle="Home to Rwanda's mountain gorillas."
+                  className="aspect-video border-none"
+                />
+              </div>
+            </Reveal>
+          </StackSection>
+
+          {/* 2. Kigali City — full-width video, shown at its native 16:9
+              aspect ratio so the whole frame is visible. */}
+          <StackSection className="bg-background">
+            <Reveal once={false}>
+              <VideoTile
+                src="/Rwanda_Gallery/Kigali City/kigali.mp4"
+                poster="/Rwanda_Gallery/Kigali City/kigali_poster.jpg"
+                alt="Aerial view of Kigali city skyline at dusk"
+                title="Kigali"
+                subtitle="A vibrant, modern capital with a warm welcome and a bright future."
+                className="aspect-video"
+              />
+            </Reveal>
+          </StackSection>
 
           {/* 3. Lake Kivu / Nyungwe */}
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Reveal once={false} delay={150}>
-              <PhotoTile
-                src="/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg"
-                alt="Aerial panorama of Lake Kivu's islands and green hills"
-                title="Lake Kivu"
-                subtitle="Stunning lake views, rolling green hills and peaceful lakeside towns."
-                className="h-[260px] sm:h-[320px] lg:h-[380px]"
-              />
-            </Reveal>
-            <Reveal once={false} delay={250}>
-              <PhotoTile
-                src="/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg"
-                alt="Canopy walkway suspended above Nyungwe Forest National Park"
-                title="Nyungwe National Park"
-                subtitle="Walk above the rainforest on one of Africa's most spectacular canopy walkways."
-                className="h-[260px] sm:h-[320px] lg:h-[380px]"
-              />
-            </Reveal>
-          </div>
+          <StackSection className="bg-background">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Reveal once={false} delay={150}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg"
+                  alt="Aerial panorama of Lake Kivu's islands and green hills"
+                  title="Lake Kivu"
+                  subtitle="Stunning lake views, rolling green hills and peaceful lakeside towns."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+              <Reveal once={false} delay={250}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg"
+                  alt="Canopy walkway suspended above Nyungwe Forest National Park"
+                  title="Nyungwe National Park"
+                  subtitle="Walk above the rainforest on one of Africa's most spectacular canopy walkways."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+            </div>
+          </StackSection>
 
-          {/* 4. Rwandan Culture — full width */}
-          <Reveal once={false} delay={100}>
-            <PhotoTile
-              src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
-              alt="Intore dancers performing a traditional Rwandan dance"
-              title="Rwandan Culture"
-              subtitle="Music, dance and traditions that inspire."
-              className="h-[300px] sm:h-[380px] lg:h-[460px]"
-            />
-          </Reveal>
+          {/* 4. Tea Plantations / Butaro Highlands (swapped with Akagera,
+              which now runs full-width below). */}
+          <StackSection className="bg-background">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Reveal once={false} delay={150}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg"
+                  alt="Rolling tea plantation hills at sunset in Rwanda"
+                  title="Tea Plantations"
+                  subtitle="Lush green hills and some of the world's finest tea."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+              <Reveal once={false} delay={250}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Butaro/IMG_5203_web.jpg"
+                  alt="Volcano and lake view from the Butaro highlands in northern Rwanda"
+                  title="Butaro Highlands"
+                  subtitle="Cool mountains, fresh air and breathtaking views in northern Rwanda."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+            </div>
+          </StackSection>
 
-          {/* 5. Tea Plantations / Akagera */}
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Reveal once={false} delay={150}>
-              <PhotoTile
-                src="/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg"
-                alt="Rolling tea plantation hills at sunset in Rwanda"
-                title="Tea Plantations"
-                subtitle="Lush green hills and some of the world's finest tea."
-                className="h-[260px] sm:h-[320px] lg:h-[380px]"
-              />
-            </Reveal>
-            <Reveal once={false} delay={250}>
+          {/* 5. Akagera National Park — full width (swapped with Butaro,
+              which now runs in the row above). */}
+          <StackSection className="bg-background">
+            <Reveal once={false}>
               <PhotoTile
                 src="/Rwanda_Gallery/Akagera/IMG_5239_web.jpg"
                 alt="Savannah, lakes and wetlands of Akagera National Park"
                 title="Akagera National Park"
                 subtitle="Wide savannah landscapes, lakes and wetlands in Rwanda's eastern wilderness."
-                className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                className="h-[300px] sm:h-[380px] lg:h-[460px]"
               />
             </Reveal>
-          </div>
+          </StackSection>
 
-          {/* 6. Butaro Highlands — full width */}
-          <Reveal once={false} delay={100}>
-            <PhotoTile
-              src="/Rwanda_Gallery/Butaro/IMG_5203_web.jpg"
-              alt="Volcano and lake view from the Butaro highlands in northern Rwanda"
-              title="Butaro Highlands"
-              subtitle="Cool mountains, fresh air and breathtaking views in northern Rwanda."
-              className="h-[300px] sm:h-[380px] lg:h-[460px]"
-            />
-          </Reveal>
+          {/* 6. Rwandan Culture / Kigali skyline — new closing row. */}
+          <StackSection className="bg-background">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Reveal once={false} delay={150}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Calture/IMG_4973_web.jpg"
+                  alt="Intore dancers performing a traditional Rwandan dance"
+                  title="Rwandan Culture"
+                  subtitle="Music, dance and traditions that inspire."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+              <Reveal once={false} delay={250}>
+                <PhotoTile
+                  src="/Rwanda_Gallery/Kigali City/kigali_poster.jpg"
+                  alt="Aerial skyline view of Kigali, Rwanda"
+                  title="Kigali Skyline"
+                  subtitle="A closer look at Rwanda's capital."
+                  className="h-[260px] sm:h-[320px] lg:h-[380px]"
+                />
+              </Reveal>
+            </div>
+          </StackSection>
         </div>
       </main>
 
       {/* Closing banner */}
-      <section className="border-t border-border/60 bg-[#eef4ea] py-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 text-center sm:flex-row sm:justify-between sm:text-left sm:px-6 lg:px-8">
+      <section className="relative z-10 border-t border-border/60 bg-[#eef4ea] py-8">
+        <div className="mx-auto flex w-[95%] flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-2xl italic text-primary">Rwanda</p>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-copper">

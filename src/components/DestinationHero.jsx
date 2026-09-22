@@ -33,8 +33,12 @@ function AccentHeading({ text }) {
  * clips the way About Us rotates the site-wide reel — Tanzania is the
  * only destination with any of its own footage.
  *
- * No color wash over the backdrop — the photo or video shows at full
- * strength; heading legibility comes from the text shadow instead.
+ * No color wash over the backdrop by default — the photo or video shows at
+ * full strength; heading legibility comes from the text shadow instead.
+ * Pass `mist` for the rare backdrop this isn't enough for (a bright/white
+ * photo like Ghana's Cape Coast Castle hero) — it adds a soft dark fade
+ * behind the header (top of the hero) and behind the heading/description
+ * (left side, where they sit) without darkening the rest of the photo.
  */
 export function DestinationHero({
   heading,
@@ -43,6 +47,7 @@ export function DestinationHero({
   backgroundImage,
   backgroundImageAlt,
   backgroundVideos,
+  mist = false,
 }) {
   return (
     <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-10 text-left text-primary-foreground lg:px-16">
@@ -56,6 +61,18 @@ export function DestinationHero({
         />
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
+      )}
+      {mist && (
+        <>
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-56 bg-gradient-to-b from-black/55 to-transparent"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full bg-gradient-to-r from-black/55 via-black/25 to-transparent sm:w-3/4 lg:w-2/3"
+            aria-hidden="true"
+          />
+        </>
       )}
       <div
         className="relative z-[4] w-full max-w-5xl"

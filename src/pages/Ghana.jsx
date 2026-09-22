@@ -124,6 +124,7 @@ export function Ghana() {
         description={`${hero.subheading} ${hero.description}`}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
+        mist
       />
 
       <CountrySubNav

@@ -3,9 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 /**
  * Tracks how far an element has scrolled through a viewport-relative
  * window, as a continuous 0→1 value — not a one-shot "has it appeared yet"
- * flag. Progress starts climbing once the element's top reaches 85% down
- * the viewport and reaches 1 once it's scrolled up to 30% down, so the
- * whole sweep happens comfortably while the element is on screen.
+ * flag. The window is ~8 viewport heights tall (progress starts climbing
+ * while the element's top is still 4 screens below the bottom of the
+ * screen, and only reaches 1 after it's scrolled past 3+ screens above the
+ * top), so the sweep needs on the order of 50 mouse-wheel scrolls to play
+ * out fully rather than finishing within a screen or two.
  *
  * This is what a real scroll-scrubbed animation needs: something that
  * grows and shrinks in lockstep with scroll position (including scrolling
@@ -33,8 +35,8 @@ export function useScrollProgress() {
       ticking = false
       const rect = node.getBoundingClientRect()
       const vh = window.innerHeight || document.documentElement.clientHeight
-      const start = vh * 0.85
-      const end = vh * 0.3
+      const start = vh * 5
+      const end = vh * -3.2
       const raw = (start - rect.top) / (start - end)
       setProgress(Math.min(1, Math.max(0, raw)))
     }

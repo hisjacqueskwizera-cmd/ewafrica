@@ -14,6 +14,12 @@ export function HashLink({ to, children, className, onClick, ...rest }) {
   const targetPath = path || '/'
 
   const handleClick = (event) => {
+    // Mirrors react-router's own <Link>: if a parent's capture-phase
+    // handler already called preventDefault() (e.g. AutoScrollTrack
+    // suppressing the click that follows a drag), treat this as "don't
+    // navigate" rather than doing it anyway — otherwise dragging a card
+    // built on HashLink instead of <Link> still navigates on release.
+    if (event.defaultPrevented) return
     event.preventDefault()
     onClick?.(event)
 

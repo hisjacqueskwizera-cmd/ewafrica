@@ -86,23 +86,13 @@ export function Rwanda() {
               return (
                 <Reveal key={service.title} delay={i * 90}>
                   <article className="flex h-full flex-col rounded-2xl bg-card shadow-card">
-                    <div
-                      className={
-                        service.title === 'Travel Planner'
-                          ? 'aspect-[4/5] overflow-hidden rounded-t-2xl bg-transparent'
-                          : 'aspect-4/3 overflow-hidden rounded-t-2xl'
-                      }
-                    >
+                    <div className="aspect-4/3 overflow-hidden rounded-t-2xl">
                       <img
                         src={service.image}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
-                        className={
-                          service.title === 'Travel Planner'
-                            ? 'size-full object-cover'
-                            : 'size-full object-cover'
-                        }
+                        className="size-full object-cover"
                       />
                     </div>
                     <span className="relative z-10 -mt-6 ml-6 grid size-14 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground shadow-card">

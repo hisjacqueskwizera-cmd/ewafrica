@@ -46,11 +46,8 @@ const HEADING =
  * pass whichever one the page actually has; `badge` still doubles as the
  * image's fallback alt text if `badgeImageAlt` is omitted.
  *
- * `overlayTone="neutral"` swaps the default warm cocoa-tinted scrim for a
- * plain black one — for a naturally light/blue-sky photo (unlike the
- * site's usual darker backdrops) where the cocoa tint reads as an unwanted
- * brown cast rather than a mood-setting one. Defaults to `"warm"`
- * (unchanged cocoa tint) everywhere this isn't passed.
+ * No color wash over the backdrop — the photo or video shows at full
+ * strength; the text carries its own shadow for legibility instead.
  */
 export function PageIntro({
   id,
@@ -67,7 +64,6 @@ export function PageIntro({
   backgroundImage,
   backgroundImageAlt,
   backgroundVideos,
-  overlayTone = 'warm',
 }) {
   return (
     <section
@@ -85,14 +81,11 @@ export function PageIntro({
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
       )}
-      {/* Same flat single-tint overlay as DestinationHero (no gradient, no
-          vignette) — overlayTone still picks the tint color. */}
-      <div
-        className={`absolute inset-0 z-[3] ${overlayTone === 'neutral' ? 'bg-black/45' : 'bg-cocoa/45'}`}
-        aria-hidden="true"
-      />
 
-      <div className="relative z-[4] flex justify-center px-4 py-24 sm:justify-end sm:px-6 lg:px-8">
+      <div
+        className="relative z-[4] flex justify-center px-4 py-24 sm:justify-end sm:px-6 lg:px-8"
+        style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
+      >
         {/* Every child below shares this wrapper's own left edge
             (items-start) instead of each being independently
             right-anchored — the copy block (capped at max-w-2xl) and the

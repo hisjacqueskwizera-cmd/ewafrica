@@ -63,8 +63,10 @@ export function AboutUs() {
           TRANSPARENT_HERO_ROUTES in Header.jsx). */}
       <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-10 text-left text-primary-foreground lg:px-16">
         <HeroVideoBackground />
-        <div className="absolute inset-0 z-[3] bg-cocoa/45" aria-hidden="true" />
-        <div className="relative z-[4] w-full max-w-5xl">
+        <div
+          className="relative z-[4] w-full max-w-5xl"
+          style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
+        >
           <Reveal delay={150} blur>
             <div className="mt-9 max-w-3xl">
               <AccentHeading

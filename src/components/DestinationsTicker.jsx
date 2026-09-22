@@ -81,33 +81,63 @@ function DestinationCard({ d, hidden }) {
 
 // Pixels per second the strip drifts at while idle.
 const AUTO_SPEED = 45
-// After a touch drag ends, autoplay waits this long before resuming — long
-// enough for the browser's momentum/inertia scrolling to settle rather than
-// fighting it.
-const TOUCH_SETTLE_MS = 600
 // Pointer movement past this many pixels counts as a drag rather than a
-// tap, so a mouse-drag never also fires the click on the card underneath.
+// tap, so a drag never also fires the click on the card underneath.
 const DRAG_THRESHOLD = 4
 
+// Driven entirely by a CSS transform on an inner track, rather than native
+// scrolling (`element.scrollLeft`) — Safari treats a continuous,
+// gesture-free `scrollLeft` write as exactly the kind of unattended
+// auto-scroll its anti-"scroll-jacking" heuristics are built to suppress,
+// so the old rAF-loop-plus-scrollLeft version played in Chrome/Firefox but
+// sat frozen in real Safari. A `transform` is a plain paint property with
+// no scrolling semantics attached, so no such heuristic applies to it —
+// and it doubles as the one mechanism for both the idle autoplay drift and
+// direct pointer dragging (mouse and touch alike, via the Pointer Events
+// API), rather than mixing native scroll for one and JS scroll for the
+// other.
 export function DestinationsTicker() {
+  const outerRef = useRef(null)
   const trackRef = useRef(null)
   const [reduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
-  // Refs, not state — they're read every animation frame and must never
-  // trigger a re-render themselves.
+  // Current scroll offset in px, and half the track's rendered width (the
+  // point one full, un-duplicated copy of the list ends) — refs, since
+  // they're read/written every animation frame and must never themselves
+  // trigger a re-render.
+  const offsetRef = useRef(0)
+  const loopWidthRef = useRef(0)
   const pausedRef = useRef(false)
   const draggingRef = useRef(false)
-  const dragRef = useRef({ pointerId: null, startX: 0, startScrollLeft: 0, moved: false })
-  const touchSettleTimeoutRef = useRef(null)
+  const dragRef = useRef({ pointerId: null, startX: 0, startOffset: 0, moved: false })
+
+  const applyOffset = () => {
+    const track = trackRef.current
+    if (track) track.style.transform = `translateX(${-offsetRef.current}px)`
+  }
+
+  const wrapOffset = () => {
+    const loopWidth = loopWidthRef.current
+    if (loopWidth <= 0) return
+    offsetRef.current = ((offsetRef.current % loopWidth) + loopWidth) % loopWidth
+  }
+
+  useEffect(() => {
+    const measure = () => {
+      if (trackRef.current) loopWidthRef.current = trackRef.current.scrollWidth / 2
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
 
   // Auto-scrolls the strip at a constant speed, wrapping back to the start
-  // once it has scrolled through one full copy of the list (the list is
+  // once it has drifted through one full copy of the list (the list is
   // rendered twice below, so the wrap lands on an identical frame and reads
   // as seamless). Paused on hover/focus and while the user is dragging.
   useEffect(() => {
-    const track = trackRef.current
-    if (!track || reduceMotion) return
+    if (reduceMotion) return
     let frame
     let last = null
     const tick = (time) => {
@@ -115,13 +145,9 @@ export function DestinationsTicker() {
       const dt = (time - last) / 1000
       last = time
       if (!pausedRef.current && !draggingRef.current) {
-        track.scrollLeft += AUTO_SPEED * dt
-      }
-      const loopWidth = track.scrollWidth / 2
-      if (loopWidth > 0 && track.scrollLeft >= loopWidth) {
-        track.scrollLeft -= loopWidth
-        // Keep the in-progress drag's reference point in step with the wrap.
-        if (draggingRef.current) dragRef.current.startScrollLeft -= loopWidth
+        offsetRef.current += AUTO_SPEED * dt
+        wrapOffset()
+        applyOffset()
       }
       frame = requestAnimationFrame(tick)
     }
@@ -129,35 +155,20 @@ export function DestinationsTicker() {
     return () => cancelAnimationFrame(frame)
   }, [reduceMotion])
 
-  useEffect(() => () => clearTimeout(touchSettleTimeoutRef.current), [])
-
-  // Mouse dragging is tracked via window-level listeners rather than this
-  // element's own onPointerMove/onPointerUp plus setPointerCapture. Pointer
-  // capture keeps delivering move events once the cursor leaves the strip
-  // mid-drag, which is exactly why it was here — but while captured, the
-  // browser also retargets the *click* event that follows pointerup to the
-  // capturing element instead of hit-testing normally, so the card's own
-  // click (and the navigation it triggers) is silently swallowed even
-  // after capture is released in the pointerup handler itself, because the
-  // click has already been dispatched with the overridden target by then.
-  // Window listeners get the same "track outside the element" behavior
-  // without ever touching click targeting, which is why a touch tap (never
-  // captured here — it scrolls natively) worked while a mouse click didn't.
-  //
-  // Built once, in an effect, as a matched { onMove, onUp } pair — rather
-  // than as two separately memoized callbacks — so neither has to refer to
-  // the other by its outer binding name before that binding exists.
+  // One unified drag path for mouse and touch alike (Pointer Events cover
+  // both), tracked via window-level listeners so a drag that leaves the
+  // strip mid-gesture keeps following the pointer.
   const dragListenersRef = useRef(null)
 
   useEffect(() => {
     const onMove = (event) => {
       if (!draggingRef.current) return
       if (event.pointerId !== dragRef.current.pointerId) return
-      const track = trackRef.current
-      if (!track) return
       const dx = event.clientX - dragRef.current.startX
       if (Math.abs(dx) > DRAG_THRESHOLD) dragRef.current.moved = true
-      track.scrollLeft = dragRef.current.startScrollLeft - dx
+      offsetRef.current = dragRef.current.startOffset - dx
+      wrapOffset()
+      applyOffset()
     }
     const onUp = () => {
       draggingRef.current = false
@@ -171,31 +182,18 @@ export function DestinationsTicker() {
     return onUp
   }, [])
 
-  // Touch scrolls natively (the track is a real overflow-x-auto element),
-  // so only mouse needs manual click-and-drag handling here.
   const onPointerDown = (event) => {
-    clearTimeout(touchSettleTimeoutRef.current)
     draggingRef.current = true
-    if (event.pointerType !== 'mouse') return
-    const track = trackRef.current
-    if (!track) return
     dragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
-      startScrollLeft: track.scrollLeft,
+      startOffset: offsetRef.current,
       moved: false,
     }
     const { onMove, onUp } = dragListenersRef.current
     window.addEventListener('pointermove', onMove)
     window.addEventListener('pointerup', onUp)
     window.addEventListener('pointercancel', onUp)
-  }
-
-  const onPointerUp = (event) => {
-    if (event.pointerType === 'mouse') return
-    touchSettleTimeoutRef.current = setTimeout(() => {
-      draggingRef.current = false
-    }, TOUCH_SETTLE_MS)
   }
 
   const onClickCapture = (event) => {
@@ -205,6 +203,28 @@ export function DestinationsTicker() {
     }
   }
 
+  // With no native scroll container, the browser's normal "scroll the
+  // focused element into view" behavior has nothing to act on — so a
+  // keyboard user tabbing to a card currently off to the side would focus
+  // something they can't see. Nudge the track's own offset instead
+  // whenever focus lands on a card outside the visible window.
+  const onFocusCapture = (event) => {
+    const outer = outerRef.current
+    const card = event.target.closest('a')
+    if (!outer || !card) return
+    const outerRect = outer.getBoundingClientRect()
+    const cardRect = card.getBoundingClientRect()
+    if (cardRect.left < outerRect.left) {
+      offsetRef.current -= outerRect.left - cardRect.left
+    } else if (cardRect.right > outerRect.right) {
+      offsetRef.current += cardRect.right - outerRect.right
+    } else {
+      return
+    }
+    wrapOffset()
+    applyOffset()
+  }
+
   return (
     <section id="destinations" className="overflow-hidden pb-16 lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -212,26 +232,27 @@ export function DestinationsTicker() {
       </div>
 
       <div
-        ref={trackRef}
+        ref={outerRef}
         role="group"
         aria-label="Explore our destinations"
-        className="mt-10 flex cursor-grab touch-pan-x select-none gap-5 overflow-x-auto active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-10 cursor-grab overflow-hidden touch-pan-y select-none active:cursor-grabbing"
         onMouseEnter={() => (pausedRef.current = true)}
         onMouseLeave={() => (pausedRef.current = false)}
         onFocus={() => (pausedRef.current = true)}
+        onFocusCapture={onFocusCapture}
         onBlur={() => (pausedRef.current = false)}
         onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
         onClickCapture={onClickCapture}
         onDragStart={(event) => event.preventDefault()}
       >
-        {DESTINATIONS.map((d) => (
-          <DestinationCard key={d.slug} d={d} />
-        ))}
-        {DESTINATIONS.map((d) => (
-          <DestinationCard key={`${d.slug}-dup`} d={d} hidden />
-        ))}
+        <div ref={trackRef} className="flex w-max gap-5 will-change-transform">
+          {DESTINATIONS.map((d) => (
+            <DestinationCard key={d.slug} d={d} />
+          ))}
+          {DESTINATIONS.map((d) => (
+            <DestinationCard key={`${d.slug}-dup`} d={d} hidden />
+          ))}
+        </div>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

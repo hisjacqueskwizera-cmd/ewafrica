@@ -42,7 +42,6 @@ export function ZambiaPracticalGuide() {
         description="Everything you need to plan a smooth, confident trip — from Victoria Falls and safari country to money, transport and border crossings."
         backgroundImage="/Pictures/zambia/Hero_Section/Zambia_Pr_Hero_Section.JPG"
         backgroundImageAlt="The Zambezi River rushing through the Batoka Gorge below Victoria Falls, Zambia"
-        overlayClassName="bg-black/40"
       />
 
       {/* Subtle top sub-nav / breadcrumb */}

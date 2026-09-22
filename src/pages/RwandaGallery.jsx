@@ -322,7 +322,6 @@ export function RwandaGallery() {
         description="A closer look at the landscapes, wildlife and culture that make Rwanda unforgettable."
         backgroundImage="/Pictures/Background/GalleryHero_Section.JPG"
         backgroundImageAlt="Aerial view of terraced green hills in Rwanda"
-        overlayClassName="bg-black/35"
       />
 
       {/* Sub-nav — shared across every Rwanda page (Overview, Gallery,

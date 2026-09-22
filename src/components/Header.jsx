@@ -1,9 +1,10 @@
-import { Mail, Menu, Search, X } from 'lucide-react'
+import { Mail, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
 import { ExploreMenu } from './ExploreMenu.jsx'
 import { HashLink } from './HashLink.jsx'
+import { SiteSearch } from './SiteSearch.jsx'
 import { WhatsAppIcon } from './social-icons.jsx'
 
 // The nav Rothschild Safaris runs is deliberately sparse — contact handled
@@ -36,6 +37,8 @@ const TRANSPARENT_HERO_ROUTES = [
   '/tanzania/zanzibar-guide',
   '/ghana',
   '/ghana/practical-guide',
+  '/ghana/practical-guide/experience',
+  '/ghana/practical-guide/travel-smarter',
   '/malawi',
   '/zambia',
   '/zambia/practical-guide',
@@ -159,9 +162,7 @@ export function Header() {
         </Link>
 
         <div className="flex items-center justify-end gap-3">
-          <button type="button" className={iconBtnClass} aria-label="Search">
-            <Search className="size-4" aria-hidden="true" />
-          </button>
+          <SiteSearch triggerClassName={iconBtnClass} />
 
           <a href={CONTACT_INFO.emailHref} className={iconBtnClass} aria-label="Email us">
             <Mail className="size-4" aria-hidden="true" />
@@ -220,13 +221,9 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3 bg-card px-4 pb-6 pt-2 sm:px-6">
-          <button
-            type="button"
-            aria-label="Search"
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary"
-          >
-            <Search className="size-4" aria-hidden="true" />
-          </button>
+          <SiteSearch
+            triggerClassName="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary"
+          />
           <a
             href={CONTACT_INFO.emailHref}
             aria-label="Email us"

@@ -79,7 +79,6 @@ export function UgandaPracticalGuide() {
         description={`${hero.tagline}. ${hero.intro}`}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
-        overlayClassName="bg-black/35"
       />
 
       <CountrySubNav

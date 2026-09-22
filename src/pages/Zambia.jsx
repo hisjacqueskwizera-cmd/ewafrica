@@ -83,7 +83,6 @@ export function Zambia() {
         description={hero.description}
         backgroundImage={hero.image}
         backgroundImageAlt="Victoria Falls, Zambia"
-        overlayClassName="bg-black/35"
       />
 
       <CountrySubNav slug="zambia" countryName="Zambia" practicalGuideTo="/zambia/practical-guide" />

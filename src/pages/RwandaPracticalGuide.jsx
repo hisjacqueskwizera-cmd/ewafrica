@@ -45,7 +45,6 @@ export function RwandaPracticalGuide() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
-        overlayClassName="bg-black/35"
       />
 
       {/* Sub-nav — shared across every Rwanda page (Overview, Gallery,

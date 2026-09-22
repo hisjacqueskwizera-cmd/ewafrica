@@ -19,6 +19,8 @@ import { Explore } from './pages/Explore.jsx'
 import { Gambia } from './pages/Gambia.jsx'
 import { Ghana } from './pages/Ghana.jsx'
 import { GhanaPracticalGuide } from './pages/GhanaPracticalGuide.jsx'
+import { GhanaPracticalGuideExperience } from './pages/GhanaPracticalGuideExperience.jsx'
+import { GhanaPracticalGuideTravelSmarter } from './pages/GhanaPracticalGuideTravelSmarter.jsx'
 import { Home } from './pages/Home.jsx'
 import { IndependentTourGuide } from './pages/IndependentTourGuide.jsx'
 import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry.jsx'
@@ -252,6 +254,14 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/ghana" element={<Ghana />} />
           <Route path="/ghana/practical-guide" element={<GhanaPracticalGuide />} />
+          <Route
+            path="/ghana/practical-guide/experience"
+            element={<GhanaPracticalGuideExperience />}
+          />
+          <Route
+            path="/ghana/practical-guide/travel-smarter"
+            element={<GhanaPracticalGuideTravelSmarter />}
+          />
           <Route path="/tanzania" element={<Tanzania />} />
           <Route path="/tanzania/practical-guide" element={<TanzaniaPracticalGuide />} />
           <Route path="/tanzania/zanzibar-guide" element={<ZanzibarGuide />} />

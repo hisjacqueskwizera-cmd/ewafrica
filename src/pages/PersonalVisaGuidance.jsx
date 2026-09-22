@@ -38,7 +38,6 @@ export function PersonalVisaGuidance() {
         description="Practical information to help you understand requirements, prepare your application, and avoid common delays."
         backgroundImage={country.image}
         backgroundImageAlt={`A scenic view of ${country.name}`}
-        overlayTone="neutral"
       />
 
       {/* Breadcrumb */}

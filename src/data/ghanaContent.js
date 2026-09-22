@@ -190,6 +190,30 @@ export const GHANA_DATA = {
       'Practical travel information to help you prepare for Ghana with confidence.',
     cards: [
       {
+        id: 'welcome',
+        icon: 'Sparkles',
+        title: 'Welcome to Ghana',
+        description:
+          "Ghana is one of West Africa's most welcoming and accessible destinations, with something meaningful for every traveler.",
+        buttonText: 'Read More',
+        image: '/Pictures/Ghana_Landing_Hero.JPG',
+        imageAlt: 'Independence Arch in Accra',
+        details: {
+          overview:
+            "Ghana is one of West Africa's most welcoming and accessible destinations. From vibrant cities and coastal towns to rich history, diverse wildlife and a proud cultural heritage, there's something meaningful for every traveler.",
+          points: [
+            {
+              label: 'A Warm First Impression',
+              text: 'Akwaaba — welcome — is more than a greeting here; visitors consistently find Ghanaians among the most welcoming hosts in the region.',
+            },
+            {
+              label: 'A Country of Contrasts',
+              text: 'Modern Accra, historic coastal castles, forest canopy walks and northern savannah all sit within a few hours of one another.',
+            },
+          ],
+        },
+      },
+      {
         id: 'when-to-visit',
         icon: 'CalendarDays',
         title: 'When to Visit',
@@ -209,6 +233,30 @@ export const GHANA_DATA = {
             {
               label: 'April – October (Green Season)',
               text: 'Lush landscapes and lower prices, with intermittent rain — a good option for travelers who don’t mind the occasional shower.',
+            },
+          ],
+        },
+      },
+      {
+        id: 'before-you-go',
+        icon: 'Briefcase',
+        title: 'Before You Go',
+        description:
+          "Check your passport validity, visa requirements, recommended vaccinations, travel insurance, and onward travel arrangements.",
+        buttonText: 'Read More',
+        image: '/Pictures/image_Ghana.webp',
+        imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
+        details: {
+          overview:
+            'A few basic checks before you fly make everything else about the trip go more smoothly.',
+          points: [
+            {
+              label: 'Passport & Documents',
+              text: 'Your passport should have at least six months of validity remaining, and it is worth keeping digital and printed copies of key documents.',
+            },
+            {
+              label: 'Insurance & Onward Travel',
+              text: 'Confirm travel insurance coverage and have proof of onward or return travel ready, since it is sometimes requested on arrival.',
             },
           ],
         },
@@ -492,6 +540,24 @@ export const GHANA_DATA = {
       },
     ],
     note: 'Many Ghanaian staples can work well for vegetarian travelers, but sauces and stews may contain fish, meat stock, or other animal ingredients — ask before ordering.',
+  },
+
+  cultureEtiquette: {
+    icon: 'Handshake',
+    heading: 'Culture & Etiquette',
+    paragraphs: [
+      'Ghanaians are generally warm and sociable, and greetings are an important part of everyday interaction. Taking a moment to greet someone before asking a question or beginning a transaction is always appreciated.',
+      'The right hand is traditionally used when giving or receiving items, eating or greeting someone. Dress is generally relaxed, but more modest clothing is appropriate in villages, religious settings and some traditional communities.',
+    ],
+  },
+
+  photography: {
+    icon: 'Camera',
+    heading: 'Photography',
+    paragraphs: [
+      'Ghana is extremely photogenic, from coastal fishing communities and historic architecture to markets, landscapes, festivals and everyday street life.',
+      'Be respectful when photographing people, places of worship, traditional ceremonies, government facilities and sensitive historical sites. Always ask for permission when appropriate.',
+    ],
   },
 
   readyToExplore: {

@@ -43,7 +43,6 @@ export function Rwanda() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
-        overlayClassName="bg-black/35"
       />
 
       <RwandaSubNav />

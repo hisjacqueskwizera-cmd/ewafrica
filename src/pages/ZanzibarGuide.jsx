@@ -41,7 +41,6 @@ export function ZanzibarGuide() {
         description={`${hero.subheading}. ${hero.description}`}
         backgroundImage={hero.image}
         backgroundImageAlt={hero.imageAlt}
-        overlayClassName="bg-black/35"
       />
 
       <CountrySubNav slug="tanzania" countryName="Tanzania" galleryTo="/tanzania#gallery" />

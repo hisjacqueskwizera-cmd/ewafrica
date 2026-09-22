@@ -120,15 +120,12 @@ export function Malawi() {
   return (
     <>
       {/* Hero — the same full-viewport hero every destination page shares,
-          lifted from About Us. No dark tint over the backdrop here
-          (`overlay={false}`) — the Ilala ferry photo reads clearly under
-          the white heading text without it. */}
+          lifted from About Us. */}
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
         backgroundImage={hero.backgroundImage}
         backgroundImageAlt={hero.backgroundImageAlt}
-        overlay={false}
       />
 
       <CountrySubNav slug="malawi" countryName="Malawi" />

@@ -49,7 +49,7 @@ export function ExploreRegions() {
                   />
                 )}
                 <div
-                  className="absolute inset-0 bg-linear-to-r from-cocoa/90 via-cocoa/60 to-cocoa/20"
+                  className="absolute inset-0 bg-linear-to-r from-cocoa/50 via-cocoa/20 to-transparent"
                   aria-hidden="true"
                 />
                 <div className="relative flex min-h-[420px] flex-col justify-between p-8">

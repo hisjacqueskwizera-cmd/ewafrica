@@ -924,7 +924,7 @@ export const MALAWI_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/Pictures/Malawi_Hero_Section.JPG',
     },
     {
       icon: 'ShieldCheck',
@@ -939,7 +939,7 @@ export const MALAWI_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Crossing Guide',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/Explore_regions/optimized/east-africa/12.webp',
     },
   ],
   routes: [
@@ -1132,7 +1132,7 @@ export const UGANDA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/countries/Uganda.jpg',
+      image: '/Explore_regions/optimized/east-africa/5.webp',
     },
     {
       icon: 'Car',
@@ -1147,7 +1147,7 @@ export const UGANDA_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/countries/Uganda.jpg',
+      image: '/Explore_regions/optimized/east-africa/3.webp',
     },
   ],
   routes: [
@@ -1210,7 +1210,7 @@ export const RWANDA_PAGE = {
         'Visa extension information',
         'Answers to your specific questions',
       ],
-      image: '/Pictures/countries/Rwanda.jpg',
+      image: '/Pictures/Rwanda/Rwanda_GCard.JPG',
     },
     {
       icon: 'Map',
@@ -1222,7 +1222,7 @@ export const RWANDA_PAGE = {
         'Timing between destinations',
         'Practical travel tips and logistics',
       ],
-      image: '/Pictures/countries/Rwanda.jpg',
+      image: '/Pictures/Travel_Planner_Cards/Rwanda.PNG',
     },
     {
       icon: 'Signpost',
@@ -1234,7 +1234,7 @@ export const RWANDA_PAGE = {
         'What to expect at the border',
         'Tips for a smoother crossing',
       ],
-      image: '/Pictures/countries/Rwanda.jpg',
+      image: '/Pictures/Rwanda/Golden_Monkey.JPG',
     },
   ],
   routes: [
@@ -1325,7 +1325,7 @@ export const SENEGAL_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/Explore_regions/optimized/west-africa/2.webp',
     },
     {
       icon: 'ShieldCheck',
@@ -1339,7 +1339,7 @@ export const SENEGAL_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/countries/Senegal.webp',
+      image: '/Explore_regions/optimized/west-africa/3.webp',
     },
   ],
   routes: [
@@ -1462,7 +1462,7 @@ export const BENIN_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/Pictures/Benin_Side_Image.JPG',
     },
     {
       icon: 'Signpost',
@@ -1476,7 +1476,7 @@ export const BENIN_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/Benin/Benin_Hero.jpg',
     },
     {
       icon: 'Users',
@@ -1491,7 +1491,7 @@ export const BENIN_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/Pictures/Benin_Landing_Hero.JPG',
     },
   ],
   places: [

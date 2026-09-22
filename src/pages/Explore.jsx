@@ -86,14 +86,14 @@ function ServiceList({ items, className = '' }) {
 // pill rather than the plain text+arrow row every other card uses. Its
 // services can come as labelled groups (Ghana's travel vs relocation)
 // instead of one list, in which case a vertical rule separates the two
-// columns. Its dark fade sits only behind the text block itself — not
-// smeared across the whole photo — so pass `strongOverlay` for a featured
-// card whose text block needs a darker shade to stay readable over a
-// busier photo (Ghana's). Pass `descriptionFirst` to render the
-// description paragraph(s) above the services instead of below (Ghana's
-// own reference layout — Tanzania keeps services first), and `liftText`
-// to lift the whole text block up off the card's bottom edge (Ghana's
-// reference has noticeably more breathing room there than Tanzania's).
+// columns. Same bottom-up fade every card gets (not a separate blurred
+// panel behind just the text) — pass `strongOverlay` for a featured card
+// whose photo needs a darker fade to stay readable (Ghana's busier photo).
+// Pass `descriptionFirst` to render the description paragraph(s) above the
+// services instead of below (Ghana's own reference layout — Tanzania keeps
+// services first), and `liftText` to lift the whole text block up off the
+// card's bottom edge (Ghana's reference has noticeably more breathing room
+// there than Tanzania's).
 // `locationCaption` (with a pin icon) pins a "Place, Country" caption to
 // the card's bottom-left corner.
 //
@@ -132,16 +132,16 @@ function DestinationCountryCard({ country, featured = false }) {
         loading="lazy"
         className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
       />
-      {/* Non-featured cards keep the classic bottom-up fade behind their
-          short title; featured cards fade only behind their own text
-          block below (not the whole photo) — see that block's own
-          background. */}
-      {!featured && (
-        <div
-          className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-transparent"
-          aria-hidden="true"
-        />
-      )}
+      {/* Every card — featured or not — gets the same bottom-up fade
+          across the whole photo; `strongOverlay` deepens it for a featured
+          card whose photo needs more contrast to stay readable (Ghana's
+          busier one). */}
+      <div
+        className={`absolute inset-0 bg-linear-to-t to-transparent ${
+          country.strongOverlay ? 'from-black/90 via-black/45' : 'from-black/80 via-black/25'
+        }`}
+        aria-hidden="true"
+      />
       {/* A featured card whose text is lifted off the bottom edge
           (liftText) leaves a gap of plain photo between the text block's
           own glow and the card's true bottom edge — this gentle strip
@@ -164,21 +164,6 @@ function DestinationCountryCard({ country, featured = false }) {
           country.locationCaption ? 'pb-11 sm:pb-12' : ''
         } ${country.liftText ? 'mb-[3cm]' : ''}`}
       >
-        {featured && (
-          // A solid dark panel roughly matching the text block's own
-          // footprint (a small -inset bleed, not a huge one) so the shade
-          // actually spreads evenly under the whole block instead of
-          // concentrating in one radial "hot spot" — the blur filter then
-          // softens just its outer edge into the photo, so there's still
-          // no hard cut anywhere.
-          <div
-            aria-hidden="true"
-            className="absolute -inset-6 rounded-[2rem] blur-2xl sm:-inset-8"
-            style={{
-              backgroundColor: `rgba(0,0,0,${country.strongOverlay ? 0.75 : 0.55})`,
-            }}
-          />
-        )}
         <div className="relative">
           <div className="flex items-center gap-2.5 transition-transform duration-[450ms] ease-out group-hover:-translate-y-2.5">
             <Flag slug={country.slug} />

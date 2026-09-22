@@ -48,14 +48,14 @@ export function ReviewAnswers() {
   }
 
   return (
-    <section className="py-10 lg:py-14">
+    <section className="pt-[104px] pb-10 lg:pt-[124px] lg:pb-14">
+      <StepProgress
+        current={9}
+        total={TOTAL_STEPS}
+        title="Declaration, Review and Submit"
+        purpose="Review every answer below, then read and agree to the declaration before submitting."
+      />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <StepProgress
-          current={9}
-          total={TOTAL_STEPS}
-          title="Declaration, Review and Submit"
-          purpose="Review every answer below, then read and agree to the declaration before submitting."
-        />
 
         <div className="space-y-6">
           {sections.slice(0, 8).map((section, i) => (

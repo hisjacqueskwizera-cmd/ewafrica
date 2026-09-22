@@ -1,5 +1,5 @@
-import { CircleCheckBig, Download, Home, Mail } from 'lucide-react'
-import { useEffect } from 'react'
+import { CircleCheckBig, Download, Home, Loader2, Mail } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { TOUR_GUIDE_PAGES } from '../../data/siteContent.js'
 import { Reveal } from '../../components/Reveal.jsx'
@@ -11,6 +11,7 @@ export function Confirmation() {
   const navigate = useNavigate()
   const countryData = TOUR_GUIDE_PAGES[slug]
   const { data, submission, reset } = useGuideApplicationFlow()
+  const [downloading, setDownloading] = useState(false)
 
   useEffect(() => {
     document.title = 'Application Received | East-West Africa Link'
@@ -28,17 +29,22 @@ export function Confirmation() {
   if (!countryData) return <Navigate to="/independent-tour-guide" replace />
   if (!submission) return null
 
-  const handleDownload = () => {
-    generateApplicationPdf({
-      data,
-      referenceNumber: submission.referenceNumber,
-      submittedAt: submission.submittedAt,
-      countryLabel: countryData.countryLabel,
-    })
+  const handleDownload = async () => {
+    setDownloading(true)
+    try {
+      await generateApplicationPdf({
+        data,
+        referenceNumber: submission.referenceNumber,
+        submittedAt: submission.submittedAt,
+        countryLabel: countryData.countryLabel,
+      })
+    } finally {
+      setDownloading(false)
+    }
   }
 
   return (
-    <section className="py-14 lg:py-20">
+    <section className="pt-[104px] pb-14 lg:pt-[124px] lg:pb-20">
       <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
         <Reveal>
           <span className="mx-auto grid size-16 place-items-center rounded-full bg-forest text-primary-foreground">
@@ -79,9 +85,18 @@ export function Confirmation() {
         </Reveal>
 
         <Reveal delay={150} className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <button type="button" onClick={handleDownload} className="btn-copper justify-center">
-            <Download className="size-4" aria-hidden="true" />
-            Download Application as PDF
+          <button
+            type="button"
+            onClick={handleDownload}
+            disabled={downloading}
+            className="btn-copper justify-center disabled:opacity-70"
+          >
+            {downloading ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+            ) : (
+              <Download className="size-4" aria-hidden="true" />
+            )}
+            {downloading ? 'Preparing PDF…' : 'Download Application as PDF'}
           </button>
           <Link to="/" onClick={reset} className="btn-outline-dark justify-center">
             <Home className="size-4" aria-hidden="true" />

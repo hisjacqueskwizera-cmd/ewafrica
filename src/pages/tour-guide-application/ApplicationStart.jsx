@@ -24,13 +24,22 @@ export function ApplicationStart() {
   if (!countryData) return <Navigate to="/independent-tour-guide" replace />
 
   return (
-    <section className="py-14 lg:py-20">
+    <section className="pt-[104px] pb-14 lg:pt-[124px] lg:pb-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
-          <span className="section-eyebrow">Independent Tour Guide Network</span>
-          <h1 className="mt-3 text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
-            Guide Application — {countryData.countryLabel}
+          <h1 className="text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
+            Applicant Information
           </h1>
+          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
+            Identity, location, and contact information.
+          </p>
+        </Reveal>
+
+        <Reveal delay={50} className="mt-6 text-center">
+          <span className="section-eyebrow">Independent Tour Guide Network</span>
+          <h2 className="mt-3 text-xl font-bold text-primary sm:text-2xl">
+            Guide Application — {countryData.countryLabel}
+          </h2>
         </Reveal>
 
         <Reveal delay={100} className="mt-6 rounded-2xl border border-border bg-card p-6 sm:p-8">

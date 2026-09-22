@@ -4,7 +4,7 @@ import { Reveal } from '../../components/Reveal.jsx'
 
 export function IneligibleNotice() {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="pt-[104px] pb-16 lg:pt-[124px] lg:pb-20">
       <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
         <Reveal>
           <span className="mx-auto grid size-16 place-items-center rounded-full bg-cocoa text-primary-foreground">

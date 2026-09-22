@@ -45,9 +45,9 @@ export function ApplicationStep() {
   }
 
   return (
-    <section className="py-10 lg:py-14">
+    <section className="pt-[104px] pb-10 lg:pt-[124px] lg:pb-14">
+      <StepProgress current={number} total={TOTAL_STEPS} title={title} purpose={purpose} />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <StepProgress current={number} total={TOTAL_STEPS} title={title} purpose={purpose} />
         <Component onNext={goNext} onBack={goBack} />
       </div>
     </section>

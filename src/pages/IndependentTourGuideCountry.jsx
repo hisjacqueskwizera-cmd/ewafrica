@@ -75,6 +75,9 @@ export function IndependentTourGuideCountry() {
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {intro.body}
               </p>
+              <HashLink to="/#contact" className="btn-copper mt-6">
+                Become a Tour Guide
+              </HashLink>
             </Reveal>
             <Reveal delay={100}>
               <img

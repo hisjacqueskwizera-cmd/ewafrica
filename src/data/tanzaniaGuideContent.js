@@ -129,7 +129,7 @@ export const TANZANIA_DATA = {
         id: 'dar-es-salaam',
         name: 'Dar es Salaam',
         description: "Tanzania's largest city and a major transport hub.",
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3462.JPG',
+        image: '/Pictures/Tanzania/Dar-Salama.JPG',
         tag: 'Major City',
         details: {
           highlight:

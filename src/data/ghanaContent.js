@@ -513,30 +513,50 @@ export const GHANA_DATA = {
     heading: 'A Taste of Ghana',
     subheading:
       "Ghanaian food is flavorful, varied and deeply connected to the country's culture. Here are some popular dishes to try during your visit.",
-    image: '/Pictures/Ghana/Gallery/festival_dancers.jpg',
-    imageAlt: 'Festival dancers celebrating in traditional dress in Ghana',
+    image: '/Pictures/Ghana/Ghana_Foods/IMG_5418.jpeg',
+    imageAlt: "Kelewele — spiced fried plantain served with roasted peanuts on banana leaves",
     dishes: [
       {
         title: 'Jollof Rice',
         description:
-          'A West African favorite, cooked in a rich tomato sauce and often served with chicken, fish or fried plantain.',
+          "One of Ghana's most popular dishes, made with rice cooked in a flavorful tomato, pepper, onion, and spice sauce.",
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5135.jpeg',
+        imageAlt: 'A plate of Ghanaian jollof rice with coleslaw and pepper sauce',
       },
       {
-        title: 'Red Red / Gobe',
-        description: 'A comforting bean stew often served with fried ripe plantain.',
+        title: 'Red Red',
+        description:
+          'A hearty bean stew, traditionally made with black-eyed peas and red palm oil, commonly served with fried ripe plantain.',
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5402.jpeg',
+        imageAlt: 'Red red bean stew served with fried plantain and sautéed spinach',
       },
       {
         title: 'Waakye',
-        description: 'Rice and beans cooked together and commonly served with a variety of sides.',
+        description:
+          'A popular Ghanaian rice-and-beans dish, traditionally cooked together and served with a variety of sauces and accompaniments.',
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5416.jpeg',
+        imageAlt: 'Waakye rice and beans served with a boiled egg, pepper sauce and salad',
       },
       {
         title: 'Fufu',
-        description: 'A smooth, dough-like staple served with rich soup — a key part of Ghanaian food culture.',
+        description:
+          'A smooth, soft staple made by pounding cooked cassava, plantain, or yam, usually served with a flavorful soup or stew.',
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5412.jpeg',
+        imageAlt: 'A ball of fufu served with a green soup',
       },
       {
-        title: 'Spinach or Kontomire Stew',
+        title: 'Spinach Stew',
         description:
-          'A flavorful leafy-green stew often made with spinach (kontomire), served with rice, fufu or other staples.',
+          'A rich Ghanaian-style stew made with leafy greens, tomatoes, onions, peppers, and seasonings, often served with rice, plantain, or beans.',
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5124.jpeg',
+        imageAlt: 'Spinach stew served with rice, black-eyed beans and fried plantain',
+      },
+      {
+        title: 'Kelewele',
+        description:
+          "Spiced fried plantain, often served with roasted peanuts. Naturally vegan and one of Ghana's most popular street foods.",
+        image: '/Pictures/Ghana/Ghana_Foods/IMG_5418.jpeg',
+        imageAlt: 'Kelewele spiced fried plantain served with roasted peanuts',
       },
     ],
     note: 'Many Ghanaian staples can work well for vegetarian travelers, but sauces and stews may contain fish, meat stock, or other animal ingredients — ask before ordering.',

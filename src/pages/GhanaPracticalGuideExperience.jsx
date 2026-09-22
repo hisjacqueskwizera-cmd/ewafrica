@@ -2,8 +2,9 @@ import { ArrowRight, Camera, CheckCircle2, Handshake, Info, UtensilsCrossed } fr
 import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { CountrySubNav } from '../components/CountrySubNav.jsx'
-import { GhanaGuideFooterNav, GhanaGuidePills } from '../components/GhanaGuidePager.jsx'
+import { GHANA_GUIDE_PAGES, GhanaGuideFooterNav } from '../components/GhanaGuidePager.jsx'
 import { GhanaGuideSubHero } from '../components/GhanaGuideSubHero.jsx'
+import { GuidePageSubNav } from '../components/GuidePageSubNav.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { GHANA_DATA } from '../data/ghanaContent.js'
@@ -40,11 +41,7 @@ export function GhanaPracticalGuideExperience() {
         practicalGuideTo="/ghana/practical-guide#guide-overview"
       />
 
-      <section className="pt-10 sm:pt-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <GhanaGuidePills current={1} />
-        </div>
-      </section>
+      <GuidePageSubNav pages={GHANA_GUIDE_PAGES} guideLabel="Ghana Practical Guide" />
 
       {/* Where to Go */}
       <section className="py-10 sm:py-14 lg:py-16">
@@ -131,14 +128,24 @@ export function GhanaPracticalGuideExperience() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {taste.dishes.map((dish, idx) => (
               <Reveal key={dish.title} delay={idx * 90} className="flex h-full">
-                <div className="flex h-full w-full flex-col gap-3 rounded-3xl bg-card p-6 shadow-card sm:p-7">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sand/70 text-copper">
-                    <UtensilsCrossed className="size-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-display text-lg font-bold text-primary">{dish.title}</h3>
-                  <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                    {dish.description}
-                  </p>
+                <div className="group flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                  <div className="relative aspect-4/3 w-full overflow-hidden bg-sand">
+                    <img
+                      src={dish.image}
+                      alt={dish.imageAlt ?? dish.title}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                    <span className="absolute bottom-3 left-3 grid size-9 place-items-center rounded-full bg-cocoa/85 text-primary-foreground backdrop-blur-xs">
+                      <UtensilsCrossed className="size-4" aria-hidden="true" />
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-6 sm:p-7">
+                    <h3 className="font-display text-lg font-bold text-primary">{dish.title}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {dish.description}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}

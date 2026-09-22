@@ -13,8 +13,9 @@ import {
 import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { CountrySubNav } from '../components/CountrySubNav.jsx'
-import { DestinationHero } from '../components/DestinationHero.jsx'
-import { GhanaGuideFooterNav, GhanaGuidePills } from '../components/GhanaGuidePager.jsx'
+import { GHANA_GUIDE_PAGES, GhanaGuideFooterNav } from '../components/GhanaGuidePager.jsx'
+import { GhanaGuideSubHero } from '../components/GhanaGuideSubHero.jsx'
+import { GuidePageSubNav } from '../components/GuidePageSubNav.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { GHANA_DATA } from '../data/ghanaContent.js'
@@ -49,14 +50,16 @@ export function GhanaPracticalGuide() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Hero — the same full-viewport hero every other Ghana page shares.
-          The only one of the guide's three pages that uses it, since it's
-          the entry point most visitors land on. */}
-      <DestinationHero
-        heading={`${hero.titleLine1} ${hero.titleAccent}`}
-        description={`${hero.subheading} ${hero.description}`}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
+      {/* Hero — the same size/shape as every page of this guide (see
+          GhanaGuideSubHero) so the three pages read as one flow rather
+          than page 1 standing apart with a full-viewport treatment the
+          other two don't have. */}
+      <GhanaGuideSubHero
+        page={1}
+        heading="Before You Travel"
+        tagline="Practical travel information to help you prepare for Ghana with confidence."
+        image={hero.backgroundImage}
+        imageAlt={hero.backgroundImageAlt}
       />
 
       {/* Sub-nav — shared across every Ghana page (Overview, Services,
@@ -68,8 +71,16 @@ export function GhanaPracticalGuide() {
         practicalGuideTo="/ghana/practical-guide#guide-overview"
       />
 
-      {/* Intro + page-flow pills */}
-      <section id="guide-overview" className="relative scroll-mt-[140px] overflow-hidden pt-14 pb-4 sm:pt-16">
+      {/* Page-flow sub-sub-nav — sticks directly under CountrySubNav, the
+          same way CountrySubNav sticks under the header. */}
+      <GuidePageSubNav pages={GHANA_GUIDE_PAGES} guideLabel="Ghana Practical Guide" />
+
+      {/* Before You Travel — Welcome, When to Visit, Before You Go, Visa,
+          Health, Money, SIM & Connectivity, Getting Around. */}
+      <section
+        id="guide-overview"
+        className="relative scroll-mt-[200px] overflow-hidden py-12 sm:py-16 lg:py-20"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-20 top-0 size-64 animate-float rounded-full bg-copper/10 blur-3xl"
@@ -79,34 +90,6 @@ export function GhanaPracticalGuide() {
           className="pointer-events-none absolute -right-16 top-10 size-56 animate-float rounded-full bg-forest/10 blur-3xl [animation-delay:1.5s]"
         />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal big className="mx-auto max-w-3xl text-center">
-            <span className="mx-auto flex items-center justify-center gap-3">
-              <span className="h-px w-10 border-t border-copper/50" aria-hidden="true" />
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.2em] text-copper">
-                <Sparkles className="size-3.5" aria-hidden="true" />
-                Akwaaba, Ghana
-              </span>
-              <span className="h-px w-10 border-t border-copper/50" aria-hidden="true" />
-            </span>
-            <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">
-              Before You Travel
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Practical travel information to help you prepare for Ghana with confidence — a
-              three-page guide, starting here.
-            </p>
-          </Reveal>
-
-          <div className="mt-8">
-            <GhanaGuidePills current={0} />
-          </div>
-        </div>
-      </section>
-
-      {/* Before You Travel — Welcome, When to Visit, Before You Go, Visa,
-          Health, Money, SIM & Connectivity, Getting Around. */}
-      <section className="py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-2">
             {planJourney.cards.map((card, idx) => {
               const Icon = ICONS[card.icon] || Info

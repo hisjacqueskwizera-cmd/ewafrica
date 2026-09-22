@@ -2,42 +2,20 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
 
-const PAGES = [
+export const GHANA_GUIDE_PAGES = [
   { label: 'Before You Travel', to: '/ghana/practical-guide' },
   { label: 'Experience Ghana', to: '/ghana/practical-guide/experience' },
   { label: 'Travel Smarter', to: '/ghana/practical-guide/travel-smarter' },
 ]
 
 /**
- * The Ghana Practical Guide's page-flow nav — reused at the top (as a
- * "Page N of 3" pill row) and bottom (as Previous/Next buttons) of each of
- * the guide's three pages, so the whole thing reads as one guide split
- * into a flow rather than three unrelated pages.
+ * Previous/Next buttons at the bottom of each Ghana Practical Guide page —
+ * the sticky "Page 1/2/3" bar (GuidePageSubNav) up top handles jumping
+ * straight to any page; this is the linear "keep reading" path.
  */
-export function GhanaGuidePills({ current }) {
-  return (
-    <Reveal className="flex flex-wrap items-center justify-center gap-2">
-      {PAGES.map((page, i) => (
-        <HashLink
-          key={page.to}
-          to={page.to}
-          className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
-            i === current
-              ? 'border-copper bg-copper text-copper-foreground'
-              : 'border-border text-muted-foreground hover:border-copper hover:text-copper'
-          }`}
-        >
-          <span className="opacity-70">Page {i + 1}</span>
-          {page.label}
-        </HashLink>
-      ))}
-    </Reveal>
-  )
-}
-
 export function GhanaGuideFooterNav({ current }) {
-  const prev = current > 0 ? PAGES[current - 1] : null
-  const next = current < PAGES.length - 1 ? PAGES[current + 1] : null
+  const prev = current > 0 ? GHANA_GUIDE_PAGES[current - 1] : null
+  const next = current < GHANA_GUIDE_PAGES.length - 1 ? GHANA_GUIDE_PAGES[current + 1] : null
 
   return (
     <Reveal className="flex flex-col items-center gap-4 border-t border-border/60 pt-10 sm:flex-row sm:justify-between">

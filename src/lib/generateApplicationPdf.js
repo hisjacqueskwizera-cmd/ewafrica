@@ -3,6 +3,27 @@ import { jsPDF } from 'jspdf'
 const yn = (v) => (v ? v : 'Not provided')
 const list = (arr) => (arr && arr.length ? arr.join(', ') : 'None provided')
 
+const DOCUMENT_LABELS = {
+  govId: 'Government issued photo identification',
+  headshot: 'Current professional photograph or headshot',
+  cv: 'CV or resume showing tourism experience',
+  experienceEvidence: 'Evidence of previous guiding experience or customer reviews',
+  license: 'Tour guide license, registration or certification',
+  certificates: 'Tourism, hospitality or guiding certificates',
+  associationProof: 'Proof of professional association membership',
+  policeClearance: 'Police clearance or certificate of good conduct',
+  referenceEvidence: 'Supporting evidence for professional references',
+  driverLicenseDoc: "Driver's license",
+  vehicleRegistrationDoc: 'Vehicle registration',
+  vehicleInsuranceDoc: 'Current vehicle insurance',
+  transportAuthDoc: 'Passenger or commercial transportation authorization',
+  firstAidCertDoc: 'First Aid or CPR certificate',
+  languageCerts: 'Language certificates',
+  trainingCerts: 'Tourism training certificates',
+  awards: 'Professional awards',
+  testimonials: 'Additional customer testimonials',
+}
+
 /**
  * Builds the plain "question: answer" sections shown on the review page and
  * baked into the downloadable PDF — one source of truth for both, so the
@@ -66,7 +87,7 @@ export function buildApplicationSections(data) {
         ['Can conduct a full private tour in French', yn(data.frenchPrivateTour)],
         ...data.otherLanguages
           .filter((l) => l.language)
-          .map((l) => [`Other language`, `${l.language} — ${l.proficiency || 'Not rated'}`]),
+          .map((l, i) => [`Other language ${i + 1}`, `${l.language} — ${l.proficiency || 'Not rated'}`]),
       ],
     },
     {
@@ -125,16 +146,16 @@ export function buildApplicationSections(data) {
         ['Facebook reviews', yn(data.facebookReviews)],
         ['Other reviews', yn(data.otherReviews)],
         ['Ever suspended / disciplined / revoked', yn(data.everSuspended)],
-        ['Explanation', yn(data.suspensionExplain)],
+        ['Suspension / discipline / revocation explanation', yn(data.suspensionExplain)],
         ['Ever removed / banned from a platform or association', yn(data.everBanned)],
-        ['Explanation', yn(data.banExplain)],
+        ['Removal / ban explanation', yn(data.banExplain)],
       ],
     },
     {
       title: '8. Document Uploads',
-      rows: Object.entries(data.documents ?? {}).map(([key, file]) => [
-        key,
-        file ? `Attached — ${file.name}` : 'Not attached',
+      rows: Object.entries(DOCUMENT_LABELS).map(([key, label]) => [
+        label,
+        data.documents?.[key] ? `Attached — ${data.documents[key].name}` : 'Not attached',
       ]),
     },
     {

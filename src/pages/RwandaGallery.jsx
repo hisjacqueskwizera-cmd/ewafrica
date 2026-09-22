@@ -70,8 +70,9 @@ const PHOTOS = [
 /**
  * Pins its children under the header + sub-nav as the user scrolls, so the
  * next stack section slides up and covers it — a "stacking cards" scroll
- * effect. Requires an opaque background (passed via `className`) so the
- * covering section fully hides whatever is stacked beneath it.
+ * effect. Requires an opaque-enough background (defaults to the same
+ * image+wash every other Rwanda section sits on, rather than a flat color)
+ * so the covering section fully hides whatever is stacked beneath it.
  *
  * Each section needs its OWN containing block for `sticky` to release at
  * the right moment — sharing one flex/grid parent across all sections
@@ -83,10 +84,10 @@ const PHOTOS = [
  * between side-by-side tiles within a row, so the horizontal gap between
  * stacked sections matches the vertical gap between columns.
  */
-function StackSection({ children, className = '' }) {
+function StackSection({ children, className = '', style = RWANDA_PAGE_BACKGROUND_STYLE }) {
   return (
     <div className="relative pb-3">
-      <div className={`sticky ${className}`} style={{ top: STACK_TOP }}>
+      <div className={`sticky ${className}`} style={{ top: STACK_TOP, ...style }}>
         {children}
       </div>
     </div>
@@ -358,7 +359,7 @@ export function RwandaGallery() {
         <div className="mx-auto w-[95%] py-3">
           {/* 1. Gorilla video — full-width, own native 16:9 aspect ratio
               (no cropping), autoplaying muted and looping. */}
-          <StackSection className="bg-background">
+          <StackSection>
             <Reveal once={false} big>
               <VideoTile
                 src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
@@ -373,7 +374,7 @@ export function RwandaGallery() {
 
           {/* 2. Kigali City — full-width video, shown at its native 16:9
               aspect ratio so the whole frame is visible. */}
-          <StackSection className="bg-background">
+          <StackSection>
             <Reveal once={false}>
               <VideoTile
                 src="/Rwanda_Gallery/Kigali City/kigali.mp4"
@@ -387,7 +388,7 @@ export function RwandaGallery() {
           </StackSection>
 
           {/* 3. Lake Kivu / Nyungwe */}
-          <StackSection className="bg-background">
+          <StackSection>
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
@@ -408,7 +409,7 @@ export function RwandaGallery() {
 
           {/* 4. Rwandan Culture — full width, right under Lake Kivu /
               Nyungwe, and bigger than the paired rows around it. */}
-          <StackSection className="bg-background">
+          <StackSection>
             <Reveal once={false}>
               <PhotoTile photo={PHOTOS[2]} onExpand={openAt} className="aspect-[3/2]" />
             </Reveal>
@@ -416,7 +417,7 @@ export function RwandaGallery() {
 
           {/* 5. Tea Plantations / Butaro Highlands (swapped with Akagera,
               which now runs full-width below). */}
-          <StackSection className="bg-background">
+          <StackSection>
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
@@ -437,7 +438,7 @@ export function RwandaGallery() {
 
           {/* 6. Akagera National Park — full width (swapped with Butaro,
               which now runs in the row above). */}
-          <StackSection className="bg-background">
+          <StackSection>
             <Reveal once={false}>
               <PhotoTile
                 photo={PHOTOS[5]}
@@ -448,7 +449,7 @@ export function RwandaGallery() {
           </StackSection>
 
           {/* 7. Akagera National Park — two more animal sightings. */}
-          <StackSection className="bg-background">
+          <StackSection>
             <div className="grid gap-3 sm:grid-cols-2">
               <Reveal once={false} delay={150}>
                 <PhotoTile
@@ -470,7 +471,10 @@ export function RwandaGallery() {
       </main>
 
       {/* Closing banner */}
-      <section className="relative z-10 border-t border-border/60 bg-cream py-8">
+      <section
+        className="relative z-10 border-t border-border/60 py-8"
+        style={RWANDA_PAGE_BACKGROUND_STYLE}
+      >
         <div className="mx-auto flex w-[95%] flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-2xl italic text-primary">Rwanda</p>

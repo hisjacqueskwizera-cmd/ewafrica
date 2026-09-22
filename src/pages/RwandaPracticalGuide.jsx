@@ -146,7 +146,7 @@ export function RwandaPracticalGuide() {
       </section>
 
       {/* 2. Plan Your Rwanda Journey */}
-      <section className="border-y border-border/50 bg-cream/50 py-12 sm:py-16 lg:py-20">
+      <section className="border-y border-border/50 py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">

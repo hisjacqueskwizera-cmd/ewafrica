@@ -13,15 +13,30 @@
 // is also how the very first version of this background worked, just at
 // full strength.
 //
-// The 50%-opacity look comes from layering a solid cream gradient on TOP
-// of the image within the same `background-image` stack, rather than an
-// actual `opacity`, which would fade the page content sitting on top of it
-// too.
+// The 40%-opacity look comes from layering a solid cream gradient (60%
+// opaque) on TOP of the image within the same `background-image` stack,
+// rather than an actual `opacity`, which would fade the page content
+// sitting on top of it too. Every section on the page is meant to sit
+// directly on this shared wash — page sections should stay transparent
+// (no `bg-cream`/`bg-background` of their own) rather than painting a flat
+// color over it, or the artwork disappears behind that section.
+//
+// `background-attachment: fixed` is intentionally NOT used here. It's only
+// reliably supported on `<html>`/`<body>` — on an ordinary nested element
+// like this one, several browsers (notably Safari, and most mobile
+// browsers) fail to paint it at all, which is why the background was
+// disappearing entirely in some browsers. It also forces a full repaint of
+// the background on every scroll frame, which is what made scrolling feel
+// janky. Plain scroll-with-the-page attachment fixes both.
+//
+// The source art is served as a .webp (re-encoded from the original
+// Rwanda_Background.PNG, same pixels, quality 80) — 322KB vs. the PNG's
+// 1MB, so painting this large a background costs a lot less decode/memory
+// on every Rwanda page without changing how it looks.
 export const RWANDA_PAGE_BACKGROUND_STYLE = {
   backgroundImage:
-    'linear-gradient(rgba(252, 246, 236, 0.5), rgba(252, 246, 236, 0.5)), url(/Pictures/Background/Rwanda_Background.PNG)',
+    'linear-gradient(rgba(252, 246, 236, 0.6), rgba(252, 246, 236, 0.6)), url(/Pictures/Background/Rwanda_Background.webp)',
   backgroundPosition: 'top center, top center',
   backgroundRepeat: 'no-repeat, no-repeat',
   backgroundSize: 'cover, cover',
-  backgroundAttachment: 'fixed, fixed',
 }

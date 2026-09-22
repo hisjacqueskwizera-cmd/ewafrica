@@ -58,6 +58,7 @@ export function Rwanda() {
         tiles={RWANDA_GALLERY_TILES}
         variant="duo"
         viewAllLink={{ label: 'View Full Photo & Video Gallery', to: '/rwanda/gallery' }}
+        transparent
       />
 
       {/* Our Services for Rwanda */}
@@ -154,7 +155,7 @@ export function Rwanda() {
           see RouteCard.jsx. */}
       <OverlandRoutesSection countryName="Rwanda" slug="rwanda" routes={routes} />
 
-      <section className="bg-cream py-16 lg:py-20">
+      <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="overflow-hidden rounded-[2rem] border border-cocoa/10 bg-[#FFFFE3] shadow-card">
             <div className="grid gap-0 lg:grid-cols-[1.3fr_0.7fr]">
@@ -193,7 +194,7 @@ export function Rwanda() {
       {/* Benefits row — same flat, outline-icon treatment as the trust row
           elsewhere, just different content: what makes this service worth
           using, not general trust statements. */}
-      <section className="bg-cream pb-16 lg:pb-20">
+      <section className="pb-16 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border">
             {benefits.map((item) => {

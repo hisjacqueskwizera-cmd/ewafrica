@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -25,10 +26,34 @@ import { GAMBIA_PAGE } from '../data/siteContent.js'
 
 const GAMBIA_GALLERY_TILES = [
   {
-    src: '/Pictures/countries/The gambia.jpg',
-    alt: 'Fishermen in traditional boats on the Gambia River',
+    src: '/Pictures/Gambia/Gallery/kololi_beach.jpg',
+    alt: "Aerial view of a beach resort along The Gambia's Atlantic coast",
+    title: 'Kololi Beach',
+    subtitle: 'Resorts along the golden coastline',
+  },
+  {
+    src: '/Pictures/Gambia/Gallery/mangrove_lodges.jpg',
+    alt: 'Floating cabins among the mangroves of the Gambia River',
+    title: 'Gambia River Lodges',
+    subtitle: 'Floating cabins amid the mangroves',
+  },
+  {
+    src: '/Pictures/Gambia/Gallery/gambia_river.jpg',
+    alt: 'Aerial view of the Gambia River winding through mangrove wetlands',
     title: 'The Gambia River',
-    subtitle: 'Life along West Africa’s river highway',
+    subtitle: 'Winding through mangrove wetlands',
+  },
+  {
+    src: '/Pictures/Gambia/Gallery/atlantic_coast.jpg',
+    alt: "Waves rolling onto The Gambia's Atlantic shoreline",
+    title: 'The Atlantic Coast',
+    subtitle: "Waves rolling onto The Gambia's shoreline",
+  },
+  {
+    src: '/Pictures/Gambia/Gallery/river_life.jpg',
+    alt: 'Boats moored along a quiet riverbank in The Gambia',
+    title: 'River Life',
+    subtitle: 'Quiet moorings along the riverbank',
   },
 ]
 
@@ -77,15 +102,17 @@ export function Gambia() {
         backgroundImageAlt={hero.imageAlt}
       />
 
+      <CountrySubNav slug="gambia" countryName="The Gambia" />
+
       <PhotoGallerySection
         heading="A Glimpse of The Gambia"
         subheading="River life, warm smiles and West Africa's smallest mainland country — a first look at what awaits."
         tiles={GAMBIA_GALLERY_TILES}
-        variant="single"
+        variant="mosaic"
       />
 
       {/* Travel Services in The Gambia */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span

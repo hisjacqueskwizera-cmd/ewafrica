@@ -538,7 +538,7 @@ export const TANZANIA_PAGE = {
       'Getting around',
       'Practical travel tips',
     ],
-    cta: { label: 'Read the Tanzania & Zanzibar Travel Guide', to: '/#contact' },
+    cta: { label: 'Read the Tanzania & Zanzibar Travel Guide', to: '/tanzania/practical-guide#guide-overview' },
     image: '/Pictures/countries/Tanzania.jpg',
     imageAlt: 'Safari vehicle and lions on the Tanzanian savanna',
   },
@@ -730,7 +730,7 @@ export const ZAMBIA_PAGE = {
   // real photo in this project.
   routes: [
     {
-      to: 'Tanzania & Zanzibar',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
     },
@@ -944,7 +944,7 @@ export const MALAWI_PAGE = {
   ],
   routes: [
     {
-      to: 'Tanzania & Zanzibar',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Via Kasumulu or Karonga border — a scenic route along Lake Malawi.',
     },
@@ -1157,7 +1157,7 @@ export const UGANDA_PAGE = {
       text: 'A scenic and popular route through beautiful highlands and rolling hills.',
     },
     {
-      to: 'Tanzania & Zanzibar',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'A well-traveled route with good transport options and stunning landscapes.',
     },
@@ -1244,7 +1244,7 @@ export const RWANDA_PAGE = {
       text: 'A popular route through beautiful highlands, connecting Kigali with southwestern Uganda.',
     },
     {
-      to: 'Tanzania & Zanzibar',
+      to: 'Tanzania',
       image: '/Pictures/countries/Tanzania.jpg',
       text: 'Overland connections through the Kagera region, linking Rwanda with northwestern Tanzania.',
     },

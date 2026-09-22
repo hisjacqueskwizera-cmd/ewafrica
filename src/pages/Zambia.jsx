@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useEffect } from 'react'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -84,6 +85,8 @@ export function Zambia() {
         backgroundImageAlt="Victoria Falls, Zambia"
         overlayClassName="bg-black/35"
       />
+
+      <CountrySubNav slug="zambia" countryName="Zambia" practicalGuideTo="/zambia/practical-guide" />
 
       <PhotoGallerySection
         heading="A Glimpse of Zambia"
@@ -174,7 +177,7 @@ export function Zambia() {
       </section>
 
       {/* 3. Explore Our Services Section */}
-      <section id="services" className="py-16 sm:py-20 lg:py-24">
+      <section id="services" className="scroll-mt-[140px] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">

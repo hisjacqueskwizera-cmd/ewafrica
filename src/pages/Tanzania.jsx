@@ -61,7 +61,7 @@ function TanzaniaGallery() {
   const [hero, ...rest] = TANZANIA_MEDIA
 
   return (
-    <section className="bg-cream py-14 sm:py-16 lg:py-20">
+    <section id="gallery" className="scroll-mt-[140px] bg-cream py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
         <Reveal once={false} className="flex items-center justify-center gap-4">
           <span
@@ -142,10 +142,12 @@ export function Tanzania() {
     <DestinationPage
       documentTitle="Explore Tanzania & Zanzibar | East-West Africa Link"
       countryName="Tanzania & Zanzibar"
+      overlandCountryName="Tanzania"
       slug="tanzania"
       data={TANZANIA_PAGE}
       heroVideos={TZ_HERO_VIDEOS}
       gallery={<TanzaniaGallery />}
+      practicalGuideTo="/tanzania/practical-guide#guide-overview"
     />
   )
 }

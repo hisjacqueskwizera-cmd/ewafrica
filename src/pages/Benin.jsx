@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -104,6 +105,8 @@ export function Benin() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
+      <CountrySubNav slug="benin" countryName="Benin" />
+
       <PhotoGallerySection
         heading="A Glimpse of Benin"
         subheading="Stilt villages, sacred traditions and waterways — a first look at the sights and stories waiting across Benin."
@@ -113,7 +116,7 @@ export function Benin() {
 
       {/* Travel Services in Benin — four cards, including Independent Tour
           Guides. */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal once={false} className="flex items-center justify-center gap-4">
             <span

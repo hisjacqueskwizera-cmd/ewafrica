@@ -20,6 +20,7 @@ import {
 import { useEffect, useState } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -130,6 +131,8 @@ export function Malawi() {
         overlay={false}
       />
 
+      <CountrySubNav slug="malawi" countryName="Malawi" />
+
       <PhotoGallerySection
         heading="A Glimpse of Malawi"
         subheading="Africa's warm heart, one great lake — a first look at the sights waiting across Malawi."
@@ -140,7 +143,7 @@ export function Malawi() {
 
       {/* Travel Services in Malawi — three cards, no Independent Tour
           Guides card (Malawi has no independent tour guide network yet). */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span

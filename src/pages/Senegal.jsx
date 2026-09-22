@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -26,10 +27,49 @@ import { SENEGAL_PAGE } from '../data/siteContent.js'
 
 const SENEGAL_GALLERY_TILES = [
   {
-    src: '/Pictures/countries/Senegal.webp',
-    alt: 'Baobab tree silhouetted at sunset in Senegal',
-    title: 'Baobab Country',
-    subtitle: 'Iconic silhouettes at golden hour',
+    src: '/Pictures/Senegal/Gallery/goree_waterfront.jpg',
+    alt: "Gorée Island's colonial waterfront seen from the water, Senegal",
+    title: 'Gorée Island',
+    subtitle: 'A UNESCO World Heritage waterfront',
+  },
+  {
+    src: '/Pictures/Senegal/Gallery/goree_fort.jpg',
+    alt: 'The old fort on Gorée Island with a fishing pirogue passing by',
+    title: 'Castel Fort, Gorée',
+    subtitle: 'The old fort above the Atlantic',
+  },
+  {
+    src: '/Pictures/Senegal/Gallery/saint_louis_pirogues.jpg',
+    alt: "Colorful painted pirogues in Saint-Louis' fishing harbor, Senegal",
+    title: 'Saint-Louis',
+    subtitle: 'Colorful pirogues fill the harbor',
+  },
+  {
+    src: '/Pictures/Senegal/Gallery/goree_lane.jpg',
+    alt: 'A bougainvillea-lined sandy lane on Gorée Island, Senegal',
+    title: 'Gorée Island',
+    subtitle: 'Bougainvillea-lined lanes',
+  },
+  {
+    src: '/Pictures/Senegal/Gallery/zebu_cattle.jpg',
+    alt: 'Long-horned zebu cattle herded through a dusty village street in Senegal',
+    title: 'Village Life',
+    subtitle: 'Cattle herded through a dusty street',
+  },
+]
+
+const SENEGAL_GALLERY_EXTRA_TILES = [
+  {
+    src: '/Pictures/Senegal/Gallery/saint_louis_carriages.jpg',
+    alt: "Horse-drawn carriages on Saint-Louis' colonial streets, Senegal",
+    title: 'Saint-Louis',
+    subtitle: 'Colonial streets and horse-drawn carriages',
+  },
+  {
+    src: '/Pictures/Senegal/Gallery/goree_memorial.jpg',
+    alt: 'The Statue of the Liberation from Slavery on Gorée Island, Senegal',
+    title: 'Gorée Island',
+    subtitle: 'A memorial to freedom and remembrance',
   },
 ]
 
@@ -78,15 +118,18 @@ export function Senegal() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
+      <CountrySubNav slug="senegal" countryName="Senegal" />
+
       <PhotoGallerySection
         heading="A Glimpse of Senegal"
         subheading="Golden light, red earth and iconic baobabs — a first look at the sights waiting across Senegal."
         tiles={SENEGAL_GALLERY_TILES}
-        variant="single"
+        variant="mosaic"
+        extraTiles={SENEGAL_GALLERY_EXTRA_TILES}
       />
 
       {/* Travel Services in Senegal */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span

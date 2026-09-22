@@ -19,6 +19,7 @@ import {
 import { useEffect, useState } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { GHANA_PAGE } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
@@ -27,34 +28,43 @@ import { Reveal } from '../components/Reveal.jsx'
 
 const GHANA_GALLERY_TILES = [
   {
-    src: '/Pictures/Ghana_Landing_Hero.JPG',
-    alt: 'Independence Arch in Accra, Ghana',
-    title: 'Independence Arch',
-    subtitle: 'Freedom and Justice, Accra',
+    src: '/Pictures/Ghana/Gallery/kakum_canopy.jpg',
+    alt: 'Visitors on the Kakum National Park canopy walkway, Ghana',
+    title: 'Kakum National Park',
+    subtitle: 'A canopy walk high above the rainforest',
   },
   {
-    src: '/Pictures/Ghana_Abode.JPG',
-    alt: 'Elmina Castle on the Ghanaian coast',
-    title: 'Elmina Castle',
-    subtitle: "Ghana's storied coastal fortress",
+    src: '/Pictures/Ghana/Gallery/larabanga_mosque.jpg',
+    alt: 'Larabanga Mosque, a Sudano-Sahelian mud-and-timber mosque in northern Ghana',
+    title: 'Larabanga Mosque',
+    subtitle: "One of West Africa's oldest mosques",
   },
   {
-    src: '/Pictures/Ghana_Side_Image.JPG',
-    alt: 'Cape Coast Castle overlooking the Atlantic Ocean',
-    title: 'Cape Coast Castle',
-    subtitle: 'History overlooking the Atlantic',
+    src: '/Pictures/Ghana/Gallery/ashanti_durbar.jpg',
+    alt: 'Royal drummers in ceremonial kente cloth at an Ashanti durbar festival',
+    title: 'Ashanti Durbar',
+    subtitle: 'Royal drummers in ceremonial kente',
   },
   {
-    src: '/Pictures/Ghana_Background_22.jpg',
-    alt: 'Inside the dungeons of a Ghanaian coastal castle',
-    title: 'Castle Dungeons',
-    subtitle: 'A solemn chapter, never forgotten',
+    src: '/Pictures/Ghana/Gallery/festival_dancers.jpg',
+    alt: 'Masquerade dancers in traditional dress at a Ghanaian festival',
+    title: 'Festival Traditions',
+    subtitle: 'Masquerade dancers at a local festival',
   },
   {
-    src: '/Pictures/image_Ghana.webp',
-    alt: 'Statue of Kwame Nkrumah at Kwame Nkrumah Memorial Park, Accra',
-    title: 'Kwame Nkrumah Memorial',
-    subtitle: "Honoring Ghana's independence leader",
+    src: '/Pictures/Ghana/Gallery/mole_elephants.jpg',
+    alt: 'Elephants gathering at a waterhole in Mole National Park, Ghana',
+    title: 'Mole National Park',
+    subtitle: 'Elephants gathering at a waterhole',
+  },
+]
+
+const GHANA_GALLERY_EXTRA_TILES = [
+  {
+    src: '/Pictures/Ghana/Gallery/fishing_boats.jpg',
+    alt: "Fishing boats along Ghana's Atlantic coastline under a dramatic sky",
+    title: "Ghana's Coastline",
+    subtitle: 'Fishing boats along the Atlantic shore',
   },
 ]
 
@@ -116,17 +126,24 @@ export function Ghana() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
+      <CountrySubNav
+        slug="ghana"
+        countryName="Ghana"
+        practicalGuideTo="/ghana/practical-guide#guide-overview"
+      />
+
       <PhotoGallerySection
         heading="A Glimpse of Ghana"
         subheading="Storied coastal castles, independence heritage and living history — a first look at the sights waiting across Ghana."
         tiles={GHANA_GALLERY_TILES}
         variant="mosaic"
+        extraTiles={GHANA_GALLERY_EXTRA_TILES}
       />
 
       {/* Travel Services in Ghana — the same four cards every other
           destination page offers, so travelers (not just those relocating)
           have a clear path from this page too. */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span
@@ -439,6 +456,45 @@ export function Ghana() {
               ))}
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* Practical Guide teaser — links to the dedicated Ghana Practical
+          Guide page, same card shape as Rwanda's equivalent banner. */}
+      <section className="bg-cream py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="overflow-hidden rounded-[2rem] border border-cocoa/10 bg-[#FFFFE3] shadow-card">
+            <div className="grid gap-0 lg:grid-cols-[1.3fr_0.7fr]">
+              <div className="p-8 sm:p-10 lg:p-12">
+                <span className="inline-flex items-center gap-2 rounded-full border border-cocoa/20 bg-white/70 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-cocoa">
+                  Practical Guide
+                </span>
+                <h2 className="mt-5 text-3xl font-bold text-primary sm:text-4xl">
+                  Ghana, Yours To Explore.
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  A practical, easy-to-follow guide covering when to visit, what to pack, how to
+                  get around, and what to know before you travel.
+                </p>
+                <HashLink
+                  to="/ghana/practical-guide"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  Read the Practical Guide
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </HashLink>
+              </div>
+
+              <div className="relative min-h-[260px] bg-cocoa">
+                <img
+                  src="/Pictures/Ghana/Gallery/kakum_canopy.jpg"
+                  alt="The rainforest canopy walkway at Kakum National Park, Ghana"
+                  loading="lazy"
+                  className="size-full object-cover opacity-80"
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

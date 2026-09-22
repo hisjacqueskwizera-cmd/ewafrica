@@ -18,6 +18,7 @@ import { BorderCrossingGuide } from './pages/BorderCrossingGuide.jsx'
 import { Explore } from './pages/Explore.jsx'
 import { Gambia } from './pages/Gambia.jsx'
 import { Ghana } from './pages/Ghana.jsx'
+import { GhanaPracticalGuide } from './pages/GhanaPracticalGuide.jsx'
 import { Home } from './pages/Home.jsx'
 import { IndependentTourGuide } from './pages/IndependentTourGuide.jsx'
 import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry.jsx'
@@ -34,10 +35,13 @@ import { RwandaGallery } from './pages/RwandaGallery.jsx'
 import { RwandaPracticalGuide } from './pages/RwandaPracticalGuide.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
+import { TanzaniaPracticalGuide } from './pages/TanzaniaPracticalGuide.jsx'
 import { TravelAudit } from './pages/TravelAudit.jsx'
 import { TravelPlanner } from './pages/TravelPlanner.jsx'
 import { TravelPlannerServiceDetails } from './pages/TravelPlannerServiceDetails.jsx'
 import { Uganda } from './pages/Uganda.jsx'
+import { UgandaPracticalGuide } from './pages/UgandaPracticalGuide.jsx'
+import { ZanzibarGuide } from './pages/ZanzibarGuide.jsx'
 import { Zambia } from './pages/Zambia.jsx'
 import { ZambiaPracticalGuide } from './pages/ZambiaPracticalGuide.jsx'
 import { Confirmation as BeforeYouBookConfirmation } from './pages/before-you-book/Confirmation.jsx'
@@ -247,11 +251,15 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/ghana" element={<Ghana />} />
+          <Route path="/ghana/practical-guide" element={<GhanaPracticalGuide />} />
           <Route path="/tanzania" element={<Tanzania />} />
+          <Route path="/tanzania/practical-guide" element={<TanzaniaPracticalGuide />} />
+          <Route path="/tanzania/zanzibar-guide" element={<ZanzibarGuide />} />
           <Route path="/malawi" element={<Malawi />} />
           <Route path="/zambia" element={<Zambia />} />
           <Route path="/zambia/practical-guide" element={<ZambiaPracticalGuide />} />
           <Route path="/uganda" element={<Uganda />} />
+          <Route path="/uganda/practical-guide" element={<UgandaPracticalGuide />} />
           <Route path="/rwanda" element={<Rwanda />} />
           <Route path="/rwanda/gallery" element={<RwandaGallery />} />
           <Route path="/rwanda/practical-guide" element={<RwandaPracticalGuide />} />

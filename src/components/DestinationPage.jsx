@@ -12,6 +12,7 @@ import {
   Users,
 } from 'lucide-react'
 import { isValidElement, useEffect } from 'react'
+import { CountrySubNav } from './CountrySubNav.jsx'
 import { DestinationHero } from './DestinationHero.jsx'
 import { HashLink } from './HashLink.jsx'
 import { PhotoGallerySection } from './PhotoGallery.jsx'
@@ -65,7 +66,16 @@ function CardCta({ to, children }) {
  * tiles, a full-screen lightbox — Tanzania's the first), an already-built
  * React element rendered as-is instead.
  */
-export function DestinationPage({ documentTitle, countryName, slug, data, heroVideos, gallery }) {
+export function DestinationPage({
+  documentTitle,
+  countryName,
+  overlandCountryName,
+  slug,
+  data,
+  heroVideos,
+  gallery,
+  practicalGuideTo,
+}) {
   useEffect(() => {
     document.title = documentTitle
   }, [documentTitle])
@@ -84,12 +94,14 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
         backgroundVideos={heroVideos}
       />
 
+      <CountrySubNav slug={slug} countryName={countryName} practicalGuideTo={practicalGuideTo} />
+
       {gallery && (isValidElement(gallery) ? gallery : <PhotoGallerySection {...gallery} />)}
 
       {/* Travel Services — a dashed-rule-flanked label rather than the
           site's usual SectionTitle, since these cards are the page's real
           subject and the heading should stay out of the way. */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span
@@ -177,7 +189,11 @@ export function DestinationPage({ documentTitle, countryName, slug, data, heroVi
           (home of the Border Crossing Guide card) so overland routing and
           border-crossing guidance read together. Shared with every other
           country page — see RouteCard.jsx. */}
-      <OverlandRoutesSection countryName={countryName} slug={slug} routes={routes} />
+      <OverlandRoutesSection
+        countryName={overlandCountryName ?? countryName}
+        slug={slug}
+        routes={routes}
+      />
 
       {/* First-time traveller's guide */}
       <section className="bg-cream py-16 lg:py-20">

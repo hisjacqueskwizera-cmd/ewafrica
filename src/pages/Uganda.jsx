@@ -1,5 +1,6 @@
 import { ArrowRight, BookOpen, Bus, Car, CheckCircle2, FileText, Users } from 'lucide-react'
 import { useEffect } from 'react'
+import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -11,10 +12,49 @@ const ICONS = { FileText, Bus, Car, Users }
 
 const UGANDA_GALLERY_TILES = [
   {
-    src: '/Pictures/countries/Uganda.jpg',
-    alt: 'Terraced hills and a volcano at sunrise in southwestern Uganda',
-    title: 'The Pearl of Africa',
-    subtitle: 'Terraced hills, volcanoes and sunrise mist',
+    src: '/Pictures/Uganda/Gallery/murchison_falls_wide.jpg',
+    alt: 'The Nile bursting through a narrow gorge at Murchison Falls, Uganda',
+    title: 'Murchison Falls',
+    subtitle: 'The Nile bursts through a narrow gorge',
+  },
+  {
+    src: '/Pictures/Uganda/Gallery/murchison_boat_safari.jpg',
+    alt: 'A boat safari approaching Murchison Falls on the Victoria Nile',
+    title: 'Murchison Falls',
+    subtitle: 'A boat safari on the Victoria Nile',
+  },
+  {
+    src: '/Pictures/Uganda/Gallery/nile_cliffs.jpg',
+    alt: 'Sandstone cliffs above the Nile River in Murchison Falls National Park',
+    title: 'The Nile River',
+    subtitle: 'Sandstone cliffs above the water',
+  },
+  {
+    src: '/Pictures/Uganda/Gallery/heron_sunset.jpg',
+    alt: 'A heron silhouetted at sunset on Lake Victoria, Uganda',
+    title: 'Lake Victoria',
+    subtitle: 'A heron silhouetted at sunset',
+  },
+  {
+    src: '/Pictures/Uganda/Gallery/murchison_elephant.jpg',
+    alt: 'An elephant with egrets and a kob antelope along the Nile in Murchison Falls National Park',
+    title: 'Murchison Falls National Park',
+    subtitle: 'Elephants and wildlife along the Nile',
+  },
+]
+
+const UGANDA_GALLERY_EXTRA_TILES = [
+  {
+    src: '/Pictures/Uganda/Gallery/lake_victoria_cormorants.jpg',
+    alt: 'Cormorants resting on a fishing boat on Lake Victoria, Uganda',
+    title: 'Lake Victoria',
+    subtitle: 'Cormorants resting on a fishing boat',
+  },
+  {
+    src: '/Pictures/Uganda/Gallery/highland_road.jpg',
+    alt: "A road winding through Uganda's tea-covered western highlands",
+    title: 'Western Highlands',
+    subtitle: 'Roads winding through tea country',
   },
 ]
 
@@ -36,17 +76,24 @@ export function Uganda() {
         backgroundImageAlt={hero.backgroundImageAlt}
       />
 
+      <CountrySubNav
+        slug="uganda"
+        countryName="Uganda"
+        practicalGuideTo="/uganda/practical-guide#guide-overview"
+      />
+
       <PhotoGallerySection
         heading="A Glimpse of Uganda"
         subheading="Terraced green hills and misty volcanoes — a first look at the sights waiting across Uganda."
         tiles={UGANDA_GALLERY_TILES}
-        variant="single"
+        variant="mosaic"
+        extraTiles={UGANDA_GALLERY_EXTRA_TILES}
       />
 
       {/* Travel Services in Uganda — same card shape as every other
           destination page: description, checklist bullets, then a
           button. */}
-      <section className="py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span
@@ -171,7 +218,7 @@ export function Uganda() {
                   ))}
                 </ul>
                 <HashLink
-                  to="/#contact"
+                  to="/uganda/practical-guide"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
                 >
                   Read the Practical Guide

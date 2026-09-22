@@ -83,7 +83,7 @@ export function PhotoGallerySection({
   const showPrev = () => setLightboxIndex((i) => (i - 1 + allPhotos.length) % allPhotos.length)
 
   return (
-    <section className="bg-cream py-14 sm:py-16 lg:py-20">
+    <section id="gallery" className="scroll-mt-[140px] bg-cream py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
         <Reveal once={false} className="flex items-center justify-center gap-4">
           <span

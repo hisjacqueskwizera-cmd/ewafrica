@@ -1,9 +1,11 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
+import { TOUR_GUIDE_PAGES } from './data/siteContent.js'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
 import { BorderCrossingFlowProvider } from './context/BorderCrossingFlowContext.jsx'
+import { GuideApplicationFlowProvider } from './context/GuideApplicationFlowContext.jsx'
 import { LandPropertyFlowProvider } from './context/LandPropertyFlowContext.jsx'
 import { PersonalizedRelocationFlowProvider } from './context/PersonalizedRelocationFlowContext.jsx'
 import { RelocationFlowProvider } from './context/RelocationFlowContext.jsx'
@@ -24,6 +26,10 @@ import { GhanaPracticalGuideTravelSmarter } from './pages/GhanaPracticalGuideTra
 import { Home } from './pages/Home.jsx'
 import { IndependentTourGuide } from './pages/IndependentTourGuide.jsx'
 import { IndependentTourGuideCountry } from './pages/IndependentTourGuideCountry.jsx'
+import { ApplicationStart as GuideApplicationStart } from './pages/tour-guide-application/ApplicationStart.jsx'
+import { ApplicationStep as GuideApplicationStepPage } from './pages/tour-guide-application/ApplicationStep.jsx'
+import { Confirmation as GuideApplicationConfirmation } from './pages/tour-guide-application/Confirmation.jsx'
+import { ReviewAnswers as GuideApplicationReview } from './pages/tour-guide-application/ReviewAnswers.jsx'
 import { LandPropertyGuidance } from './pages/LandPropertyGuidance.jsx'
 import { Malawi } from './pages/Malawi.jsx'
 import { PersonalVisaGuidance } from './pages/PersonalVisaGuidance.jsx'
@@ -223,6 +229,27 @@ function VisaGuidanceFlowRoutes() {
   )
 }
 
+// The Independent Tour Guide Application — another independent flow,
+// reached from a country's Independent Tour Guide page
+// (IndependentTourGuideCountry.jsx). Keyed by `:slug` the same way
+// VisaGuidanceFlowRoutes is above (one shared form for Ghana, Benin and
+// Tanzania/Zanzibar, not a per-country flow), except this one has no
+// payment step — applying to the guide network costs nothing.
+function GuideApplicationFlowRoutes() {
+  const { slug } = useParams()
+  const countryLabel = TOUR_GUIDE_PAGES[slug]?.countryLabel ?? ''
+  return (
+    <GuideApplicationFlowProvider primaryCountry={countryLabel}>
+      <Routes>
+        <Route index element={<GuideApplicationStart />} />
+        <Route path="step/:stepNumber" element={<GuideApplicationStepPage />} />
+        <Route path="review" element={<GuideApplicationReview />} />
+        <Route path="confirmation" element={<GuideApplicationConfirmation />} />
+      </Routes>
+    </GuideApplicationFlowProvider>
+  )
+}
+
 // Ghana's Personalized Relocation Guidance request wizard — an eighth
 // independent flow, reached from its own service detail page
 // (PersonalizedRelocationGuidance.jsx). Same shape as the other Ghana
@@ -288,6 +315,10 @@ function App() {
           <Route
             path="/independent-tour-guide/:slug"
             element={<IndependentTourGuideCountry />}
+          />
+          <Route
+            path="/independent-tour-guide/:slug/apply/*"
+            element={<GuideApplicationFlowRoutes />}
           />
           <Route path="/travel-planner" element={<TravelPlanner />} />
           <Route

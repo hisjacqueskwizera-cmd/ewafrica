@@ -1,4 +1,5 @@
 import {
+  ArrowRight,
   Binoculars,
   CheckCircle2,
   ClipboardCheck,
@@ -37,7 +38,8 @@ export function IndependentTourGuideCountry() {
 
   if (!data) return <Navigate to="/independent-tour-guide" replace />
 
-  const { hero, stats, intro, offer, vetting, howItWorks, comingSoon, countryLabel } = data
+  const { hero, stats, intro, offer, vetting, howItWorks, comingSoon, guideRecruit, countryLabel } =
+    data
 
   return (
     <>
@@ -75,7 +77,7 @@ export function IndependentTourGuideCountry() {
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {intro.body}
               </p>
-              <HashLink to="/#contact" className="btn-copper mt-6">
+              <HashLink to={`/independent-tour-guide/${slug}/apply`} className="btn-copper mt-6">
                 Become a Tour Guide
               </HashLink>
             </Reveal>
@@ -173,12 +175,53 @@ export function IndependentTourGuideCountry() {
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
 
-          {/* Need help before purchasing? */}
-          <Reveal
-            delay={250}
-            className="mt-14 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center"
-          >
+      {/* Join Our Independent Guide Network — recruiting local guides
+          rather than travelers looking for one, so it sits between the
+          Coming Soon card above and the general contact strip below. */}
+      <section className="border-t border-border bg-cream py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:divide-x lg:divide-border">
+            <Reveal>
+              <Users className="size-10 text-copper" aria-hidden="true" />
+              <p className="section-eyebrow mt-4">{guideRecruit.eyebrow}</p>
+              <h2 className="mt-3 text-2xl font-bold text-primary sm:text-3xl lg:text-4xl">
+                Are You a Professional Tour Guide in {countryLabel}?
+              </h2>
+            </Reveal>
+            <Reveal delay={100} className="lg:pl-16">
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                {guideRecruit.description}
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-bold uppercase tracking-wide text-copper sm:text-sm">
+                {guideRecruit.requirements.map((req, i) => (
+                  <span key={req} className="flex items-center gap-3">
+                    {i > 0 && <span aria-hidden="true">&bull;</span>}
+                    {req}
+                  </span>
+                ))}
+              </div>
+              <HashLink
+                to={`/independent-tour-guide/${slug}/apply`}
+                className="btn-copper mt-6 w-full uppercase tracking-wide sm:w-auto"
+              >
+                {guideRecruit.cta}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </HashLink>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                {guideRecruit.subtext}
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Need help before purchasing? */}
+      <section className="border-t border-border py-10 lg:py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="flex shrink-0 -space-x-2">
               <a
                 href={CONTACT_INFO.whatsappHref}

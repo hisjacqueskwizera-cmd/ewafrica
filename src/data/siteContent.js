@@ -366,7 +366,7 @@ export const ABOUT_PAGE = {
   founder: {
     eyebrow: 'Meet The Founder',
     heading: "I'm Humphrey",
-    photo: '/Pictures/CEO.jpg',
+    photo: '/Pictures/Founder/Founder.jpg',
     photoAlt: 'Humphrey, founder of East-West Africa Link',
     quote: 'Africa has a way of changing you for the better.',
     quoteAttribution: 'Humphrey',
@@ -3078,6 +3078,14 @@ export const TOUR_GUIDE_PAGES = {
       cta: 'Contact Us for Updates',
       subtext: 'Be the first to know when our Ghana Guide Match service is available.',
     },
+    guideRecruit: {
+      eyebrow: 'Join Our Independent Guide Network',
+      description:
+        'East-West Africa Link is building a network of experienced independent tour guides. If you have at least three years of professional guiding experience and meet applicable local licensing or registration requirements, we invite you to apply.',
+      requirements: ["3+ Years' Experience", 'Strong Local Knowledge', 'Professional References'],
+      cta: 'Apply to Join Our Guide Network',
+      subtext: 'Applications are reviewed individually. Submission does not guarantee acceptance or customer referrals.',
+    },
   },
   benin: {
     countryLabel: 'Benin',
@@ -3149,6 +3157,14 @@ export const TOUR_GUIDE_PAGES = {
       cta: 'Contact Us for Updates',
       subtext: 'Be the first to know when our Benin Guide Match service is available.',
     },
+    guideRecruit: {
+      eyebrow: 'Join Our Independent Guide Network',
+      description:
+        'East-West Africa Link is building a network of experienced independent tour guides. If you have at least three years of professional guiding experience and meet applicable local licensing or registration requirements, we invite you to apply.',
+      requirements: ["3+ Years' Experience", 'Strong Local Knowledge', 'Professional References'],
+      cta: 'Apply to Join Our Guide Network',
+      subtext: 'Applications are reviewed individually. Submission does not guarantee acceptance or customer referrals.',
+    },
   },
   tanzania: {
     countryLabel: 'Zanzibar',
@@ -3219,6 +3235,14 @@ export const TOUR_GUIDE_PAGES = {
       body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
       cta: 'Contact Us for Updates',
       subtext: 'Be the first to know when our Zanzibar Guide Match service is available.',
+    },
+    guideRecruit: {
+      eyebrow: 'Join Our Independent Guide Network',
+      description:
+        'East-West Africa Link is building a network of experienced independent tour guides. If you have at least three years of professional guiding experience and meet applicable local licensing or registration requirements, we invite you to apply.',
+      requirements: ["3+ Years' Experience", 'Strong Local Knowledge', 'Professional References'],
+      cta: 'Apply to Join Our Guide Network',
+      subtext: 'Applications are reviewed individually. Submission does not guarantee acceptance or customer referrals.',
     },
   },
 }

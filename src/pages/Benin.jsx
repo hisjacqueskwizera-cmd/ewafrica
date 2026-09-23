@@ -16,12 +16,12 @@ import {
   Signpost,
   Users,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Accordion } from '../components/Accordion.jsx'
 import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
-import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
+import { MediaLightbox, MediaTile } from '../components/MediaGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { BENIN_PAGE } from '../data/siteContent.js'
@@ -42,38 +42,132 @@ const ICONS = {
   MapPin,
 }
 
-const BENIN_GALLERY_TILES = [
+// One flat list, video first — the Lightbox steps through this same order
+// regardless of which item a visitor opens first. The two videos bookend
+// the two remaining photos (see BeninGallery below): a portrait clip as
+// the hero tile, and a landscape clip filling what used to be the last two
+// photo tiles in the old 5-photo mosaic.
+const BENIN_MEDIA = [
   {
-    src: '/Pictures/Benin/Benin_Hero.jpg',
-    alt: 'Sailing pirogue on Lake Nokoué, Benin',
-    title: 'Lake Nokoué',
-    subtitle: 'Sailing pirogues, timeless waterways',
+    type: 'video',
+    src: '/Pictures/Benin/optimized/first_one.mp4',
+    poster: '/Pictures/Benin/optimized/first_one_poster.jpg',
+    alt: 'A monumental carved sculpture merging with a building facade in Benin',
+    title: 'Living Sculpture',
+    subtitle: 'Where art and Vodun tradition meet',
   },
   {
+    type: 'photo',
     src: '/Pictures/Benin_Landing_Hero.JPG',
     alt: 'Ganvié stilt village on the water in Benin',
     title: 'Ganvié',
     subtitle: "Africa's Venice, a village on stilts",
   },
   {
+    type: 'photo',
     src: '/Pictures/Benin_Side_Image.JPG',
     alt: 'Traditional Vodun fetish statues in Benin',
     title: 'Vodun Heritage',
     subtitle: 'Sacred rites, living spirituality',
   },
   {
-    src: '/Pictures/Benin/Back_River.jpg',
-    alt: 'Palm-lined river channel in Benin',
-    title: 'Palm-lined Waterways',
-    subtitle: 'Quiet channels, lush scenery',
-  },
-  {
-    src: '/Pictures/countries/BeninReal.JPG',
-    alt: 'Beninese woman in traditional dress with her child',
-    title: 'Beninese Culture',
-    subtitle: 'Warmth, tradition, living heritage',
+    type: 'video',
+    src: '/Pictures/Benin/optimized/landscape_one.mp4',
+    poster: '/Pictures/Benin/optimized/landscape_one_poster.jpg',
+    alt: 'A traditional straw-woven ritual figure in a Vodun shrine courtyard in Benin',
+    title: 'Vodun Shrine',
+    subtitle: 'A living courtyard of ritual and tradition',
   },
 ]
+
+// Matches TanzaniaGallery's layout exactly (see Tanzania.jsx): a large hero
+// tile followed by a row of the rest, the last of which spans two columns.
+// With BENIN_MEDIA's 4 items that row holds the two photos plus the
+// landscape video spanning the final two slots.
+function BeninGallery() {
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+  const showNext = () => setLightboxIndex((i) => (i + 1) % BENIN_MEDIA.length)
+  const showPrev = () => setLightboxIndex((i) => (i - 1 + BENIN_MEDIA.length) % BENIN_MEDIA.length)
+
+  // First_one is a genuinely portrait clip (720x1020) and Landscape_one a
+  // genuinely landscape one (1276x720) — the layout below keeps each in
+  // its natural orientation instead of cropping either to fit a shared
+  // aspect ratio: the portrait video sits tall on the left with the two
+  // photos stacked beside it to match its height, and the landscape video
+  // spans full width underneath everything.
+  const [portraitVideo, photoOne, photoTwo, landscapeVideo] = BENIN_MEDIA
+
+  return (
+    <section id="gallery" className="scroll-mt-[140px] bg-cream py-14 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
+        <Reveal once={false} className="flex items-center justify-center gap-4">
+          <span
+            className="hidden h-px max-w-24 flex-1 border-t border-dashed border-copper/50 sm:block"
+            aria-hidden="true"
+          />
+          <h2 className="text-center text-xs font-bold uppercase tracking-[0.2em] text-primary sm:text-sm">
+            A Glimpse of Benin
+          </h2>
+          <span
+            className="hidden h-px max-w-24 flex-1 border-t border-dashed border-copper/50 sm:block"
+            aria-hidden="true"
+          />
+        </Reveal>
+        <Reveal once={false} delay={80}>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Stilt villages, sacred traditions and waterways — tap any photo or video for a closer
+            look.
+          </p>
+        </Reveal>
+      </div>
+
+      <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
+        <div className="grid gap-3">
+          <div className="grid gap-3 lg:grid-cols-2">
+            <Reveal once={false} big>
+              <MediaTile
+                item={portraitVideo}
+                onOpen={() => setLightboxIndex(0)}
+                className="aspect-[3/4] lg:aspect-auto lg:h-full"
+              />
+            </Reveal>
+
+            {/* The two photos stack beside the portrait video at lg — their
+                combined natural height (aspect-[4/3] each, plus the gap
+                between them) is what the video's own lg:h-full matches. */}
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
+              {[photoOne, photoTwo].map((item, i) => (
+                <Reveal key={item.src} once={false} delay={100 + i * 100}>
+                  <MediaTile
+                    item={item}
+                    onOpen={() => setLightboxIndex(i + 1)}
+                    className="aspect-[4/3]"
+                  />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <Reveal once={false} delay={300}>
+            <MediaTile
+              item={landscapeVideo}
+              onOpen={() => setLightboxIndex(3)}
+              className="aspect-[16/9] sm:aspect-[21/9]"
+            />
+          </Reveal>
+        </div>
+      </div>
+
+      <MediaLightbox
+        items={BENIN_MEDIA}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNext={showNext}
+        onPrev={showPrev}
+      />
+    </section>
+  )
+}
 
 function CardCta({ to, children }) {
   return (
@@ -107,16 +201,11 @@ export function Benin() {
 
       <CountrySubNav slug="benin" countryName="Benin" />
 
-      <PhotoGallerySection
-        heading="A Glimpse of Benin"
-        subheading="Stilt villages, sacred traditions and waterways — a first look at the sights and stories waiting across Benin."
-        tiles={BENIN_GALLERY_TILES}
-        variant="mosaic"
-      />
+      <BeninGallery />
 
       {/* Travel Services in Benin — four cards, including Independent Tour
           Guides. */}
-      <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
+      <section id="services" className="scroll-mt-[140px] pb-16 pt-6 lg:pb-20 lg:pt-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal once={false} className="flex items-center justify-center gap-4">
             <span
@@ -292,13 +381,25 @@ export function Benin() {
                 />
               </div>
             </div>
-            <div className="aspect-4/3 lg:aspect-auto lg:w-2/5">
+            <div className="relative aspect-4/3 lg:aspect-auto lg:w-2/5">
               <img
                 src={guide.image}
                 alt={guide.imageAlt}
                 loading="lazy"
                 className="size-full object-cover"
               />
+              <div
+                className="absolute inset-0 bg-linear-to-t from-cocoa/85 via-cocoa/10 to-transparent"
+                aria-hidden="true"
+              />
+              <div className="absolute inset-x-0 bottom-5 px-6 text-primary-foreground">
+                <p className="font-display text-xl italic leading-snug sm:text-2xl">
+                  Tamari People
+                </p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-gold">
+                  Tata Somba House
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>

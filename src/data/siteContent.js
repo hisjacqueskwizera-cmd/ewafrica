@@ -2158,8 +2158,8 @@ export const TRAVEL_PLANNER_PAGE = {
 export const TRAVEL_PLANNER_DETAILS_PAGE = {
   hero: {
     badge: 'Travel Planner',
-    titleLine1: 'Plan More',
-    titleAccent: 'Discover Deeper',
+    titleLine1: 'Travel Planner',
+    titleAccent: '',
     tagline: ['Real places. Real people. A more meaningful Africa.'],
     description: 'Personalized planning support to help you create your ideal Africa journey — your way.',
     backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',

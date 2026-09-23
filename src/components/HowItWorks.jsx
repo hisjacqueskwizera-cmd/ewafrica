@@ -23,13 +23,14 @@ export function HowItWorks() {
   const containerRef = useRef(null)
   const headingRef = useRef(null)
   const iconRefs = useRef([])
+  const rowRef = useRef(null)
   const pathRef = useRef(null)
   const [geometry, setGeometry] = useState(null)
   const [pathLength, setPathLength] = useState(0)
   const [reducedMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
-  const [lineVisible, setLineVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   // Builds the whole line as one SVG path measured off the real layout:
   // it drops in at the very top of this section — directly under Our
@@ -118,29 +119,56 @@ export function HowItWorks() {
     if (pathRef.current) setPathLength(pathRef.current.getTotalLength())
   }, [geometry])
 
-  // A one-shot draw-in once the section scrolls into view, rather than
-  // scrubbing the line to raw scroll position: this section can sit
-  // anywhere on a page of any length, so a fixed scroll-distance window
-  // (the old approach) either finishes drawing the line long before or
-  // long after it's actually on screen. Triggering off intersection and
-  // animating over a fixed duration means it always draws while the
-  // visitor is actually looking at it, whatever the surrounding page.
+  // Scrubs the line's draw directly to scroll position — 0 while the
+  // section's top is still below the viewport, 1 once the icon row (where
+  // the line ends) has scrolled up into the top portion of the screen —
+  // so it draws from top to end as the visitor scrolls down, and retreats
+  // the same way scrolling back up, instead of a fixed-duration reveal.
+  //
+  // The window is measured off the line's own top and bottom each time
+  // (not a fixed viewport-height multiple), so it always spans exactly
+  // the scroll distance this section actually occupies on screen,
+  // whatever page it sits on and however long that page is.
   useEffect(() => {
-    if (reducedMotion) return
-    const node = containerRef.current
-    if (!node) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setLineVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.2 },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [reducedMotion])
+    if (reducedMotion) {
+      setProgress(1)
+      return
+    }
+    let ticking = false
+
+    const update = () => {
+      ticking = false
+      const top = containerRef.current
+      const bottom = rowRef.current
+      if (!top || !bottom) return
+      const vh = window.innerHeight || document.documentElement.clientHeight
+      const topY = top.getBoundingClientRect().top
+      const bottomY = bottom.getBoundingClientRect().bottom
+      // Starts drawing as the top edge enters the bottom of the screen,
+      // finishes once the bottom edge has scrolled up to ~30% of the
+      // viewport height — comfortably inside the screen rather than
+      // right at its edge, so the line reads as "done" while still
+      // fully visible.
+      const start = vh
+      const end = vh * 0.3
+      const raw = (start - topY) / (start - end + (bottomY - topY))
+      setProgress(Math.min(1, Math.max(0, raw)))
+    }
+
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [reducedMotion, geometry])
 
   return (
     <div ref={containerRef} className="relative pt-16 lg:pt-20">
@@ -179,8 +207,7 @@ export function HowItWorks() {
             strokeLinecap="round"
             style={{
               strokeDasharray: pathLength,
-              strokeDashoffset: reducedMotion || lineVisible ? 0 : pathLength,
-              transition: reducedMotion ? 'none' : 'stroke-dashoffset 1.4s ease-out',
+              strokeDashoffset: pathLength * (1 - progress),
             }}
           />
         </svg>
@@ -205,7 +232,7 @@ export function HowItWorks() {
         local insight, and practical support across Africa.
       </p>
 
-      <div className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      <div ref={rowRef} className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
         {HOW_IT_WORKS.map((step, index) => {
           const Icon = STEP_ICONS[step.icon] || MessageSquareText
 

@@ -333,7 +333,7 @@ export function TravelPlannerServiceDetails() {
           <Reveal delay={150} className="mt-12 text-center">
             <Link
               to="/travel-planner"
-              className="text-sm font-semibold text-primary hover:text-copper"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-copper px-5 py-2.5 text-xs font-bold uppercase tracking-[0.08em] text-copper transition-colors hover:bg-copper hover:text-copper-foreground"
             >
               ← Back to Travel Planner
             </Link>

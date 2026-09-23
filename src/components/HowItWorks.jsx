@@ -1,7 +1,6 @@
 import { ArrowRight, MessageSquareText, Search, Send } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { HOW_IT_WORKS } from '../data/siteContent.js'
-import { useScrollProgress } from '../hooks/useScrollProgress.js'
 import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
@@ -21,13 +20,16 @@ const RAIL_GUTTER = 16
 const SVG_BLEED = 40
 
 export function HowItWorks() {
-  const [rowRef, progress] = useScrollProgress()
   const containerRef = useRef(null)
   const headingRef = useRef(null)
   const iconRefs = useRef([])
   const pathRef = useRef(null)
   const [geometry, setGeometry] = useState(null)
   const [pathLength, setPathLength] = useState(0)
+  const [reducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+  const [lineVisible, setLineVisible] = useState(false)
 
   // Builds the whole line as one SVG path measured off the real layout:
   // it drops in at the very top of this section — directly under Our
@@ -110,11 +112,35 @@ export function HowItWorks() {
     }
   }, [])
 
-  // The dash offset is what actually scrubs the draw, so the path's real
+  // The dash offset is what actually draws the line, so the path's real
   // length has to be read back once it exists.
   useEffect(() => {
     if (pathRef.current) setPathLength(pathRef.current.getTotalLength())
   }, [geometry])
+
+  // A one-shot draw-in once the section scrolls into view, rather than
+  // scrubbing the line to raw scroll position: this section can sit
+  // anywhere on a page of any length, so a fixed scroll-distance window
+  // (the old approach) either finishes drawing the line long before or
+  // long after it's actually on screen. Triggering off intersection and
+  // animating over a fixed duration means it always draws while the
+  // visitor is actually looking at it, whatever the surrounding page.
+  useEffect(() => {
+    if (reducedMotion) return
+    const node = containerRef.current
+    if (!node) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLineVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.2 },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [reducedMotion])
 
   return (
     <div ref={containerRef} className="relative pt-16 lg:pt-20">
@@ -153,7 +179,8 @@ export function HowItWorks() {
             strokeLinecap="round"
             style={{
               strokeDasharray: pathLength,
-              strokeDashoffset: pathLength * (1 - progress),
+              strokeDashoffset: reducedMotion || lineVisible ? 0 : pathLength,
+              transition: reducedMotion ? 'none' : 'stroke-dashoffset 1.4s ease-out',
             }}
           />
         </svg>
@@ -178,7 +205,7 @@ export function HowItWorks() {
         local insight, and practical support across Africa.
       </p>
 
-      <div ref={rowRef} className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      <div className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
         {HOW_IT_WORKS.map((step, index) => {
           const Icon = STEP_ICONS[step.icon] || MessageSquareText
 

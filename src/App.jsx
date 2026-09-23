@@ -17,6 +17,8 @@ import { AboutUs } from './pages/AboutUs.jsx'
 import { Benin } from './pages/Benin.jsx'
 import { BeforeYouBookCheck } from './pages/BeforeYouBookCheck.jsx'
 import { BorderCrossingGuide } from './pages/BorderCrossingGuide.jsx'
+import { ContactUs } from './pages/ContactUs.jsx'
+import { Disclaimer } from './pages/Disclaimer.jsx'
 import { Explore } from './pages/Explore.jsx'
 import { Gambia } from './pages/Gambia.jsx'
 import { Ghana } from './pages/Ghana.jsx'
@@ -35,6 +37,8 @@ import { Malawi } from './pages/Malawi.jsx'
 import { PersonalVisaGuidance } from './pages/PersonalVisaGuidance.jsx'
 import { PersonalizedRelocationGuidance } from './pages/PersonalizedRelocationGuidance.jsx'
 import { Placeholder } from './pages/Placeholder.jsx'
+import { PrivacyPolicy } from './pages/PrivacyPolicy.jsx'
+import { RefundPolicy } from './pages/RefundPolicy.jsx'
 import { RelocationFullDetails } from './pages/RelocationFullDetails.jsx'
 import { RelocationPackage } from './pages/RelocationPackage.jsx'
 import { RightOfAbodeGuidance } from './pages/RightOfAbodeGuidance.jsx'
@@ -44,6 +48,7 @@ import { RwandaPracticalGuide } from './pages/RwandaPracticalGuide.jsx'
 import { Senegal } from './pages/Senegal.jsx'
 import { Tanzania } from './pages/Tanzania.jsx'
 import { TanzaniaPracticalGuide } from './pages/TanzaniaPracticalGuide.jsx'
+import { TermsAndConditions } from './pages/TermsAndConditions.jsx'
 import { TravelAudit } from './pages/TravelAudit.jsx'
 import { TravelPlanner } from './pages/TravelPlanner.jsx'
 import { TravelPlannerServiceDetails } from './pages/TravelPlannerServiceDetails.jsx'
@@ -358,6 +363,11 @@ function App() {
             path="/ghana/personalized-relocation-guidance/*"
             element={<PersonalizedRelocationFlowRoutes />}
           />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           <Route
             path="*"
             element={

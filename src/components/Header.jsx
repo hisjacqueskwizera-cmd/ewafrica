@@ -51,6 +51,7 @@ const TRANSPARENT_HERO_ROUTES = [
   '/senegal',
   '/benin',
   '/independent-tour-guide',
+  '/contact',
 ]
 
 export function Header() {

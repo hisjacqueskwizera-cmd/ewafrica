@@ -146,4 +146,15 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Legal document body copy (Terms, Privacy, Refund Policy, Disclaimer) —
+     plain bulleted/nested lists read cleanly without pulling in a full
+     typography plugin for four static pages. */
+  .legal-prose ul {
+    @apply list-disc space-y-2 pl-5;
+  }
+
+  .legal-prose strong {
+    @apply font-semibold text-cocoa;
+  }
 }

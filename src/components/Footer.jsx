@@ -12,6 +12,14 @@ const SOCIAL_ICONS = {
   whatsapp: WhatsAppIcon,
 }
 
+const LEGAL_LINKS = [
+  { label: 'Terms & Conditions', to: '/terms-and-conditions' },
+  { label: 'Privacy Policy', to: '/privacy-policy' },
+  { label: 'Refund Policy', to: '/refund-policy' },
+  { label: 'Disclaimer', to: '/disclaimer' },
+  { label: 'Contact', to: '/contact' },
+]
+
 export function Footer() {
   const year = new Date().getFullYear()
 
@@ -143,10 +151,19 @@ export function Footer() {
       </div>
 
       <div className="relative border-t border-primary-foreground/10">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p className="text-xs text-primary-foreground/45">
             © {year} East-West Africa Link. All rights reserved.
           </p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-primary-foreground/45">
+            {LEGAL_LINKS.map((link) => (
+              <li key={link.label}>
+                <HashLink to={link.to} className="transition-colors hover:text-gold">
+                  {link.label}
+                </HashLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

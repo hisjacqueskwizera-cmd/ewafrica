@@ -11,11 +11,29 @@
 // overlay, so its primary-foreground text stays legible) rather than as
 // its own separate band, to avoid doubling up the pt-28 header clearance
 // on every step.
-export function PlannerStepHero({ cornerTagline, bannerTagline, stepper }) {
+//
+// `badge`/`badgeImage` are also optional, and only the Travel Planner
+// flow's own steps pass them (its umbrella-logo mark, matching the badge
+// on the Travel Planner landing and service-details heroes) — Before You
+// Book Check and Travel Audit don't have that mark and stay exactly as
+// they were.
+//
+// `backgroundImage` defaults to the shared Kilimanjaro veranda shot used
+// by Before You Book Check and Travel Audit; the Travel Planner flow's own
+// steps override it with their own photo instead.
+export function PlannerStepHero({
+  cornerTagline,
+  bannerTagline,
+  stepper,
+  badge,
+  badgeImage,
+  badgeImageAlt,
+  backgroundImage = '/Pictures/Hero_Trv_PLNR.PNG',
+}) {
   return (
     <section className="relative isolate overflow-hidden">
       <img
-        src="/Pictures/Hero_Trv_PLNR.PNG"
+        src={backgroundImage}
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -25,6 +43,13 @@ export function PlannerStepHero({ cornerTagline, bannerTagline, stepper }) {
         className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-8 pt-28 sm:px-6 lg:px-8"
         style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
       >
+        {badgeImage && (
+          <img
+            src={badgeImage}
+            alt={badgeImageAlt ?? badge ?? ''}
+            className="h-11 w-auto self-start sm:h-14"
+          />
+        )}
         {stepper}
         <p className="text-right text-xs italic leading-relaxed text-primary-foreground/90 sm:text-sm">
           {cornerTagline.map((line) => (

@@ -59,7 +59,14 @@ export function Confirmation() {
   return (
     <>
       <PlannerBackground />
-      <PlannerStepHero cornerTagline={copy.cornerTagline} bannerTagline={copy.bannerTagline} />
+      <PlannerStepHero
+        badge="Travel Planner"
+        badgeImage="/Pictures/umbrella.PNG"
+        badgeImageAlt="Travel Planner"
+        backgroundImage="/Pictures/TRV_HR.PNG"
+        cornerTagline={copy.cornerTagline}
+        bannerTagline={copy.bannerTagline}
+      />
 
       <section className="py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -84,8 +84,8 @@ function AuthPage({ mode }) {
     <div className="grid min-h-svh pt-[84px] lg:grid-cols-2">
       <div className="relative hidden lg:block">
         <img
-          src="/Pictures/Hero_Trv_PLNR.PNG"
-          alt="A veranda table with a map of Africa, compass and journal overlooking Mount Kilimanjaro at sunrise"
+          src="/Pictures/Login_Page.jpg"
+          alt="A donkey cart and motorbike passing down a lively African street lined with balconied buildings"
           className="absolute inset-0 size-full object-cover"
         />
         <div

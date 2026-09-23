@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
 import { ScrollManager } from './components/ScrollManager.jsx'
+import { WhatsAppChatBar } from './components/WhatsAppChatBar.jsx'
 import { TOUR_GUIDE_PAGES } from './data/siteContent.js'
 import { BeforeYouBookFlowProvider } from './context/BeforeYouBookFlowContext.jsx'
 import { BorderCrossingFlowProvider } from './context/BorderCrossingFlowContext.jsx'
@@ -384,6 +385,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <WhatsAppChatBar />
     </>
   )
 }

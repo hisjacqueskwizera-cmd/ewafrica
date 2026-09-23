@@ -68,7 +68,7 @@ const BENIN_GALLERY_TILES = [
     subtitle: 'Quiet channels, lush scenery',
   },
   {
-    src: '/Pictures/countries/Benin.jpg',
+    src: '/Pictures/countries/BeninReal.JPG',
     alt: 'Beninese woman in traditional dress with her child',
     title: 'Beninese Culture',
     subtitle: 'Warmth, tradition, living heritage',
@@ -213,7 +213,7 @@ export function Benin() {
                   <article className="group flex h-full flex-col overflow-hidden border-b border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:border-b-0 lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
-                        src={place.image ?? '/Pictures/countries/Benin.jpg'}
+                        src={place.image ?? '/Pictures/countries/BeninReal.JPG'}
                         alt={place.imageAlt ?? place.name}
                         loading="lazy"
                         className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -241,7 +241,7 @@ export function Benin() {
                   <article className="group flex h-full flex-col overflow-hidden border-t border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
-                        src={place.image ?? '/Pictures/countries/Benin.jpg'}
+                        src={place.image ?? '/Pictures/countries/BeninReal.JPG'}
                         alt={place.imageAlt ?? place.name}
                         loading="lazy"
                         className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

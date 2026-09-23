@@ -122,7 +122,7 @@ export const COUNTRIES = [
     note: 'The Cradle of Voodoo',
     to: '/benin',
     tone: 'copper',
-    image: '/Pictures/countries/Benin.jpg',
+    image: '/Pictures/countries/BeninReal.JPG',
     flag: '🇧🇯',
   },
   {
@@ -1449,7 +1449,7 @@ export const BENIN_PAGE = {
         'Entry points and arrival info',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/countries/BeninReal.JPG',
     },
     {
       icon: 'Bus',
@@ -1511,7 +1511,7 @@ export const BENIN_PAGE = {
     {
       name: 'Abomey',
       text: 'Step into the history of the former Kingdom of Dahomey through royal palaces, museums, traditions, and stories that remain central to Benin’s cultural identity.',
-      image: '/Pictures/countries/Benin.jpg',
+      image: '/Pictures/countries/BeninReal.JPG',
       imageAlt: 'Royal palaces and historical heritage in Abomey',
     },
     {
@@ -1585,8 +1585,8 @@ export const BENIN_PAGE = {
         text: 'Learn a few words in French, the official language. Dress modestly, especially in rural and religious areas. Bargaining is common in markets — do it politely. Respect local customs and traditions, and keep your belongings safe.',
       },
     ],
-    image: '/Pictures/explore/ghana-card-background.webp',
-    imageAlt: 'Cape Coast Castle on the Ghanaian coast',
+    image: '/Pictures/Benin/Benin_Practical_Guide.jpg',
+    imageAlt: 'A traditional mud-and-thatch Tata Somba compound in northern Benin',
   },
   closing: {
     eyebrow: 'Need Personalized Guidance?',

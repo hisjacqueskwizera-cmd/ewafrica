@@ -401,7 +401,7 @@ export function TanzaniaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to="/travel-planner?destination=tanzania"
+                to="/travel-planner/service-details?destinations=tanzania"
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 Plan a Trip to {selectedPlace.name}
@@ -438,7 +438,7 @@ export function TanzaniaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to={selectedPlan.cta?.to ?? '/travel-planner?destination=tanzania'}
+                to={selectedPlan.cta?.to ?? '/travel-planner/service-details?destinations=tanzania'}
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 {selectedPlan.cta?.label ?? 'Get Personalized Planning Guidance'}
@@ -475,7 +475,7 @@ export function TanzaniaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to={selectedTip.cta?.to ?? '/travel-planner?destination=tanzania'}
+                to={selectedTip.cta?.to ?? '/travel-planner/service-details?destinations=tanzania'}
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 {selectedTip.cta?.label ?? 'Get Personalized Planning Guidance'}

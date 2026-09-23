@@ -149,7 +149,7 @@ export function Uganda() {
                       <HashLink
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner?destination=uganda'
+                            ? '/travel-planner/service-details?destinations=uganda'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=uganda'
                               : service.title === 'Personal Visa Guidance'

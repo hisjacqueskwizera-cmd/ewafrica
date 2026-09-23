@@ -548,7 +548,7 @@ export function UgandaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to="/travel-planner?destination=uganda"
+                to="/travel-planner/service-details?destinations=uganda"
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 Plan a Trip to {selectedPlace.name}

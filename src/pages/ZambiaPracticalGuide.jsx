@@ -334,7 +334,7 @@ export function ZambiaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to="/travel-planner?destination=zambia"
+                to="/travel-planner/service-details?destinations=zambia"
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 Plan a Trip to {selectedPlace.name}
@@ -371,7 +371,7 @@ export function ZambiaPracticalGuide() {
 
             <div className="pt-2">
               <HashLink
-                to="/travel-planner?destination=zambia"
+                to="/travel-planner/service-details?destinations=zambia"
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 Get Personalized Planning Guidance

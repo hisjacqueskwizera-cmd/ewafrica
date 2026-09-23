@@ -208,7 +208,7 @@ export function GhanaPracticalGuideTravelSmarter() {
 
             <div className="pt-2">
               <HashLink
-                to={selectedTip.cta?.to ?? '/travel-planner?destination=ghana'}
+                to={selectedTip.cta?.to ?? '/travel-planner/service-details?destinations=ghana'}
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 {selectedTip.cta?.label ?? 'Get Personalized Planning Guidance'}

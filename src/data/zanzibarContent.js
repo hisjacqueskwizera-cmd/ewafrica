@@ -111,6 +111,6 @@ export const ZANZIBAR_DATA = {
     heading: 'More to Explore',
     text: 'From the winding streets of Stone Town to pristine beaches and spice-scented villages, Zanzibar offers a unique blend of history, culture and natural beauty.',
     backgroundImage: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3635.JPG',
-    cta: { label: 'Plan Your Zanzibar Experience', to: '/travel-planner?destination=tanzania' },
+    cta: { label: 'Plan Your Zanzibar Experience', to: '/travel-planner/service-details?destinations=tanzania' },
   },
 }

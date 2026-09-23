@@ -306,7 +306,7 @@ export const UGANDA_DATA = {
     image: '/Pictures/Uganda/Gallery/highland_road.jpg',
     imageAlt: "A road winding through Uganda's tea-covered western highlands",
     ctas: [
-      { label: 'Plan My Route', to: '/travel-planner?destination=uganda' },
+      { label: 'Plan My Route', to: '/travel-planner/service-details?destinations=uganda' },
       { label: 'Get a Border Crossing Guide', to: '/travel-planner/border-crossing-guide?from=uganda' },
     ],
   },
@@ -351,7 +351,7 @@ export const UGANDA_DATA = {
     icon: 'Users',
     heading: 'Not Sure Where to Start?',
     text: 'Tell us where you are traveling, when you plan to go and what you need help with.',
-    cta: { label: 'Get Personalized Guidance', to: '/travel-planner?destination=uganda' },
+    cta: { label: 'Get Personalized Guidance', to: '/travel-planner/service-details?destinations=uganda' },
     helpWithLabel: 'East-West Africa Link can help with:',
     helpWith: [
       { icon: 'FileText', label: 'Personal Visa Guidance' },

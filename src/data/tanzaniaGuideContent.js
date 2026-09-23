@@ -294,7 +294,7 @@ export const TANZANIA_DATA = {
             },
           ],
         },
-        cta: { label: 'Plan My Route', to: '/travel-planner?destination=tanzania' },
+        cta: { label: 'Plan My Route', to: '/travel-planner/service-details?destinations=tanzania' },
       },
     ],
   },
@@ -309,7 +309,7 @@ export const TANZANIA_DATA = {
         title: 'Traveling Overland?',
         description:
           'Tanzania connects well with several neighboring countries, making it easy to combine destinations.',
-        cta: { label: 'Plan My Route', to: '/travel-planner?destination=tanzania' },
+        cta: { label: 'Plan My Route', to: '/travel-planner/service-details?destinations=tanzania' },
         image: '/Pictures/Tanzania/Tz_Gallery/optimized/IMG_5156_web.jpg',
         imageAlt: 'Maasai homesteads overlooking the Ngorongoro Crater',
         details: {

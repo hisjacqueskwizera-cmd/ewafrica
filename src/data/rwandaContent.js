@@ -300,7 +300,7 @@ export const RWANDA_DATA = {
       'Get personalized guidance for a visit, an overland adventure, or a longer stay in Rwanda. We’re here to help you plan a journey that’s right for you.',
     primaryBtn: {
       text: 'Start Your Request',
-      to: '/travel-planner?destination=rwanda',
+      to: '/travel-planner/service-details?destinations=rwanda',
     },
     secondaryBtn: {
       text: 'View Travel Planner',

@@ -125,7 +125,7 @@ export function DestinationPage({
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
                     <div className="aspect-4/3 overflow-hidden rounded-t-3xl">
                       <img
-                        src={guide.image}
+                        src={service.image ?? guide.image}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
@@ -159,7 +159,7 @@ export function DestinationPage({
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? `/travel-planner?destination=${slug}`
+                            ? `/travel-planner/service-details?destinations=${slug}`
                             : service.title.startsWith('Independent Tour Guides')
                               ? `/independent-tour-guide/${slug}`
                               : service.title === 'Border Crossing Guide'

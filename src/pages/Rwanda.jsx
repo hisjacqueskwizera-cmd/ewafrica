@@ -120,7 +120,7 @@ export function Rwanda() {
                       <HashLink
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner?destination=rwanda'
+                            ? '/travel-planner/service-details?destinations=rwanda'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=rwanda'
                               : service.title === 'Personal Visa Guidance'

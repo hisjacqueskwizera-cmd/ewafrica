@@ -381,7 +381,7 @@ export const GHANA_DATA = {
             },
           ],
         },
-        cta: { label: 'Plan My Route', to: '/travel-planner?destination=ghana' },
+        cta: { label: 'Plan My Route', to: '/travel-planner/service-details?destinations=ghana' },
       },
     ],
   },
@@ -586,7 +586,7 @@ export const GHANA_DATA = {
       'Travelers who want more personalized assistance can use EWAL services for visa guidance, travel planning, and border crossings.',
     primaryBtn: {
       text: 'Travel Planner',
-      to: '/travel-planner?destination=ghana',
+      to: '/travel-planner/service-details?destinations=ghana',
     },
     secondaryBtn: {
       text: 'Visa Guidance',

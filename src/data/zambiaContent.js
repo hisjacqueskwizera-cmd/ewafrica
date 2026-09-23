@@ -43,7 +43,7 @@ export const ZAMBIA_DATA = {
         description:
           'Discover Zambia’s central location and excellent overland links to Tanzania, Malawi, Zimbabwe and beyond.',
         image: '/Pictures/zambia/overland_4x4.jpg',
-        to: '/travel-planner?destination=zambia',
+        to: '/travel-planner/service-details?destinations=zambia',
       },
     ],
   },
@@ -85,7 +85,7 @@ export const ZAMBIA_DATA = {
         'Practical travel tips',
       ],
       image: '/Pictures/Travel planner.PNG',
-      to: '/travel-planner?destination=zambia',
+      to: '/travel-planner/service-details?destinations=zambia',
     },
     {
       icon: 'ShieldCheck',
@@ -143,7 +143,7 @@ export const ZAMBIA_DATA = {
     note: 'Routes, transport connections and border procedures vary depending on your journey.',
     researchText:
       '',
-    planRouteTo: '/travel-planner?destination=zambia',
+    planRouteTo: '/travel-planner/service-details?destinations=zambia',
     borderGuideTo: '/travel-planner/border-crossing-guide?from=zambia',
     tourGuideUnavailable: '',
   },
@@ -416,7 +416,7 @@ export const ZAMBIA_DATA = {
       'Get personalized guidance for a visit, an overland adventure, or a longer stay in Zambia. We’re here to help you plan a journey that’s right for you.',
     primaryBtn: {
       text: 'Start Your Request',
-      to: '/travel-planner?destination=zambia',
+      to: '/travel-planner/service-details?destinations=zambia',
     },
     secondaryBtn: {
       text: 'View Travel Planner',

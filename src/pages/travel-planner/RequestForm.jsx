@@ -807,8 +807,6 @@ export function RequestForm() {
         badgeImage="/Pictures/umbrella.PNG"
         badgeImageAlt="Travel Planner"
         backgroundImage="/Pictures/TRV_HR.PNG"
-        cornerTagline={copy.cornerTagline}
-        bannerTagline={copy.bannerTagline}
       />
 
       <section className="py-12 lg:py-16">

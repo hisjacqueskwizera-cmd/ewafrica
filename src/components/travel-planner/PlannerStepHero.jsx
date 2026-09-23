@@ -21,6 +21,11 @@
 // `backgroundImage` defaults to the shared Kilimanjaro veranda shot used
 // by Before You Book Check and Travel Audit; the Travel Planner flow's own
 // steps override it with their own photo instead.
+//
+// `cornerTagline`/`bannerTagline` are optional — Before You Book Check and
+// Travel Audit still pass their own italic micro-copy, but the Travel
+// Planner flow's steps leave both out, so the photo strip shows just the
+// badge (and stepper, where passed) with no overlaid tagline text.
 export function PlannerStepHero({
   cornerTagline,
   bannerTagline,
@@ -51,16 +56,20 @@ export function PlannerStepHero({
           />
         )}
         {stepper}
-        <p className="text-right text-xs italic leading-relaxed text-primary-foreground/90 sm:text-sm">
-          {cornerTagline.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-        </p>
-        <p className="text-center text-base italic text-primary-foreground sm:text-lg">
-          {bannerTagline}
-        </p>
+        {cornerTagline && (
+          <p className="text-right text-xs italic leading-relaxed text-primary-foreground/90 sm:text-sm">
+            {cornerTagline.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </p>
+        )}
+        {bannerTagline && (
+          <p className="text-center text-base italic text-primary-foreground sm:text-lg">
+            {bannerTagline}
+          </p>
+        )}
       </div>
     </section>
   )

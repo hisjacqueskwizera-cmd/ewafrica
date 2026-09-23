@@ -27,6 +27,7 @@ import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
+import { FLAGS } from '../data/countryFlags.js'
 
 const ICONS = {
   Map,
@@ -40,6 +41,23 @@ const ICONS = {
   ClipboardCheck,
   Mail,
   ShieldCheck,
+}
+
+// Same flag treatment as DestinationPicker's own rows (real SVG flags, not
+// emoji — see the note on countryFlags.js), paired with the country name in
+// bold so the selection reads clearly at a glance.
+function CountryChip({ slug, name }) {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-card">
+      <img
+        src={FLAGS[slug]}
+        alt=""
+        aria-hidden="true"
+        className="h-4 w-[21.33px] shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10"
+      />
+      <span className="text-sm font-bold text-primary">{name}</span>
+    </span>
+  )
 }
 
 function CountTile({ n, price, selected, onSelect }) {
@@ -151,13 +169,20 @@ export function TravelPlannerServiceDetails() {
               <Reveal delay={100} className="mt-10 rounded-3xl bg-cream p-6 sm:p-8">
                 <h2 className="text-lg font-bold text-primary">{countPicker.heading}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {arrivedWithSelection
-                    ? `You're planning to visit ${destinationNames.join(', ')}.`
-                    : countPicker.subtext}
+                  {arrivedWithSelection ? "You're planning to visit:" : countPicker.subtext}
                 </p>
 
                 {arrivedWithSelection ? (
-                  <div className="mt-6 flex flex-col items-start gap-2">
+                  <div className="mt-6 flex flex-col items-start gap-4">
+                    <div className="flex flex-wrap gap-2">
+                      {destinationSlugs.map((slug) => (
+                        <CountryChip
+                          key={slug}
+                          slug={slug}
+                          name={COUNTRIES.find((c) => c.slug === slug)?.name}
+                        />
+                      ))}
+                    </div>
                     <p className="text-3xl font-bold text-primary">${price}</p>
                     <Link
                       to="/travel-planner"

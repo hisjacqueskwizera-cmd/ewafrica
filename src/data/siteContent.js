@@ -2281,12 +2281,13 @@ export const TRAVEL_PLANNER_FLOW = {
     { icon: 'Users', text: 'Three follow-up clarification emails within 7 days' },
     { icon: 'Clock', text: 'Typical delivery 3–5 business days' },
   ],
-  // Per-step banner/eyebrow micro-copy — decorative, kept short since it's
-  // just the photo-strip tagline and the small italic corner line.
+  // Per-step copy. request/review/payment/confirmation each used to carry
+  // a bannerTagline/cornerTagline pair (decorative italic text overlaid on
+  // the step's photo strip) — removed for this flow so the header shows
+  // just the umbrella badge; PlannerStepHero still supports both props for
+  // Before You Book Check and Travel Audit, which keep theirs.
   steps: {
     request: {
-      bannerTagline: 'Your Journey Across Africa Starts Here.',
-      cornerTagline: ['Explore Today.', 'A Richer Tomorrow.'],
       heading: 'Your Travel Planner Request',
       description: 'Tell us about your trip so we can create a personalized travel plan for you.',
       back: { label: 'Back to Travel Planner', to: '/travel-planner' },
@@ -2294,8 +2295,6 @@ export const TRAVEL_PLANNER_FLOW = {
       sidebarCaption: ['Extraordinary places.', 'Meaningful journeys.'],
     },
     review: {
-      bannerTagline: 'Your Journey. A Brighter Africa.',
-      cornerTagline: ['Travel with knowledge.', 'Travel with confidence.'],
       heading: 'Review Your Answers',
       description:
         'Please review your information before continuing to payment. You can edit any section if needed.',
@@ -2304,8 +2303,6 @@ export const TRAVEL_PLANNER_FLOW = {
       sidebarCaption: ["Real places. Deeper experiences.", "We'll help you plan the journey."],
     },
     payment: {
-      bannerTagline: 'Plan Today. Explore Tomorrow.',
-      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
       heading: 'Secure Payment',
       description: 'Complete your payment to submit your Travel Planner request.',
       back: { label: 'Back to Review Your Answers', to: '/travel-planner/review' },
@@ -2317,8 +2314,6 @@ export const TRAVEL_PLANNER_FLOW = {
       sidebarCaption2: ['Different places.', 'A brighter perspective.'],
     },
     confirmation: {
-      bannerTagline: 'Real Places. Meaningful Journeys.',
-      cornerTagline: ['Independent travel.', 'A brighter Africa.'],
       heading: 'Payment Received',
       intro: 'Your Travel Planner request has been received successfully.',
       body: "We appreciate your trust in East-West Africa Link. We're excited to help you plan your journey and look forward to sending you your personalized Travel Planner.",

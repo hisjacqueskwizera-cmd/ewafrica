@@ -478,7 +478,7 @@ export function RwandaGallery() {
         <div className="mx-auto flex w-[95%] flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-2xl italic text-primary">Rwanda</p>
-            <p className="max-w-md text-xs font-semibold uppercase tracking-[0.14em] text-copper sm:text-[13px]">
+            <p className="max-w-md text-xs font-semibold tracking-[0.14em] text-copper sm:text-[13px]">
               Where misty hills, ancient wildlife, and serene waters meet timeless culture.
             </p>
           </div>

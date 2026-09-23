@@ -1,4 +1,4 @@
-import { Mail, Menu, X } from 'lucide-react'
+import { Mail, Menu, User, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
@@ -179,6 +179,10 @@ export function Header() {
             <WhatsAppIcon className="size-4" aria-hidden="true" />
           </a>
 
+          <Link to="/login" className={iconBtnClass} aria-label="Log in or sign up">
+            <User className="size-4" aria-hidden="true" />
+          </Link>
+
           <button
             type="button"
             className={`inline-flex size-10 items-center justify-center rounded-lg border transition-colors md:hidden ${
@@ -241,6 +245,14 @@ export function Header() {
           >
             <WhatsAppIcon className="size-4" aria-hidden="true" />
           </a>
+          <Link
+            to="/login"
+            onClick={closeMenu}
+            aria-label="Log in or sign up"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary"
+          >
+            <User className="size-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </header>

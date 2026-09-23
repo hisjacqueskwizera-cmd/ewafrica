@@ -33,6 +33,7 @@ import { ApplicationStep as GuideApplicationStepPage } from './pages/tour-guide-
 import { Confirmation as GuideApplicationConfirmation } from './pages/tour-guide-application/Confirmation.jsx'
 import { ReviewAnswers as GuideApplicationReview } from './pages/tour-guide-application/ReviewAnswers.jsx'
 import { LandPropertyGuidance } from './pages/LandPropertyGuidance.jsx'
+import { Login, Signup } from './pages/Login.jsx'
 import { Malawi } from './pages/Malawi.jsx'
 import { PersonalVisaGuidance } from './pages/PersonalVisaGuidance.jsx'
 import { PersonalizedRelocationGuidance } from './pages/PersonalizedRelocationGuidance.jsx'
@@ -364,6 +365,8 @@ function App() {
             element={<PersonalizedRelocationFlowRoutes />}
           />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />

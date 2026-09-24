@@ -5,8 +5,8 @@ export const UGANDA_DATA = {
     tagline: 'A Practical Guide for First-Time Travelers',
     intro:
       'Welcome to Uganda — the Pearl of Africa. Uganda is a country of dramatic landscapes, warm people, rich culture, and remarkable wildlife.',
-    backgroundImage: '/Pictures/countries/Uganda.jpg',
-    backgroundImageAlt: 'Misty highlands and a volcano at sunrise in southwestern Uganda',
+    backgroundImage: '/Pictures/Countries_Images/Uganda/IMG_4463.JPG',
+    backgroundImageAlt: 'Two men paddling a wooden dugout canoe on a calm stretch of the Nile in Uganda',
   },
 
   seasons: {
@@ -68,8 +68,8 @@ export const UGANDA_DATA = {
           'Travelers visiting Uganda, Rwanda and Kenya may explore the East Africa Tourist Visa and should confirm eligibility and entry conditions.',
         ],
         cta: { label: 'Get Personal Visa Guidance', to: '/personal-visa-guidance/uganda' },
-        image: '/Pictures/countries/Uganda.jpg',
-        imageAlt: 'Misty highlands and a volcano at sunrise in southwestern Uganda',
+        image: '/Pictures/Countries_Images/Uganda/IMG_5457.JPG',
+        imageAlt: 'The Gaddafi National Mosque above the rooftops of Kampala, Uganda',
       },
       {
         id: 'health-vaccinations',
@@ -109,7 +109,7 @@ export const UGANDA_DATA = {
         name: 'Kampala',
         tag: "Uganda's Capital",
         description: "Uganda's capital and largest city. A busy, energetic hub and main gateway to the country.",
-        image: '/Pictures/countries/Uganda.jpg',
+        image: '/Pictures/Countries_Images/Uganda/IMG_5455.JPG',
         details: {
           highlight:
             'Built across seven hills, Kampala blends markets, nightlife and a growing business scene — most journeys into the rest of Uganda start and end here.',

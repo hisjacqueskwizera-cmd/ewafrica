@@ -1122,7 +1122,7 @@ export const UGANDA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/Uganda.jpg',
+      image: '/Pictures/Countries_Images/Uganda/IMG_5072.JPG',
     },
     {
       icon: 'Bus',

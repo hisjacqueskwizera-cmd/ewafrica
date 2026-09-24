@@ -177,7 +177,7 @@ export function Zambia() {
 
       {/* 3. Explore Our Services Section */}
       <section id="services" className="scroll-mt-[140px] py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">
               {servicesIntro.heading}
@@ -196,13 +196,23 @@ export function Zambia() {
               return (
                 <Reveal key={service.title} delay={i * 100} className="flex h-full">
                   <article className="flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-shadow duration-300 hover:shadow-lift">
-                    <div className="relative aspect-4/3 w-full overflow-hidden bg-sand">
+                    {/* Every card's image box takes the Travel Planner art's own
+                        landscape ratio, so all of them line up at the same
+                        height: the art fills its box edge to edge with
+                        nothing cropped, and the sibling photos cover theirs.
+                        (Malawi and Zambia's art is 3:2 rather than 16:9, so
+                        object-contain keeps those uncropped too.) */}
+                    <div className="relative aspect-[3/2] w-full overflow-hidden bg-sand">
                       <img
                         src={service.image}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
-                        className="size-full object-cover"
+                        className={
+                          service.title === 'Travel Planner'
+                            ? 'size-full object-contain'
+                            : 'size-full object-cover'
+                        }
                       />
                     </div>
 

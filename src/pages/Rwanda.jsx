@@ -63,7 +63,7 @@ export function Rwanda() {
 
       {/* Our Services for Rwanda */}
       <section id="rwanda-services" className="scroll-mt-[140px] py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="mx-auto flex items-center justify-center gap-3">
               <span className="h-px w-10 border-t border-copper/50" aria-hidden="true" />
@@ -86,13 +86,23 @@ export function Rwanda() {
               return (
                 <Reveal key={service.title} delay={i * 90}>
                   <article className="flex h-full flex-col rounded-2xl bg-card shadow-card">
-                    <div className="aspect-4/3 overflow-hidden rounded-t-2xl">
+                    {/* Every card's image box takes the Travel Planner art's own
+                        landscape ratio, so all of them line up at the same
+                        height: the art fills its box edge to edge with
+                        nothing cropped, and the sibling photos cover theirs.
+                        (Malawi and Zambia's art is 3:2 rather than 16:9, so
+                        object-contain keeps those uncropped too.) */}
+                    <div className="aspect-[16/9] overflow-hidden rounded-t-2xl bg-sand">
                       <img
                         src={service.image}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
-                        className="size-full object-cover"
+                        className={
+                          service.title === 'Travel Planner'
+                            ? 'size-full object-contain'
+                            : 'size-full object-cover'
+                        }
                       />
                     </div>
                     <span className="relative z-10 -mt-6 ml-6 grid size-14 shrink-0 place-items-center rounded-full bg-cocoa text-primary-foreground shadow-card">

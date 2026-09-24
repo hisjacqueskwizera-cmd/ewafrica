@@ -355,6 +355,10 @@ function App() {
             element={<RelocationFullDetails />}
           />
           <Route path="/ghana/complete-relocation-package/*" element={<RelocationFlowRoutes />} />
+          {/* Country-agnostic entry point (the homepage's "Visa & Entry"
+              card) — the same page, with a destination chooser instead of
+              an assumed country. */}
+          <Route path="/personal-visa-guidance" element={<PersonalVisaGuidance />} />
           <Route path="/personal-visa-guidance/:slug" element={<PersonalVisaGuidance />} />
           <Route path="/personal-visa-guidance/:slug/*" element={<VisaGuidanceFlowRoutes />} />
           <Route

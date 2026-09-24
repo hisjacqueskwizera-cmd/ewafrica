@@ -84,7 +84,7 @@ export const ZAMBIA_DATA = {
         'Border connections',
         'Practical travel tips',
       ],
-      image: '/Pictures/Travel planner.PNG',
+      image: '/Pictures/Travel_Planner_Cards/Zambia.png',
       to: '/travel-planner/service-details?destinations=zambia',
     },
     {

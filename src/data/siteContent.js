@@ -146,7 +146,10 @@ export const SERVICES = [
     icon: 'Globe2',
     title: 'Visa & Entry',
     description: 'Expert guidance on visas, entry requirements and documentation for a smooth arrival.',
-    to: '/#contact',
+    // The country-agnostic Personal Visa Guidance page — this card isn't tied
+    // to a destination, so it lands on the version with the destination
+    // chooser rather than assuming one country (see PersonalVisaGuidance.jsx).
+    to: '/personal-visa-guidance',
     image: '/Pictures/Visa_Entry.png',
   },
   {
@@ -491,6 +494,7 @@ export const TANZANIA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
+      image: '/Pictures/Travel_Planner_Cards/Tanzania.png',
     },
     {
       icon: 'ShieldCheck',
@@ -910,7 +914,7 @@ export const MALAWI_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/Pictures/Countries_Images/Malawi/IMG_4913.JPG',
     },
     {
       icon: 'Bus',
@@ -925,7 +929,7 @@ export const MALAWI_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Malawi_Hero_Section.JPG',
+      image: '/Pictures/Travel_Planner_Cards/Malawi.png',
     },
     {
       icon: 'ShieldCheck',
@@ -972,7 +976,7 @@ export const MALAWI_PAGE = {
   lakeBorder: {
     card: {
       title: 'Likoma Lake Crossings',
-      image: '/Pictures/Malawi_Hero_Section.JPG',
+      image: '/Pictures/Countries_Images/Malawi/IMG_4902.JPG',
       text: 'Ferries from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, and Mbamba Bay in Tanzania.',
     },
     banner: {
@@ -1133,7 +1137,7 @@ export const UGANDA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Explore_regions/optimized/east-africa/5.webp',
+      image: '/Pictures/Travel_Planner_Cards/Uganda.png',
     },
     {
       icon: 'Car',
@@ -1223,7 +1227,7 @@ export const RWANDA_PAGE = {
         'Timing between destinations',
         'Practical travel tips and logistics',
       ],
-      image: '/Pictures/Travel_Planner_Cards/Rwanda.PNG',
+      image: '/Pictures/Travel_Planner_Cards/Rwanda.png',
     },
     {
       icon: 'Signpost',
@@ -1312,7 +1316,7 @@ export const SENEGAL_PAGE = {
         'Entry points & arrival info',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/Senegal.webp',
+      image: '/Pictures/Countries_Images/Senegal/IMG_5555.JPG',
     },
     {
       icon: 'Bus',
@@ -1326,7 +1330,7 @@ export const SENEGAL_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Explore_regions/optimized/west-africa/2.webp',
+      image: '/Pictures/Travel_Planner_Cards/Senegal.png',
     },
     {
       icon: 'ShieldCheck',
@@ -1405,14 +1409,14 @@ export const SENEGAL_PAGE = {
         text: 'Give yourself enough time, carry some cash, and keep your itinerary flexible. Respect local customs, protect the environment, and travel with an open mind.',
       },
     ],
-    image: '/Pictures/countries/Senegal.webp',
-    imageAlt: 'Historic Île de Gorée off the coast of Senegal',
+    image: '/Pictures/Countries_Images/Senegal/IMG_4185.JPG',
+    imageAlt: 'Painted pirogues and a crowded fishing beach on the Senegalese coast',
   },
   closing: {
     eyebrow: 'Need Personalized Guidance?',
     text: 'Tell us where you are traveling, when you plan to go and what you need help with.',
     cta: { label: 'Get Personalized Guidance', to: '/#contact' },
-    image: '/Pictures/countries/Senegal.webp',
+    image: '/Pictures/Countries_Images/Senegal/IMG_5465.JPG',
     helpWith: [
       { icon: 'FileText', label: 'Personal Visa Guidance' },
       { icon: 'Bus', label: 'Travel Planner' },
@@ -1463,7 +1467,7 @@ export const BENIN_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Benin_Side_Image.JPG',
+      image: '/Pictures/Travel_Planner_Cards/Benin.png',
     },
     {
       icon: 'Signpost',
@@ -1499,8 +1503,8 @@ export const BENIN_PAGE = {
     {
       name: 'Ouidah',
       text: 'Explore one of Benin’s most historic cities, known for its powerful cultural heritage, sacred traditions, colonial history, and connection to the Atlantic slave trade.',
-      image: '/Pictures/Benin_Side_Image.JPG',
-      imageAlt: 'Historic Ouidah and the coastal heritage of Benin',
+      image: '/Pictures/Countries_Images/Benin/Benin_Card.JPG',
+      imageAlt: 'An Egungun masquerade performer in a beaded and sequinned costume in Benin',
     },
     {
       name: 'Ganvié',
@@ -1643,7 +1647,7 @@ export const GAMBIA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/Pictures/Travel_Planner_Cards/The_Gambia.png',
     },
     {
       icon: 'Users',
@@ -1799,7 +1803,7 @@ export const GHANA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/image_Ghana.webp',
+      image: '/Pictures/Travel_Planner_Cards/Ghana.png',
     },
     {
       icon: 'ShieldCheck',

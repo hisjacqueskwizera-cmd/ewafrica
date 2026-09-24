@@ -46,8 +46,11 @@ const HEADING =
  * pass whichever one the page actually has; `badge` still doubles as the
  * image's fallback alt text if `badgeImageAlt` is omitted.
  *
- * No color wash over the backdrop — the photo or video shows at full
- * strength; the text carries its own shadow for legibility instead.
+ * No color wash over the backdrop by default — the photo or video shows at
+ * full strength and the text carries its own shadow for legibility, which
+ * is enough over the darker scenic photos most pages use. Pass `overlay`
+ * for a backdrop that's too bright or busy for that alone (a light stock
+ * graphic, say), which lays a cocoa wash between the image and the copy.
  */
 export function PageIntro({
   id,
@@ -64,6 +67,7 @@ export function PageIntro({
   backgroundImage,
   backgroundImageAlt,
   backgroundVideos,
+  overlay = false,
 }) {
   return (
     <section
@@ -80,6 +84,10 @@ export function PageIntro({
         />
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
+      )}
+
+      {overlay && (
+        <div className="absolute inset-0 z-[2] bg-cocoa/65" aria-hidden="true" />
       )}
 
       <div

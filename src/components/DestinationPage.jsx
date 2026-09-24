@@ -102,7 +102,7 @@ export function DestinationPage({
           site's usual SectionTitle, since these cards are the page's real
           subject and the heading should stay out of the way. */}
       <section id="services" className="scroll-mt-[140px] py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-center justify-center gap-4">
             <span
               className="hidden h-px max-w-24 flex-1 border-t border-dashed border-copper/50 sm:block"
@@ -123,13 +123,23 @@ export function DestinationPage({
               return (
                 <Reveal key={service.title} delay={i * 90}>
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
-                    <div className="aspect-4/3 overflow-hidden rounded-t-3xl">
+                    {/* Every card's image box takes the Travel Planner art's own
+                        landscape ratio, so all of them line up at the same
+                        height: the art fills its box edge to edge with
+                        nothing cropped, and the sibling photos cover theirs.
+                        (Malawi and Zambia's art is 3:2 rather than 16:9, so
+                        object-contain keeps those uncropped too.) */}
+                    <div className="aspect-[16/9] overflow-hidden rounded-t-3xl bg-sand">
                       <img
                         src={service.image ?? guide.image}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
-                        className="size-full object-cover"
+                        className={
+                          service.title === 'Travel Planner'
+                            ? 'size-full object-contain'
+                            : 'size-full object-cover'
+                        }
                       />
                     </div>
                     {/* Pulled up with a negative margin so it isn't clipped

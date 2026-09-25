@@ -1986,8 +1986,8 @@ export const GHANA_PAGE = {
     cta: { label: 'Ask a Ghana-Specific Question', to: '/#contact' },
     sidePhotos: [
       {
-        image: '/Pictures/about/mission-nkrumah-statue.webp',
-        alt: 'Kwame Nkrumah statue at the Memorial Park in Accra, Ghana',
+        image: '/Pictures/Countries_Images/Ghana/IMG_4977.JPG',
+        alt: 'Chiefs in kente cloth and royal regalia in procession at an Ashanti durbar, Ghana',
         label: 'Culture & Heritage',
       },
       {

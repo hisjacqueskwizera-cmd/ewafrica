@@ -418,7 +418,10 @@ export function Ghana() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
+          {/* Full-width now that the two heritage photos have moved down
+              beside the Practical Guide — the accordion gets the whole
+              landscape band to itself. */}
+          <div className="mt-10">
             <Reveal className="relative flex flex-col overflow-hidden rounded-3xl shadow-card">
               <img
                 src="/Pictures/Ghana_Background_22.jpg"
@@ -428,7 +431,7 @@ export function Ghana() {
                 className="absolute inset-0 size-full object-cover"
               />
               <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
-              <div className="relative flex flex-1 flex-col p-6 text-white sm:p-8">
+              <div className="relative flex flex-1 flex-col p-6 text-white sm:p-8 lg:p-10">
                 <Accordion
                   items={livingGuide.topics.map((topic) => ({
                     ...topic,
@@ -439,32 +442,12 @@ export function Ghana() {
                 />
                 <HashLink
                   to={livingGuide.cta.to}
-                  className="mt-6 inline-flex w-fit items-center gap-2 self-start rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1B1B1B] transition-transform hover:-translate-y-0.5 lg:mt-auto"
+                  className="mt-6 inline-flex w-fit items-center gap-2 self-start rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1B1B1B] transition-transform hover:-translate-y-0.5"
                 >
                   {livingGuide.cta.label}
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </HashLink>
               </div>
-            </Reveal>
-
-            <Reveal delay={90} className="grid grid-rows-2 gap-6">
-              {livingGuide.sidePhotos.map((photo) => (
-                <div key={photo.label} className="group relative overflow-hidden rounded-3xl shadow-card">
-                  <img
-                    src={photo.image}
-                    alt={photo.alt}
-                    loading="lazy"
-                    className="size-full min-h-40 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-cocoa/10 to-transparent"
-                    aria-hidden="true"
-                  />
-                  <p className="absolute inset-x-0 bottom-0 p-4 text-sm font-semibold text-primary-foreground">
-                    {photo.label}
-                  </p>
-                </div>
-              ))}
             </Reveal>
           </div>
         </div>
@@ -474,9 +457,23 @@ export function Ghana() {
           Guide page, same card shape as Rwanda's equivalent banner. */}
       <section className="bg-cream py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Landscape banner: the photo runs the full width of the card
+              rather than sitting in a tall side column, with the copy
+              beneath it. */}
           <Reveal className="overflow-hidden rounded-[2rem] border border-cocoa/10 bg-[#FFFFE3] shadow-card">
-            <div className="grid gap-0 lg:grid-cols-[1.3fr_0.7fr]">
-              <div className="p-8 sm:p-10 lg:p-12">
+            <div className="aspect-[16/9] w-full bg-cocoa sm:aspect-[2/1] lg:aspect-[21/9]">
+              <img
+                src="/Pictures/Countries_Images/Ghana/IMG_5483.JPG"
+                alt="A wide palm-lined beach along Ghana's Atlantic coast"
+                loading="lazy"
+                className="size-full object-cover"
+              />
+            </div>
+
+            {/* Copy left, CTA right on wide screens so the band under the
+                landscape photo doesn't trail off into empty cream. */}
+            <div className="flex flex-col gap-6 p-8 sm:p-10 lg:flex-row lg:items-end lg:justify-between lg:gap-10 lg:p-12">
+              <div>
                 <span className="inline-flex items-center gap-2 rounded-full border border-cocoa/20 bg-white/70 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-cocoa">
                   Practical Guide
                 </span>
@@ -487,25 +484,42 @@ export function Ghana() {
                   A practical, easy-to-follow guide covering when to visit, what to pack, how to
                   get around, and what to know before you travel.
                 </p>
-                <HashLink
-                  to="/ghana/practical-guide"
-                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-                >
-                  Read the Practical Guide
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </HashLink>
               </div>
-
-              <div className="relative min-h-[260px] bg-cocoa">
-                <img
-                  src="/Pictures/Ghana/Gallery/kakum_canopy.jpg"
-                  alt="The rainforest canopy walkway at Kakum National Park, Ghana"
-                  loading="lazy"
-                  className="size-full object-cover opacity-80"
-                />
-              </div>
+              <HashLink
+                to="/ghana/practical-guide"
+                className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-cocoa px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Read the Practical Guide
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </HashLink>
             </div>
           </Reveal>
+
+          {/* Culture & Heritage / History & Heritage — moved out of the
+              Living Guide's side column to sit under the Practical Guide. */}
+          <div className="mt-6 grid gap-6 sm:grid-cols-2">
+            {livingGuide.sidePhotos.map((photo, i) => (
+              <Reveal
+                key={photo.label}
+                delay={i * 90}
+                className="group relative overflow-hidden rounded-3xl shadow-card"
+              >
+                <img
+                  src={photo.image}
+                  alt={photo.alt}
+                  loading="lazy"
+                  className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-cocoa/10 to-transparent"
+                  aria-hidden="true"
+                />
+                <p className="absolute inset-x-0 bottom-0 p-5 text-base font-semibold text-primary-foreground">
+                  {photo.label}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

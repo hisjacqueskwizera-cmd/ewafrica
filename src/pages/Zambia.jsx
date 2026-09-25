@@ -32,10 +32,10 @@ const ZAMBIA_GALLERY_TILES = [
     subtitle: 'Premier walking-safari wildlife',
   },
   {
-    src: '/Pictures/zambia/lake_kariba.jpg',
-    alt: 'Lake Kariba at sunset, Zambia',
-    title: 'Lake Kariba',
-    subtitle: 'Tranquil houseboat escapes',
+    src: '/Pictures/Countries_Images/Zambia/IMG_5498.JPG',
+    alt: 'Sunset over the Zambezi River seen through riverside trees, Zambia',
+    title: 'Zambezi Sunsets',
+    subtitle: 'Golden evenings on the river',
   },
   {
     src: '/Pictures/zambia/elephants_savanna.jpg',

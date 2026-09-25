@@ -34,7 +34,7 @@ export const ZAMBIA_DATA = {
         title: 'Wildlife & Safaris',
         description:
           'Explore world-class safari regions such as South Luangwa and Lower Zambezi, home to diverse wildlife and pristine wilderness.',
-        image: '/Pictures/zambia/leopard.jpg',
+        image: '/Pictures/Countries_Images/Zambia/IMG_3945.JPG',
         to: '/zambia/practical-guide#south-luangwa',
       },
       {
@@ -135,7 +135,7 @@ export const ZAMBIA_DATA = {
   ],
 
   travelingOverland: {
-    image: '/Pictures/zambia/traveling_overland_leopard.jpg',
+    image: '/Pictures/Countries_Images/Zambia/IMG_5529.jpg',
     title: 'Traveling Overland?',
     description:
       'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',
@@ -169,7 +169,7 @@ export const ZAMBIA_DATA = {
         name: 'Victoria Falls',
         description:
           'One of the world’s great natural wonders, Victoria Falls is a top highlight for its breathtaking scenic views, thrilling adventure activities, and unforgettable photography.',
-        image: '/Pictures/zambia/victoria_falls.jpg',
+        image: '/Pictures/Countries_Images/Zambia/IMG_3942.JPG',
         tag: 'UNESCO World Heritage',
         details: {
           highlight:
@@ -192,7 +192,7 @@ export const ZAMBIA_DATA = {
         name: 'South Luangwa National Park',
         description:
           'Famous for walking safaris, abundant wildlife encounters, and an immersive safari atmosphere, South Luangwa offers some of Africa’s most authentic and rewarding wildlife experiences.',
-        image: '/Pictures/zambia/leopard.jpg',
+        image: '/Pictures/Countries_Images/Zambia/IMG_4045.jpg',
         tag: 'Premier Safari Haven',
         details: {
           highlight:
@@ -393,7 +393,7 @@ export const ZAMBIA_DATA = {
         title: 'Incredible Wildlife',
         description:
           'Home to abundant wildlife, from elephants and lions to hippos and rare antelope, Zambia offers authentic and uncrowded safari experiences in spectacular natural settings.',
-        image: '/Pictures/zambia/elephants_savanna.jpg',
+        image: '/Pictures/Countries_Images/Zambia/IMG_5499.JPG',
       },
       {
         title: 'Breathtaking Landscapes',

@@ -97,7 +97,7 @@ export const GHANA_DATA = {
         id: 'volta-region',
         name: 'Volta Region',
         description:
-          'The Volta Region offers mountains, waterfalls, lakeside communities, hiking and a quieter side of Ghana.',
+          'The Volta Region offers mountains, waterfalls, lakeside communities, hiking and a more relaxed side of Ghana.',
         image: '/Pictures/Ghana/Gallery/fishing_boats.jpg',
         tag: 'Mountains & Waterfalls',
         details: {
@@ -119,7 +119,7 @@ export const GHANA_DATA = {
         id: 'mole-national-park',
         name: 'Mole National Park',
         description:
-          "Located in northern Ghana, Mole offers one of the country's best wildlife experiences, with elephants, antelope and monkeys.",
+          "Located in northern Ghana, Mole offers one of Ghana's best Known wildlife experiences, with elephants, antelope and monkeys.",
         image: '/Pictures/Ghana/Gallery/mole_elephants.jpg',
         tag: 'Wildlife Safari',
         details: {

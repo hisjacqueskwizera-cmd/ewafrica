@@ -102,7 +102,7 @@ function ServiceCard({ s, hidden }) {
 
 function UmbrellaCard({ hidden }) {
   return (
-    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/Pictures/Travel_Planner.PNG" hidden={hidden}>
+    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/Pictures/Travel_Planner.png" hidden={hidden}>
       <Umbrella className="size-6 text-gold" aria-hidden="true" />
       <CardTitle className="mt-3 text-2xl font-semibold leading-snug text-primary-foreground">
         {TRAVEL_PLANNER_UMBRELLA.title}

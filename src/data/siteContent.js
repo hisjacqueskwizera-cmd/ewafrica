@@ -480,6 +480,7 @@ export const TANZANIA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
+      image: '/Pictures/PersonalVisaGuidanceCards/Tanzania.PNG',
     },
     {
       icon: 'Bus',
@@ -692,7 +693,7 @@ export const ZAMBIA_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      image: '/Pictures/Visa_Entry.png',
+      image: '/Pictures/PersonalVisaGuidanceCards/Zambia.PNG',
       to: '/personal-visa-guidance/zambia',
     },
     {
@@ -914,7 +915,7 @@ export const MALAWI_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/Countries_Images/Malawi/IMG_4913.JPG',
+      image: '/Pictures/PersonalVisaGuidanceCards/Malawi.jpg',
     },
     {
       icon: 'Bus',
@@ -1122,7 +1123,7 @@ export const UGANDA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/Countries_Images/Uganda/IMG_5072.JPG',
+      image: '/Pictures/PersonalVisaGuidanceCards/Uganda.PNG',
     },
     {
       icon: 'Bus',
@@ -1215,7 +1216,7 @@ export const RWANDA_PAGE = {
         'Visa extension information',
         'Answers to your specific questions',
       ],
-      image: '/Pictures/Rwanda/Rwanda_GCard.JPG',
+      image: '/Pictures/PersonalVisaGuidanceCards/Rwanda.PNG',
     },
     {
       icon: 'Map',
@@ -1316,7 +1317,7 @@ export const SENEGAL_PAGE = {
         'Entry points & arrival info',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/Countries_Images/Senegal/IMG_5555.JPG',
+      image: '/Pictures/PersonalVisaGuidanceCards/Senegal.PNG',
     },
     {
       icon: 'Bus',
@@ -1453,7 +1454,7 @@ export const BENIN_PAGE = {
         'Entry points and arrival info',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/BeninReal.JPG',
+      image: '/Pictures/PersonalVisaGuidanceCards/Benin.PNG',
     },
     {
       icon: 'Bus',
@@ -1633,7 +1634,7 @@ export const GAMBIA_PAGE = {
         'Entry points & stay regulations',
       ],
       cta: 'Get Visa Guidance',
-      image: encodeURI('/Pictures/countries/The gambia.jpg'),
+      image: '/Pictures/PersonalVisaGuidanceCards/TheGambia.PNG',
     },
     {
       icon: 'Bus',
@@ -1788,7 +1789,7 @@ export const GHANA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Visa Guidance',
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/Pictures/PersonalVisaGuidanceCards/Ghana.PNG',
     },
     {
       icon: 'Bus',

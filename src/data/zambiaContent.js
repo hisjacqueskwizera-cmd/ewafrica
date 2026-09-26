@@ -68,7 +68,7 @@ export const ZAMBIA_DATA = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      image: '/Pictures/Visa_Entry.png',
+      image: '/Pictures/PersonalVisaGuidanceCards/Zambia.PNG',
       to: '/personal-visa-guidance/zambia',
     },
     {

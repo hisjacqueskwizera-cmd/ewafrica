@@ -30,7 +30,7 @@ import { MALAWI_PAGE } from '../data/siteContent.js'
 
 const MALAWI_GALLERY_TILES = [
   {
-    src: '/Pictures/Malawi_Hero_Section.JPG',
+    src: '/Pictures/Malawi.JPG',
     alt: 'The MV Ilala ferry crossing Lake Malawi',
     title: 'Lake Malawi',
     subtitle: "The MV Ilala crossing Africa's warm heart",

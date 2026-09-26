@@ -1074,7 +1074,7 @@ export const MALAWI_PAGE = {
         text: 'Malawians are friendly and welcoming. Respect local customs and dress modestly, especially in rural areas. Bargaining is normal in markets. A few words of Chichewa go a long way: "Moni" (hello) and "Zikomo" (thank you).',
       },
     ],
-    image: '/Pictures/countries/Malawi.webp',
+    image: '/Pictures/MalawiSidePractical.JPG',
     imageAlt: 'Turquoise waters and sandy beach along Lake Malawi',
   },
   ctas: [

@@ -1992,9 +1992,9 @@ export const GHANA_PAGE = {
         label: 'Culture & Heritage',
       },
       {
-        image: '/Pictures/explore/ghana-card-background.webp',
+        image: '/Pictures/explore/Yours_To_Explore.JPG',
         alt: 'Cape Coast Castle on the Ghanaian coast',
-        label: 'History & Heritage',
+        label: 'Nzulezu stilt village lake tadane',
       },
     ],
   },
@@ -3272,7 +3272,7 @@ export const BORDER_CROSSING_PAGE = {
     tagline: ['Practical guidance for crossing one or multiple borders.'],
     description:
       'The Border Crossing Guide is for travelers who want practical help understanding how to move between countries by land.',
-    backgroundImage: '/Pictures/Border_crossing.jpg',
+    backgroundImage: '/Pictures/Zanzibar_Tour.JPG',
     backgroundImageAlt: 'A truck stopped for inspection at a land border crossing checkpoint',
   },
   intro: {

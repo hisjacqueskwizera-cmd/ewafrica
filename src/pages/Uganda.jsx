@@ -237,7 +237,7 @@ export function Uganda() {
               </div>
               <div className="hidden w-1/3 shrink-0 sm:block">
                 <img
-                  src={hero.backgroundImage}
+                  src='Pictures/Uganda/Uganda_trees.JPG'
                   alt="Uganda's green hills and forests"
                   loading="lazy"
                   className="size-full object-cover"

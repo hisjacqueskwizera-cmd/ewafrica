@@ -46,10 +46,10 @@ const GHANA_GALLERY_TILES = [
     subtitle: 'Royal drummers in ceremonial kente',
   },
   {
-    src: '/Pictures/Ghana/Gallery/festival_dancers.jpg',
+    src: '/Pictures/Ghana/Gallery/Ghana_Gallery_image.JPG',
     alt: 'Masquerade dancers in traditional dress at a Ghanaian festival',
     title: 'Festival Traditions',
-    subtitle: 'Masquerade dancers at a local festival',
+    subtitle: 'Culture celebration',
   },
   {
     src: '/Pictures/Ghana/Gallery/mole_elephants.jpg',

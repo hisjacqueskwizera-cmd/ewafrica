@@ -220,7 +220,7 @@ export const GHANA_DATA = {
         description:
           'Ghana can be visited year-round. The drier months are ideal for most travelers, while the green season brings lusher landscapes and fewer crowds.',
         buttonText: 'Read More',
-        image: '/Pictures/Ghana/Gallery/fishing_boats.jpg',
+        image: '/Pictures/Ghana/Ghanaaaa.jpg',
         imageAlt: "Fishing boats along Ghana's Atlantic coastline",
         details: {
           overview:
@@ -244,7 +244,7 @@ export const GHANA_DATA = {
         description:
           "Check your passport validity, visa requirements, recommended vaccinations, travel insurance, and onward travel arrangements.",
         buttonText: 'Read More',
-        image: '/Pictures/image_Ghana.webp',
+        image: '/Pictures/Ghana/BFRYGO.JPG',
         imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
         details: {
           overview:
@@ -395,7 +395,7 @@ export const GHANA_DATA = {
         icon: 'Shield',
         title: 'Staying Safe',
         description:
-          'Ghana is generally straightforward for travelers, but normal precautions still matter.',
+          'Ghana is generally straightforward for travelers, but normal precautions still matter, especially with valuables, transportation, and moving around after dark.',
         image: '/Pictures/Ghana/Gallery/ashanti_durbar.jpg',
         imageAlt: 'A crowded Ashanti durbar procession in Kumasi',
         details: {
@@ -418,7 +418,7 @@ export const GHANA_DATA = {
         icon: 'RouteIcon',
         title: 'Traveling Overland',
         description:
-          "Ghana connects overland with Côte d'Ivoire, Burkina Faso and Togo, useful for a wider West Africa journey.",
+          "Ghana shares land borders with Côte d'Ivoire, Burkina Faso, and Togo, making overland travel possible as part of a wider West Africa journey.",
         cta: { label: 'Get a Border Crossing Guide', to: '/travel-planner/border-crossing-guide?from=ghana' },
         image: '/Pictures/Ghana_Background_22.jpg',
         imageAlt: 'A stone archway and passage inside a coastal Ghanaian fort',
@@ -465,7 +465,7 @@ export const GHANA_DATA = {
         icon: 'Users',
         title: 'What to Pack',
         description:
-          'Lightweight breathable clothing is suitable for most of Ghana, with a few extras for religious and traditional sites.',
+          'Lightweight, breathable clothing works well for most of Ghana. Bring a few more modest options for religious and traditional settings.',
         image: '/Pictures/Ghana/Gallery/kakum_canopy.jpg',
         imageAlt: 'The rainforest canopy walkway at Kakum National Park',
         details: {
@@ -488,7 +488,7 @@ export const GHANA_DATA = {
         icon: 'Handshake',
         title: 'Responsible Travel',
         description:
-          'Support locally owned businesses, ask before photographing people, and approach historical sites with respect.',
+          'Support locally owned businesses, ask before photographing people, and approach cultural and historical sites with respect.',
         image: '/Pictures/Ghana_Card.JPG',
         imageAlt: 'A memorial statue commemorating the transatlantic slave trade in Ghana',
         details: {
@@ -566,8 +566,8 @@ export const GHANA_DATA = {
     icon: 'Handshake',
     heading: 'Culture & Etiquette',
     paragraphs: [
-      'Ghanaians are generally warm and sociable, and greetings are an important part of everyday interaction. Taking a moment to greet someone before asking a question or beginning a transaction is always appreciated.',
-      'The right hand is traditionally used when giving or receiving items, eating or greeting someone. Dress is generally relaxed, but more modest clothing is appropriate in villages, religious settings and some traditional communities.',
+      'Ghanaians are generally warm and sociable, and greetings are an important part of everyday interaction. Taking a moment to greet someone before asking a question or beginning a transaction is appreciated.',
+      'The right hand is traditionally used when giving or receiving items, eating, or greeting someone. Dress is generally relaxed, but more modest clothing is a priate in villages, religious settings, and some traditional cummunities.'
     ],
   },
 
@@ -575,8 +575,11 @@ export const GHANA_DATA = {
     icon: 'Camera',
     heading: 'Photography',
     paragraphs: [
-      'Ghana is extremely photogenic, from coastal fishing communities and historic architecture to markets, landscapes, festivals and everyday street life.',
-      'Be respectful when photographing people, places of worship, traditional ceremonies, government facilities and sensitive historical sites. Always ask for permission when appropriate.',
+      'Ghana is highly photogenic, from coastal fishing communities',
+      '• Scheduled',
+      'and historic architecture to markets, landscapes, festivals, and everyday street life. Remote 08 Explore',
+      'Be respectful when photographing people, places of worship, traditional ceremonies, government facilities, and sensitive',
+      'historical sites. Ask permission when appropriate',
     ],
   },
 

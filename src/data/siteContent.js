@@ -1840,7 +1840,7 @@ export const GHANA_PAGE = {
   residency: {
     heading: 'Residency & Immigration',
     intro: 'Explore your options for living, working or investing in Ghana.',
-    image: '/Pictures/countries/Ghana.jpg',
+    image: '/Pictures/countries/ROA.PNG',
     imageAlt: 'Coastal Ghana landscape',
     featured: {
       badge: 'Featured',

@@ -163,7 +163,7 @@ export const GHANA_DATA = {
         id: 'northern-ghana',
         name: 'Northern Ghana',
         description:
-          'Northern Ghana has a distinctly different landscape and cultural character from the south, with historic mosques and open savannah.',
+          'Northern Ghana has a very different landscape and cultural character from the southern Ghana, with historic mosques and open savannah.',
         image: '/Pictures/Ghana/Gallery/larabanga_mosque.jpg',
         tag: 'History & Savannah',
         details: {
@@ -512,7 +512,7 @@ export const GHANA_DATA = {
   taste: {
     heading: 'A Taste of Ghana',
     subheading:
-      "Ghanaian food is flavorful, varied and deeply connected to the country's culture. Here are some popular dishes to try during your visit.",
+      "Ghanaian food is flavorful, varied, and deeply connected to the country's culture. Here are some popular dishes to try during your visit.",
     image: '/Pictures/Ghana/Ghana_Foods/IMG_5418.jpeg',
     imageAlt: "Kelewele — spiced fried plantain served with roasted peanuts on banana leaves",
     dishes: [

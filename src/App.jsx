@@ -90,6 +90,8 @@ import { Confirmation as VisaGuidanceConfirmation } from './pages/visa-guidance/
 import { Payment as VisaGuidancePayment } from './pages/visa-guidance/Payment.jsx'
 import { RequestForm as VisaGuidanceRequestForm } from './pages/visa-guidance/RequestForm.jsx'
 import { ReviewAnswers as VisaGuidanceReviewAnswers } from './pages/visa-guidance/ReviewAnswers.jsx'
+import { SelectCountries as VisaGuidanceSelectCountries } from './pages/visa-guidance/SelectCountries.jsx'
+import { MultiCountryOverview as VisaGuidanceMultiCountryOverview } from './pages/visa-guidance/MultiCountryOverview.jsx'
 import { Confirmation as PersonalizedRelocationConfirmation } from './pages/personalized-relocation/Confirmation.jsx'
 import { Payment as PersonalizedRelocationPayment } from './pages/personalized-relocation/Payment.jsx'
 import { RequestForm as PersonalizedRelocationRequestForm } from './pages/personalized-relocation/RequestForm.jsx'
@@ -217,15 +219,15 @@ function RelocationFlowRoutes() {
   )
 }
 
-// Personal Visa Guidance — the one service on this list reached via a
-// `:slug` route param rather than its own fixed URL, since the same flow
-// serves every country's page (see the note on VisaGuidanceFlowContext).
-// VisaGuidanceFlowProvider reads that param itself via useParams(), so it
-// only needs to sit above these four step routes, not the whole app.
+// Personal Visa Guidance flow routes — wraps all multi-country and per-country
+// steps with a single VisaGuidanceFlowProvider so selection and form state
+// are preserved across steps.
 function VisaGuidanceFlowRoutes() {
   return (
     <VisaGuidanceFlowProvider>
       <Routes>
+        <Route path="select-countries" element={<VisaGuidanceSelectCountries />} />
+        <Route path="overview" element={<VisaGuidanceMultiCountryOverview />} />
         <Route path="request" element={<VisaGuidanceRequestForm />} />
         <Route path="review" element={<VisaGuidanceReviewAnswers />} />
         <Route path="payment" element={<VisaGuidancePayment />} />
@@ -354,12 +356,37 @@ function App() {
             element={<RelocationFullDetails />}
           />
           <Route path="/ghana/complete-relocation-package/*" element={<RelocationFlowRoutes />} />
-          {/* Country-agnostic entry point (the homepage's "Visa & Entry"
-              card) — the same page, with a destination chooser instead of
-              an assumed country. */}
+          {/* Personal Visa Guidance — Landing page, Multi-country flow, and per-country flows */}
           <Route path="/personal-visa-guidance" element={<PersonalVisaGuidance />} />
+          <Route path="/personal-visa-guidance/multi/*" element={<VisaGuidanceFlowRoutes />} />
+          <Route
+            path="/personal-visa-guidance/select-countries"
+            element={<Navigate to="/personal-visa-guidance/multi/select-countries" replace />}
+          />
+          <Route
+            path="/personal-visa-guidance/overview"
+            element={<Navigate to="/personal-visa-guidance/multi/overview" replace />}
+          />
+          <Route
+            path="/personal-visa-guidance/request"
+            element={<Navigate to="/personal-visa-guidance/multi/request" replace />}
+          />
+          <Route
+            path="/personal-visa-guidance/review"
+            element={<Navigate to="/personal-visa-guidance/multi/review" replace />}
+          />
+          <Route
+            path="/personal-visa-guidance/payment"
+            element={<Navigate to="/personal-visa-guidance/multi/payment" replace />}
+          />
+          <Route
+            path="/personal-visa-guidance/confirmation"
+            element={<Navigate to="/personal-visa-guidance/multi/confirmation" replace />}
+          />
           <Route path="/personal-visa-guidance/:slug" element={<PersonalVisaGuidance />} />
           <Route path="/personal-visa-guidance/:slug/*" element={<VisaGuidanceFlowRoutes />} />
+          <Route path="/visa-guidance" element={<Navigate to="/personal-visa-guidance" replace />} />
+          <Route path="/visa-guidance/*" element={<Navigate to="/personal-visa-guidance" replace />} />
           <Route
             path="/ghana/personalized-relocation-guidance"
             element={<PersonalizedRelocationGuidance />}

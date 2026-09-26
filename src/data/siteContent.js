@@ -144,7 +144,7 @@ export const DESTINATIONS = COUNTRIES
 export const SERVICES = [
   {
     icon: 'Globe2',
-    title: 'Visa & Entry',
+    title: 'Personal Visa Guidance',
     description: 'Expert guidance on visas, entry requirements and documentation for a smooth arrival.',
     // The country-agnostic Personal Visa Guidance page — this card isn't tied
     // to a destination, so it lands on the version with the destination

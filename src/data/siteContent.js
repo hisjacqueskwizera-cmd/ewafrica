@@ -72,7 +72,7 @@ export const COUNTRIES = [
     note: 'The Warm Heart of Africa',
     to: '/malawi',
     tone: 'forest',
-    image: '/Pictures/countries/Malawi.webp',
+    image: '/Pictures/Malawi_Card.JPG',
     flag: '🇲🇼',
   },
   {
@@ -112,7 +112,7 @@ export const COUNTRIES = [
     note: 'Destination Senegal, Land of Teranga',
     to: '/senegal',
     tone: 'copper',
-    image: '/Pictures/countries/Senegal.webp',
+    image: '/Pictures/Senegal_Card.JPG',
     flag: '🇸🇳',
   },
   {

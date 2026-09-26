@@ -51,7 +51,7 @@ export const COUNTRIES = [
     featuredLabel: 'Featured Country',
     to: '/ghana',
     tone: 'copper',
-    image: '/Pictures/countries/Ghana.jpg',
+    image: '/Pictures/Ghana_Home_Card.JPG',
     flag: '🇬🇭',
   },
   {

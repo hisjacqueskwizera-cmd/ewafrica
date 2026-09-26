@@ -65,11 +65,11 @@ export function DestinationHero({
       {mist && (
         <>
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-56 bg-gradient-to-b from-black/55 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-full bg-gradient-to-r from-black/50 via-black/50 to-transparent"
             aria-hidden="true"
           />
           <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full bg-gradient-to-r from-black/55 via-black/25 to-transparent sm:w-3/4 lg:w-2/3"
+            className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full bg-gradient-to-r from-black/50 via-black/50 to-transparent sm:w-[72%] lg:w-[65%]"
             aria-hidden="true"
           />
         </>

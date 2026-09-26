@@ -82,7 +82,7 @@ export const COUNTRIES = [
     note: 'The Real Africa - Victoria Falls and Beyond',
     to: '/zambia',
     tone: 'navy',
-    image: '/Pictures/countries/Zambia.jpg',
+    image: '/Pictures/Zambia_Card.JPG',
     flag: '🇿🇲',
   },
   {

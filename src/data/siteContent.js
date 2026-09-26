@@ -1227,7 +1227,7 @@ export const RWANDA_PAGE = {
         'Timing between destinations',
         'Practical travel tips and logistics',
       ],
-      image: '/Pictures/Travel_Planner_Cards/Rwanda.png',
+      image: '/Pictures/Travel_Planner_Cards/Rwanda.PNG',
     },
     {
       icon: 'Signpost',

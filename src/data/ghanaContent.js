@@ -9,7 +9,7 @@ export const GHANA_DATA = {
         id: 'accra',
         name: 'Accra',
         description:
-          "Ghana's capital is energetic and modern, with markets, restaurants, nightlife, beaches, museums and historic neighborhoods.",
+          "Ghana's capital is energetic and modern, with markets, restaurants, beaches, museums, cultural sites, and historic neighborhoods.",
         image: '/Pictures/Ghana_Landing_Hero.JPG',
         tag: "Ghana's Capital",
         details: {

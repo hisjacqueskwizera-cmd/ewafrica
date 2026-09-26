@@ -464,7 +464,7 @@ export const TANZANIA_PAGE = {
     description:
       'From the wildlife-filled plains of the Serengeti and the slopes of Mount Kilimanjaro to the historic streets and turquoise waters of Zanzibar, Tanzania offers an extraordinary mix of safari, culture, coastline and adventure.',
   },
-  // Each card's cta originally opened a dedicated modal (visa guidance,
+  // Each card's cta originally opened a dedicated modal (Personal Visa Guidance,
   // travel planner, border crossing) that doesn't exist in this project —
   // every cta below links to /#contact instead until those are built.
   services: [
@@ -479,7 +479,7 @@ export const TANZANIA_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Tanzania.PNG',
     },
     {
@@ -535,7 +535,7 @@ export const TANZANIA_PAGE = {
     items: [
       'When to visit',
       'Places to visit',
-      'Visa & entry information',
+      'Personal Visa Guidance information',
       'Overland transportation',
       'Money and payments',
       'Border travel',
@@ -914,7 +914,7 @@ export const MALAWI_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Malawi.jpg',
     },
     {
@@ -1045,7 +1045,7 @@ export const MALAWI_PAGE = {
       },
       {
         icon: 'FileText',
-        label: 'Visa & Entry Information',
+        label: 'Personal Visa Guidance Information',
         text: 'Most nationalities get a visa on arrival for up to 90 days. Your passport must be valid for at least 6 months beyond your entry date, and a Yellow Fever certificate is required if arriving from a risk country. Extensions are available at the Department of Immigration in Lilongwe.',
       },
       {
@@ -1122,7 +1122,7 @@ export const UGANDA_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Uganda.PNG',
     },
     {
@@ -1180,13 +1180,13 @@ export const UGANDA_PAGE = {
   ],
   guideItems: [
     'When to visit',
-    'Visa & entry information',
+    'Personal Visa Guidance information',
     'Money & SIM cards',
     'Getting around',
     'Health & travel tips',
   ],
   helpWith: [
-    { icon: 'FileText', label: 'Visa Guidance' },
+    { icon: 'FileText', label: 'Personal Visa Guidance' },
     { icon: 'Bus', label: 'Travel Planner' },
     { icon: 'Car', label: 'Border Crossing Guides' },
   ],
@@ -1311,12 +1311,12 @@ export const SENEGAL_PAGE = {
       title: 'Personal Visa Guidance',
       text: 'Get personalized research and practical information based on your nationality, travel dates and plans.',
       items: [
-        'Visa & entry requirements',
+        'Personal Visa Guidance requirements',
         'Single or multiple-entry options',
         'Documentation required',
         'Entry points & arrival info',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Senegal.PNG',
     },
     {
@@ -1386,7 +1386,7 @@ export const SENEGAL_PAGE = {
       },
       {
         icon: 'FileText',
-        label: 'Visa & Entry Information',
+        label: 'Personal Visa Guidance Information',
         text: 'Visa requirements depend on your nationality — some travelers are visa-exempt while others should confirm official requirements before departure. Check current entry requirements before you travel.',
       },
       {
@@ -1453,7 +1453,7 @@ export const BENIN_PAGE = {
         'Documentation required',
         'Entry points and arrival info',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Benin.PNG',
     },
     {
@@ -1571,7 +1571,7 @@ export const BENIN_PAGE = {
       },
       {
         icon: 'FileText',
-        label: 'Visa & Entry',
+        label: 'Personal Visa Guidance',
         text: 'Most travelers need a visa to enter Benin. An eVisa is available for many nationalities (30-day single entry) — apply online before your trip at evisa.gouv.bj. Visa on arrival may be available for some nationalities. Entry points: Cotonou Airport, land borders, and seaports.',
       },
       {
@@ -1628,12 +1628,12 @@ export const GAMBIA_PAGE = {
       title: 'Personal Visa Guidance',
       text: 'Get personalized visa research and practical information based on your nationality and travel plans.',
       items: [
-        'Visa & entry requirements',
+        'Personal Visa Guidance requirements',
         'Single or multiple-entry visas',
         'Documentation checklist',
         'Entry points & stay regulations',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/TheGambia.PNG',
     },
     {
@@ -1703,7 +1703,7 @@ export const GAMBIA_PAGE = {
       },
       {
         icon: 'FileText',
-        label: 'Visa & Entry Information',
+        label: 'Personal Visa Guidance Information',
         text: 'Most nationalities get a visa on arrival for up to 90 days. Your passport must be valid for at least 6 months beyond your entry date, and a Yellow Fever vaccination certificate is required if arriving from a risk country. Extensions are available at the Department of Immigration in Banjul.',
       },
       {
@@ -1788,7 +1788,7 @@ export const GHANA_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      cta: 'Get Visa Guidance',
+      cta: 'Get Personal Visa Guidance',
       image: '/Pictures/PersonalVisaGuidanceCards/Ghana.PNG',
     },
     {
@@ -4201,14 +4201,14 @@ export const VISA_GUIDANCE_FLOW = {
       cornerTagline: ['Explore Africa.', 'Your way.'],
       heading: 'Secure Payment',
       description: "You're almost done! Complete your payment below to submit your request.",
-      helper: 'After payment, you will receive a confirmation and your visa guidance request will be submitted for research.',
+      helper: 'After payment, you will receive a confirmation and your Personal Visa Guidance request will be submitted for research.',
     },
     confirmation: {
       bannerTagline: 'Explore Africa. A brighter tomorrow.',
       cornerTagline: ['Explore Africa.', 'Your way.'],
       heading: 'Your Request Has Been Received',
       whatsNext: 'Our team will research the latest requirements for your situation.',
-      deliveryNote: 'Your personalized visa guidance will be delivered by email.',
+      deliveryNote: 'Your personalized Personal Visa Guidance will be delivered by email.',
       confirmationNote: 'Please check your inbox (and spam folder) for our email.',
       secureNote: 'Your payment was processed securely using industry-standard SSL encryption.',
       secureNote2: 'Your information is safe and protected.',

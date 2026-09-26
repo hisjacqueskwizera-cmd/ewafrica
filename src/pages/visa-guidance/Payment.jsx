@@ -101,7 +101,7 @@ export function Payment() {
   const [isProcessing, setIsProcessing] = useState(false)
 
   useEffect(() => {
-    document.title = 'Secure Payment | Visa Guidance | East-West Africa Link'
+    document.title = 'Secure Payment | Personal Visa Guidance | East-West Africa Link'
   }, [])
 
   const handleSubmit = (e) => {
@@ -352,7 +352,7 @@ export function Payment() {
                 <div className="border-b border-border pb-4">
                   <h3 className="text-sm font-bold text-primary">Order Summary</h3>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {count} {count === 1 ? 'Country' : 'Countries'} Visa Guidance
+                    {count} {count === 1 ? 'Country' : 'Countries'} Personal Visa Guidance
                   </p>
 
                   <div className="mt-3 space-y-2">

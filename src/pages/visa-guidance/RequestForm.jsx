@@ -123,8 +123,8 @@ export function RequestForm() {
 
   useEffect(() => {
     document.title = isMultiCountry
-      ? 'Start Your Multi-Country Visa Guidance Request | East-West Africa Link'
-      : `Start Your Request — ${country?.name ?? 'Visa Guidance'} | East-West Africa Link`
+      ? 'Start Your Multi-Country Personal Visa Guidance Request | East-West Africa Link'
+      : `Start Your Request — ${country?.name ?? 'Personal Visa Guidance'} | East-West Africa Link`
   }, [isMultiCountry, country])
 
   const currentCountryDetail = countryDetails[activeCountryTab] ?? {}
@@ -185,7 +185,7 @@ export function RequestForm() {
                 {isMultiCountry ? 'Multi-Country Package' : `${country?.name ?? 'Africa'} Guidance`}
               </p>
               <h1 className="mt-1 text-2xl font-bold tracking-tight text-primary sm:text-3xl lg:text-4xl">
-                {isMultiCountry ? 'Visa Guidance – Multiple Countries' : `Visa Guidance – ${country?.name}`}
+                {isMultiCountry ? 'Personal Visa Guidance – Multiple Countries' : `Personal Visa Guidance – ${country?.name}`}
               </h1>
               <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
                 Tell us about your trip and we&apos;ll provide clear, reliable visa and entry guidance for each selected country.
@@ -215,7 +215,7 @@ export function RequestForm() {
                 <SectionHeader
                   number={1}
                   title="Your Information"
-                  subtitle="We'll use this information to contact you about your visa guidance."
+                  subtitle="We'll use this information to contact you about your Personal Visa Guidance."
                 />
                 <div className="p-6 space-y-5">
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -411,7 +411,7 @@ export function RequestForm() {
                 />
                 <div className="p-6 space-y-6">
                   {/* Which countries tag selector */}
-                  <Field label="Which countries are you requesting visa guidance for?" required>
+                  <Field label="Which countries are you requesting Personal Visa Guidance for?" required>
                     <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-sand/30 p-2.5">
                       {destinationSlugs.map((slug) => {
                         const item = COUNTRIES.find((c) => c.slug === slug)
@@ -874,7 +874,7 @@ export function RequestForm() {
                 <SectionHeader
                   number={5}
                   title="Additional Information"
-                  subtitle="Let us know if there is anything else we should consider for your visa guidance."
+                  subtitle="Let us know if there is anything else we should consider for your Personal Visa Guidance."
                 />
                 <div className="p-6 space-y-5">
                   <Field label="Do you have any existing visas or residence permits that may affect this trip? (optional)">

@@ -264,7 +264,7 @@ export const GHANA_DATA = {
       {
         id: 'visa-entry',
         icon: 'FileText',
-        title: 'Visa & Entry Basics',
+        title: 'Personal Visa Guidance Basics',
         description:
           'Most travelers need a visa to enter Ghana. Requirements vary by nationality and purpose of travel.',
         buttonText: 'Get Personal Visa Guidance',
@@ -583,13 +583,13 @@ export const GHANA_DATA = {
   readyToExplore: {
     heading: 'Need Help Planning Ghana?',
     description:
-      'Travelers who want more personalized assistance can use EWAL services for visa guidance, travel planning, and border crossings.',
+      'Travelers who want more personalized assistance can use EWAL services for Personal Visa Guidance, travel planning, and border crossings.',
     primaryBtn: {
       text: 'Travel Planner',
       to: '/travel-planner/service-details?destinations=ghana',
     },
     secondaryBtn: {
-      text: 'Visa Guidance',
+      text: 'Personal Visa Guidance',
       to: '/personal-visa-guidance/ghana',
     },
     tertiaryBtn: {

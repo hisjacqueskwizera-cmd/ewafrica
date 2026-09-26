@@ -81,7 +81,7 @@ export function PhoneConsultationModal({ isOpen, onClose }) {
 
         <div className="mt-6 rounded-xl border border-copper/30 bg-copper/5 p-4 text-xs leading-relaxed text-muted-foreground">
           <strong className="text-primary block font-semibold mb-1">How scheduling works:</strong>
-          Once your visa guidance request is submitted, you will receive confirmation details and an invitation link to pick a convenient date and time on our calendar.
+          Once your Personal Visa Guidance request is submitted, you will receive confirmation details and an invitation link to pick a convenient date and time on our calendar.
         </div>
 
         <div className="mt-6 flex justify-end">

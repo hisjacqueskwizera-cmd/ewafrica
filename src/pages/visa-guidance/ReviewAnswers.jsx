@@ -76,7 +76,7 @@ export function ReviewAnswers() {
   const [activeTab, setActiveTab] = useState(destinationSlugs[0] ?? 'ghana')
 
   useEffect(() => {
-    document.title = 'Review Your Answers | Visa Guidance | East-West Africa Link'
+    document.title = 'Review Your Answers | Personal Visa Guidance | East-West Africa Link'
   }, [])
 
   const handleEdit = () => {

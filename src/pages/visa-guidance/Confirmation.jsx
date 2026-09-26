@@ -27,7 +27,7 @@ export function Confirmation() {
   }, [])
 
   useEffect(() => {
-    document.title = 'Request Received | Visa Guidance | East-West Africa Link'
+    document.title = 'Request Received | Personal Visa Guidance | East-West Africa Link'
   }, [])
 
   return (
@@ -46,7 +46,7 @@ export function Confirmation() {
                 Your Request Has Been Received
               </h1>
               <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-white/90 sm:text-base">
-                Thank you, {userInfo.fullName || 'Traveler'}! Your payment of ${price} has been processed successfully and your visa guidance request has been submitted to our research desk.
+                Thank you, {userInfo.fullName || 'Traveler'}! Your payment of ${price} has been processed successfully and your Personal Visa Guidance request has been submitted to our research desk.
               </p>
 
               <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold tracking-wide text-white">

@@ -31,7 +31,7 @@ export function MultiCountryOverview() {
 
   // Sync if query param has destinations
   useEffect(() => {
-    document.title = 'Multi-Country Visa Guidance Overview | East-West Africa Link'
+    document.title = 'Multi-Country Personal Visa Guidance Overview | East-West Africa Link'
     const queryDests = searchParams.get('destinations')
     if (queryDests) {
       const parsed = queryDests
@@ -77,7 +77,7 @@ export function MultiCountryOverview() {
               <Reveal>
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
                   <h1 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl lg:text-4xl">
-                    Your Multi-Country Visa Guidance Request
+                    Your Multi-Country Personal Visa Guidance Request
                   </h1>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
                     You&apos;ve selected multiple countries! You&apos;ll now begin one request that covers all your selected destinations. We&apos;ll provide personalized visa and entry guidance for each country based on your travel details, nationality, purpose of travel, and country of residence.
@@ -243,7 +243,7 @@ export function MultiCountryOverview() {
                 {/* Image Banner matching Image 1 */}
                 <div className="relative aspect-16/10 overflow-hidden">
                   <img
-                    src="/Pictures/VisaGuidance/Hero.JPG"
+                    src="/Pictures/VisaGuidance/Side.PNG"
                     alt="East and West Africa landscape"
                     className="size-full object-cover"
                   />
@@ -333,6 +333,17 @@ export function MultiCountryOverview() {
                       <ShieldCheck className="size-4 text-forest" />
                       <span>Secure &amp; Encrypted · Your information is safe with us.</span>
                     </div>
+                    {/* CTA Row */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={handleStartRequest}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-7 py-3.5 text-sm font-bold text-copper-foreground shadow-sm hover:bg-copper/90 active:scale-[0.99] transition-all"
+                >
+                  Start Your Request
+                  <ArrowRight className="size-4" />
+                </button>
+              </div>
                   </div>
 
                   {/* Next: Start Your Request Box */}

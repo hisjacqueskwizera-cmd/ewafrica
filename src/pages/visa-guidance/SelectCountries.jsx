@@ -18,7 +18,7 @@ export function SelectCountries() {
   const MAX_COUNTRIES = 4
 
   useEffect(() => {
-    document.title = 'Select Countries | Visa Guidance | East-West Africa Link'
+    document.title = 'Select Countries | Personal Visa Guidance | East-West Africa Link'
   }, [])
 
   const selectedCount = destinationSlugs.length
@@ -61,10 +61,10 @@ export function SelectCountries() {
           </Link>
           <ChevronRight className="size-3" aria-hidden="true" />
           <Link to="/personal-visa-guidance" className="hover:text-copper">
-            Visa Guidance
+            Personal Visa Guidance
           </Link>
           <ChevronRight className="size-3" aria-hidden="true" />
-          <span className="font-semibold text-primary">Multi-Country Visa Guidance</span>
+          <span className="font-semibold text-primary">Multi-Country Personal Visa Guidance</span>
         </div>
       </div>
 
@@ -125,7 +125,7 @@ export function SelectCountries() {
                   Select Your Destination(s)
                 </h1>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  Select one or more countries — up to {MAX_COUNTRIES}. Then click <strong>Continue</strong> to proceed with your visa guidance request.
+                  Select one or more countries — up to {MAX_COUNTRIES}. Then click <strong>Continue</strong> to proceed with your Personal Visa Guidance request.
                 </p>
               </Reveal>
 
@@ -135,7 +135,7 @@ export function SelectCountries() {
                   <div>
                     <h2 className="text-xl font-bold text-primary">Choose Countries</h2>
                     <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-                      Select up to {MAX_COUNTRIES} countries and get visa guidance for all of them in one request.
+                      Select up to {MAX_COUNTRIES} countries and get Personal Visa Guidance for all of them in one request.
                     </p>
                   </div>
                   <span className="self-start sm:self-auto rounded-full bg-sand/80 px-3.5 py-1.5 text-right font-bold text-copper text-sm">

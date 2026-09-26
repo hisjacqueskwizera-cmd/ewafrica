@@ -146,7 +146,7 @@ export function UgandaPracticalGuide() {
         </div>
       </section>
 
-      {/* 2. Before You Go / Visa & Entry / Health & Vaccinations / Staying Safe */}
+      {/* 2. Before You Go / Personal Visa Guidance / Health & Vaccinations / Staying Safe */}
       <section className="border-y border-border/50 bg-cream/50 py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-2">

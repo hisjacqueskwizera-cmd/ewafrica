@@ -35,7 +35,7 @@ export function PersonalVisaGuidance() {
   useEffect(() => {
     document.title = country
       ? `Personal Visa Guidance — ${country.name} | East-West Africa Link`
-      : 'Visa Guidance | East-West Africa Link'
+      : 'Personal Visa Guidance | East-West Africa Link'
   }, [country])
 
   if (slug && !country) return <Navigate to="/personal-visa-guidance" replace />
@@ -81,8 +81,8 @@ export function PersonalVisaGuidance() {
       <>
         <PlannerBackground />
         <PageIntro
-          badge="Visa &amp; Entry"
-          titleLine1="Visa"
+          badge="Personal Visa &amp; Guidance"
+          titleLine1="Personal Visa"
           titleAccent="Guidance"
           tagline={[
             'Get clear, reliable visa and entry guidance for your trip. We provide personalized information based on your travel dates, nationality, purpose of travel, and country of residence.',
@@ -97,7 +97,7 @@ export function PersonalVisaGuidance() {
           <div className="mx-auto flex max-w-7xl items-center gap-1.5 px-4 py-3 text-xs text-muted-foreground sm:px-6 lg:px-8">
             <Link to="/" className="hover:text-copper">Home</Link>
             <ChevronRight className="size-3" aria-hidden="true" />
-            <span className="font-semibold text-primary">Visa Guidance</span>
+            <span className="font-semibold text-primary">Personal Visa Guidance</span>
           </div>
         </div>
 
@@ -318,7 +318,7 @@ export function PersonalVisaGuidance() {
         <div className="mx-auto flex max-w-7xl items-center gap-1.5 px-4 py-3 text-xs text-muted-foreground sm:px-6 lg:px-8">
           <Link to="/" className="hover:text-copper">Home</Link>
           <ChevronRight className="size-3" aria-hidden="true" />
-          <Link to="/personal-visa-guidance" className="hover:text-copper">Visa Guidance</Link>
+          <Link to="/personal-visa-guidance" className="hover:text-copper">Personal Visa Guidance</Link>
           <ChevronRight className="size-3" aria-hidden="true" />
           <Link to={country.to} className="hover:text-copper">{country.name}</Link>
           <ChevronRight className="size-3" aria-hidden="true" />
@@ -385,7 +385,7 @@ export function PersonalVisaGuidance() {
                   {[
                     `Tourists visiting ${country.name}`,
                     `Travelers visiting ${country.name} for tourism, business, or an extended stay`,
-                    'Those planning a longer stay and needing clear visa guidance',
+                    'Those planning a longer stay and needing clear Personal Visa Guidance',
                     'Travelers who want reliable information before applying',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">

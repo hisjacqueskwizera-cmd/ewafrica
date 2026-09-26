@@ -61,7 +61,7 @@ export const UGANDA_DATA = {
       {
         id: 'visa-entry',
         icon: 'FileText',
-        title: 'Visa & Entry',
+        title: 'Personal Visa Guidance',
         paragraphs: [
           'Visa requirements depend on your nationality. Most travelers must apply online before traveling through Uganda’s official immigration portal.',
           'Uganda’s standard tourist visa is a single-entry visa valid for up to three months. Some nationalities are visa-exempt.',

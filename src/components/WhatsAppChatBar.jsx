@@ -117,7 +117,7 @@ export function WhatsAppChatBar() {
             tabIndex={open ? 0 : -1}
             enterKeyHint="send"
             autoComplete="off"
-            placeholder="Ask us anything, we reply on WhatsApp"
+            placeholder="Here to help with your Africa travel plans."
             className="min-w-0 flex-1 bg-transparent py-2 text-sm text-primary placeholder:text-muted-foreground/70 focus:outline-none"
           />
         </div>

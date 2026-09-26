@@ -22,6 +22,7 @@ import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { MediaLightbox, MediaTile } from '../components/MediaGallery.jsx'
+import { GALLERY_TILE_HEIGHT } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { BENIN_PAGE } from '../data/siteContent.js'
@@ -121,40 +122,31 @@ function BeninGallery() {
         </Reveal>
       </div>
 
+      {/* The landscape video takes the feature row full width; the portrait
+          clip sits in an ordinary fixed tile alongside the photos, cropped
+          to the same height as everything else. Nothing here is sized by a
+          vertical asset, so the whole gallery stays inside one screen. */}
       <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
         <div className="grid gap-3">
-          <div className="grid gap-3 lg:grid-cols-2">
-            <Reveal once={false} big>
-              <MediaTile
-                item={portraitVideo}
-                onOpen={() => setLightboxIndex(0)}
-                className="aspect-[3/4] lg:aspect-auto lg:h-full"
-              />
-            </Reveal>
-
-            {/* The two photos stack beside the portrait video at lg — their
-                combined natural height (aspect-[4/3] each, plus the gap
-                between them) is what the video's own lg:h-full matches. */}
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-              {[photoOne, photoTwo].map((item, i) => (
-                <Reveal key={item.src} once={false} delay={100 + i * 100}>
-                  <MediaTile
-                    item={item}
-                    onOpen={() => setLightboxIndex(i + 1)}
-                    className="aspect-[4/3]"
-                  />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          <Reveal once={false} delay={300}>
+          <Reveal once={false} big>
             <MediaTile
               item={landscapeVideo}
               onOpen={() => setLightboxIndex(3)}
-              className="aspect-[16/9] sm:aspect-[21/9]"
+              className={GALLERY_TILE_HEIGHT}
             />
           </Reveal>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[portraitVideo, photoOne, photoTwo].map((item, i) => (
+              <Reveal key={item.src} once={false} delay={120 + i * 110}>
+                <MediaTile
+                  item={item}
+                  onOpen={() => setLightboxIndex(i === 0 ? 0 : i)}
+                  className={GALLERY_TILE_HEIGHT}
+                />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
 

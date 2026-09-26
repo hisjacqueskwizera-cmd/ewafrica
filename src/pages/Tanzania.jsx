@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DestinationPage } from '../components/DestinationPage.jsx'
 import { MediaLightbox, MediaTile } from '../components/MediaGallery.jsx'
+import { GALLERY_TILE_HEIGHT } from '../components/PhotoGallery.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { TANZANIA_PAGE } from '../data/siteContent.js'
 import { TZ_HERO_VIDEOS } from '../data/tanzaniaHeroVideos.js'
@@ -86,42 +87,28 @@ function TanzaniaGallery() {
 
       <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
         <div className="grid gap-3">
+          {/* Same fixed tile height as every other gallery (see
+              GALLERY_TILE_HEIGHT): the feature is wide rather than tall, and
+              the rest sit in a plain three-up row, so no single item sets
+              the gallery's height. */}
           <Reveal once={false} big>
             <MediaTile
               item={hero}
               onOpen={() => setLightboxIndex(0)}
-              className="aspect-video sm:aspect-[21/9]"
+              className={GALLERY_TILE_HEIGHT}
             />
           </Reveal>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((item, i) => {
-              const isLast = i === rest.length - 1
-              // Sits in the same row as the double-wide Lake Victoria tile
-              // (at lg) — stretched to that row's height instead of its
-              // own aspect ratio, so the two line up exactly.
-              const matchesLastRowHeight = i === rest.length - 2
-              return (
-                <Reveal
-                  key={item.src}
-                  once={false}
-                  delay={100 + i * 100}
-                  className={`${isLast ? 'sm:col-span-2 lg:col-span-2' : ''} ${matchesLastRowHeight ? 'lg:h-full' : ''}`}
-                >
-                  <MediaTile
-                    item={item}
-                    onOpen={() => setLightboxIndex(i + 1)}
-                    className={
-                      isLast
-                        ? 'aspect-[16/9] sm:aspect-[2/1]'
-                        : matchesLastRowHeight
-                          ? 'aspect-[4/3] lg:aspect-auto lg:h-full'
-                          : 'aspect-[4/3]'
-                    }
-                  />
-                </Reveal>
-              )
-            })}
+            {rest.map((item, i) => (
+              <Reveal key={item.src} once={false} delay={100 + i * 100}>
+                <MediaTile
+                  item={item}
+                  onOpen={() => setLightboxIndex(i + 1)}
+                  className={GALLERY_TILE_HEIGHT}
+                />
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

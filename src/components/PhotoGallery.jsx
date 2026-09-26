@@ -125,7 +125,7 @@ export function PhotoGallerySection({
                 <GalleryTile
                   {...tile}
                   onOpen={() => setLightboxIndex(tiles.length + index)}
-                  className="h-[220px] sm:h-[300px] lg:h-[380px]"
+                  className={TILE_HEIGHT}
                 />
               </Reveal>
             ))}
@@ -156,65 +156,57 @@ export function PhotoGallerySection({
   )
 }
 
+/**
+ * The one tile height every gallery on the site uses — the shared galleries
+ * below plus the bespoke Benin/Tanzania ones, so they all read the same.
+ *
+ * Every tile is a fixed, landscape-ish box of the SAME height and the media
+ * inside is cropped to fit (object-cover), so a portrait photo or a vertical
+ * video can never stretch a column and drag the rest of the grid taller with
+ * it. A feature tile earns its prominence by spanning more columns (wider),
+ * never by being taller — which is what keeps a whole gallery inside one
+ * screen instead of making visitors scroll to finish a single image.
+ */
+export const GALLERY_TILE_HEIGHT = 'h-[200px] sm:h-[240px] lg:h-[280px]'
+const TILE_HEIGHT = GALLERY_TILE_HEIGHT
+
 function MosaicLayout({ tiles, onOpenAt }) {
-  const [hero, ...rest] = tiles
-  const left = rest.slice(0, 2)
-  const right = rest.slice(2, 4)
+  const [feature, ...rest] = tiles
 
   return (
     <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
-      <div className="grid gap-px lg:grid-cols-[1.8fr_1fr_1fr]">
-        <Reveal once={false} big className="group" from="left">
-          <GalleryTile
-            {...hero}
-            onOpen={() => onOpenAt(0)}
-            className="h-[380px] sm:h-[480px] lg:h-[820px]"
-          />
+      <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal once={false} big className="group sm:col-span-2" from="left">
+          <GalleryTile {...feature} onOpen={() => onOpenAt(0)} className={TILE_HEIGHT} />
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-px lg:grid-cols-1">
-          {left.map((photo, index) => (
-            <Reveal key={photo.src} once={false} className="group h-full" delay={150 + index * 150}>
-              <GalleryTile
-                {...photo}
-                onOpen={() => onOpenAt(1 + index)}
-                className="h-[190px] sm:h-[240px] lg:h-[406px]"
-              />
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 gap-px lg:grid-cols-1">
-          {right.map((photo, index) => (
-            <Reveal key={photo.src} once={false} className="group h-full" delay={300 + index * 150}>
-              <GalleryTile
-                {...photo}
-                onOpen={() => onOpenAt(3 + index)}
-                className="h-[190px] sm:h-[240px] lg:h-[406px]"
-              />
-            </Reveal>
-          ))}
-        </div>
+        {rest.map((photo, index) => (
+          <Reveal key={photo.src} once={false} className="group" delay={150 + index * 120}>
+            <GalleryTile
+              {...photo}
+              onOpen={() => onOpenAt(1 + index)}
+              className={TILE_HEIGHT}
+            />
+          </Reveal>
+        ))}
       </div>
     </div>
   )
 }
 
+// Two equal landscape tiles rather than a tall hero beside a smaller one.
 function DuoLayout({ tiles, onOpenAt }) {
   const [hero, side] = tiles
+  const duoHeight = 'h-[220px] sm:h-[300px] lg:h-[360px]'
 
   return (
     <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[80%]">
-      <div className="grid gap-px sm:grid-cols-[1.6fr_1fr]">
+      <div className="grid gap-px sm:grid-cols-2">
         <Reveal once={false} big className="group" from="left">
-          <GalleryTile {...hero} onOpen={() => onOpenAt(0)} className="h-[300px] sm:h-[420px] lg:h-[520px]" />
+          <GalleryTile {...hero} onOpen={() => onOpenAt(0)} className={duoHeight} />
         </Reveal>
         <Reveal once={false} className="group" delay={150}>
-          <GalleryTile
-            {...side}
-            onOpen={() => onOpenAt(1)}
-            className="h-[220px] sm:h-[420px] lg:h-[520px]"
-          />
+          <GalleryTile {...side} onOpen={() => onOpenAt(1)} className={duoHeight} />
         </Reveal>
       </div>
     </div>
@@ -230,7 +222,7 @@ function SingleLayout({ tiles, onOpenAt }) {
         <GalleryTile
           {...photo}
           onOpen={() => onOpenAt(0)}
-          className="h-[300px] sm:h-[420px] lg:h-[520px]"
+          className="h-[240px] sm:h-[320px] lg:h-[400px]"
         />
       </Reveal>
     </div>

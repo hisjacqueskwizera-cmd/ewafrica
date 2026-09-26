@@ -526,7 +526,7 @@ export const GHANA_DATA = {
       {
         title: 'Red Red',
         description:
-          'A hearty bean stew, traditionally made with black-eyed peas and red palm oil, commonly served with fried ripe plantain.',
+          'A hearty bean stew, traditionally made with black-eyed peas and red palm oil, Often served with fried ripe plantain.',
         image: '/Pictures/Ghana/Ghana_Foods/IMG_5402.jpeg',
         imageAlt: 'Red red bean stew served with fried plantain and sautéed spinach',
       },
@@ -540,7 +540,7 @@ export const GHANA_DATA = {
       {
         title: 'Fufu',
         description:
-          'A smooth, soft staple made by pounding cooked cassava, plantain, or yam, usually served with a flavorful soup or stew.',
+          'Smooth, soft staple made by pounding cooked cassava, plantain, yam, or a combination, usually served with soup or stew.',
         image: '/Pictures/Ghana/Ghana_Foods/IMG_5412.jpeg',
         imageAlt: 'A ball of fufu served with a green soup',
       },

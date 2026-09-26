@@ -102,7 +102,7 @@ export const COUNTRIES = [
     note: 'Land of a Thousand Hills',
     to: '/rwanda',
     tone: 'navy',
-    image: '/Pictures/countries/Rwanda.jpg',
+    image: '/Pictures/RwandaCard.JPG',
     flag: '🇷🇼',
   },
   {

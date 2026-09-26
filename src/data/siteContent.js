@@ -171,7 +171,7 @@ export const SERVICES = [
     title: 'Ghana Right of Abode',
     description: 'Market insight, setup support and local connections to start, invest and grow.',
     to: '/ghana/right-of-abode-guidance',
-    image: '/Pictures/Investment-Opportunities-in-Africa.webp',
+    image: '/Pictures/Investment-Opportunities-in-Africa.PNG',
   },
   {
     icon: 'Users',

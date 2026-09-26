@@ -12,7 +12,8 @@ const ICONS = { Search, FileText, Mail, Phone, Clock, ShieldCheck }
 
 // Hero/sidebar photo for the country-agnostic entry point, where there's no
 // destination photo to use yet.
-const GENERIC_IMAGE = '/Pictures/Visa_Entry.png'
+const GENERIC_IMAGE = '/Pictures/VisaGuidance/Hero.JPG'
+const SIDEBAR_IMAGE = '/Pictures/VisaGuidance/Hero.JPG'
 
 /**
  * Personal Visa Guidance — served at two URLs:
@@ -59,9 +60,9 @@ export function PersonalVisaGuidance() {
         backgroundImageAlt={
           country ? `A scenic view of ${country.name}` : 'A passport and visa paperwork at an airport entry desk'
         }
-        // The generic backdrop is a bright, busy stock graphic — unlike the
-        // darker country photos, the hero copy needs a wash to stay legible.
-        overlay={!country}
+        // The generic backdrop keeps its original color so the image reads
+        // naturally without the warm cocoa wash added to the page hero.
+        overlay={false}
       />
 
       {/* Breadcrumb */}
@@ -224,7 +225,7 @@ export function PersonalVisaGuidance() {
 
             <PlannerSidebar
               heading="Service Price"
-              photo={country ? country.image : GENERIC_IMAGE}
+              photo={country ? country.image : SIDEBAR_IMAGE}
               photoAlt={
                 country ? `A scenic view of ${country.name}` : 'A passport and visa paperwork at an airport entry desk'
               }

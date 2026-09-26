@@ -291,13 +291,13 @@ export const GHANA_DATA = {
         icon: 'HeartPulse',
         title: 'Health for Travelers',
         description:
-          'Yellow fever vaccination is required for entry, and routine vaccinations are recommended.',
+          'Yellow fever vaccination is required for most travelers entering Ghana',
         buttonText: 'See Tips',
         image: '/Pictures/image_Ghana.webp',
         imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
         details: {
           overview:
-            'Yellow fever vaccination is required for entry, and routine vaccinations are recommended. Travel insurance, personal medications and access to quality medical care are important considerations, especially in remote areas.',
+            'Yellow fever vaccination is required for most travelers entering Ghana. Routine vaccinations should be up to date, and travelers should also consider malaria prevention and other health precautions before departure.',
           points: [
             {
               label: 'Yellow Fever Certificate',

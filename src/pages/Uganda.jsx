@@ -159,7 +159,7 @@ export function Uganda() {
                       <HashLink
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=uganda'
+                            ? '/travel-planner?destination=uganda'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=uganda'
                               : service.title === 'Personal Visa Guidance'
@@ -189,10 +189,15 @@ export function Uganda() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-2">
             <Reveal from="left" className="relative isolate min-h-72 overflow-hidden rounded-3xl">
-              <img
-                src={hero.backgroundImage}
-                alt=""
+              <video
+                src="/Pictures/Uganda/optimized/uganda_side.mp4"
+                poster="/Pictures/Uganda/optimized/uganda_side_poster.jpg"
                 aria-hidden="true"
+                muted
+                loop
+                autoPlay
+                playsInline
+                preload="metadata"
                 className="absolute inset-0 -z-10 size-full object-cover"
               />
               <div

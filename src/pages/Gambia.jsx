@@ -178,7 +178,7 @@ export function Gambia() {
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=gambia'
+                            ? '/travel-planner?destination=gambia'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=gambia'
                               : service.title === 'Personal Visa Guidance'

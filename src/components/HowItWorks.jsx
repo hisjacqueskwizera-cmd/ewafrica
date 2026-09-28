@@ -1,5 +1,5 @@
 import { ArrowRight, MessageSquareText, Search, Send } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { HOW_IT_WORKS } from '../data/siteContent.js'
 import { HashLink } from './HashLink.jsx'
 import { Reveal } from './Reveal.jsx'
@@ -19,27 +19,41 @@ const CORNER_RADIUS = 28
 const RAIL_GUTTER = 16
 const SVG_BLEED = 40
 
+// While the line runs down the left rail, its tip stays pinned at this
+// height on screen (as a fraction of the viewport), so it grows down the
+// page in step with the scroll, just ahead of where the visitor is reading.
+const DRAW_LINE = 0.7
+
+// Once the rail turns the corner, the run across the icons is drawn over
+// this much scrolling (as a fraction of the viewport height), so it
+// finishes while the icon row is still comfortably on screen.
+const ACROSS_SCROLL = 0.3
+
+const clamp01 = (value) => Math.min(1, Math.max(0, value))
+
 export function HowItWorks() {
   const containerRef = useRef(null)
   const headingRef = useRef(null)
   const iconRefs = useRef([])
-  const rowRef = useRef(null)
-  const pathRef = useRef(null)
+  const pathRefs = useRef([])
   const [geometry, setGeometry] = useState(null)
-  const [pathLength, setPathLength] = useState(0)
   const [reducedMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
-  const [progress, setProgress] = useState(0)
 
-  // Builds the whole line as one SVG path measured off the real layout:
-  // it drops in at the very top of this section — directly under Our
-  // Services — runs down the left margin, breaks around the "How We
-  // Guide Your Journey" heading instead of drawing across it, picks back
-  // up underneath, curves in from the left to meet Tell Us at its own
-  // height, threads through each icon edge to edge, and carries on past
-  // You Connect. Re-measured on resize and once web fonts have settled,
-  // since either can move the heading and shift everything below it.
+  // Builds the line off the real layout: it drops in at the very top of
+  // this section — directly under Our Services — runs down the left
+  // margin, breaks around the "How We Guide Your Journey" heading instead
+  // of drawing across it, picks back up underneath, curves in from the
+  // left to meet Tell Us at its own height, threads through each icon
+  // edge to edge, and carries on past You Connect. Re-measured on resize
+  // and once web fonts have settled, since either can move the heading
+  // and shift everything below it.
+  //
+  // Each piece is its own path with its own scroll window (`start`/`end`,
+  // in container px at the draw line). Browsers restart the dash pattern
+  // at every sub-path of a single path, so one path with gaps would draw
+  // all of its pieces at once instead of one after another.
   useEffect(() => {
     const measure = () => {
       const container = containerRef.current
@@ -74,28 +88,54 @@ export function HowItWorks() {
 
       const gapWidth = Math.max(0, iconRects[1].left - firstIcon.right)
       const tailWidth = Math.min(160, gapWidth || 120)
+      const turnY = iconY - radius
 
-      // `M` starts a new sub-path, which is how the break around the
-      // heading and the breaks at each icon are drawn — they add no
-      // length, so a single dash offset still sweeps the whole line in
-      // one continuous pass.
-      const d = [
+      // The rail follows the draw line one-to-one, so its pieces' scroll
+      // windows are just their own top and bottom.
+      const rail = [
         // From under Our Services down to just above the heading.
-        `M ${railX} 0 V ${headingTop}`,
-        // Resumes below the heading and curves in from the side.
-        `M ${railX} ${headingBottom} V ${iconY - radius}`,
-        `A ${radius} ${radius} 0 0 0 ${railX + radius} ${iconY}`,
-        `H ${icon1Left}`,
+        { d: `M ${railX} 0 V ${headingTop}`, start: 0, end: headingTop },
+        // Resumes below the heading, down to where it turns the corner.
+        { d: `M ${railX} ${headingBottom} V ${turnY}`, start: headingBottom, end: turnY },
+      ]
+
+      const across = [
+        // Curves in from the side to meet the first icon.
+        {
+          d: `M ${railX} ${turnY} A ${radius} ${radius} 0 0 0 ${railX + radius} ${iconY} H ${icon1Left}`,
+          length: (Math.PI * radius) / 2 + (icon1Left - railX - radius),
+        },
         // Icon to icon, edge to edge.
         ...iconRects.slice(0, -1).map((icon, i) => {
-          const next = iconRects[i + 1]
-          return `M ${x(icon.right)} ${iconY} H ${x(next.left)}`
+          const from = x(icon.right)
+          const to = x(iconRects[i + 1].left)
+          return { d: `M ${from} ${iconY} H ${to}`, length: to - from }
         }),
         // And on past the last step.
-        `M ${x(lastIcon.right)} ${iconY} H ${x(lastIcon.right) + tailWidth}`,
-      ].join(' ')
+        {
+          d: `M ${x(lastIcon.right)} ${iconY} H ${x(lastIcon.right) + tailWidth}`,
+          length: tailWidth,
+        },
+      ]
 
-      setGeometry({ d, width: containerRect.width, height: containerRect.height })
+      // The run across shares one scroll window after the turn, handed
+      // out to each piece in proportion to its length so the tip moves
+      // at a steady pace from the corner to the end of the line.
+      const acrossLength = across.reduce((sum, piece) => sum + piece.length, 0) || 1
+      const acrossScroll = window.innerHeight * ACROSS_SCROLL
+      let drawn = 0
+      const acrossWindows = across.map(({ d, length }) => {
+        const start = turnY + (drawn / acrossLength) * acrossScroll
+        drawn += length
+        const end = turnY + (drawn / acrossLength) * acrossScroll
+        return { d, start, end }
+      })
+
+      setGeometry({
+        segments: [...rail, ...acrossWindows],
+        width: containerRect.width,
+        height: containerRect.height,
+      })
     }
 
     measure()
@@ -113,46 +153,31 @@ export function HowItWorks() {
     }
   }, [])
 
-  // The dash offset is what actually draws the line, so the path's real
-  // length has to be read back once it exists.
-  useEffect(() => {
-    if (pathRef.current) setPathLength(pathRef.current.getTotalLength())
-  }, [geometry])
-
-  // Scrubs the line's draw directly to scroll position — 0 while the
-  // section's top is still below the viewport, 1 once the icon row (where
-  // the line ends) has scrolled up into the top portion of the screen —
-  // so it draws from top to end as the visitor scrolls down, and retreats
-  // the same way scrolling back up, instead of a fixed-duration reveal.
-  //
-  // The window is measured off the line's own top and bottom each time
-  // (not a fixed viewport-height multiple), so it always spans exactly
-  // the scroll distance this section actually occupies on screen,
-  // whatever page it sits on and however long that page is.
-  useEffect(() => {
-    if (reducedMotion) {
-      setProgress(1)
-      return
-    }
+  // Scrubs the line's draw directly to scroll position: it draws from
+  // top to end as the visitor scrolls down and retreats the same way
+  // scrolling back up. Written straight to the paths rather than through
+  // state, so scrolling doesn't re-render the section every frame, and
+  // in a layout effect so the first frame is already at the right point.
+  useLayoutEffect(() => {
+    if (reducedMotion || !geometry) return
     let ticking = false
 
     const update = () => {
       ticking = false
-      const top = containerRef.current
-      const bottom = rowRef.current
-      if (!top || !bottom) return
+      const container = containerRef.current
+      if (!container) return
       const vh = window.innerHeight || document.documentElement.clientHeight
-      const topY = top.getBoundingClientRect().top
-      const bottomY = bottom.getBoundingClientRect().bottom
-      // Starts drawing as the top edge enters the bottom of the screen,
-      // finishes once the bottom edge has scrolled up to ~30% of the
-      // viewport height — comfortably inside the screen rather than
-      // right at its edge, so the line reads as "done" while still
-      // fully visible.
-      const start = vh
-      const end = vh * 0.3
-      const raw = (start - topY) / (start - end + (bottomY - topY))
-      setProgress(Math.min(1, Math.max(0, raw)))
+      // Which point of the section (in its own px) is at the draw line.
+      const at = vh * DRAW_LINE - container.getBoundingClientRect().top
+
+      geometry.segments.forEach(({ start, end }, i) => {
+        const path = pathRefs.current[i]
+        if (!path) return
+        const drawn = end > start ? clamp01((at - start) / (end - start)) : Number(at >= start)
+        path.style.strokeDashoffset = String(1 - drawn)
+        // A zero-length dash still paints a dot with round caps.
+        path.style.visibility = drawn > 0 ? 'visible' : 'hidden'
+      })
     }
 
     const onScroll = () => {
@@ -199,17 +224,19 @@ export function HowItWorks() {
             height: geometry.height,
           }}
         >
-          <path
-            ref={pathRef}
-            d={geometry.d}
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            style={{
-              strokeDasharray: pathLength,
-              strokeDashoffset: pathLength * (1 - progress),
-            }}
-          />
+          {geometry.segments.map((segment, i) => (
+            <path
+              key={i}
+              ref={(el) => (pathRefs.current[i] = el)}
+              d={segment.d}
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              // Normalizes each piece to a length of 1, so the scroll
+              // effect can draw it with a 0–1 dash offset.
+              {...(!reducedMotion && { pathLength: 1, strokeDasharray: '1 1' })}
+            />
+          ))}
         </svg>
       )}
 
@@ -232,7 +259,7 @@ export function HowItWorks() {
         local insight, and practical support across Africa.
       </p>
 
-      <div ref={rowRef} className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      <div className="relative z-10 mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
         {HOW_IT_WORKS.map((step, index) => {
           const Icon = STEP_ICONS[step.icon] || MessageSquareText
 

@@ -206,7 +206,7 @@ export function Malawi() {
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=malawi'
+                            ? '/travel-planner?destination=malawi'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=malawi'
                               : service.title === 'Personal Visa Guidance'

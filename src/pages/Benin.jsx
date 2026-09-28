@@ -263,7 +263,7 @@ export function Benin() {
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=benin'
+                            ? '/travel-planner?destination=benin'
                             : service.title.startsWith('Independent Tour Guides')
                               ? '/independent-tour-guide/benin'
                               : service.title === 'Border Crossing Guide'

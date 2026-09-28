@@ -210,7 +210,7 @@ export function Ghana() {
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=ghana'
+                            ? '/travel-planner?destination=ghana'
                             : service.title === 'Independent Tour Guides'
                               ? '/independent-tour-guide/ghana'
                               : service.title === 'Border Crossing Guide'

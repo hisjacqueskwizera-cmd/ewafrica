@@ -136,23 +136,9 @@ export function GhanaPracticalGuideTravelSmarter() {
                     {readyToExplore.description}
                   </p>
 
-                  <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
+                  <div className="mt-8 flex justify-center">
                     <HashLink to={readyToExplore.primaryBtn.to} className="btn-copper w-full sm:w-auto">
                       {readyToExplore.primaryBtn.text}
-                      <ArrowRight className="size-4" aria-hidden="true" />
-                    </HashLink>
-                    <HashLink
-                      to={readyToExplore.secondaryBtn.to}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary-foreground/60 bg-primary-foreground/10 px-7 py-3.5 text-sm font-bold text-primary-foreground backdrop-blur-xs transition-all hover:bg-primary-foreground/25 sm:w-auto"
-                    >
-                      {readyToExplore.secondaryBtn.text}
-                      <ArrowRight className="size-4" aria-hidden="true" />
-                    </HashLink>
-                    <HashLink
-                      to={readyToExplore.tertiaryBtn.to}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary-foreground/60 bg-primary-foreground/10 px-7 py-3.5 text-sm font-bold text-primary-foreground backdrop-blur-xs transition-all hover:bg-primary-foreground/25 sm:w-auto"
-                    >
-                      {readyToExplore.tertiaryBtn.text}
                       <ArrowRight className="size-4" aria-hidden="true" />
                     </HashLink>
                   </div>
@@ -208,7 +194,7 @@ export function GhanaPracticalGuideTravelSmarter() {
 
             <div className="pt-2">
               <HashLink
-                to={selectedTip.cta?.to ?? '/travel-planner/service-details?destinations=ghana'}
+                to={selectedTip.cta?.to ?? '/travel-planner?destination=ghana'}
                 className="btn-copper w-full justify-center text-xs py-3"
               >
                 {selectedTip.cta?.label ?? 'Get Personalized Planning Guidance'}

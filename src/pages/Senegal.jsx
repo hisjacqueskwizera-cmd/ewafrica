@@ -195,7 +195,7 @@ export function Senegal() {
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? '/travel-planner/service-details?destinations=senegal'
+                            ? '/travel-planner?destination=senegal'
                             : service.title === 'Border Crossing Guide'
                               ? '/travel-planner/border-crossing-guide?from=senegal'
                               : service.title === 'Personal Visa Guidance'

@@ -169,7 +169,7 @@ export function DestinationPage({
                       <CardCta
                         to={
                           service.title === 'Travel Planner'
-                            ? `/travel-planner/service-details?destinations=${slug}`
+                            ? `/travel-planner?destination=${slug}`
                             : service.title.startsWith('Independent Tour Guides')
                               ? `/independent-tour-guide/${slug}`
                               : service.title === 'Border Crossing Guide'

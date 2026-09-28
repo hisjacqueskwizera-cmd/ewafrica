@@ -638,7 +638,8 @@ const trustFor = (country) => [
 // TANZANIA_PAGE) is bespoke, matching its own reference design rather
 // than one shared template, but all of them keep two conventions from
 // Tanzania: every service `cta` links to /#contact except Travel Planner,
-// which each page deep-links to /travel-planner/service-details?destinations=<slug> (the
+// which each page links to /travel-planner?destination=<slug> — the Travel
+// Planner landing page with its three services, preset to that country (the
 // visa/border-crossing modals these were originally written against don't
 // exist in this project); and route-card photos reuse another tracked
 // country's real photo where the neighbour is one of our own COUNTRIES
@@ -710,7 +711,7 @@ export const ZAMBIA_PAGE = {
         'Practical travel tips',
       ],
       image: '/Pictures/Travel planner.PNG',
-      to: '/travel-planner/service-details?destinations=zambia',
+      to: '/travel-planner?destination=zambia',
     },
     {
       icon: 'RouteIcon',
@@ -1082,7 +1083,7 @@ export const MALAWI_PAGE = {
       icon: 'RouteIcon',
       eyebrow: 'Planning an Overland Journey?',
       text: 'Routes, transport options and border conditions can change. Plan ahead and check the latest information before you travel.',
-      cta: { label: 'Plan My Route', to: '/travel-planner/service-details?destinations=malawi' },
+      cta: { label: 'Plan My Route', to: '/travel-planner?destination=malawi' },
     },
     {
       icon: 'IdCard',

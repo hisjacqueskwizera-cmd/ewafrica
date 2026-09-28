@@ -195,7 +195,7 @@ export function Zambia() {
               const Icon = SERVICE_ICONS[service.icon] || FileText
               return (
                 <Reveal key={service.title} delay={i * 100} className="flex h-full">
-                  <article className="flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-shadow duration-300 hover:shadow-lift">
+                  <article className="relative flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                     {/* Every card's image box takes the Travel Planner art's own
                         landscape ratio, so all of them line up at the same
                         height: the art fills its box edge to edge with
@@ -242,7 +242,15 @@ export function Zambia() {
                         ))}
                       </ul>
 
-                      <HashLink to={service.to} className="btn-copper mt-6 w-full justify-center text-xs py-2.5">
+                      {/* The ::after stretches this link over the whole
+                          (relative) card, so the entire card is clickable.
+                          translate-none cancels btn-copper's hover lift: a
+                          transform on the link would shrink that overlay
+                          back to the button. */}
+                      <HashLink
+                        to={service.to}
+                        className="btn-copper mt-6 w-full justify-center text-xs py-2.5 hover:translate-none after:absolute after:inset-0 after:z-20"
+                      >
                         View Details
                         <ArrowRight className="size-3.5" aria-hidden="true" />
                       </HashLink>

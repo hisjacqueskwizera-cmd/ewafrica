@@ -71,11 +71,14 @@ const ICONS = {
   Compass,
 }
 
+// The ::after stretches this link over its whole card (the card is
+// `relative`), so clicking anywhere on the card follows it. Keep transforms
+// off the link itself: one would shrink that overlay back to the button.
 function CardCta({ to, children }) {
   return (
     <HashLink
       to={to}
-      className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+      className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-xs font-semibold text-primary-foreground after:absolute after:inset-0 after:z-20"
     >
       {children}
       <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -133,7 +136,7 @@ export function Gambia() {
               const Icon = ICONS[service.icon]
               return (
                 <Reveal key={service.title} delay={i * 90}>
-                  <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                     {/* Every card's image box takes the Travel Planner art's own
                         landscape ratio, so all of them line up at the same
                         height: the art fills its box edge to edge with

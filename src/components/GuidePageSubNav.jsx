@@ -21,6 +21,7 @@ export function GuidePageSubNav({ pages, guideLabel = 'Guide' }) {
 
   return (
     <div
+      data-sticky-bar
       className="sticky z-20 border-b border-border/60 bg-cream/95 backdrop-blur-sm"
       style={{ top: TOP }}
     >

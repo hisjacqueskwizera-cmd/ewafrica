@@ -116,6 +116,7 @@ export function Header() {
 
   return (
     <header
+      data-site-header
       className={`fixed inset-x-0 top-0 z-[100] transition-[background-color,box-shadow] duration-300 ${
         solid ? 'border-b border-border bg-background' : 'border-b border-transparent bg-transparent'
       } ${scrolled ? 'shadow-[0_12px_30px_-24px_rgba(20,14,8,0.6)]' : ''}`}

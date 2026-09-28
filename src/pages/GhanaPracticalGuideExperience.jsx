@@ -38,6 +38,7 @@ export function GhanaPracticalGuideExperience() {
       <CountrySubNav
         slug="ghana"
         countryName="Ghana"
+        hasRoutes={false}
         practicalGuideTo="/ghana/practical-guide#guide-overview"
       />
 

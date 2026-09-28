@@ -280,7 +280,7 @@ export function Payment() {
               includesHeading="Travel Audit Includes"
               helpHeading="Need Help Before Paying?"
               helpText="General questions about our services, pricing, or how the website works can be sent through WhatsApp or email at no charge."
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

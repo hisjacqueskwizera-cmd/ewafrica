@@ -34,7 +34,7 @@ const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon,
  */
 export function PlannerSidebar({
   heading = 'Your Travel Planner',
-  photo = '/Pictures/caption.jpg',
+  photo = '/images/services/travel-planner/sidebar-coastal-fort.webp',
   photoAlt = 'Aerial view of a coastal fort on the Ghanaian coast',
   caption,
   price,

@@ -150,12 +150,12 @@ export function Confirmation() {
 
             <PlannerSidebar
               heading={copy.sidebarHeading}
-              photo="/Pictures/explore/ghana-card-background.webp"
+              photo="/images/explore/ghana-card-background.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline at sunset"
               includes={GHANA_RELOCATION_FLOW.includes}
               includesHeading="Complete Relocation Package Includes"
               caption={copy.sidebarCaption}
-              secondaryPhoto="/Pictures/countries/Ghana.jpg"
+              secondaryPhoto="/images/countries/ghana.webp"
               secondaryPhotoAlt="Coastal land overlooking the Ghanaian coastline"
               secondaryCaption={copy.sidebarCaption2}
             />

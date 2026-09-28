@@ -27,7 +27,7 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-primary-foreground/10 bg-cocoa text-primary-foreground/70">
       <Reveal big className="absolute inset-0">
         <img
-          src="/Pictures/footer.png"
+          src="/images/backgrounds/footer.webp"
           alt=""
           aria-hidden="true"
           className="size-full object-cover"
@@ -41,7 +41,7 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-11 px-4 py-16 sm:px-6 sm:py-[70px] lg:grid-cols-[1.3fr_0.8fr_1fr_1fr] lg:gap-8 lg:divide-x lg:divide-primary-foreground/15 lg:px-8">
         <div>
           <div className="mb-4 flex items-center">
-            <img src="/Logos/New_logo/Logo_White.webp" alt="East-West Africa Link" className="h-14 w-auto" />  
+            <img src="/brand/logo-white.webp" alt="East-West Africa Link" className="h-14 w-auto" />  
           </div>
           <p className="max-w-75 text-sm leading-relaxed text-primary-foreground/60">
             {FOOTER.tagline}

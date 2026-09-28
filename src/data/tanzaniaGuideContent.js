@@ -45,7 +45,7 @@ export const TANZANIA_DATA = {
         id: 'arusha',
         name: 'Arusha',
         description: 'Gateway to northern Tanzania and safari adventures.',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4452.JPG',
+        image: '/images/tanzania/img-4452.webp',
         tag: 'Safari Gateway',
         details: {
           highlight:
@@ -66,7 +66,7 @@ export const TANZANIA_DATA = {
         id: 'serengeti-ngorongoro',
         name: 'Serengeti & Ngorongoro',
         description: 'Iconic wildlife areas and incredible natural landscapes.',
-        image: '/Pictures/Tanzania/Tz_Gallery/optimized/IMG_3460_web.jpg',
+        image: '/images/tanzania/gallery/img-3460.webp',
         tag: 'Wildlife & Safari',
         details: {
           highlight:
@@ -87,7 +87,7 @@ export const TANZANIA_DATA = {
         id: 'mount-kilimanjaro',
         name: 'Mount Kilimanjaro',
         description: "Africa's highest peak and a bucket-list experience.",
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4453.JPG',
+        image: '/images/tanzania/img-4453.webp',
         tag: 'Highest Peak',
         details: {
           highlight:
@@ -108,7 +108,7 @@ export const TANZANIA_DATA = {
         id: 'zanzibar',
         name: 'Zanzibar',
         description: 'Beautiful beaches, Stone Town and a unique island culture.',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3635.JPG',
+        image: '/images/tanzania/img-3635.webp',
         tag: 'Island & Culture',
         details: {
           highlight:
@@ -129,7 +129,7 @@ export const TANZANIA_DATA = {
         id: 'dar-es-salaam',
         name: 'Dar es Salaam',
         description: "Tanzania's largest city and a major transport hub.",
-        image: '/Pictures/Tanzania/Dar-Salama.JPG',
+        image: '/images/tanzania/dar-salama.webp',
         tag: 'Major City',
         details: {
           highlight:
@@ -150,7 +150,7 @@ export const TANZANIA_DATA = {
         id: 'mafia',
         name: 'Mafia',
         description: 'A quieter island with outstanding marine life.',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3465.JPG',
+        image: '/images/tanzania/img-3465.webp',
         tag: 'Marine Reserve',
         details: {
           highlight:
@@ -181,7 +181,7 @@ export const TANZANIA_DATA = {
         description:
           'Entry requirements depend on your nationality and travel plans. Some travelers may need a visa before arrival.',
         buttonText: 'Get Personal Visa Guidance',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3462.JPG',
+        image: '/images/tanzania/img-3462.webp',
         imageAlt: 'Stone Town waterfront, Zanzibar, Tanzania',
         details: {
           overview:
@@ -206,7 +206,7 @@ export const TANZANIA_DATA = {
         description:
           'Health safety is important when traveling in Tanzania. Vaccinations such as yellow fever may be required, and malaria is present in many areas.',
         buttonText: 'See Tips',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4452.JPG',
+        image: '/images/tanzania/img-4452.webp',
         imageAlt: 'A Maasai traveler watching zebras on the savannah',
         details: {
           overview:
@@ -230,7 +230,7 @@ export const TANZANIA_DATA = {
         description:
           'The Tanzanian shilling (TZS) is the local currency. ATMs are available in cities and towns, and credit cards are accepted in many hotels and larger businesses.',
         buttonText: 'Read More',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4233.JPG',
+        image: '/images/tanzania/img-4233.webp',
         imageAlt: 'Stone Town waterfront with dhows moored offshore',
         details: {
           overview:
@@ -254,7 +254,7 @@ export const TANZANIA_DATA = {
         description:
           'Local SIM cards are widely available from Vodacom, Tigo and Airtel. Data is affordable and useful for navigation and communication.',
         buttonText: 'Read More',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4453.JPG',
+        image: '/images/tanzania/img-4453.webp',
         imageAlt: 'A Maasai community procession in traditional dress',
         details: {
           overview:
@@ -278,7 +278,7 @@ export const TANZANIA_DATA = {
         description:
           'Travel options include domestic flights, buses, private drivers, taxis and rideshare, connecting cities, parks and the islands.',
         buttonText: 'Travel Planner',
-        image: '/Pictures/Tanzania/Tz_Gallery/optimized/IMG_5073_web.jpg',
+        image: '/images/tanzania/gallery/img-5073.webp',
         imageAlt: "A tented camp along Lake Victoria's shore near Mwanza",
         details: {
           overview:
@@ -310,7 +310,7 @@ export const TANZANIA_DATA = {
         description:
           'Tanzania connects well with several neighboring countries, making it easy to combine destinations.',
         cta: { label: 'Plan My Route', to: '/travel-planner?destination=tanzania' },
-        image: '/Pictures/Tanzania/Tz_Gallery/optimized/IMG_5156_web.jpg',
+        image: '/images/tanzania/gallery/img-5156.webp',
         imageAlt: 'Maasai homesteads overlooking the Ngorongoro Crater',
         details: {
           overview:
@@ -333,7 +333,7 @@ export const TANZANIA_DATA = {
         title: 'First-Time Traveler Tips',
         description:
           'Practical, easy-to-follow tips to help first-time visitors travel with confidence across Tanzania.',
-        image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3496.JPG',
+        image: '/images/tanzania/img-3496.webp',
         imageAlt: 'A traditional dhow sailing off the coast of Zanzibar',
         details: {
           overview:
@@ -361,6 +361,6 @@ export const TANZANIA_DATA = {
       'Continue to our Zanzibar guide for detailed information on culture and etiquette, getting around the island, tours and local guides, food and more practical advice.',
     cta: { label: 'Continue to Zanzibar', to: '/tanzania/zanzibar-guide' },
     watermark: 'More Than a Beach, a Way of Life',
-    backgroundImage: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3635.JPG',
+    backgroundImage: '/images/tanzania/img-3635.webp',
   },
 }

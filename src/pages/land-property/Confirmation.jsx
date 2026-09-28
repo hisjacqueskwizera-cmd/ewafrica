@@ -153,7 +153,7 @@ export function Confirmation() {
               includes={GHANA_LAND_PROPERTY_FLOW.includes}
               includesHeading="Land & Property Guidance Includes"
               caption={copy.sidebarCaption}
-              secondaryPhoto="/Pictures/countries/Ghana.jpg"
+              secondaryPhoto="/images/countries/ghana.webp"
               secondaryPhotoAlt="Coastal land overlooking the Ghanaian coastline"
               secondaryCaption={copy.sidebarCaption2}
             />

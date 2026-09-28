@@ -8,7 +8,7 @@ export const ZAMBIA_DATA = {
     cta: 'Explore Zambia',
     watermarkQuote: ['Explore new places.', 'Discover new possibilities.'],
     locationBadge: 'Victoria Falls, Zambia',
-    image: '/Pictures/Hero_Zambia.jpeg',
+    image: '/images/zambia/zambia-hero.webp',
   },
 
   travelInZambia: {
@@ -19,14 +19,14 @@ export const ZAMBIA_DATA = {
       'Lusaka, the friendly capital, serves as a convenient gateway for exploring the country, while Zambia’s central location makes it an ideal base for overland travel to neighboring countries. Whether you’re seeking breathtaking landscapes, rich culture, or cross-border adventures, Zambia offers a truly rewarding travel experience.',
     ],
     cta: 'Why Visit Zambia',
-    backgroundSilhouette: '/Pictures/Background/zambia_travel_section_bg.png',
+    backgroundSilhouette: '/images/backgrounds/zambia-travel-section-bg.webp',
     cards: [
       {
         id: 'victoria-falls',
         title: 'Victoria Falls',
         description:
           'Experience the awe-inspiring Victoria Falls, a UNESCO World Heritage Site and one of the world’s great wonders.',
-        image: '/Pictures/zambia/victoria_falls.jpg',
+        image: '/images/zambia/victoria-falls.webp',
         to: '/zambia/practical-guide#victoria-falls',
       },
       {
@@ -34,7 +34,7 @@ export const ZAMBIA_DATA = {
         title: 'Wildlife & Safaris',
         description:
           'Explore world-class safari regions such as South Luangwa and Lower Zambezi, home to diverse wildlife and pristine wilderness.',
-        image: '/Pictures/Countries_Images/Zambia/IMG_3945.JPG',
+        image: '/images/zambia/img-3945.webp',
         to: '/zambia/practical-guide#south-luangwa',
       },
       {
@@ -42,7 +42,7 @@ export const ZAMBIA_DATA = {
         title: 'Overland Routes',
         description:
           'Discover Zambia’s central location and excellent overland links to Tanzania, Malawi, Zimbabwe and beyond.',
-        image: '/Pictures/zambia/overland_4x4.jpg',
+        image: '/images/zambia/overland-4x4.webp',
         to: '/travel-planner?destination=zambia',
       },
     ],
@@ -68,7 +68,7 @@ export const ZAMBIA_DATA = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      image: '/Pictures/PersonalVisaGuidanceCards/Zambia.PNG',
+      image: '/images/services/visa-guidance/cards/zambia.webp',
       to: '/personal-visa-guidance/zambia',
     },
     {
@@ -84,7 +84,7 @@ export const ZAMBIA_DATA = {
         'Border connections',
         'Practical travel tips',
       ],
-      image: '/Pictures/Travel_Planner_Cards/Zambia.png',
+      image: '/images/services/travel-planner/cards/zambia.webp',
       to: '/travel-planner?destination=zambia',
     },
     {
@@ -100,7 +100,7 @@ export const ZAMBIA_DATA = {
         'Approx. travel times',
         'Practical tips',
       ],
-      image: '/Pictures/Border_crossing.jpg',
+      image: '/images/services/border-crossing/border-crossing.webp',
       to: '/travel-planner/border-crossing-guide?from=zambia',
     },
   ],
@@ -114,28 +114,28 @@ export const ZAMBIA_DATA = {
   routes: [
     {
       to: 'Tanzania & Zanzibar',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
     },
     {
       to: 'Malawi',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/images/countries/malawi.webp',
       text: 'Via Mchinji or Mwami border, a popular crossing for travellers and traders.',
     },
     {
       to: 'Zimbabwe',
-      image: '/Pictures/countries/Zambia.jpg',
+      image: '/images/countries/zambia.webp',
       text: 'Cross the Zambezi at Victoria Falls Bridge or Chirundu, linking the two countries.',
     },
     {
       to: 'Mozambique',
-      image: '/Pictures/zambia/traveling_overland_falls.jpg',
+      image: '/images/zambia/traveling-overland-falls.webp',
       text: 'Via Cassacatiza or Zumbo, a quieter overland route into northern Mozambique.',
     },
   ],
 
   travelingOverland: {
-    image: '/Pictures/Countries_Images/Zambia/IMG_5529.jpg',
+    image: '/images/services/border-crossing/border-crossing.webp',
     title: 'Traveling Overland?',
     description:
       'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',
@@ -155,7 +155,7 @@ export const ZAMBIA_DATA = {
       'Our Zambia Practical Guide brings together useful information to help you prepare for travel, longer stays, and independent journeys throughout Zambia.',
     cta: 'Read the Zambia Practical Guide',
     to: '/zambia/practical-guide',
-    backgroundSilhouette: '/Pictures/Background/zambia_practical_guide_bg.png',
+    backgroundSilhouette: '/images/backgrounds/zambia-practical-guide-bg.webp',
   },
 
   // --- Zambia Practical Guide Page (Image 4) ---
@@ -169,7 +169,7 @@ export const ZAMBIA_DATA = {
         name: 'Victoria Falls',
         description:
           'One of the world’s great natural wonders, Victoria Falls is a top highlight for its breathtaking scenic views, thrilling adventure activities, and unforgettable photography.',
-        image: '/Pictures/Countries_Images/Zambia/IMG_3942.JPG',
+        image: '/images/zambia/img-3942.webp',
         tag: 'UNESCO World Heritage',
         details: {
           highlight:
@@ -192,7 +192,7 @@ export const ZAMBIA_DATA = {
         name: 'South Luangwa National Park',
         description:
           'Famous for walking safaris, abundant wildlife encounters, and an immersive safari atmosphere, South Luangwa offers some of Africa’s most authentic and rewarding wildlife experiences.',
-        image: '/Pictures/Countries_Images/Zambia/IMG_4045.jpg',
+        image: '/images/zambia/img-4045.webp',
         tag: 'Premier Safari Haven',
         details: {
           highlight:
@@ -214,7 +214,7 @@ export const ZAMBIA_DATA = {
         name: 'Lower Zambezi National Park',
         description:
           'A beautiful river-based wilderness area known for boating, canoeing, exceptional wildlife viewing, and dramatic landscapes along the Zambezi River.',
-        image: '/Pictures/zambia/lower_zambezi.jpg',
+        image: '/images/zambia/lower-zambezi.webp',
         tag: 'Riverine Wilderness',
         details: {
           highlight:
@@ -236,7 +236,7 @@ export const ZAMBIA_DATA = {
         name: 'Lake Kariba',
         description:
           'A vast man-made lake offering excellent fishing, houseboat safaris, stunning sunsets, and a peaceful lakeside escape surrounded by natural beauty.',
-        image: '/Pictures/zambia/lake_kariba.jpg',
+        image: '/images/zambia/lake-kariba.webp',
         tag: 'Tranquil Lake Escape',
         details: {
           highlight:
@@ -393,19 +393,19 @@ export const ZAMBIA_DATA = {
         title: 'Incredible Wildlife',
         description:
           'Home to abundant wildlife, from elephants and lions to hippos and rare antelope, Zambia offers authentic and uncrowded safari experiences in spectacular natural settings.',
-        image: '/Pictures/Countries_Images/Zambia/IMG_5499.JPG',
+        image: '/images/zambia/img-5499.webp',
       },
       {
         title: 'Breathtaking Landscapes',
         description:
           'From the mighty Zambezi River and dramatic waterfalls to vast national parks and tranquil lakes, Zambia’s diverse landscapes inspire adventure at every turn.',
-        image: '/Pictures/zambia/ZAMBIA_CARDS_PRG (2).jpg',
+        image: '/images/zambia/zambia-practical-guide-card.webp',
       },
       {
         title: 'Authentic Experiences',
         description:
           'Warm and welcoming people, rich cultures, and vibrant local communities make Zambia a place for meaningful travel experiences and lasting connections.',
-        image: '/Pictures/zambia/Zambiaaaa_People.jpg',
+        image: '/images/zambia/zambia-people.webp',
       },
     ],
   },
@@ -424,6 +424,6 @@ export const ZAMBIA_DATA = {
     },
     leftWatermark: ['Zambia', 'More to Explore'],
     rightWatermark: ['People', 'Nature', 'Culture', 'Opportunity', 'Discovery'],
-    backgroundImage: '/Pictures/zambia/traveling_overland_leopard.jpg',
+    backgroundImage: '/images/zambia/traveling-overland-leopard.webp',
   },
 }

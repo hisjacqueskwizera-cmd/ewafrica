@@ -29,6 +29,12 @@ Senegal_Gallery_originals/
 Gambia_Gallery_originals/
 Uganda_Gallery_originals/
 
+# Every original photo/video that public/ used to hold, before it was
+# converted to web formats (WebP / H.264 MP4) and reorganized into
+# public/brand, public/images and public/videos. Kept at their old paths
+# (media-originals/public/...) for re-editing; never deployed.
+media-originals/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

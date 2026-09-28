@@ -4,7 +4,7 @@ export const ZANZIBAR_DATA = {
     subheading: 'Island Culture, Timeless Beauty',
     description:
       "Zanzibar is one of East Africa's most distinctive destinations, combining white-sand beaches, historic Stone Town, Swahili culture and a relaxed island way of life.",
-    image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3635.JPG',
+    image: '/images/tanzania/img-3635.webp',
     imageAlt: 'Aerial view of Stone Town and its beach at sunset, Zanzibar',
   },
 
@@ -14,7 +14,7 @@ export const ZANZIBAR_DATA = {
       icon: 'Users',
       title: 'Culture & Island Etiquette',
       subtitle: 'Respect Goes a Long Way',
-      image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3501.JPG',
+      image: '/images/tanzania/img-3501.webp',
       imageAlt: 'A woman herding cattle along the shoreline at sunset in Zanzibar',
       bullets: [
         'Zanzibar is predominantly Muslim, and local traditions and values are important.',
@@ -33,7 +33,7 @@ export const ZANZIBAR_DATA = {
       icon: 'Bus',
       title: 'Getting Around Zanzibar',
       subtitle: 'Local Transport, Easier With the Right Guidance',
-      image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4233.JPG',
+      image: '/images/tanzania/img-4233.webp',
       imageAlt: 'Boats moored along the Stone Town waterfront, Zanzibar',
       intro:
         'Zanzibar can be explored in several ways, from local dala dala and taxis to private drivers. Distances, unfamiliar routes and local transport practices can make planning less straightforward for first-time visitors, especially when combining Stone Town, villages, beaches and cultural sites.',
@@ -65,7 +65,7 @@ export const ZANZIBAR_DATA = {
       icon: 'Compass',
       title: 'Tours & Local Guides',
       subtitle: 'Explore More, Experience Deeper',
-      image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3496.JPG',
+      image: '/images/tanzania/img-3496.webp',
       imageAlt: 'A traditional dhow sailing off the coast of Zanzibar',
       intro:
         'Zanzibar offers a wide range of unforgettable experiences, including:',
@@ -91,7 +91,7 @@ export const ZANZIBAR_DATA = {
       icon: 'UtensilsCrossed',
       title: 'Food & Water',
       subtitle: 'Simple, Delicious, and Fresh',
-      image: '/Pictures/Tanzania/TZ_Hero_Section/IMG_4453.JPG',
+      image: '/images/tanzania/img-4453.webp',
       imageAlt: 'A community gathering in traditional dress in Tanzania',
       intro:
         "Zanzibar's cuisine is a flavorful blend of African, Arab, Indian and European influences, with an abundance of fresh seafood, tropical fruits and local spices.",
@@ -110,7 +110,7 @@ export const ZANZIBAR_DATA = {
   moreToExplore: {
     heading: 'More to Explore',
     text: 'From the winding streets of Stone Town to pristine beaches and spice-scented villages, Zanzibar offers a unique blend of history, culture and natural beauty.',
-    backgroundImage: '/Pictures/Tanzania/TZ_Hero_Section/IMG_3635.JPG',
+    backgroundImage: '/images/tanzania/img-3635.webp',
     cta: { label: 'Plan Your Zanzibar Experience', to: '/travel-planner?destination=tanzania' },
   },
 }

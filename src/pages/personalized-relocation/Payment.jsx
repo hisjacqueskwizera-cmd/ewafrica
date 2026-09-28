@@ -260,14 +260,14 @@ export function Payment() {
 
             <PlannerSidebar
               heading={copy.sidebarHeading}
-              photo="/Pictures/countries/Ghana.jpg"
+              photo="/images/countries/ghana.webp"
               photoAlt="Independence Arch in Accra, Ghana"
               caption={copy.sidebarCaption}
               includes={F.includes}
               includesHeading="Personalized Relocation Guidance Includes"
               helpHeading="Need Help With Payment?"
               helpText="If you have any questions about payment options or are experiencing issues, please contact us."
-              secondaryPhoto="/Pictures/explore/ghana-card-background.webp"
+              secondaryPhoto="/images/explore/ghana-card-background.webp"
               secondaryPhotoAlt="Cape Coast Castle overlooking the Ghanaian coastline"
               secondaryCaption={copy.sidebarCaption2}
             />

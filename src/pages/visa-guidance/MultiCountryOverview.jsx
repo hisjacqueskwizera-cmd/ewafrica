@@ -243,7 +243,7 @@ export function MultiCountryOverview() {
                 {/* Image Banner matching Image 1 */}
                 <div className="relative aspect-16/10 overflow-hidden">
                   <img
-                    src="/Pictures/VisaGuidance/Side.PNG"
+                    src="/images/services/visa-guidance/visa-guidance-side.webp"
                     alt="East and West Africa landscape"
                     className="size-full object-cover"
                   />

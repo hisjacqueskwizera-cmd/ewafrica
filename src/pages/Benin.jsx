@@ -51,30 +51,30 @@ const ICONS = {
 const BENIN_MEDIA = [
   {
     type: 'video',
-    src: '/Pictures/Benin/optimized/first_one.mp4',
-    poster: '/Pictures/Benin/optimized/first_one_poster.jpg',
+    src: '/videos/benin/first-one.mp4',
+    poster: '/videos/benin/first-one-poster.webp',
     alt: 'A monumental carved sculpture merging with a building facade in Benin',
     title: 'Living Sculpture',
     subtitle: 'Where art and Vodun tradition meet',
   },
   {
     type: 'photo',
-    src: '/Pictures/Benin_Landing_Hero.JPG',
+    src: '/images/benin/benin-landing-hero.webp',
     alt: 'Ganvié stilt village on the water in Benin',
     title: 'Ganvié',
     subtitle: "Africa's Venice, a village on stilts",
   },
   {
     type: 'photo',
-    src: '/Pictures/Benin_Side_Image.JPG',
+    src: '/images/benin/benin-side.webp',
     alt: 'Traditional Vodun fetish statues in Benin',
     title: 'Vodun Heritage',
     subtitle: 'Sacred rites, living spirituality',
   },
   {
     type: 'video',
-    src: '/Pictures/Benin/optimized/landscape_one.mp4',
-    poster: '/Pictures/Benin/optimized/landscape_one_poster.jpg',
+    src: '/videos/benin/landscape-one.mp4',
+    poster: '/videos/benin/landscape-one-poster.webp',
     alt: 'A traditional straw-woven ritual figure in a Vodun shrine courtyard in Benin',
     title: 'Vodun Shrine',
     subtitle: 'A living courtyard of ritual and tradition',
@@ -307,7 +307,7 @@ export function Benin() {
                   <article className="group flex h-full flex-col overflow-hidden border-b border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:border-b-0 lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
-                        src={place.image ?? '/Pictures/countries/BeninReal.JPG'}
+                        src={place.image ?? '/images/countries/benin.webp'}
                         alt={place.imageAlt ?? place.name}
                         loading="lazy"
                         className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -335,7 +335,7 @@ export function Benin() {
                   <article className="group flex h-full flex-col overflow-hidden border-t border-cocoa/10 bg-[#f4efe8] transition-transform duration-300 hover:-translate-y-0.5 lg:border-r lg:last:border-r-0 lg:first:border-l-0">
                     <div className="relative aspect-[7/5] overflow-hidden">
                       <img
-                        src={place.image ?? '/Pictures/countries/BeninReal.JPG'}
+                        src={place.image ?? '/images/countries/benin.webp'}
                         alt={place.imageAlt ?? place.name}
                         loading="lazy"
                         className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

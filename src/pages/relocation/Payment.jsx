@@ -259,14 +259,14 @@ export function Payment() {
 
             <PlannerSidebar
               heading={copy.sidebarHeading}
-              photo="/Pictures/explore/ghana-card-background.webp"
+              photo="/images/explore/ghana-card-background.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline at sunset"
               caption={copy.sidebarCaption}
               includes={GHANA_RELOCATION_FLOW.includes}
               includesHeading="Complete Relocation Package Includes"
               helpHeading="Need Help With Payment?"
               helpText="If you have any questions about payment options or are experiencing issues, please contact us."
-              secondaryPhoto="/Pictures/countries/Ghana.jpg"
+              secondaryPhoto="/images/countries/ghana.webp"
               secondaryPhotoAlt="Coastal land overlooking the Ghanaian coastline"
               secondaryCaption={copy.sidebarCaption2}
             />

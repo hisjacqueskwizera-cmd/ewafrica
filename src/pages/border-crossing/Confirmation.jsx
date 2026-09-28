@@ -158,7 +158,7 @@ export function Confirmation() {
               includes={BORDER_CROSSING_FLOW.includes}
               includesHeading="Border Crossing Guide Includes"
               caption={copy.sidebarCaption}
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

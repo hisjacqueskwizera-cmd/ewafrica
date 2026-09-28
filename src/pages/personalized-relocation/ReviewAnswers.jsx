@@ -213,7 +213,7 @@ export function ReviewAnswers() {
 
             <PlannerSidebar
               heading="Personalized Relocation Guidance"
-              photo="/Pictures/countries/Ghana.jpg"
+              photo="/images/countries/ghana.webp"
               photoAlt="Independence Arch in Accra, Ghana"
               includes={F.includes}
               includesHeading="Personalized Relocation Guidance Includes"

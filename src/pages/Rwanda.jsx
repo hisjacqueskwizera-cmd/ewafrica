@@ -13,13 +13,13 @@ const ICONS = { FileText, Map, Signpost, Users, ShieldCheck, Mail, Plane }
 
 const RWANDA_GALLERY_TILES = [
   {
-    src: '/Pictures/countries/Rwandaa.jpg',
+    src: '/images/countries/rwanda-alt.webp',
     alt: 'Mountain gorilla in Volcanoes National Park, Rwanda',
     title: 'Mountain Gorillas',
     subtitle: "Volcanoes National Park",
   },
   {
-    src: '/Pictures/Rwanda/Rwanda_GCard.JPG',
+    src: '/images/rwanda/rwanda-gcard.webp',
     alt: 'Kibuye lakeside scenery in Rwanda',
     title: 'Kibuye',
     subtitle: 'Where Rwanda comes to Breathe',
@@ -184,7 +184,7 @@ export function Rwanda() {
 
               <div className="relative min-h-[260px] bg-cocoa">
                 <img
-                  src="/Pictures/Rwanda/Golden_Monkey.JPG"
+                  src="/images/rwanda/golden-monkey.webp"
                   alt="Golden monkey in Rwanda"
                   loading="lazy"
                   className="size-full object-cover opacity-80"

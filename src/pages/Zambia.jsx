@@ -20,31 +20,31 @@ import { ZAMBIA_DATA } from '../data/zambiaContent.js'
 
 const ZAMBIA_GALLERY_TILES = [
   {
-    src: '/Pictures/zambia/victoria_falls.jpg',
+    src: '/images/zambia/victoria-falls.webp',
     alt: 'Victoria Falls on the Zambezi River, Zambia',
     title: 'Victoria Falls',
     subtitle: 'The Smoke That Thunders',
   },
   {
-    src: '/Pictures/zambia/leopard.jpg',
+    src: '/images/zambia/leopard.webp',
     alt: 'Leopard in South Luangwa National Park, Zambia',
     title: 'South Luangwa',
     subtitle: 'Premier walking-safari wildlife',
   },
   {
-    src: '/Pictures/Countries_Images/Zambia/IMG_5498.JPG',
+    src: '/images/zambia/img-5498.webp',
     alt: 'Sunset over the Zambezi River seen through riverside trees, Zambia',
     title: 'Zambezi Sunsets',
     subtitle: 'Golden evenings on the river',
   },
   {
-    src: '/Pictures/zambia/elephants_savanna.jpg',
+    src: '/images/zambia/elephants-savanna.webp',
     alt: 'Elephant herd in the Zambian savanna',
     title: 'Elephant Herds',
     subtitle: 'Wild Zambia, up close',
   },
   {
-    src: '/Pictures/zambia/Zambiaaaa_People.jpg',
+    src: '/images/zambia/zambia-people.webp',
     alt: 'Traditional dancers in ceremonial dress, Zambia',
     title: 'Zambian Culture',
     subtitle: 'Vibrant traditions, living heritage',
@@ -99,7 +99,7 @@ export function Zambia() {
         id="travel-in-zambia"
         className="relative isolate overflow-hidden bg-cream py-16 lg:py-24"
         style={{
-          backgroundImage: 'url(/Pictures/Background/zambia_travel_section_bg.png)',
+          backgroundImage: 'url(/images/backgrounds/zambia-travel-section-bg.webp)',
           backgroundPosition: 'bottom center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -345,7 +345,7 @@ export function Zambia() {
       {/* 5. Practical Guide — landscape strip pinned to the footer edge */}
       <section className="relative isolate overflow-hidden bg-cream pt-16 sm:pt-20 lg:pt-24">
         <img
-          src="/Pictures/Background/zambia_practical_guide_bg.png"
+          src="/images/backgrounds/zambia-practical-guide-bg.webp"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 w-full"

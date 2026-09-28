@@ -264,7 +264,7 @@ export function Payment() {
               includesHeading="Land & Property Guidance Includes"
               helpHeading="Need Help With Payment?"
               helpText="If you have any questions about payment options or are experiencing issues, please contact us."
-              secondaryPhoto="/Pictures/countries/Ghana.jpg"
+              secondaryPhoto="/images/countries/ghana.webp"
               secondaryPhotoAlt="Coastal land overlooking the Ghanaian coastline"
               secondaryCaption={copy.sidebarCaption2}
             />

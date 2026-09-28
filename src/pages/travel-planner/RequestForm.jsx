@@ -833,9 +833,9 @@ export function RequestForm() {
       <PlannerBackground />
       <PlannerStepHero
         badge="Travel Planner"
-        badgeImage="/Pictures/umbrella.PNG"
+        badgeImage="/images/services/travel-planner/umbrella-badge.webp"
         badgeImageAlt="Travel Planner"
-        backgroundImage="/Pictures/TRV_HR.PNG"
+        backgroundImage="/images/services/travel-planner/travel-planner-step-hero.webp"
       />
 
       <section className="py-12 lg:py-16">

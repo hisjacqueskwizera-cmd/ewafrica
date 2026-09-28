@@ -423,7 +423,7 @@ export async function generateApplicationPdf({ data, referenceNumber, submittedA
 
   let logo = null
   try {
-    logo = await loadImage('/Logos/East-West.png')
+    logo = await loadImage('/brand/logo.png')
   } catch {
     logo = null // Missing/blocked image shouldn't stop the download.
   }
@@ -656,7 +656,7 @@ async function appendAttachments(merged, documents) {
 
   let logoImage = null
   try {
-    const logoBytes = await fetch('/Logos/East-West.png').then((res) => res.arrayBuffer())
+    const logoBytes = await fetch('/brand/logo.png').then((res) => res.arrayBuffer())
     logoImage = await merged.embedPng(logoBytes)
   } catch {
     logoImage = null // Branding is best-effort — a missing/blocked logo shouldn't stop attachments.

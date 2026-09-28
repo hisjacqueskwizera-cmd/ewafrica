@@ -30,12 +30,12 @@
 // janky. Plain scroll-with-the-page attachment fixes both.
 //
 // The source art is served as a .webp (re-encoded from the original
-// Rwanda_Background.PNG, same pixels, quality 80) — 322KB vs. the PNG's
+// Rwanda background PNG, same pixels, quality 80) — 322KB vs. the PNG's
 // 1MB, so painting this large a background costs a lot less decode/memory
 // on every Rwanda page without changing how it looks.
 export const RWANDA_PAGE_BACKGROUND_STYLE = {
   backgroundImage:
-    'linear-gradient(rgba(252, 246, 236, 0.6), rgba(252, 246, 236, 0.6)), url(/Pictures/Background/Rwanda_Background.webp)',
+    'linear-gradient(rgba(252, 246, 236, 0.6), rgba(252, 246, 236, 0.6)), url(/images/backgrounds/rwanda-background.webp)',
   backgroundPosition: 'top center, top center',
   backgroundRepeat: 'no-repeat, no-repeat',
   backgroundSize: 'cover, cover',

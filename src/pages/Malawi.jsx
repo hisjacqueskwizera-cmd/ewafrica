@@ -30,31 +30,31 @@ import { MALAWI_PAGE } from '../data/siteContent.js'
 
 const MALAWI_GALLERY_TILES = [
   {
-    src: '/Pictures/Malawi.JPG',
+    src: '/images/malawi/malawi.webp',
     alt: 'The MV Ilala ferry crossing Lake Malawi',
     title: 'Lake Malawi',
     subtitle: "The MV Ilala crossing Africa's warm heart",
   },
   {
-    src: '/Pictures/Malawi/Gallery/majete_elephants.jpg',
+    src: '/images/malawi/gallery/majete-elephants.webp',
     alt: 'Elephants along the Shire River in Majete Wildlife Reserve, Malawi',
     title: 'Majete Wildlife Reserve',
     subtitle: 'Elephants along the Shire River',
   },
   {
-    src: '/Pictures/Malawi/Gallery/lake_malawi_sunset.jpg',
+    src: '/images/malawi/gallery/lake-malawi-sunset.webp',
     alt: 'Sunset over Lake Malawi framed by a palm tree',
     title: 'Lake Malawi',
     subtitle: "Sunset over Africa's warm heart",
   },
   {
-    src: '/Pictures/Malawi/Gallery/likoma_cathedral.jpg',
+    src: '/images/malawi/gallery/likoma-cathedral.webp',
     alt: "St Peter's Cathedral on Likoma Island, Lake Malawi",
     title: 'Likoma Island',
     subtitle: "St Peter's Cathedral, a lakeside landmark",
   },
   {
-    src: '/Pictures/Malawi/Gallery/tea_plantation.jpg',
+    src: '/images/malawi/gallery/tea-plantation.webp',
     alt: 'Rolling tea plantations in the Malawian highlands',
     title: 'Highland Tea Estates',
     subtitle: 'Rolling tea plantations in the highlands',
@@ -63,13 +63,13 @@ const MALAWI_GALLERY_TILES = [
 
 const MALAWI_GALLERY_EXTRA_TILES = [
   {
-    src: '/Pictures/Malawi/Gallery/majete_zebras.jpg',
+    src: '/images/malawi/gallery/majete-zebras.webp',
     alt: 'Zebras at dawn in Majete Wildlife Reserve, Malawi',
     title: 'Majete Wildlife Reserve',
     subtitle: 'Zebras grazing at first light',
   },
   {
-    src: '/Pictures/Malawi/Gallery/usisya_village.jpg',
+    src: '/images/malawi/gallery/usisya-village.webp',
     alt: 'Usisya village and Lake Malawi seen from the highlands above',
     title: 'Usisya',
     subtitle: 'A remote lakeshore village seen from above',

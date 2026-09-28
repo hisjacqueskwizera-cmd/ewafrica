@@ -1,25 +1,24 @@
-// Ordered numerically (filenames use a "(n)" suffix, so a plain sort would
-// put "(10)" right after "(1)").
+// Zero-padded so the play order matches a plain sort of the filenames.
 const FILENAMES = [
-  'Hero_section (1).mp4',
-  'Hero_section (2).mp4',
-  'Hero_section (3).mp4',
-  'Hero_section (4).mp4',
-  'Hero_section (5).mp4',
-  'Hero_section (6).mp4',
-  'Hero_section (7).mp4',
-  'Hero_section (8).mp4',
-  'Hero_section (9).mp4',
-  'Hero_section (10).mp4',
+  'hero-01.mp4',
+  'hero-02.mp4',
+  'hero-03.mp4',
+  'hero-04.mp4',
+  'hero-05.mp4',
+  'hero-06.mp4',
+  'hero-07.mp4',
+  'hero-08.mp4',
+  'hero-09.mp4',
+  'hero-10.mp4',
 ]
 
 // Per-clip watch limit in seconds. Every clip plays in full except this one,
 // which cuts to the next clip after 14s regardless of its real length.
 const WATCH_CAP_SECONDS = {
-  'Hero_section (1).mp4': 14,
+  'hero-01.mp4': 14,
 }
 
 export const HERO_VIDEOS = FILENAMES.map((name) => ({
-  src: encodeURI(`/Videos/${name}`),
+  src: `/videos/hero/${name}`,
   capSeconds: WATCH_CAP_SECONDS[name] ?? null,
 }))

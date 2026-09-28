@@ -399,7 +399,7 @@ export function RequestForm() {
 
             <PlannerSidebar
               heading="Right of Abode Guidance"
-              photo="/Pictures/image_Ghana.webp"
+              photo="/images/ghana/ghana-featured.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline"
               price={price}
               includes={GHANA_RIGHT_OF_ABODE_FLOW.includes}

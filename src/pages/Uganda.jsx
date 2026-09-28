@@ -12,31 +12,31 @@ const ICONS = { FileText, Bus, Car, Users }
 
 const UGANDA_GALLERY_TILES = [
   {
-    src: '/Pictures/Uganda/Gallery/murchison_falls_wide.jpg',
+    src: '/images/uganda/gallery/murchison-falls-wide.webp',
     alt: 'The Nile bursting through a narrow gorge at Murchison Falls, Uganda',
     title: 'Murchison Falls',
     subtitle: 'The Nile bursts through a narrow gorge',
   },
   {
-    src: '/Pictures/Uganda/Gallery/murchison_boat_safari.jpg',
+    src: '/images/uganda/gallery/murchison-boat-safari.webp',
     alt: 'A boat safari approaching Murchison Falls on the Victoria Nile',
     title: 'Murchison Falls',
     subtitle: 'A boat safari on the Victoria Nile',
   },
   {
-    src: '/Pictures/Uganda/Gallery/nile_cliffs.jpg',
+    src: '/images/uganda/gallery/nile-cliffs.webp',
     alt: 'Sandstone cliffs above the Nile River in Murchison Falls National Park',
     title: 'The Nile River',
     subtitle: 'Sandstone cliffs above the water',
   },
   {
-    src: '/Pictures/Uganda/Gallery/heron_sunset.jpg',
+    src: '/images/uganda/gallery/heron-sunset.webp',
     alt: 'A heron silhouetted at sunset on Lake Victoria, Uganda',
     title: 'Lake Victoria',
     subtitle: 'A heron silhouetted at sunset',
   },
   {
-    src: '/Pictures/Uganda/Gallery/murchison_elephant.jpg',
+    src: '/images/uganda/gallery/murchison-elephant.webp',
     alt: 'An elephant with egrets and a kob antelope along the Nile in Murchison Falls National Park',
     title: 'Murchison Falls National Park',
     subtitle: 'Elephants and wildlife along the Nile',
@@ -45,13 +45,13 @@ const UGANDA_GALLERY_TILES = [
 
 const UGANDA_GALLERY_EXTRA_TILES = [
   {
-    src: '/Pictures/Uganda/Gallery/lake_victoria_cormorants.jpg',
+    src: '/images/uganda/gallery/lake-victoria-cormorants.webp',
     alt: 'Cormorants resting on a fishing boat on Lake Victoria, Uganda',
     title: 'Lake Victoria',
     subtitle: 'Cormorants resting on a fishing boat',
   },
   {
-    src: '/Pictures/Uganda/Gallery/highland_road.jpg',
+    src: '/images/uganda/gallery/highland-road.webp',
     alt: "A road winding through Uganda's tea-covered western highlands",
     title: 'Western Highlands',
     subtitle: 'Roads winding through tea country',
@@ -194,8 +194,8 @@ export function Uganda() {
           <div className="grid gap-6 lg:grid-cols-2">
             <Reveal from="left" className="relative isolate min-h-72 overflow-hidden rounded-3xl">
               <video
-                src="/Pictures/Uganda/optimized/uganda_side.mp4"
-                poster="/Pictures/Uganda/optimized/uganda_side_poster.jpg"
+                src="/videos/uganda/uganda-side.mp4"
+                poster="/videos/uganda/uganda-side-poster.webp"
                 aria-hidden="true"
                 muted
                 loop
@@ -246,7 +246,7 @@ export function Uganda() {
               </div>
               <div className="hidden w-1/3 shrink-0 sm:block">
                 <img
-                  src='Pictures/Uganda/Uganda_trees.JPG'
+                  src='/images/uganda/uganda-trees.webp'
                   alt="Uganda's green hills and forests"
                   loading="lazy"
                   className="size-full object-cover"

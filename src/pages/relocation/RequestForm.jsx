@@ -608,7 +608,7 @@ export function RequestForm() {
 
             <PlannerSidebar
               heading="Complete Relocation Package"
-              photo="/Pictures/explore/ghana-card-background.webp"
+              photo="/images/explore/ghana-card-background.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline at sunset"
               price={price}
               includes={GHANA_RELOCATION_FLOW.includes}

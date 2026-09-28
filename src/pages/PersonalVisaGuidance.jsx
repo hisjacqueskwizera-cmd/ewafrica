@@ -22,7 +22,7 @@ import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
 import { PhoneConsultationModal } from '../components/visa-guidance/PhoneConsultationModal.jsx'
 
 const ICONS = { Search, FileText, Mail, Phone, Clock, ShieldCheck }
-const GENERIC_IMAGE = '/Pictures/VisaGuidance/Hero.JPG'
+const GENERIC_IMAGE = '/images/services/visa-guidance/visa-guidance-hero.webp'
 const MAX_COUNTRIES = 4
 
 export function PersonalVisaGuidance() {
@@ -178,7 +178,7 @@ export function PersonalVisaGuidance() {
                 <div className="overflow-hidden rounded-3xl shadow-card border border-border">
                   <div className="relative aspect-16/10 overflow-hidden">
                     <img
-                      src="/Pictures/VisaGuidance/Hero.JPG"
+                      src="/images/services/visa-guidance/visa-guidance-hero.webp"
                       alt="Mount Kilimanjaro overlooking African savanna"
                       className="size-full object-cover"
                     />

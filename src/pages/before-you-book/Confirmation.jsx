@@ -159,7 +159,7 @@ export function Confirmation() {
               includes={BEFORE_YOU_BOOK_FLOW.includes}
               includesHeading="Before You Book Check Includes"
               caption={copy.sidebarCaption}
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

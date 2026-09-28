@@ -40,7 +40,7 @@ export function ZambiaPracticalGuide() {
       <DestinationHero
         heading="Zambia Practical Guide"
         description="Everything you need to plan a smooth, confident trip — from Victoria Falls and safari country to money, transport and border crossings."
-        backgroundImage="/Pictures/zambia/Hero_Section/Zambia_Pr_Hero_Section.JPG"
+        backgroundImage="/images/zambia/zambia-practical-guide-hero.webp"
         backgroundImageAlt="The Zambezi River rushing through the Batoka Gorge below Victoria Falls, Zambia"
       />
 

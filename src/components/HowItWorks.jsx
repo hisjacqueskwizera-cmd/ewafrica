@@ -201,7 +201,7 @@ export function HowItWorks() {
         aria-hidden="true"
         className="pointer-events-none absolute right-[-46rem] top-[64%] hidden -translate-y-1/2 opacity-50 md:block md:right-[-42rem] md:top-[62%] lg:right-[-36rem] lg:top-[64%]"
         style={{
-          backgroundImage: "url('/Pictures/HowWeGuideYourJourney/Map_Of_Africa.PNG')",
+          backgroundImage: "url('/images/home/map-of-africa.webp')",
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',

@@ -51,7 +51,7 @@ export const COUNTRIES = [
     featuredLabel: 'Featured Country',
     to: '/ghana',
     tone: 'copper',
-    image: '/Pictures/Ghana_Home_Card.JPG',
+    image: '/images/ghana/ghana-home-card.webp',
     flag: '🇬🇭',
   },
   {
@@ -62,7 +62,7 @@ export const COUNTRIES = [
     displayName: 'Tanzania (Zanzibar)',
     to: '/tanzania',
     tone: 'forest',
-    image: '/Pictures/countries/Tanzania.jpg',
+    image: '/images/countries/tanzania.webp',
     flag: '🇹🇿',
   },
   {
@@ -72,7 +72,7 @@ export const COUNTRIES = [
     note: 'The Warm Heart of Africa',
     to: '/malawi',
     tone: 'forest',
-    image: '/Pictures/Malawi_Card.JPG',
+    image: '/images/malawi/malawi-card.webp',
     flag: '🇲🇼',
   },
   {
@@ -82,7 +82,7 @@ export const COUNTRIES = [
     note: 'The Real Africa - Victoria Falls and Beyond',
     to: '/zambia',
     tone: 'navy',
-    image: '/Pictures/Zambia_Card.JPG',
+    image: '/images/zambia/img-3945.webp',
     flag: '🇿🇲',
   },
   {
@@ -92,7 +92,7 @@ export const COUNTRIES = [
     note: 'Pearl of Africa',
     to: '/uganda',
     tone: 'forest',
-    image: '/Pictures/countries/Uganda.jpg',
+    image: '/images/countries/uganda.webp',
     flag: '🇺🇬',
   },
   {
@@ -102,7 +102,7 @@ export const COUNTRIES = [
     note: 'Land of a Thousand Hills',
     to: '/rwanda',
     tone: 'navy',
-    image: '/Pictures/RwandaCard.JPG',
+    image: '/images/rwanda/rwanda-card.webp',
     flag: '🇷🇼',
   },
   {
@@ -112,7 +112,7 @@ export const COUNTRIES = [
     note: 'Destination Senegal, Land of Teranga',
     to: '/senegal',
     tone: 'copper',
-    image: '/Pictures/Senegal_Card.JPG',
+    image: '/images/senegal/senegal-card.webp',
     flag: '🇸🇳',
   },
   {
@@ -122,7 +122,7 @@ export const COUNTRIES = [
     note: 'The Cradle of Voodoo',
     to: '/benin',
     tone: 'copper',
-    image: '/Pictures/countries/BeninReal.JPG',
+    image: '/images/countries/benin.webp',
     flag: '🇧🇯',
   },
   {
@@ -132,7 +132,7 @@ export const COUNTRIES = [
     note: 'The Smiling Coast of Africa',
     to: '/gambia',
     tone: 'copper',
-    image: encodeURI('/Pictures/countries/The gambia.jpg'),
+    image: encodeURI('/images/countries/the-gambia.webp'),
     flag: '🇬🇲',
   },
 ]
@@ -150,35 +150,35 @@ export const SERVICES = [
     // to a destination, so it lands on the version with the destination
     // chooser rather than assuming one country (see PersonalVisaGuidance.jsx).
     to: '/personal-visa-guidance',
-    image: '/Pictures/Visa_Entry.png',
+    image: '/images/services/visa-guidance/visa-entry.webp',
   },
   {
     icon: 'Home',
     title: 'Ghana Travel and Relocation',
     description: 'End-to-end support for individuals and families relocating to a new life in Africa.',
     to: '/ghana',
-    image: '/Pictures/Relocation.jpg',
+    image: '/images/services/relocation/relocation.webp',
   },
   {
     icon: 'FileText',
     title: 'Border Crossings',
     description: 'Navigate land borders with ease, backed by up-to-date, on-the-ground advice.',
     to: '/travel-planner/border-crossing-guide',
-    image: '/Pictures/Border_crossing.jpg',
+    image: '/images/services/border-crossing/border-crossing.webp',
   },
   {
     icon: 'Building2',
     title: 'Ghana Right of Abode',
     description: 'Market insight, setup support and local connections to start, invest and grow.',
     to: '/ghana/right-of-abode-guidance',
-    image: '/Pictures/Investment-Opportunities-in-Africa.PNG',
+    image: '/images/services/business/investment-opportunities.webp',
   },
   {
     icon: 'Users',
     title: 'Find a Local Guide',
     description: "Connect with trusted, vetted local guides who know the places and the people.",
     to: '/independent-tour-guide',
-    image: '/Pictures/local_guide.jpg',
+    image: '/images/services/tour-guides/local-guide.webp',
   },
 ]
 
@@ -231,14 +231,14 @@ export const HOW_IT_WORKS = [
   },
 ]
 
-// `slides` are web-sized copies (max 1920px, WebP) of the photos in
-// public/Explore_regions/<Region>/ — the originals run up to 8K and 5.5MB
-// each, far more than a card needs. Listed by their original file numbers,
-// which is also the order each card's background slideshow plays them in
-// (the first slide is also the still shown for prefers-reduced-motion).
+// `slides` are web-sized copies (max 1920px, WebP) in
+// public/images/explore/<region>/ — the 8K originals are kept out of the
+// build in media-originals/. Listed by their original file numbers, which
+// is also the order each card's background slideshow plays them in (the
+// first slide is also the still shown for prefers-reduced-motion).
 // `image` is only a fallback for an entry without slides.
 const regionSlides = (folder, numbers) =>
-  numbers.map((n) => `/Explore_regions/optimized/${folder}/${n}.webp`)
+  numbers.map((n) => `/images/explore/${folder}/${n}.webp`)
 
 export const REGIONS = [
   {
@@ -246,7 +246,7 @@ export const REGIONS = [
     name: 'East Africa',
     tone: 'forest',
     to: '/explore#east-africa',
-    image: '/Pictures/countries/Tanzania.jpg',
+    image: '/images/countries/tanzania.webp',
     slides: regionSlides('east-africa', [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
     countries: COUNTRIES.filter((c) => c.region === 'east').map((c) => ({
       name: c.displayName ?? c.name,
@@ -263,7 +263,7 @@ export const REGIONS = [
     name: 'West Africa',
     tone: 'copper',
     to: '/explore#west-africa',
-    image: '/Pictures/countries/Ghana.jpg',
+    image: '/images/countries/ghana.webp',
     slides: regionSlides('west-africa', [1, 2, 3, 4, 5, 6, 7, 8]),
     countries: COUNTRIES.filter((c) => c.region === 'west').map((c) => ({
       name: c.displayName ?? c.name,
@@ -348,7 +348,7 @@ export const ABOUT_PAGE = {
       'We provide practical research, personalized guidance, and trusted local connections to help you make better-informed decisions before and during your journey.',
       'Our focus is East and West Africa, with growing coverage across selected destinations in both regions.',
     ],
-    image: '/Pictures/about/mission-nkrumah-statue.webp',
+    image: '/images/about/mission-nkrumah-statue.webp',
     imageAlt: 'Bronze statue of Kwame Nkrumah at the Kwame Nkrumah Memorial Park in Accra, Ghana',
   },
   approach: {
@@ -358,10 +358,10 @@ export const ABOUT_PAGE = {
       'Sometimes the most valuable information is simply knowing which border to use, where a bus actually departs, what documents to prepare, or who to contact locally.',
     ],
     closing: 'Those practical details are at the heart of East-West Africa Link.',
-    image: '/Pictures/countries/Tanzania.jpg',
+    image: '/images/countries/tanzania.webp',
     imageAlt: 'Safari vehicle watching lions on the East African savanna',
     // The tall photo filling the row's other column.
-    featureImage: '/Pictures/about/approach-bismarck-rock.webp',
+    featureImage: '/images/about/approach-bismarck-rock.webp',
     featureImageAlt: 'Bismarck Rock rising from Lake Victoria at dusk in Mwanza, Tanzania',
   },
   // The homepage Founder teaser's "Read The Full Bio" button links here
@@ -369,7 +369,7 @@ export const ABOUT_PAGE = {
   founder: {
     eyebrow: 'Meet The Founder',
     heading: "I'm Humphrey",
-    photo: '/Pictures/Founder/Founder.jpg',
+    photo: '/images/about/founder.webp',
     photoAlt: 'Humphrey, founder of East-West Africa Link',
     quote: 'Africa has a way of changing you for the better.',
     quoteAttribution: 'Humphrey',
@@ -388,7 +388,7 @@ export const ABOUT_PAGE = {
         ],
         closing: 'For me, the journey itself is often one of the most memorable parts of travel.',
         // Full-bleed backdrop for this highlight's feature section.
-        image: '/Pictures/about/feature-dhow.webp',
+        image: '/images/about/feature-dhow.webp',
         imageAlt: 'A traditional dhow under sail on the Indian Ocean',
       },
       {
@@ -408,28 +408,28 @@ export const ABOUT_PAGE = {
       icon: 'Globe2',
       title: 'Focused on East and West Africa',
       text: 'Growing coverage across selected destinations',
-      image: '/Explore_regions/optimized/east-africa/15.webp',
+      image: '/images/explore/east-africa/15.webp',
       imageAlt: 'Elephants crossing the plains below Mount Kilimanjaro',
     },
     {
       icon: 'FileText',
       title: 'Practical Information You Can Use',
       text: 'Research you can act on, not generic advice',
-      image: '/Explore_regions/optimized/west-africa/4.webp',
+      image: '/images/explore/west-africa/4.webp',
       imageAlt: 'A grand mosque with tall minarets above a busy West African town',
     },
     {
       icon: 'Handshake',
       title: 'Trusted Local Connections',
       text: 'Vetted guides and on-the-ground contacts',
-      image: '/Explore_regions/optimized/west-africa/7.webp',
+      image: '/images/explore/west-africa/7.webp',
       imageAlt: 'Dancers and drummers at a traditional ceremony in West Africa',
     },
     {
       icon: 'ShieldCheck',
       title: 'Independent, Honest and Transparent',
       text: 'No hidden commissions, ever',
-      image: '/Explore_regions/optimized/east-africa/7.webp',
+      image: '/images/explore/east-africa/7.webp',
       imageAlt: 'Hartebeest running past an acacia tree on the savanna',
     },
   ],
@@ -445,7 +445,7 @@ export const ABOUT_PAGE = {
 // component references), and copy centralized here rather than inline in
 // the page file, matching every other page's data (ABOUT_PAGE etc.).
 //
-// Every image below reuses /Pictures/countries/Tanzania.jpg — the only
+// Every image below reuses /images/countries/tanzania.webp — the only
 // Tanzania-specific photo in the project (no dedicated Zanzibar, safari-
 // route, or flag-icon assets exist yet). The four service cards used one
 // repeated photo in the reference too, so this isn't a step down, just a
@@ -480,7 +480,7 @@ export const TANZANIA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Tanzania.PNG',
+      image: '/images/services/visa-guidance/cards/tanzania.webp',
     },
     {
       icon: 'Bus',
@@ -495,7 +495,7 @@ export const TANZANIA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Tanzania.png',
+      image: '/images/services/travel-planner/cards/tanzania.webp',
     },
     {
       icon: 'ShieldCheck',
@@ -510,7 +510,7 @@ export const TANZANIA_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/Border_Crossing/Tanzania_Border_crossing.PNG',
+      image: '/images/services/border-crossing/tanzania-border-crossing.webp',
     },
     {
       icon: 'Users',
@@ -545,31 +545,31 @@ export const TANZANIA_PAGE = {
       'Practical travel tips',
     ],
     cta: { label: 'Read the Tanzania & Zanzibar Travel Guide', to: '/tanzania/practical-guide#guide-overview' },
-    image: '/Pictures/countries/Tanzania.jpg',
+    image: '/images/countries/tanzania.webp',
     imageAlt: 'Safari vehicle and lions on the Tanzanian savanna',
   },
   // Unlike the reference (which fell back to an unrelated stock photo for
   // Rwanda), every route here has a real matching photo already in
-  // public/Pictures/countries.
+  // public/images/countries.
   routes: [
     {
       to: 'Malawi',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/images/countries/malawi.webp',
       text: 'Practical route planning and border-crossing information for travellers continuing south between Tanzania and Malawi.',
     },
     {
       to: 'Zambia',
-      image: '/Pictures/countries/Zambia.jpg',
+      image: '/images/countries/zambia.webp',
       text: 'Information and personalized planning for overland travel between Tanzania and Zambia.',
     },
     {
       to: 'Rwanda',
-      image: '/Pictures/countries/Rwanda.jpg',
+      image: '/images/countries/rwanda.webp',
       text: 'Route research and practical information for travellers moving between Tanzania and Rwanda.',
     },
     {
       to: 'Uganda',
-      image: '/Pictures/countries/Uganda.jpg',
+      image: '/images/countries/uganda.webp',
       text: 'Planning an overland journey between Tanzania and Uganda? We can help research practical route options and connections.',
     },
   ],
@@ -670,7 +670,7 @@ export const ZAMBIA_PAGE = {
     tagline: 'Explore. Plan. Travel with Confidence.',
     description:
       'Practical information and personalized support to help you travel, explore, and navigate opportunities in Zambia.',
-    image: '/Pictures/countries/Zambia.jpg',
+    image: '/images/countries/zambia.webp',
     imageAlt: 'Victoria Falls with a rainbow arcing over the gorge in Zambia',
     watermark: 'Zambia',
     watermarkCaption: ['Stunning Landscapes.', 'Welcoming People.', 'Real Possibilities.'],
@@ -694,7 +694,7 @@ export const ZAMBIA_PAGE = {
         'Entry points and arrival info',
         'Questions about your specific plans',
       ],
-      image: '/Pictures/PersonalVisaGuidanceCards/Zambia.PNG',
+      image: '/images/services/visa-guidance/cards/zambia.webp',
       to: '/personal-visa-guidance/zambia',
     },
     {
@@ -710,7 +710,7 @@ export const ZAMBIA_PAGE = {
         'Border connections',
         'Practical travel tips',
       ],
-      image: '/Pictures/Travel planner.PNG',
+      image: '/images/services/travel-planner/travel-planner-card.webp',
       to: '/travel-planner?destination=zambia',
     },
     {
@@ -726,7 +726,7 @@ export const ZAMBIA_PAGE = {
         'Approx. travel times',
         'Practical tips',
       ],
-      image: '/Pictures/Border_crossing.jpg',
+      image: '/images/services/border-crossing/border-crossing.webp',
       to: '/travel-planner/border-crossing-guide?from=zambia',
     },
   ],
@@ -738,22 +738,22 @@ export const ZAMBIA_PAGE = {
   routes: [
     {
       to: 'Tanzania',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       text: 'Via Tunduma/Nakonde, a busy crossing linking Zambia with southern Tanzania.',
     },
     {
       to: 'Malawi',
-      image: '/Pictures/countries/Malawi.webp',
+      image: '/images/countries/malawi.webp',
       text: 'Via Mchinji or Mwami border, a popular crossing for travelers and traders.',
     },
     {
       to: 'Zimbabwe',
-      image: '/Explore_regions/optimized/east-africa/16.webp',
+      image: '/images/explore/east-africa/16.webp',
       text: 'Cross the Zambezi at Victoria Falls Bridge or Chirundu, linking the two countries.',
     },
     {
       to: 'Mozambique',
-      image: '/Explore_regions/optimized/east-africa/10.webp',
+      image: '/images/explore/east-africa/10.webp',
       text: 'Via Cassacatiza or Zumbo, a quieter overland route into northern Mozambique.',
     },
   ],
@@ -768,11 +768,11 @@ export const ZAMBIA_PAGE = {
     heading: 'A Land of Natural Beauty and Opportunity',
     body: 'From the mighty Zambezi to welcoming communities, Zambia offers unforgettable experiences for travelers, prospective residents, and entrepreneurs.',
     quote: ['Explore new places.', 'Discover new possibilities.'],
-    image: '/Pictures/countries/Zambia.jpg',
+    image: '/images/countries/zambia.webp',
     imageAlt: 'The Zambezi River at sunset in Zambia',
   },
   hero: {
-    image: '/Pictures/countries/Zambia.jpg',
+    image: '/images/countries/zambia.webp',
     imageAlt: 'Victoria Falls with a rainbow arcing over the gorge in Zambia',
     description:
       'From the thundering waters of Victoria Falls and the wildlife-rich plains of South Luangwa to the vast landscapes of the Lower Zambezi, Zambia offers an unforgettable mix of nature, adventure and authentic African travel.',
@@ -839,7 +839,7 @@ export const ZAMBIA_PAGE = {
     'Trains on selected routes',
   ],
   overland: {
-    image: '/Pictures/countries/Zambia.jpg',
+    image: '/images/countries/zambia.webp',
     imageAlt: 'Victoria Falls Bridge over the Zambezi gorge, the border crossing between Zambia and Zimbabwe',
     text: 'Zambia shares borders with several countries and is an important link between Southern and East Africa. Popular connections include:',
     neighbours: ['Tanzania & Zanzibar', 'Malawi', 'Zimbabwe', 'Botswana', 'Namibia', 'Mozambique'],
@@ -882,7 +882,7 @@ export const ZAMBIA_PAGE = {
     { icon: 'Bus', label: 'Travel Planner' },
     { icon: 'RouteIcon', label: 'Border Crossing Guides' },
   ],
-  helpPhoto: '/Pictures/countries/Tanzania.jpg',
+  helpPhoto: '/images/countries/tanzania.webp',
   trust: trustFor('Zambia'),
   farewell: {
     heading: 'Takulandirani ku Zambia. ❤️',
@@ -897,7 +897,7 @@ export const ZAMBIA_PAGE = {
 // service" banner.
 export const MALAWI_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/Malawi_Hero_Section.JPG',
+    backgroundImage: '/images/malawi/malawi-hero.webp',
     backgroundImageAlt: 'The Ilala ferry crossing Lake Malawi toward the mountains beyond',
     heading: 'Explore Malawi',
     description:
@@ -916,7 +916,7 @@ export const MALAWI_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Malawi.jpg',
+      image: '/images/services/visa-guidance/cards/malawi.webp',
     },
     {
       icon: 'Bus',
@@ -931,7 +931,7 @@ export const MALAWI_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Malawi.png',
+      image: '/images/services/travel-planner/cards/malawi.webp',
     },
     {
       icon: 'ShieldCheck',
@@ -946,23 +946,23 @@ export const MALAWI_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Crossing Guide',
-      image: '/Explore_regions/optimized/east-africa/12.webp',
+      image: '/images/explore/east-africa/12.webp',
     },
   ],
   routes: [
     {
       to: 'Tanzania',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       text: 'Via Kasumulu or Karonga border — a scenic route along Lake Malawi.',
     },
     {
       to: 'Zambia',
-      image: '/Pictures/countries/Zambia.jpg',
+      image: '/images/countries/zambia.webp',
       text: 'Via Mchinji or Mwami border, a popular crossing for travelers and traders.',
     },
     {
       to: 'Mozambique',
-      image: '/Explore_regions/optimized/east-africa/4.webp',
+      image: '/images/explore/east-africa/4.webp',
       text: 'Via Dedza or Mwanza border, with beautiful countryside views.',
     },
   ],
@@ -978,7 +978,7 @@ export const MALAWI_PAGE = {
   lakeBorder: {
     card: {
       title: 'Likoma Lake Crossings',
-      image: '/Pictures/Countries_Images/Malawi/IMG_4902.JPG',
+      image: '/images/malawi/img-4902.webp',
       text: 'Ferries from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, and Mbamba Bay in Tanzania.',
     },
     banner: {
@@ -987,7 +987,7 @@ export const MALAWI_PAGE = {
       titleAccent: 'Border Crossings',
       subtitle: 'Malawi – Mozambique & Tanzania',
       text: 'Lake crossings from Likoma connect Malawi with Cóbuè and Metangula in Mozambique, while the wider lake transport network also links toward Mbamba Bay in Tanzania.',
-      image: '/Pictures/Malawi_Hero_Section.JPG',
+      image: '/images/malawi/malawi-hero.webp',
       imageAlt: 'The Ilala ferry crossing Lake Malawi toward the mountains beyond',
     },
     eyebrow: 'Three Lake-Border Destinations',
@@ -998,19 +998,19 @@ export const MALAWI_PAGE = {
       {
         name: 'Cóbuè',
         country: 'Mozambique',
-        image: '/Explore_regions/optimized/east-africa/11.webp',
+        image: '/images/explore/east-africa/11.webp',
         text: 'A peaceful lakeside village surrounded by clear blue water, green hills, and an unhurried atmosphere. Cóbuè offers a beautiful introduction to the quieter, less-traveled side of Lake Malawi, with stunning views across the lake toward Likoma Island.',
       },
       {
         name: 'Metangula',
         country: 'Mozambique',
-        image: '/Explore_regions/optimized/east-africa/12.webp',
+        image: '/images/explore/east-africa/12.webp',
         text: "Set along Mozambique's scenic lakeshore, Metangula combines sweeping lake views, sandy shoreline, and a relaxed local atmosphere. It is a beautiful and peaceful stop along this quieter side of Lake Malawi.",
       },
       {
         name: 'Mbamba Bay',
         country: 'Tanzania',
-        image: '/Explore_regions/optimized/east-africa/2.webp',
+        image: '/images/explore/east-africa/2.webp',
         text: 'A picturesque Tanzanian lakeside town framed by rolling hills and the wide waters of Lake Malawi. Mbamba Bay offers a tranquil shoreline, attractive scenery, and a strong sense of being away from the usual tourist trail.',
       },
     ],
@@ -1075,7 +1075,7 @@ export const MALAWI_PAGE = {
         text: 'Malawians are friendly and welcoming. Respect local customs and dress modestly, especially in rural areas. Bargaining is normal in markets. A few words of Chichewa go a long way: "Moni" (hello) and "Zikomo" (thank you).',
       },
     ],
-    image: '/Pictures/MalawiSidePractical.JPG',
+    image: '/images/malawi/malawi-practical-guide.webp',
     imageAlt: 'Turquoise waters and sandy beach along Lake Malawi',
   },
   ctas: [
@@ -1105,7 +1105,7 @@ export const MALAWI_PAGE = {
 // has no trust row, and closes with a plain tagline instead of a farewell.
 export const UGANDA_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/countries/Uganda.jpg',
+    backgroundImage: '/images/countries/uganda.webp',
     backgroundImageAlt: 'Boats on a river winding through green hills at golden hour in Uganda',
     heading: 'Explore Uganda',
     description:
@@ -1124,7 +1124,7 @@ export const UGANDA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Uganda.PNG',
+      image: '/images/services/visa-guidance/cards/uganda.webp',
     },
     {
       icon: 'Bus',
@@ -1139,7 +1139,7 @@ export const UGANDA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Uganda.png',
+      image: '/images/services/travel-planner/cards/uganda.webp',
     },
     {
       icon: 'Car',
@@ -1154,28 +1154,28 @@ export const UGANDA_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/Border_Crossing/Uganda.JPG',
+      image: '/images/services/border-crossing/uganda.webp',
     },
   ],
   routes: [
     {
       to: 'Rwanda',
-      image: '/Pictures/countries/Rwanda.jpg',
+      image: '/images/countries/rwanda.webp',
       text: 'A scenic and popular route through beautiful highlands and rolling hills.',
     },
     {
       to: 'Tanzania',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       text: 'A well-traveled route with good transport options and stunning landscapes.',
     },
     {
       to: 'South Sudan',
-      image: '/Explore_regions/optimized/east-africa/5.webp',
+      image: '/images/explore/east-africa/5.webp',
       text: 'An overland journey through diverse landscapes and welcoming communities.',
     },
     {
       to: 'Kenya',
-      image: '/Explore_regions/optimized/east-africa/3.webp',
+      image: '/images/explore/east-africa/3.webp',
       text: 'Uganda shares four active official land border crossings with Kenya, The border crossing guide can provide the specific routes and crossing information for your journey.',
     },
   ],
@@ -1200,7 +1200,7 @@ export const UGANDA_PAGE = {
 // banner rather than a farewell strip.
 export const RWANDA_PAGE = {
   hero: {
-    image: '/Pictures/countries/Rwanda.jpg',
+    image: '/images/countries/rwanda.webp',
     imageAlt: 'Misty green hills and terraced farmland at sunrise in Rwanda',
     subheading: 'Land of a Thousand Hills',
     description:
@@ -1217,7 +1217,7 @@ export const RWANDA_PAGE = {
         'Visa extension information',
         'Answers to your specific questions',
       ],
-      image: '/Pictures/PersonalVisaGuidanceCards/Rwanda.PNG',
+      image: '/images/services/visa-guidance/cards/rwanda.webp',
     },
     {
       icon: 'Map',
@@ -1229,7 +1229,7 @@ export const RWANDA_PAGE = {
         'Timing between destinations',
         'Practical travel tips and logistics',
       ],
-      image: '/Pictures/Travel_Planner_Cards/Rwanda.PNG',
+      image: '/images/services/travel-planner/cards/rwanda.webp',
     },
     {
       icon: 'Signpost',
@@ -1241,28 +1241,28 @@ export const RWANDA_PAGE = {
         'What to expect at the border',
         'Tips for a smoother crossing',
       ],
-      image: '/Pictures/Border_Crossing/Rwanda.jpg',
+      image: '/images/services/border-crossing/rwanda.webp',
     },
   ],
   routes: [
     {
       to: 'Uganda',
-      image: '/Pictures/countries/Uganda.jpg',
+      image: '/images/countries/uganda.webp',
       text: 'A popular route through beautiful highlands, connecting Kigali with southwestern Uganda.',
     },
     {
       to: 'Tanzania',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       text: 'Overland connections through the Kagera region, linking Rwanda with northwestern Tanzania.',
     },
     {
       to: 'Burundi',
-      image: '/Explore_regions/optimized/east-africa/7.webp',
+      image: '/images/explore/east-africa/7.webp',
       text: 'A short overland route south to Bujumbura, sharing similar landscapes and culture.',
     },
     {
       to: 'DR Congo',
-      image: '/Explore_regions/optimized/east-africa/8.webp',
+      image: '/images/explore/east-africa/8.webp',
       text: 'Crossings near Lake Kivu connect Rwanda with the eastern DR Congo.',
     },
   ],
@@ -1300,7 +1300,7 @@ export const RWANDA_PAGE = {
 // which service" banner.
 export const SENEGAL_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/countries/Senegal.webp',
+    backgroundImage: '/images/countries/senegal.webp',
     backgroundImageAlt: 'Colorful pirogue boats beside a coastal fort in Senegal',
     heading: 'Explore Senegal',
     description:
@@ -1318,7 +1318,7 @@ export const SENEGAL_PAGE = {
         'Entry points & arrival info',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Senegal.PNG',
+      image: '/images/services/visa-guidance/cards/senegal.webp',
     },
     {
       icon: 'Bus',
@@ -1332,7 +1332,7 @@ export const SENEGAL_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Senegal.png',
+      image: '/images/services/travel-planner/cards/senegal.webp',
     },
     {
       icon: 'ShieldCheck',
@@ -1346,28 +1346,28 @@ export const SENEGAL_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/Explore_regions/optimized/west-africa/3.webp',
+      image: '/images/explore/west-africa/3.webp',
     },
   ],
   routes: [
     {
       to: 'The Gambia',
-      image: encodeURI('/Pictures/countries/The gambia.jpg'),
+      image: encodeURI('/images/countries/the-gambia.webp'),
       text: 'A popular route with frequent crossings at Farafenni.',
     },
     {
       to: 'Mali',
-      image: '/Explore_regions/optimized/west-africa/2.webp',
+      image: '/images/explore/west-africa/2.webp',
       text: 'Common entry through Kidira or Kayes.',
     },
     {
       to: 'Mauritania',
-      image: '/Explore_regions/optimized/west-africa/3.webp',
+      image: '/images/explore/west-africa/3.webp',
       text: 'Overland route via Rosso with regular transport.',
     },
     {
       to: 'Guinea',
-      image: '/Explore_regions/optimized/west-africa/4.webp',
+      image: '/images/explore/west-africa/4.webp',
       text: 'Route via Kolda or Mako with shared transport.',
     },
   ],
@@ -1411,14 +1411,14 @@ export const SENEGAL_PAGE = {
         text: 'Give yourself enough time, carry some cash, and keep your itinerary flexible. Respect local customs, protect the environment, and travel with an open mind.',
       },
     ],
-    image: '/Pictures/Countries_Images/Senegal/IMG_4185.JPG',
+    image: '/images/senegal/img-4185.webp',
     imageAlt: 'Painted pirogues and a crowded fishing beach on the Senegalese coast',
   },
   closing: {
     eyebrow: 'Need Personalized Guidance?',
     text: 'Tell us where you are traveling, when you plan to go and what you need help with.',
     cta: { label: 'Get Personalized Guidance', to: '/#contact' },
-    image: '/Pictures/Countries_Images/Senegal/IMG_5465.JPG',
+    image: '/images/senegal/img-5465.webp',
     helpWith: [
       { icon: 'FileText', label: 'Personal Visa Guidance' },
       { icon: 'Bus', label: 'Travel Planner' },
@@ -1437,7 +1437,7 @@ export const SENEGAL_PAGE = {
 // Benin" destinations grid the generic template has no room for.
 export const BENIN_PAGE = {
   hero: {
-    backgroundImage: '/Pictures/Benin/Benin_Hero.jpg',
+    backgroundImage: '/images/benin/benin-hero.webp',
     backgroundImageAlt: 'Benin hero portrait',
     heading: 'Explore Benin',
     description:
@@ -1455,7 +1455,7 @@ export const BENIN_PAGE = {
         'Entry points and arrival info',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Benin.PNG',
+      image: '/images/services/visa-guidance/cards/benin.webp',
     },
     {
       icon: 'Bus',
@@ -1469,7 +1469,7 @@ export const BENIN_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Benin.png',
+      image: '/images/services/travel-planner/cards/benin.webp',
     },
     {
       icon: 'Signpost',
@@ -1483,7 +1483,7 @@ export const BENIN_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/Benin/Benin_Hero.jpg',
+      image: '/images/benin/benin-hero.webp',
     },
     {
       icon: 'Users',
@@ -1498,66 +1498,66 @@ export const BENIN_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
-      image: '/Pictures/Benin_Landing_Hero.JPG',
+      image: '/images/benin/benin-landing-hero.webp',
     },
   ],
   places: [
     {
       name: 'Ouidah',
       text: 'Explore one of Benin’s most historic cities, known for its powerful cultural heritage, sacred traditions, colonial history, and connection to the Atlantic slave trade.',
-      image: '/Pictures/Countries_Images/Benin/Benin_Card.JPG',
+      image: '/images/benin/benin-card.webp',
       imageAlt: 'An Egungun masquerade performer in a beaded and sequinned costume in Benin',
     },
     {
       name: 'Ganvié',
       text: 'Discover Benin’s remarkable lakeside community, where homes, markets, and daily life unfold on the water in a setting unlike anywhere else in the country.',
-      image: '/Pictures/Benin_Landing_Hero.JPG',
+      image: '/images/benin/benin-landing-hero.webp',
       imageAlt: 'Stilt village homes on Lake Nokoué in Benin',
     },
     {
       name: 'Abomey',
       text: 'Step into the history of the former Kingdom of Dahomey through royal palaces, museums, traditions, and stories that remain central to Benin’s cultural identity.',
-      image: '/Pictures/countries/BeninReal.JPG',
+      image: '/images/countries/benin.webp',
       imageAlt: 'Royal palaces and historical heritage in Abomey',
     },
     {
       name: 'Parakou & Atacora',
       text: 'Journey into northern Benin for changing landscapes, local traditions, lively towns, and access to some of the country’s most scenic and culturally rich areas.',
-      image: '/Pictures/Benin/Benin_Hero.jpg',
+      image: '/images/benin/benin-hero.webp',
       imageAlt: 'Northern Benin landscapes and villages',
     },
     {
       name: 'Grand-Popo',
       text: 'Relax along Benin’s Atlantic coast, where broad beaches, fishing communities, palm-lined scenery, and the Mono River create a peaceful coastal escape.',
-      image: '/Pictures/Benin_Side_Image.JPG',
+      image: '/images/benin/benin-side.webp',
       imageAlt: 'Coastal beach setting in Grand-Popo, Benin',
     },
     {
       name: 'La Rivière Noire — Adjarra',
       text: 'Take a traditional canoe trip along a mysterious river surrounded by raffia palms and unspoiled nature, offering a landscape as peaceful as it is spectacular.',
-      image: '/Pictures/Benin/Back_River.jpg',
+      image: '/images/benin/back-river.webp',
       imageAlt: 'Riverfront scenery in Black River Adjarra',
     },
   ],
   routes: [
     {
       to: 'Togo',
-      image: '/Explore_regions/optimized/west-africa/5.webp',
+      image: '/images/explore/west-africa/5.webp',
       text: 'Frequent taxis and buses via Saint-Jean/Hillacondji or Aflao/Séva.',
     },
     {
       to: 'Nigeria',
-      image: '/Explore_regions/optimized/west-africa/6.webp',
+      image: '/images/explore/west-africa/6.webp',
       text: 'Via Seme (Porto-Novo/Cotonou) — a busy border with document and vehicle checks.',
     },
     {
       to: 'Burkina Faso',
-      image: '/Explore_regions/optimized/west-africa/7.webp',
+      image: '/images/explore/west-africa/7.webp',
       text: 'Routes through Malanville — check security updates before traveling.',
     },
     {
       to: 'Ghana (via Togo)',
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/images/countries/ghana.webp',
       text: 'A popular multi-country route along the coast.',
     },
   ],
@@ -1591,7 +1591,7 @@ export const BENIN_PAGE = {
         text: 'Learn a few words in French, the official language. Dress modestly, especially in rural and religious areas. Bargaining is common in markets — do it politely. Respect local customs and traditions, and keep your belongings safe.',
       },
     ],
-    image: '/Pictures/Benin/Benin_Practical_Guide.jpg',
+    image: '/images/benin/benin-practical-guide.webp',
     imageAlt: 'A traditional mud-and-thatch Tata Somba compound in northern Benin',
   },
   closing: {
@@ -1620,7 +1620,7 @@ export const GAMBIA_PAGE = {
     subheading: ['Small Country. Big Hospitality.', 'Natural Beauty. Real Experiences.'],
     description:
       'The Smiling Coast of Africa, The Gambia unfolds along both the north and south banks of the Gambia River, from lively Banjul and the Atlantic beaches to riverside towns, wildlife reserves and traditional communities — a small country with two sides to discover and plenty of character in between.',
-    image: encodeURI('/Pictures/countries/The gambia.jpg'),
+    image: encodeURI('/images/countries/the-gambia.webp'),
     imageAlt: 'Colorful pirogue boats on the water in The Gambia',
   },
   services: [
@@ -1635,7 +1635,7 @@ export const GAMBIA_PAGE = {
         'Entry points & stay regulations',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/TheGambia.PNG',
+      image: '/images/services/visa-guidance/cards/the-gambia.webp',
     },
     {
       icon: 'Bus',
@@ -1649,7 +1649,7 @@ export const GAMBIA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/The_Gambia.png',
+      image: '/images/services/travel-planner/cards/the-gambia.webp',
     },
     {
       icon: 'Users',
@@ -1663,28 +1663,28 @@ export const GAMBIA_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: encodeURI('/Pictures/countries/The gambia.jpg'),
+      image: encodeURI('/images/countries/the-gambia.webp'),
     },
   ],
   routes: [
     {
       to: 'Senegal (Dakar)',
-      image: '/Pictures/countries/Senegal.webp',
+      image: '/images/countries/senegal.webp',
       text: 'Travel south from Dakar through central Senegal toward The Gambia, with onward road connections to Banjul and the coastal areas.',
     },
     {
       to: 'Senegal (Ziguinchor)',
-      image: '/Explore_regions/optimized/west-africa/8.webp',
+      image: '/images/explore/west-africa/8.webp',
       text: "A practical route from Senegal's Casamance region, traveling north by road toward The Gambia and the main coastal destinations.",
     },
     {
       to: 'Guinea-Bissau via Senegal',
-      image: '/Explore_regions/optimized/west-africa/1.webp',
+      image: '/images/explore/west-africa/1.webp',
       text: 'Travel north from Guinea-Bissau through southern Senegal before continuing across the border into The Gambia.',
     },
     {
       to: 'Guinea via Senegal',
-      image: '/Explore_regions/optimized/west-africa/2.webp',
+      image: '/images/explore/west-africa/2.webp',
       text: 'Overland travelers from Guinea generally continue through Senegal before entering The Gambia, with several possible road connections depending on the route.',
     },
   ],
@@ -1733,14 +1733,14 @@ export const GAMBIA_PAGE = {
         text: 'Gambians are warm and welcoming — you\'ll feel at home. Respect local customs and dress modestly, especially in rural areas. Bargaining is normal in markets. Learn a few words in Wolof: "Salaam" (hello), "Jërëjéf" (thank you).',
       },
     ],
-    image: '/Pictures/explore/ghana-card-background.webp',
+    image: '/images/explore/ghana-card-background.webp',
     imageAlt: 'Snorkeller in clear turquoise ocean water',
   },
   closing: {
     eyebrow: 'Need Personalized Guidance?',
     text: 'Tell us where you are traveling, when you plan to go and what you need help with.',
     cta: { label: 'Get Personalized Guidance', to: '/#contact' },
-    image: encodeURI('/Pictures/countries/The gambia.jpg'),
+    image: encodeURI('/images/countries/the-gambia.webp'),
     helpWith: [
       { icon: 'FileText', label: 'Personal Visa Guidance' },
       { icon: 'Bus', label: 'Travel Planner' },
@@ -1770,7 +1770,7 @@ export const GHANA_PAGE = {
     subheading: 'Considering a trip to Ghana, an extended stay, or relocation?',
     description:
       'Akwaaba — welcome to Ghana, where the energy of Accra meets the historic castles of Cape Coast and Elmina, vibrant markets, beautiful coastline and rich cultural traditions. Ghana offers a memorable blend of history, heritage, everyday life and warm West African hospitality.',
-    backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+    backgroundImage: '/images/explore/ghana-card-background.webp',
     backgroundImageAlt: 'Cape Coast Castle on the Ghanaian coast',
   },
   // Personal Visa Guidance, Travel Planner and Border Crossing Guide route
@@ -1790,7 +1790,7 @@ export const GHANA_PAGE = {
         'Questions about your specific plans',
       ],
       cta: 'Get Personal Visa Guidance',
-      image: '/Pictures/PersonalVisaGuidanceCards/Ghana.PNG',
+      image: '/images/services/visa-guidance/cards/ghana.webp',
     },
     {
       icon: 'Bus',
@@ -1805,7 +1805,7 @@ export const GHANA_PAGE = {
         'Practical travel tips',
       ],
       cta: 'Plan My Route',
-      image: '/Pictures/Travel_Planner_Cards/Ghana.png',
+      image: '/images/services/travel-planner/cards/ghana.webp',
     },
     {
       icon: 'ShieldCheck',
@@ -1820,7 +1820,7 @@ export const GHANA_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Guide',
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/images/explore/ghana-card-background.webp',
     },
     {
       icon: 'Users',
@@ -1835,19 +1835,19 @@ export const GHANA_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
-      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      image: '/images/about/mission-nkrumah-statue.webp',
     },
   ],
   residency: {
     heading: 'Residency & Immigration',
     intro: 'Explore your options for living, working or investing in Ghana.',
-    image: '/Pictures/countries/ROA.PNG',
+    image: '/images/services/relocation/right-of-abode.webp',
     imageAlt: 'Coastal Ghana landscape',
     featured: {
       badge: 'Featured',
       title: 'Right of Abode',
       text: "Practical guidance for eligible members of the African diaspora who want to understand Ghana's Right of Abode pathway.",
-      image: '/Pictures/image_Ghana.webp',
+      image: '/images/ghana/ghana-featured.webp',
       cta: { label: 'Explore Right of Abode Guidance', to: '/ghana/right-of-abode-guidance' },
     },
     // Each pathway opens a bottom-sheet modal (see BottomSheetModal.jsx)
@@ -1913,7 +1913,7 @@ export const GHANA_PAGE = {
   // own checkout flow yet" CTA on the site.
   servicePackages: [
     {
-      image: '/Pictures/image_Ghana.webp',
+      image: '/images/ghana/ghana-featured.webp',
       title: 'Personalized Relocation Guidance',
       text: 'Get practical, personalized information to help you plan your move to Ghana.',
       price: '$39.95',
@@ -1925,7 +1925,7 @@ export const GHANA_PAGE = {
       ],
     },
     {
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/images/countries/ghana.webp',
       title: 'Land & Property Information Package',
       text: 'Learn about land and property options in Ghana with practical guidance.',
       price: '$39.95',
@@ -1936,7 +1936,7 @@ export const GHANA_PAGE = {
       ],
     },
     {
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/images/explore/ghana-card-background.webp',
       title: 'Complete Ghana Relocation Package',
       text: 'A comprehensive package combining the key information you need.',
       price: '$79.95',
@@ -1951,7 +1951,7 @@ export const GHANA_PAGE = {
   livingGuide: {
     heading: 'Ghana Living Guide',
     intro: 'Practical information on everyday life in Ghana — open a topic to read more.',
-    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImage: '/images/countries/ghana.webp',
     backgroundImageAlt: 'Coastal Ghana landscape',
     topics: [
       {
@@ -1988,12 +1988,12 @@ export const GHANA_PAGE = {
     cta: { label: 'Ask a Ghana-Specific Question', to: '/#contact' },
     sidePhotos: [
       {
-        image: '/Pictures/Countries_Images/Ghana/IMG_4977.JPG',
+        image: '/images/ghana/img-4977.webp',
         alt: 'Chiefs in kente cloth and royal regalia in procession at an Ashanti durbar, Ghana',
         label: 'Culture & Heritage',
       },
       {
-        image: '/Pictures/explore/Yours_To_Explore.JPG',
+        image: '/images/explore/yours-to-explore.webp',
         alt: 'Cape Coast Castle on the Ghanaian coast',
         label: 'Nzulezu stilt village lake tadane',
       },
@@ -2038,14 +2038,14 @@ export const TRAVEL_PLANNER_PAGE = {
   // PageIntro) so the page keeps its own photo and copy.
   hero: {
     badge: 'Travel Planner',
-    badgeImage: '/Pictures/umbrella.PNG',
+    badgeImage: '/images/services/travel-planner/umbrella-badge.webp',
     badgeImageAlt: 'Travel Planner',
     titleLine1: 'Plan Your',
     titleAccent: 'Africa Journey',
     tagline: ['One country or multiple countries, travel with confidence.'],
     description:
       'Get personalized, practical guidance to help you build a smoother, smarter trip across East and West Africa.',
-    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
+    backgroundImage: '/images/services/travel-planner/travel-planner-hero.webp',
     backgroundImageAlt:
       'A veranda table with a map of Africa, compass and journal overlooking Mount Kilimanjaro at sunrise',
     // This photo's sky is naturally light/blue rather than the site's usual
@@ -2082,7 +2082,7 @@ export const TRAVEL_PLANNER_PAGE = {
       icon: 'Route',
       accent: 'copper',
       title: 'Travel Planner',
-      image: '/Pictures/caption.jpg',
+      image: '/images/services/travel-planner/sidebar-coastal-fort.webp',
       imageAlt: 'Aerial view of a coastal fort on the Ghanaian coast',
       description:
         'Personalized planning support based on your travel dates, interests, destinations and preferred way of travelling.',
@@ -2117,7 +2117,7 @@ export const TRAVEL_PLANNER_PAGE = {
       icon: 'FileText',
       accent: 'copper',
       title: 'Travel Audit',
-      image: '/Pictures/countries/Tanzania.jpg',
+      image: '/images/countries/tanzania.webp',
       imageAlt: 'Safari vehicle on the Tanzanian savanna',
       description:
         'For travelers who have already booked or partially booked their trip and want an independent review of how the journey fits together.',
@@ -2162,13 +2162,13 @@ export const TRAVEL_PLANNER_PAGE = {
 export const TRAVEL_PLANNER_DETAILS_PAGE = {
   hero: {
     badge: 'Travel Planner',
-    badgeImage: '/Pictures/umbrella.PNG',
+    badgeImage: '/images/services/travel-planner/umbrella-badge.webp',
     badgeImageAlt: 'Travel Planner',
     titleLine1: 'Travel Planner',
     titleAccent: '',
     tagline: ['Real places. Real people. A more meaningful Africa.'],
     description: 'Personalized planning support to help you create your ideal Africa journey — your way.',
-    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
+    backgroundImage: '/images/services/travel-planner/travel-planner-hero.webp',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
     overlayTone: 'neutral',
@@ -2443,7 +2443,7 @@ export const BEFORE_YOU_BOOK_PAGE = {
     tagline: ['Check your trip before you commit.'],
     description:
       'The Before You Book Check is for travelers who already have an idea of where they want to go but have not yet committed to the major bookings.',
-    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
+    backgroundImage: '/images/services/travel-planner/travel-planner-hero.webp',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
     overlayTone: 'neutral',
@@ -2651,7 +2651,7 @@ export const TRAVEL_AUDIT_PAGE = {
     tagline: ['Already booked? Let us review how it fits together.'],
     description:
       'The Travel Audit is for travelers who have already booked — or partially booked — their trip and want an independent review before they travel.',
-    backgroundImage: '/Pictures/Hero_Trv_PLNR.PNG',
+    backgroundImage: '/images/services/travel-planner/travel-planner-hero.webp',
     backgroundImageAlt:
       'A map of Africa with route arrows, compass, camera and journal on a veranda table overlooking Kilimanjaro at sunrise',
     overlayTone: 'neutral',
@@ -2860,7 +2860,7 @@ export const EXPLORE_PAGE = {
       {
         slug: 'tanzania',
         name: 'Tanzania & Zanzibar',
-        image: '/Pictures/Tanzania/Tanzania_Card.PNG',
+        image: '/images/tanzania/tanzania-card.webp',
         services: EXPLORE_SERVICES_WITH_GUIDES,
         description: [
           "Tanzania is one of East Africa's most rewarding destinations, known for its wildlife, dramatic landscapes, rich cultures, and Indian Ocean coastline. Zanzibar adds white-sand beaches, turquoise waters, and centuries of Swahili history.",
@@ -2879,10 +2879,10 @@ export const EXPLORE_PAGE = {
     featured: {
       slug: 'ghana',
       badge: 'Featured Destination · Travel + Relocation',
-      image: '/Pictures/Ghana_Card.png',
+      image: '/images/ghana/ghana-card-art.webp',
       imageAlt: 'Kwame Nkrumah Memorial Park monument in Accra, Ghana',
       // Shown clearly behind the card's copy (Cape Coast Castle's courtyard).
-      backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+      backgroundImage: '/images/explore/ghana-card-background.webp',
       travelServices: EXPLORE_SERVICES_WITH_GUIDES,
       relocationServices: [
         'General Ghana Relocation Guidance',
@@ -2948,7 +2948,7 @@ export const TOUR_GUIDE_LANDING_PAGE = {
     tagline: ['More than a trip. A deeper connection.'],
     description:
       'Independent local guides. Authentic experiences. Real insights from people who know their country best.',
-    backgroundImage: '/Pictures/countries/Tanzania.jpg',
+    backgroundImage: '/images/countries/tanzania.webp',
     backgroundImageAlt: 'Safari vehicle watching wildlife on the Tanzanian savanna',
   },
   trust: [
@@ -3014,7 +3014,7 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, vibrant communities, and beautiful places — explore Ghana with a trusted independent local guide.',
-      backgroundImage: '/Pictures/Ghana_Landing_Hero.JPG',
+      backgroundImage: '/images/ghana/ghana-landing-hero.webp',
       backgroundImageAlt: "Ghana's Independence Arch in Accra under a clear sky",
     },
     stats: [
@@ -3028,7 +3028,7 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Ghana.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Ghana's history, culture, communities, and everyday life.",
-      image: '/Pictures/Ghana_Side_Image.JPG',
+      image: '/images/ghana/ghana-side.webp',
       imageAlt: "Cape Coast Castle's ramparts overlooking the Ghanaian coastline",
     },
     offer: {
@@ -3097,7 +3097,7 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, unique communities, and beautiful places — explore Benin with a trusted independent local guide.',
-      backgroundImage: '/Pictures/Benin_Hero.jpg',
+      backgroundImage: '/images/benin/benin-hero-wide.webp',
       backgroundImageAlt: 'A traditional woven-sail boat crossing the water in Benin',
     },
     stats: [
@@ -3111,7 +3111,7 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Benin.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Benin's history, culture, communities, and everyday life.",
-      image: '/Pictures/Benin_Side_Image.JPG',
+      image: '/images/benin/benin-side.webp',
       imageAlt: 'Traditional carved fetish figures dressed in cloth in Benin',
     },
     offer: {
@@ -3176,7 +3176,7 @@ export const TOUR_GUIDE_PAGES = {
       tagline: ['Local People. Deeper Experiences.'],
       description:
         'Rich history, vibrant communities, and beautiful places — explore Zanzibar with a trusted independent local guide.',
-      backgroundImage: '/Pictures/Zanzibar_Tour.JPG',
+      backgroundImage: '/images/tanzania/zanzibar/zanzibar-tour.webp',
       backgroundImageAlt: 'Stone Town waterfront with a dhow sailboat passing by at golden hour',
     },
     stats: [
@@ -3190,7 +3190,7 @@ export const TOUR_GUIDE_PAGES = {
       heading:
         'We are currently building and vetting our network of independent local guides in Zanzibar.',
       body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Zanzibar's history, culture, communities, and everyday life.",
-      image: '/Pictures/Zanzibar_ Card.JPG',
+      image: '/images/tanzania/zanzibar/zanzibar-card.webp',
       imageAlt: 'A traditional dhow sailing off Zanzibar at sunset',
     },
     offer: {
@@ -3270,7 +3270,7 @@ export const BORDER_CROSSING_PAGE = {
     tagline: ['Practical guidance for crossing one or multiple borders.'],
     description:
       'The Border Crossing Guide is for travelers who want practical help understanding how to move between countries by land.',
-    backgroundImage: '/Pictures/Zanzibar_Tour.JPG',
+    backgroundImage: '/images/tanzania/zanzibar/zanzibar-tour.webp',
     backgroundImageAlt: 'A truck stopped for inspection at a land border crossing checkpoint',
   },
   intro: {
@@ -3488,7 +3488,7 @@ export const GHANA_LAND_PROPERTY_PAGE = {
     tagline: ['Practical research. Local insight. Smarter decisions.'],
     description:
       'Buying or leasing land in Ghana can be a rewarding investment — but it is important to understand the laws, processes, and local realities before you commit.',
-    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImage: '/images/countries/ghana.webp',
     backgroundImageAlt: 'Coastal land overlooking the Ghanaian coastline',
     overlayTone: 'neutral',
   },
@@ -3686,7 +3686,7 @@ export const GHANA_RIGHT_OF_ABODE_PAGE = {
     tagline: ['Personalized research. Practical guidance. Clear next steps.'],
     description:
       "Ghana's Right of Abode is a specialized immigration status that may be relevant to certain people with Ghanaian connections, former Ghanaian citizenship, African descent, or other qualifying circumstances.",
-    backgroundImage: '/Pictures/Ghana_Abode.JPG',
+    backgroundImage: '/images/services/relocation/ghana-right-of-abode.webp',
     backgroundImageAlt: 'A scenic view representing Ghana’s Right of Abode pathway',
     overlayTone: 'neutral',
   },
@@ -3879,7 +3879,7 @@ export const GHANA_RELOCATION_PAGE = {
     tagline: ['Comprehensive, personalized guidance to help you plan your move to Ghana with confidence.'],
     description:
       'Our Complete Relocation Package is a personalized guidance service designed for individuals, couples, and families planning a move to Ghana. It brings together the major areas you need to think through before departure, during your move, and as you settle into everyday life.',
-    backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+    backgroundImage: '/images/explore/ghana-card-background.webp',
     backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline at sunset',
     overlayTone: 'neutral',
   },
@@ -3936,7 +3936,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
     tagline: ['A closer look at what’s included and how it can help you plan, move, and settle into Ghana with confidence.'],
     description:
       'A closer look at what’s included and how it can help you plan, move, and settle into Ghana with confidence.',
-    backgroundImage: '/Pictures/explore/ghana-card-background.webp',
+    backgroundImage: '/images/explore/ghana-card-background.webp',
     backgroundImageAlt: 'Cape Coast Castle overlooking the Ghanaian coastline at sunset',
     overlayTone: 'neutral',
   },
@@ -3950,7 +3950,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
         'Step-by-step application guidance and document checklist',
         'Where to find official information and who to contact',
       ],
-      image: '/Pictures/image_Ghana.webp',
+      image: '/images/ghana/ghana-featured.webp',
       imageAlt: 'A Republic of Ghana passport',
     },
     {
@@ -3962,7 +3962,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
         'Realistic cost of living and budgeting',
         'Essential services: utilities, healthcare, phone and internet',
       ],
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/images/countries/ghana.webp',
       imageAlt: 'Modern apartment buildings in Ghana',
     },
     {
@@ -3974,7 +3974,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
         'Banking, mobile money, and international transfers',
         'School options and education considerations',
       ],
-      image: '/Pictures/explore/ghana-card-background.webp',
+      image: '/images/explore/ghana-card-background.webp',
       imageAlt: 'City skyline in Accra, Ghana',
     },
     {
@@ -3986,7 +3986,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
         'Safety tips and emergency contacts',
         'Helpful tips for your first days and weeks',
       ],
-      image: '/Pictures/about/mission-nkrumah-statue.webp',
+      image: '/images/about/mission-nkrumah-statue.webp',
       imageAlt: 'Traffic on a street in Accra, Ghana',
     },
     {
@@ -3998,7 +3998,7 @@ export const GHANA_RELOCATION_DETAILS_PAGE = {
         'Practical next steps before and after arrival',
         'Useful contacts, resources, and templates',
       ],
-      image: '/Pictures/countries/Ghana.jpg',
+      image: '/images/countries/ghana.webp',
       imageAlt: 'A beach with fishing boats in Ghana',
     },
     {
@@ -4244,7 +4244,7 @@ export const GHANA_PERSONALIZED_RELOCATION_PAGE = {
     titleAccent: 'Relocation Guidance',
     tagline: ['Practical, personalized guidance for your new chapter in Ghana.'],
     description: 'Make informed decisions. Move with confidence.',
-    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImage: '/images/countries/ghana.webp',
     backgroundImageAlt: 'Independence Arch in Accra, Ghana',
     overlayTone: 'neutral',
   },

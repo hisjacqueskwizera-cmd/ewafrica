@@ -28,31 +28,31 @@ import { Reveal } from '../components/Reveal.jsx'
 
 const GHANA_GALLERY_TILES = [
   {
-    src: '/Pictures/Ghana/Gallery/kakum_canopy.jpg',
+    src: '/images/ghana/gallery/kakum-canopy.webp',
     alt: 'Visitors on the Kakum National Park canopy walkway, Ghana',
     title: 'Kakum National Park',
     subtitle: 'A canopy walk high above the rainforest',
   },
   {
-    src: '/Pictures/Ghana/Gallery/larabanga_mosque.jpg',
+    src: '/images/ghana/gallery/larabanga-mosque.webp',
     alt: 'Larabanga Mosque, a Sudano-Sahelian mud-and-timber mosque in northern Ghana',
     title: 'Larabanga Mosque',
     subtitle: "One of West Africa's oldest mosques",
   },
   {
-    src: '/Pictures/Ghana/Gallery/ashanti_durbar.jpg',
+    src: '/images/ghana/gallery/ashanti-durbar.webp',
     alt: 'Royal drummers in ceremonial kente cloth at an Ashanti durbar festival',
     title: 'Ashanti Durbar',
     subtitle: 'Royal drummers in ceremonial kente',
   },
   {
-    src: '/Pictures/Ghana/Gallery/Ghana_Gallery_image.JPG',
+    src: '/images/ghana/gallery/ghana-gallery-image.webp',
     alt: 'Masquerade dancers in traditional dress at a Ghanaian festival',
     title: 'Festival Traditions',
     subtitle: 'Culture celebration',
   },
   {
-    src: '/Pictures/Ghana/Gallery/mole_elephants.jpg',
+    src: '/images/ghana/gallery/mole-elephants.webp',
     alt: 'Elephants gathering at a waterhole in Mole National Park, Ghana',
     title: 'Mole National Park',
     subtitle: 'Elephants gathering at a waterhole',
@@ -61,7 +61,7 @@ const GHANA_GALLERY_TILES = [
 
 const GHANA_GALLERY_EXTRA_TILES = [
   {
-    src: '/Pictures/Ghana/Gallery/fishing_boats.jpg',
+    src: '/images/ghana/gallery/fishing-boats.webp',
     alt: "Fishing boats along Ghana's Atlantic coastline under a dramatic sky",
     title: "Ghana's Coastline",
     subtitle: 'Fishing boats along the Atlantic shore',
@@ -428,7 +428,7 @@ export function Ghana() {
           <div className="mt-10">
             <Reveal className="relative flex flex-col overflow-hidden rounded-3xl shadow-card">
               <img
-                src="/Pictures/Ghana_Background_22.jpg"
+                src="/images/ghana/ghana-background.webp"
                 alt={livingGuide.backgroundImageAlt}
                 aria-hidden="true"
                 loading="lazy"
@@ -467,7 +467,7 @@ export function Ghana() {
           <Reveal className="overflow-hidden rounded-[2rem] border border-cocoa/10 bg-[#FFFFE3] shadow-card">
             <div className="aspect-[16/9] w-full bg-cocoa sm:aspect-[2/1] lg:aspect-[21/9]">
               <img
-                src="/Pictures/Countries_Images/Ghana/IMG_5483.JPG"
+                src="/images/ghana/img-5483.webp"
                 alt="A wide palm-lined beach along Ghana's Atlantic coast"
                 loading="lazy"
                 className="size-full object-cover"

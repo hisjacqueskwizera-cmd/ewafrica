@@ -10,7 +10,7 @@ export const RWANDA_DATA = {
         name: 'Volcanoes National Park',
         description:
           'Home to the world’s mountain gorillas, as well as golden monkeys and stunning volcanic landscapes in the Virunga range.',
-        image: '/Pictures/countries/Rwanda.jpg',
+        image: '/images/countries/rwanda.webp',
         tag: 'Mountain Gorilla Trekking',
         details: {
           highlight:
@@ -32,7 +32,7 @@ export const RWANDA_DATA = {
         name: 'Kigali',
         description:
           'A clean, modern and welcoming capital city with great restaurants, museums, markets and a growing creative scene.',
-        image: '/Pictures/countries/Rwandaa.jpg',
+        image: '/images/countries/rwanda-alt.webp',
         tag: 'Rwanda’s Capital',
         details: {
           highlight:
@@ -54,7 +54,7 @@ export const RWANDA_DATA = {
         name: 'Akagera National Park',
         description:
           'Rwanda’s only savannah park, home to the Big Five, beautiful lakes and remarkably diverse wildlife.',
-        image: '/Pictures/countries/Rwandaa.jpg',
+        image: '/images/countries/rwanda-alt.webp',
         tag: 'Big Five Safari',
         details: {
           highlight:
@@ -76,7 +76,7 @@ export const RWANDA_DATA = {
         name: 'Lake Kivu',
         description:
           'Relax by the shores of Lake Kivu, with beautiful scenery, water activities and laid-back lakeside towns.',
-        image: '/Pictures/countries/Rwanda.jpg',
+        image: '/images/countries/rwanda.webp',
         tag: 'Lakeside Escape',
         details: {
           highlight:
@@ -98,7 +98,7 @@ export const RWANDA_DATA = {
         name: 'Nyungwe Forest National Park',
         description:
           'An ancient rainforest with chimpanzees, hiking trails, canopy walks and incredible biodiversity.',
-        image: '/Pictures/countries/Rwandaa.jpg',
+        image: '/images/countries/rwanda-alt.webp',
         tag: 'Rainforest & Canopy Walk',
         details: {
           highlight:
@@ -120,7 +120,7 @@ export const RWANDA_DATA = {
         name: 'Rwandan Culture & People',
         description:
           'Experience Rwanda’s rich culture, warm hospitality and inspiring stories of resilience and renewal.',
-        image: '/Pictures/countries/Rwanda.jpg',
+        image: '/images/countries/rwanda.webp',
         tag: 'Culture & Community',
         details: {
           highlight:
@@ -277,19 +277,19 @@ export const RWANDA_DATA = {
         title: 'Extraordinary Wildlife',
         description:
           'From mountain gorillas in the Virunga volcanoes to the Big Five in Akagera, Rwanda offers rare and rewarding wildlife encounters in a compact, accessible destination.',
-        image: '/Pictures/countries/Rwanda.jpg',
+        image: '/images/countries/rwanda.webp',
       },
       {
         title: 'Land of a Thousand Hills',
         description:
           'Terraced hillsides, volcanic peaks, ancient rainforest and the shores of Lake Kivu make Rwanda one of the continent’s most scenic and rewarding countries to explore.',
-        image: '/Pictures/countries/Rwandaa.jpg',
+        image: '/images/countries/rwanda-alt.webp',
       },
       {
         title: 'Warmth, Culture & Resilience',
         description:
           'Rwanda’s welcoming people, vibrant traditions and inspiring story of renewal make every visit a deeper, more meaningful connection — not just a trip.',
-        image: '/Pictures/countries/Rwanda.jpg',
+        image: '/images/countries/rwanda.webp',
       },
     ],
   },
@@ -308,6 +308,6 @@ export const RWANDA_DATA = {
     },
     leftWatermark: ['Rwanda', 'More to Explore'],
     rightWatermark: ['People', 'Nature', 'Culture', 'Opportunity', 'Rwanda'],
-    backgroundImage: '/Pictures/countries/Rwandaa.jpg',
+    backgroundImage: '/images/countries/rwanda-alt.webp',
   },
 }

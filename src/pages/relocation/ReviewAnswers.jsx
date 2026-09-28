@@ -197,7 +197,7 @@ export function ReviewAnswers() {
 
             <PlannerSidebar
               heading="Complete Relocation Package"
-              photo="/Pictures/explore/ghana-card-background.webp"
+              photo="/images/explore/ghana-card-background.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline at sunset"
               includes={GHANA_RELOCATION_FLOW.includes}
               includesHeading="Complete Relocation Package Includes"

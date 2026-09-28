@@ -113,9 +113,9 @@ export function Payment() {
       <PlannerBackground />
       <PlannerStepHero
         badge="Travel Planner"
-        badgeImage="/Pictures/umbrella.PNG"
+        badgeImage="/images/services/travel-planner/umbrella-badge.webp"
         badgeImageAlt="Travel Planner"
-        backgroundImage="/Pictures/TRV_HR.PNG"
+        backgroundImage="/images/services/travel-planner/travel-planner-step-hero.webp"
       />
 
       <section className="py-12 lg:py-16">
@@ -293,7 +293,7 @@ export function Payment() {
               caption={copy.sidebarCaption}
               helpHeading="Need Help With Payment?"
               helpText="If you have any questions about payment options or are experiencing issues, please contact us."
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

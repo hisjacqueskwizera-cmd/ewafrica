@@ -66,7 +66,7 @@ export function ExploreRegions() {
                               className="inline-flex items-center gap-1.5 font-bold text-gold"
                             >
                               <img
-                                src="/Pictures/location.webp"
+                                src="/images/shared/location-pin.webp"
                                 alt=""
                                 aria-hidden="true"
                                 className="size-3.5 shrink-0 invert"
@@ -80,7 +80,7 @@ export function ExploreRegions() {
                         ) : (
                           <li key={country.name} className="flex items-center gap-1.5">
                             <img
-                              src="/Pictures/location.webp"
+                              src="/images/shared/location-pin.webp"
                               alt=""
                               aria-hidden="true"
                               className="size-3.5 shrink-0 invert"

@@ -233,7 +233,7 @@ export function PersonalizedRelocationGuidance() {
 
             <PlannerSidebar
               heading={sidebar.title}
-              photo="/Pictures/countries/Ghana.jpg"
+              photo="/images/countries/ghana.webp"
               photoAlt="Independence Arch in Accra, Ghana"
               price={GHANA_PERSONALIZED_RELOCATION_FLOW.price}
               includes={GHANA_PERSONALIZED_RELOCATION_FLOW.includes}

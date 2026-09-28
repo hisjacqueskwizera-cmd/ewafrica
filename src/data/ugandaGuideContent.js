@@ -5,7 +5,7 @@ export const UGANDA_DATA = {
     tagline: 'A Practical Guide for First-Time Travelers',
     intro:
       'Welcome to Uganda — the Pearl of Africa. Uganda is a country of dramatic landscapes, warm people, rich culture, and remarkable wildlife.',
-    backgroundImage: '/Pictures/Countries_Images/Uganda/IMG_4463.JPG',
+    backgroundImage: '/images/uganda/img-4463.webp',
     backgroundImageAlt: 'Two men paddling a wooden dugout canoe on a calm stretch of the Nile in Uganda',
   },
 
@@ -55,7 +55,7 @@ export const UGANDA_DATA = {
           'Keep digital and printed copies of important documents.',
           'It’s a good idea to check the latest entry requirements before you go.',
         ],
-        image: '/Pictures/Uganda/Gallery/murchison_elephant.jpg',
+        image: '/images/uganda/gallery/murchison-elephant.webp',
         imageAlt: 'An elephant with egrets and a kob antelope along the Nile in Murchison Falls National Park',
       },
       {
@@ -68,7 +68,7 @@ export const UGANDA_DATA = {
           'Travelers visiting Uganda, Rwanda and Kenya may explore the East Africa Tourist Visa and should confirm eligibility and entry conditions.',
         ],
         cta: { label: 'Get Personal Visa Guidance', to: '/personal-visa-guidance/uganda' },
-        image: '/Pictures/Countries_Images/Uganda/IMG_5457.JPG',
+        image: '/images/uganda/img-5457.webp',
         imageAlt: 'The Gaddafi National Mosque above the rooftops of Kampala, Uganda',
       },
       {
@@ -81,7 +81,7 @@ export const UGANDA_DATA = {
           'Consider travel insurance that includes coverage for medical treatment and evacuation.',
           'Check current official health and entry requirements before you travel.',
         ],
-        image: '/Pictures/Uganda/Gallery/nile_cliffs.jpg',
+        image: '/images/uganda/gallery/nile-cliffs.webp',
         imageAlt: 'Sandstone cliffs above the Nile River in Murchison Falls National Park',
       },
       {
@@ -93,7 +93,7 @@ export const UGANDA_DATA = {
           'Keep valuables discreet, use trusted transportation, avoid demonstrations and large political gatherings, and exercise additional caution after dark and near sensitive border areas.',
           'Security conditions can change, so review the latest official travel advice from your own government before departure.',
         ],
-        image: '/Pictures/Uganda/Gallery/murchison_boat_safari.jpg',
+        image: '/images/uganda/gallery/murchison-boat-safari.webp',
         imageAlt: 'A boat safari approaching Murchison Falls on the Victoria Nile',
       },
     ],
@@ -109,7 +109,7 @@ export const UGANDA_DATA = {
         name: 'Kampala',
         tag: "Uganda's Capital",
         description: "Uganda's capital and largest city. A busy, energetic hub and main gateway to the country.",
-        image: '/Pictures/Countries_Images/Uganda/IMG_5455.JPG',
+        image: '/images/uganda/img-5455.webp',
         details: {
           highlight:
             'Built across seven hills, Kampala blends markets, nightlife and a growing business scene — most journeys into the rest of Uganda start and end here.',
@@ -131,7 +131,7 @@ export const UGANDA_DATA = {
         tag: 'Gorilla Trekking',
         description:
           'Home to mountain gorillas. Gorilla trekking is one of Uganda’s signature wildlife experiences.',
-        image: '/Pictures/Uganda/Gallery/highland_road.jpg',
+        image: '/images/uganda/gallery/highland-road.webp',
         details: {
           highlight:
             'An ancient, mist-covered rainforest sheltering roughly half of the world’s remaining mountain gorillas alongside rich birdlife and other primates.',
@@ -153,7 +153,7 @@ export const UGANDA_DATA = {
         tag: 'Safari & Wildlife',
         description:
           'Known for diverse wildlife, beautiful landscapes and rewarding safari experiences.',
-        image: '/Pictures/Uganda/Gallery/lake_victoria_cormorants.jpg',
+        image: '/images/uganda/gallery/lake-victoria-cormorants.webp',
         details: {
           highlight:
             'One of Uganda’s most biodiverse parks, spanning savannah, wetlands and crater lakes, with the Kazinga Channel linking Lakes Edward and George.',
@@ -174,7 +174,7 @@ export const UGANDA_DATA = {
         name: 'Murchison Falls National Park',
         tag: 'The Nile & Waterfalls',
         description: 'A dramatic park centered around the Nile and the powerful Murchison Falls.',
-        image: '/Pictures/Uganda/Gallery/murchison_falls_wide.jpg',
+        image: '/images/uganda/gallery/murchison-falls-wide.webp',
         details: {
           highlight:
             'Uganda’s largest national park, where the Victoria Nile forces its way through a narrow gorge before exploding into Murchison Falls.',
@@ -195,7 +195,7 @@ export const UGANDA_DATA = {
         name: 'Kibale National Park',
         tag: 'Primate Capital',
         description: 'Renowned for chimpanzee tracking and rich primate diversity.',
-        image: '/Pictures/Uganda/Gallery/nile_cliffs.jpg',
+        image: '/images/uganda/gallery/nile-cliffs.webp',
         details: {
           highlight:
             'Known as the primate capital of East Africa, Kibale’s rainforest shelters chimpanzees alongside twelve other primate species.',
@@ -216,7 +216,7 @@ export const UGANDA_DATA = {
         name: 'Jinja & the Nile',
         tag: 'Adventure & the Source of the Nile',
         description: 'Popular for river activities, outdoor adventure and a relaxed atmosphere.',
-        image: '/Pictures/Uganda/Gallery/murchison_boat_safari.jpg',
+        image: '/images/uganda/gallery/murchison-boat-safari.webp',
         details: {
           highlight:
             'Sitting where the Nile begins its journey from Lake Victoria, Jinja has grown into Uganda’s adventure-travel hub with a relaxed, riverside pace.',
@@ -237,7 +237,7 @@ export const UGANDA_DATA = {
         name: 'Lake Bunyonyi',
         tag: 'Highland Lake Escape',
         description: 'A scenic highland lake surrounded by steep hills and islands. A perfect place to slow down.',
-        image: '/Pictures/Uganda/Gallery/heron_sunset.jpg',
+        image: '/images/uganda/gallery/heron-sunset.webp',
         details: {
           highlight:
             'One of Africa’s deepest lakes, ringed by terraced hills and dotted with small islands — a quiet counterpoint to Uganda’s parks.',
@@ -303,7 +303,7 @@ export const UGANDA_DATA = {
     ],
     note:
       'Routes, transportation connections and border procedures vary depending on your journey. Routes toward South Sudan require careful checking of current border and security conditions.',
-    image: '/Pictures/Uganda/Gallery/highland_road.jpg',
+    image: '/images/uganda/gallery/highland-road.webp',
     imageAlt: "A road winding through Uganda's tea-covered western highlands",
     ctas: [
       { label: 'Plan My Route', to: '/travel-planner?destination=uganda' },
@@ -358,7 +358,7 @@ export const UGANDA_DATA = {
       { icon: 'RouteIcon', label: 'Overland Travel Route Planning' },
       { icon: 'MapPin', label: 'Border Crossing Guide' },
     ],
-    backgroundImage: '/Pictures/Uganda/Gallery/heron_sunset.jpg',
+    backgroundImage: '/images/uganda/gallery/heron-sunset.webp',
   },
 
   farewell: {

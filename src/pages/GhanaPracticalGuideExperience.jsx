@@ -31,7 +31,7 @@ export function GhanaPracticalGuideExperience() {
         page={2}
         heading="Experience Ghana"
         tagline="History. Culture. Nature. People. A journey worth taking."
-        image="/Pictures/Ghana_card_Background.JPG"
+        image="/images/ghana/ghana-card-background.webp"
         imageAlt="Cape Coast Castle overlooking the Atlantic at sunset"
       />
 

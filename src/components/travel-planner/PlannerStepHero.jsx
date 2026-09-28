@@ -33,7 +33,7 @@ export function PlannerStepHero({
   badge,
   badgeImage,
   badgeImageAlt,
-  backgroundImage = '/Pictures/Hero_Trv_PLNR.PNG',
+  backgroundImage = '/images/services/travel-planner/travel-planner-hero.webp',
 }) {
   return (
     <section className="relative isolate overflow-hidden">

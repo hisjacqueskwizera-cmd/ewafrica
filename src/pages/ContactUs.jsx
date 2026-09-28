@@ -58,7 +58,7 @@ export function ContactUs() {
         badge="Get In Touch"
         titleLine1="Contact Us"
         description="Questions about a trip, a relocation, or one of our services? Reach out and our team will help you find the right next step."
-        backgroundImage="/Pictures/Background/about_us_background.png"
+        backgroundImage="/images/backgrounds/about-us-background.webp"
       />
 
       <section className="px-[30px] py-[100px] lg:py-[140px]">

@@ -179,7 +179,7 @@ export function SelectCountries() {
               <div className="overflow-hidden rounded-3xl shadow-card border border-border">
                 <div className="relative aspect-16/10 overflow-hidden">
                   <img
-                    src="/Pictures/VisaGuidance/Side.PNG"
+                    src="/images/services/visa-guidance/visa-guidance-side.webp"
                     alt="Passport control officer reviewing documents"
                     className="size-full object-cover"
                   />

@@ -26,31 +26,31 @@ import { GAMBIA_PAGE } from '../data/siteContent.js'
 
 const GAMBIA_GALLERY_TILES = [
   {
-    src: '/Pictures/Gambia/Gallery/kololi_beach.jpg',
+    src: '/images/gambia/gallery/kololi-beach.webp',
     alt: "Aerial view of a beach resort along The Gambia's Atlantic coast",
     title: 'Kololi Beach',
     subtitle: 'Resorts along the golden coastline',
   },
   {
-    src: '/Pictures/Gambia/Gallery/mangrove_lodges.jpg',
+    src: '/images/gambia/gallery/mangrove-lodges.webp',
     alt: 'Floating cabins among the mangroves of the Gambia River',
     title: 'Gambia River Lodges',
     subtitle: 'Floating cabins amid the mangroves',
   },
   {
-    src: '/Pictures/Gambia/Gallery/gambia_river.jpg',
+    src: '/images/gambia/gallery/gambia-river.webp',
     alt: 'Aerial view of the Gambia River winding through mangrove wetlands',
     title: 'The Gambia River',
     subtitle: 'Winding through mangrove wetlands',
   },
   {
-    src: '/Pictures/Gambia/Gallery/atlantic_coast.jpg',
+    src: '/images/gambia/gallery/atlantic-coast.webp',
     alt: "Waves rolling onto The Gambia's Atlantic shoreline",
     title: 'The Atlantic Coast',
     subtitle: "Waves rolling onto The Gambia's shoreline",
   },
   {
-    src: '/Pictures/Gambia/Gallery/river_life.jpg',
+    src: '/images/gambia/gallery/river-life.webp',
     alt: 'Boats moored along a quiet riverbank in The Gambia',
     title: 'River Life',
     subtitle: 'Quiet moorings along the riverbank',

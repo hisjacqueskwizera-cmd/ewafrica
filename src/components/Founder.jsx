@@ -12,7 +12,7 @@ export function Founder() {
         <Reveal className="relative">
           <div className="overflow-hidden rounded-3xl shadow-lift">
             <img
-              src="/Pictures/Founder/Founder.jpg"
+              src="/images/about/founder.webp"
               alt="Founder of East-West Africa Link"
               className="aspect-4/5 w-full object-cover"
             />

@@ -18,49 +18,49 @@ const STACK_TOP = HEADER_HEIGHT + SUBNAV_HEIGHT
 // which row a photo happens to sit in.
 const PHOTOS = [
   {
-    src: '/Rwanda_Gallery/Lake_Kivu/IMG_5202_web.jpg',
+    src: '/images/rwanda/gallery/lake-kivu/img-5202.webp',
     alt: "Aerial panorama of Lake Kivu's islands and green hills",
     title: 'Lake Kivu',
     subtitle: 'Stunning lake views, rolling green hills and peaceful lakeside towns.',
   },
   {
-    src: '/Rwanda_Gallery/Nyungwe/IMG_5233_web.jpg',
+    src: '/images/rwanda/gallery/nyungwe/img-5233.webp',
     alt: 'Canopy walkway suspended above Nyungwe Forest National Park',
     title: 'Nyungwe National Park',
     subtitle: "Walk above the rainforest on one of Africa's most spectacular canopy walkways.",
   },
   {
-    src: '/Rwanda_Gallery/Calture/IMG_4973_web.jpg',
+    src: '/images/rwanda/gallery/culture/img-4973.webp',
     alt: 'Intore dancers performing a traditional Rwandan dance',
     title: 'Rwandan Culture',
     subtitle: 'Music, dance and traditions that inspire.',
   },
   {
-    src: '/Rwanda_Gallery/Tea_Plantation/IMG_5086_web.jpg',
+    src: '/images/rwanda/gallery/tea-plantation/img-5086.webp',
     alt: 'Rolling tea plantation hills at sunset in Rwanda',
     title: 'Tea Plantations',
     subtitle: "Lush green hills and some of the world's finest tea.",
   },
   {
-    src: '/Rwanda_Gallery/Butaro/IMG_5203_web.jpg',
+    src: '/images/rwanda/gallery/butaro/img-5203.webp',
     alt: 'Volcano and lake view from the Butaro highlands in northern Rwanda',
     title: 'Butaro Highlands',
     subtitle: 'Cool mountains, fresh air and breathtaking views in northern Rwanda.',
   },
   {
-    src: '/Rwanda_Gallery/Akagera/IMG_5239_web.jpg',
+    src: '/images/rwanda/gallery/akagera/img-5239.webp',
     alt: 'Savannah, lakes and wetlands of Akagera National Park',
     title: 'Akagera National Park',
     subtitle: "Wide savannah landscapes, lakes and wetlands in Rwanda's eastern wilderness.",
   },
   {
-    src: '/Rwanda_Gallery/Akagera/IMG_5300_web.jpg',
+    src: '/images/rwanda/gallery/akagera/img-5300.webp',
     alt: 'Two rhinos grazing beside a lake in Akagera National Park',
     title: 'Akagera National Park',
     subtitle: 'Rhinos, brought back from the brink of disappearance.',
   },
   {
-    src: '/Rwanda_Gallery/Akagera/IMG_5301_web.jpg',
+    src: '/images/rwanda/gallery/akagera/img-5301.webp',
     alt: 'Giraffes among acacia trees in Akagera National Park',
     title: 'Akagera National Park',
     subtitle: 'Giraffes roaming the savannah hills.',
@@ -321,7 +321,7 @@ export function RwandaGallery() {
       <DestinationHero
         heading="Explore Rwanda"
         description="A closer look at the landscapes, wildlife and culture that make Rwanda unforgettable."
-        backgroundImage="/Pictures/Background/GalleryHero_Section.JPG"
+        backgroundImage="/images/backgrounds/rwanda-gallery-hero.webp"
         backgroundImageAlt="Aerial view of terraced green hills in Rwanda"
       />
 
@@ -362,8 +362,8 @@ export function RwandaGallery() {
           <StackSection>
             <Reveal once={false} big>
               <VideoTile
-                src="/Rwanda_Gallery/Gorilla/gorilla.mp4"
-                poster="/Rwanda_Gallery/Gorilla/gorilla_poster.jpg"
+                src="/videos/rwanda/gorilla.mp4"
+                poster="/videos/rwanda/gorilla-poster.webp"
                 alt="Mountain gorilla walking near a pool of water in Rwanda"
                 title="Volcanoes National Park"
                 subtitle="Home to Rwanda's mountain gorillas."
@@ -377,8 +377,8 @@ export function RwandaGallery() {
           <StackSection>
             <Reveal once={false}>
               <VideoTile
-                src="/Rwanda_Gallery/Kigali City/kigali.mp4"
-                poster="/Rwanda_Gallery/Kigali City/kigali_poster.jpg"
+                src="/videos/rwanda/kigali.mp4"
+                poster="/videos/rwanda/kigali-poster.webp"
                 alt="Aerial view of Kigali city skyline at dusk"
                 title="Kigali"
                 subtitle="A vibrant, modern capital with a warm welcome and a bright future."

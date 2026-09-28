@@ -10,7 +10,7 @@ export const GHANA_DATA = {
         name: 'Accra',
         description:
           "Ghana's capital is energetic and modern, with markets, restaurants, beaches, museums, cultural sites, and historic neighborhoods.",
-        image: '/Pictures/Ghana_Landing_Hero.JPG',
+        image: '/images/ghana/ghana-landing-hero.webp',
         tag: "Ghana's Capital",
         details: {
           highlight:
@@ -32,7 +32,7 @@ export const GHANA_DATA = {
         name: 'Cape Coast & Elmina',
         description:
           "These coastal towns are among Ghana's most historically significant destinations, home to Cape Coast Castle and Elmina Castle.",
-        image: '/Pictures/Ghana_Abode.JPG',
+        image: '/images/services/relocation/ghana-right-of-abode.webp',
         tag: 'Coastal Heritage',
         details: {
           highlight:
@@ -54,7 +54,7 @@ export const GHANA_DATA = {
         name: 'Kumasi & the Ashanti Region',
         description:
           'Kumasi is the cultural heart of the Ashanti people, with markets, traditional crafts, royal history and important cultural sites.',
-        image: '/Pictures/Ghana/Gallery/ashanti_durbar.jpg',
+        image: '/images/ghana/gallery/ashanti-durbar.webp',
         tag: 'Ashanti Kingdom',
         details: {
           highlight:
@@ -76,7 +76,7 @@ export const GHANA_DATA = {
         name: 'Kakum National Park',
         description:
           "Known for its tropical rainforest and canopy walkway, Kakum is one of Ghana's best-known nature experiences.",
-        image: '/Pictures/Ghana/Gallery/kakum_canopy.jpg',
+        image: '/images/ghana/gallery/kakum-canopy.webp',
         tag: 'Canopy Walkway',
         details: {
           highlight:
@@ -98,7 +98,7 @@ export const GHANA_DATA = {
         name: 'Volta Region',
         description:
           'The Volta Region offers mountains, waterfalls, lakeside communities, hiking and a more relaxed side of Ghana.',
-        image: '/Pictures/Ghana/Gallery/fishing_boats.jpg',
+        image: '/images/ghana/gallery/fishing-boats.webp',
         tag: 'Mountains & Waterfalls',
         details: {
           highlight:
@@ -120,7 +120,7 @@ export const GHANA_DATA = {
         name: 'Mole National Park',
         description:
           "Located in northern Ghana, Mole offers one of Ghana's best Known wildlife experiences, with elephants, antelope and monkeys.",
-        image: '/Pictures/Ghana/Gallery/mole_elephants.jpg',
+        image: '/images/ghana/gallery/mole-elephants.webp',
         tag: 'Wildlife Safari',
         details: {
           highlight:
@@ -142,7 +142,7 @@ export const GHANA_DATA = {
         name: 'Lake Volta',
         description:
           "One of the world's largest artificial lakes, Lake Volta is surrounded by towns and communities where travelers can experience a slower pace of life.",
-        image: '/Pictures/Ghana_card_Background.JPG',
+        image: '/images/ghana/ghana-card-background.webp',
         tag: 'Lakeside Scenery',
         details: {
           highlight:
@@ -164,7 +164,7 @@ export const GHANA_DATA = {
         name: 'Northern Ghana',
         description:
           'Northern Ghana has a very different landscape and cultural character from the southern Ghana, with historic mosques and open savannah.',
-        image: '/Pictures/Ghana/Gallery/larabanga_mosque.jpg',
+        image: '/images/ghana/gallery/larabanga-mosque.webp',
         tag: 'History & Savannah',
         details: {
           highlight:
@@ -196,7 +196,7 @@ export const GHANA_DATA = {
         description:
           "Ghana is one of West Africa's most welcoming and accessible destinations, with something meaningful for every traveler.",
         buttonText: 'Read More',
-        image: '/Pictures/Ghana_Landing_Hero.JPG',
+        image: '/images/ghana/ghana-landing-hero.webp',
         imageAlt: 'Independence Arch in Accra',
         details: {
           overview:
@@ -220,7 +220,7 @@ export const GHANA_DATA = {
         description:
           'Ghana can be visited year-round. The drier months are ideal for most travelers, while the green season brings lusher landscapes and fewer crowds.',
         buttonText: 'Read More',
-        image: '/Pictures/Ghana/Ghanaaaa.jpg',
+        image: '/images/ghana/ghanaaaa.webp',
         imageAlt: "Fishing boats along Ghana's Atlantic coastline",
         details: {
           overview:
@@ -244,7 +244,7 @@ export const GHANA_DATA = {
         description:
           "Check your passport validity, visa requirements, recommended vaccinations, travel insurance, and onward travel arrangements.",
         buttonText: 'Read More',
-        image: '/Pictures/Ghana/BFRYGO.JPG',
+        image: '/images/ghana/bfrygo.webp',
         imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
         details: {
           overview:
@@ -268,7 +268,7 @@ export const GHANA_DATA = {
         description:
           'Most travelers need a visa to enter Ghana. Requirements vary by nationality and purpose of travel.',
         buttonText: 'Get Personal Visa Guidance',
-        image: '/Pictures/Ghana_Landing_Hero.JPG',
+        image: '/images/ghana/ghana-landing-hero.webp',
         imageAlt: 'Independence Arch in Accra, marking Ghana’s 1957 independence',
         details: {
           overview:
@@ -293,7 +293,7 @@ export const GHANA_DATA = {
         description:
           'Yellow fever vaccination is required for most travelers entering Ghana',
         buttonText: 'See Tips',
-        image: '/Pictures/image_Ghana.webp',
+        image: '/images/ghana/ghana-featured.webp',
         imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
         details: {
           overview:
@@ -317,7 +317,7 @@ export const GHANA_DATA = {
         description:
           'Ghana uses the Ghanaian cedi (GHS). Cash is useful outside major cities, while cards and mobile money are widely accepted.',
         buttonText: 'Read More',
-        image: '/Pictures/Ghana_card_Background.JPG',
+        image: '/images/ghana/ghana-card-background.webp',
         imageAlt: 'The courtyard of Cape Coast Castle',
         details: {
           overview:
@@ -341,7 +341,7 @@ export const GHANA_DATA = {
         description:
           'Mobile internet is widely available. Local SIM cards are affordable and easy to buy, with good coverage in cities and most towns.',
         buttonText: 'Read More',
-        image: '/Pictures/Ghana/Gallery/festival_dancers.jpg',
+        image: '/images/ghana/gallery/festival-dancers.webp',
         imageAlt: 'Festival dancers in traditional dress in Ghana',
         details: {
           overview:
@@ -365,7 +365,7 @@ export const GHANA_DATA = {
         description:
           'Travel options include domestic flights, intercity buses, shared taxis, ride-hailing services and private drivers.',
         buttonText: 'Travel Planner',
-        image: '/Pictures/Ghana_Abode.JPG',
+        image: '/images/services/relocation/ghana-right-of-abode.webp',
         imageAlt: 'Elmina Castle on the coastline, seen from the water',
         details: {
           overview:
@@ -396,7 +396,7 @@ export const GHANA_DATA = {
         title: 'Staying Safe',
         description:
           'Ghana is generally straightforward for travelers, but normal precautions still matter, especially with valuables, transportation, and moving around after dark.',
-        image: '/Pictures/Ghana/Gallery/ashanti_durbar.jpg',
+        image: '/images/ghana/gallery/ashanti-durbar.webp',
         imageAlt: 'A crowded Ashanti durbar procession in Kumasi',
         details: {
           overview:
@@ -420,7 +420,7 @@ export const GHANA_DATA = {
         description:
           "Ghana shares land borders with Côte d'Ivoire, Burkina Faso, and Togo, making overland travel possible as part of a wider West Africa journey.",
         cta: { label: 'Get a Border Crossing Guide', to: '/travel-planner/border-crossing-guide?from=ghana' },
-        image: '/Pictures/Ghana_Background_22.jpg',
+        image: '/images/ghana/ghana-background.webp',
         imageAlt: 'A stone archway and passage inside a coastal Ghanaian fort',
         details: {
           overview:
@@ -443,7 +443,7 @@ export const GHANA_DATA = {
         title: 'First-Time Ghana Tips',
         description:
           'A first visit is easier when you avoid trying to fit too much into one itinerary.',
-        image: '/Pictures/Ghana_card_Background.JPG',
+        image: '/images/ghana/ghana-card-background.webp',
         imageAlt: 'The historic courtyard of Cape Coast Castle',
         details: {
           overview:
@@ -466,7 +466,7 @@ export const GHANA_DATA = {
         title: 'What to Pack',
         description:
           'Lightweight, breathable clothing works well for most of Ghana. Bring a few more modest options for religious and traditional settings.',
-        image: '/Pictures/Ghana/Gallery/kakum_canopy.jpg',
+        image: '/images/ghana/gallery/kakum-canopy.webp',
         imageAlt: 'The rainforest canopy walkway at Kakum National Park',
         details: {
           overview:
@@ -489,7 +489,7 @@ export const GHANA_DATA = {
         title: 'Responsible Travel',
         description:
           'Support locally owned businesses, ask before photographing people, and approach cultural and historical sites with respect.',
-        image: '/Pictures/Ghana_Card.JPG',
+        image: '/images/ghana/ghana-card.webp',
         imageAlt: 'A memorial statue commemorating the transatlantic slave trade in Ghana',
         details: {
           overview:
@@ -513,49 +513,49 @@ export const GHANA_DATA = {
     heading: 'A Taste of Ghana',
     subheading:
       "Ghanaian food is flavorful, varied, and deeply connected to the country's culture. Here are some popular dishes to try during your visit.",
-    image: '/Pictures/Ghana/Ghana_Foods/IMG_5418.jpeg',
+    image: '/images/ghana/food/img-5418.webp',
     imageAlt: "Kelewele — spiced fried plantain served with roasted peanuts on banana leaves",
     dishes: [
       {
         title: 'Jollof Rice',
         description:
           "One of Ghana's most popular dishes, made with rice cooked in a flavorful tomato, pepper, onion, and spice sauce.",
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5135.jpeg',
+        image: '/images/ghana/food/img-5135.webp',
         imageAlt: 'A plate of Ghanaian jollof rice with coleslaw and pepper sauce',
       },
       {
         title: 'Red Red',
         description:
           'A hearty bean stew, traditionally made with black-eyed peas and red palm oil, Often served with fried ripe plantain.',
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5402.jpeg',
+        image: '/images/ghana/food/img-5402.webp',
         imageAlt: 'Red red bean stew served with fried plantain and sautéed spinach',
       },
       {
         title: 'Waakye',
         description:
           'A popular Ghanaian rice-and-beans dish, traditionally cooked together and served with a variety of sauces and accompaniments.',
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5416.jpeg',
+        image: '/images/ghana/food/img-5416.webp',
         imageAlt: 'Waakye rice and beans served with a boiled egg, pepper sauce and salad',
       },
       {
         title: 'Fufu',
         description:
           'Smooth, soft staple made by pounding cooked cassava, plantain, yam, or a combination, usually served with soup or stew.',
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5412.jpeg',
+        image: '/images/ghana/food/img-5412.webp',
         imageAlt: 'A ball of fufu served with a green soup',
       },
       {
         title: 'Spinach Stew',
         description:
           'A rich Ghanaian-style stew made with leafy greens, tomatoes, onions, peppers, and seasonings, often served with rice, plantain, or beans.',
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5124.jpeg',
+        image: '/images/ghana/food/img-5124.webp',
         imageAlt: 'Spinach stew served with rice, black-eyed beans and fried plantain',
       },
       {
         title: 'Kelewele',
         description:
           "Spiced fried plantain, often served with roasted peanuts. Naturally vegan and one of Ghana's most popular street foods.",
-        image: '/Pictures/Ghana/Ghana_Foods/IMG_5418.jpeg',
+        image: '/images/ghana/food/img-5418.webp',
         imageAlt: 'Kelewele spiced fried plantain served with roasted peanuts',
       },
     ],
@@ -593,6 +593,6 @@ export const GHANA_DATA = {
     },
     leftWatermark: ['Ghana', 'People, Places'],
     rightWatermark: ['People', 'Places', 'Possibilities', 'Ghana'],
-    backgroundImage: '/Pictures/countries/Ghana.jpg',
+    backgroundImage: '/images/countries/ghana.webp',
   },
 }

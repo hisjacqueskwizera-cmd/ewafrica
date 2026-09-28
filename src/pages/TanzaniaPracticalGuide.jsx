@@ -51,7 +51,7 @@ export function TanzaniaPracticalGuide() {
       <DestinationHero
         heading="Tanzania & Zanzibar"
         description="A practical guide for first-time travelers to Tanzania — Karibu Tanzania, welcome! Tanzania is one of Africa's most rewarding destinations, a land of incredible wildlife, rich cultures and warm, welcoming people."
-        backgroundImage="/Pictures/Tanzania/TZ_Hero_Section/IMG_4452.JPG"
+        backgroundImage="/images/tanzania/img-4452.webp"
         backgroundImageAlt="A Maasai traveler watching a herd of zebras cross the Tanzanian savannah"
       />
 

@@ -165,7 +165,7 @@ export function RightOfAbodeGuidance() {
 
             <PlannerSidebar
               heading={sidebar.title}
-              photo="/Pictures/image_Ghana.webp"
+              photo="/images/ghana/ghana-featured.webp"
               photoAlt="Cape Coast Castle overlooking the Ghanaian coastline"
               price={GHANA_RIGHT_OF_ABODE_FLOW.price}
               includes={GHANA_RIGHT_OF_ABODE_FLOW.includes}

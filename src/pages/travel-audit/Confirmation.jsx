@@ -159,7 +159,7 @@ export function Confirmation() {
               includes={TRAVEL_AUDIT_FLOW.includes}
               includesHeading="Travel Audit Includes"
               caption={copy.sidebarCaption}
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

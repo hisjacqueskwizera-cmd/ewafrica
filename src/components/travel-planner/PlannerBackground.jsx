@@ -9,7 +9,7 @@ export function PlannerBackground() {
     <div
       className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-30"
       style={{
-        backgroundImage: `url(${encodeURI('/Pictures/Background on travel planner landing page.PNG')})`,
+        backgroundImage: `url(${encodeURI('/images/backgrounds/travel-planner-landing.webp')})`,
       }}
       aria-hidden="true"
     />

@@ -39,7 +39,7 @@ export function GhanaPracticalGuideTravelSmarter() {
         page={3}
         heading="Travel Smarter"
         tagline="Practical advice for moving around Ghana with confidence."
-        image="/Pictures/Ghana/Gallery/fishing_boats.jpg"
+        image="/images/ghana/gallery/fishing-boats.webp"
         imageAlt="A coastal road along Ghana's Atlantic shoreline"
       />
 

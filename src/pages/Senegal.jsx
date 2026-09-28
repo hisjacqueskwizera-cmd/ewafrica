@@ -27,31 +27,31 @@ import { SENEGAL_PAGE } from '../data/siteContent.js'
 
 const SENEGAL_GALLERY_TILES = [
   {
-    src: '/Pictures/Senegal/Gallery/goree_waterfront.jpg',
+    src: '/images/senegal/gallery/goree-waterfront.webp',
     alt: "Gorée Island's colonial waterfront seen from the water, Senegal",
     title: 'Gorée Island',
     subtitle: 'A UNESCO World Heritage waterfront',
   },
   {
-    src: '/Pictures/Senegal/Gallery/goree_fort.jpg',
+    src: '/images/senegal/gallery/goree-fort.webp',
     alt: 'The old fort on Gorée Island with a fishing pirogue passing by',
     title: 'Castel Fort, Gorée',
     subtitle: 'The old fort above the Atlantic',
   },
   {
-    src: '/Pictures/Senegal/Gallery/saint_louis_pirogues.jpg',
+    src: '/images/senegal/gallery/saint-louis-pirogues.webp',
     alt: "Colorful painted pirogues in Saint-Louis' fishing harbor, Senegal",
     title: 'Saint-Louis',
     subtitle: 'Colorful pirogues fill the harbor',
   },
   {
-    src: '/Pictures/Senegal/Gallery/goree_lane.jpg',
+    src: '/images/senegal/gallery/goree-lane.webp',
     alt: 'A bougainvillea-lined sandy lane on Gorée Island, Senegal',
     title: 'Gorée Island',
     subtitle: 'Bougainvillea-lined lanes',
   },
   {
-    src: '/Pictures/Senegal/Gallery/zebu_cattle.jpg',
+    src: '/images/senegal/gallery/zebu-cattle.webp',
     alt: 'Long-horned zebu cattle herded through a dusty village street in Senegal',
     title: 'Village Life',
     subtitle: 'Cattle herded through a dusty street',
@@ -60,13 +60,13 @@ const SENEGAL_GALLERY_TILES = [
 
 const SENEGAL_GALLERY_EXTRA_TILES = [
   {
-    src: '/Pictures/Senegal/Gallery/saint_louis_carriages.jpg',
+    src: '/images/senegal/gallery/saint-louis-carriages.webp',
     alt: "Horse-drawn carriages on Saint-Louis' colonial streets, Senegal",
     title: 'Saint-Louis',
     subtitle: 'Colonial streets and horse-drawn carriages',
   },
   {
-    src: '/Pictures/Senegal/Gallery/goree_memorial.jpg',
+    src: '/images/senegal/gallery/goree-memorial.webp',
     alt: 'The Statue of the Liberation from Slavery on Gorée Island, Senegal',
     title: 'Gorée Island',
     subtitle: 'A memorial to freedom and remembrance',

@@ -22,7 +22,7 @@ export function FeaturedGhana() {
     <section className="relative overflow-hidden bg-cocoa text-primary-foreground">
       <Reveal big className="absolute inset-0">
         <img
-          src="/Pictures/image_Ghana.webp"
+          src="/images/ghana/ghana-featured.webp"
           alt="The Kwame Nkrumah Memorial Park monument in Accra, Ghana"
           className="size-full object-cover object-[center_13%]"
         />

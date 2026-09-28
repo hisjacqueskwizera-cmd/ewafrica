@@ -294,7 +294,7 @@ export function Payment() {
               includesHeading="Border Crossing Guide Includes"
               helpHeading="Need Help With Payment?"
               helpText="If you have any questions about payment options or are experiencing issues, please contact us."
-              secondaryPhoto="/Pictures/countries/Zambia.jpg"
+              secondaryPhoto="/images/countries/zambia.webp"
               secondaryPhotoAlt="Victoria Falls with a rainbow arcing over the gorge"
               secondaryCaption={copy.sidebarCaption2}
             />

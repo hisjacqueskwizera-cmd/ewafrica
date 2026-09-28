@@ -19,7 +19,7 @@ import {
   TRAVEL_AUDIT_FLOW,
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
-import { DestinationPicker } from '../components/DestinationPicker.jsx'
+import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { PlaceholderArt } from '../components/PlaceholderArt.jsx'
@@ -58,6 +58,8 @@ function ServiceCard({
   requestHref,
   beforeYouBookHref,
   travelAuditHref,
+  needsSelection,
+  onNeedSelection,
   delay,
 }) {
   const Icon = ICONS[service.icon]
@@ -85,6 +87,7 @@ function ServiceCard({
         : service.key === 'travelAudit'
           ? travelAuditHref
           : '/#contact'
+  const ctaClass = `mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${accent.button}`
 
   return (
     <Reveal delay={delay}>
@@ -136,13 +139,19 @@ function ServiceCard({
             ))}
           </ul>
 
-          <HashLink
-            to={href}
-            className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${accent.button}`}
-          >
-            View Details
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </HashLink>
+          {needsSelection ? (
+            // Nothing picked yet: point the visitor back up to the country
+            // tiles rather than continuing without a destination.
+            <button type="button" onClick={onNeedSelection} className={ctaClass}>
+              View Details
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </button>
+          ) : (
+            <HashLink to={href} className={ctaClass}>
+              View Details
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </HashLink>
+          )}
         </div>
       </article>
     </Reveal>
@@ -174,11 +183,18 @@ export function TravelPlanner() {
     .filter(Boolean)
   const count = Math.max(destinationSlugs.length, 1)
   const hasGhana = destinationSlugs.includes('ghana')
-  // Every card's "View Details" always works, selected or not — the
-  // Travel Planner card goes to that service's own details page (where a
-  // count can still be chosen if nothing was picked here) rather than
-  // straight to the request form, so there's no "nothing picked yet" dead
-  // end to guard against any more.
+  // This page is the one place destinations are chosen, so every card's
+  // "View Details" needs at least one country picked first — the same rule
+  // as Personal Visa Guidance's Continue. With none, it shows that page's
+  // notice and scrolls back up to the tiles instead of continuing.
+  const [selectionError, setSelectionError] = useState('')
+  const needsSelection = destinationSlugs.length === 0
+  const onNeedSelection = () => {
+    setSelectionError('Please select at least one country to continue.')
+    document
+      .getElementById('destination-select')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
   const requestHref = `/travel-planner/service-details?destinations=${destinationSlugs.join(',')}`
   const beforeYouBookHref = `/travel-planner/before-you-book-check?destinations=${destinationSlugs.join(',')}`
   const travelAuditHref = `/travel-planner/travel-audit?destinations=${destinationSlugs.join(',')}`
@@ -215,28 +231,45 @@ export function TravelPlanner() {
             </p>
           </Reveal>
 
+          {/* The same country selection card as Personal Visa Guidance. */}
           {!isLocked && (
-            <Reveal delay={150}>
-              <div className="mx-auto mt-8 flex max-w-xs flex-col items-center gap-2">
-                <span className="font-bold text-primary" style={{ fontSize: "14px" }}> Your Destination:</span>
-                <DestinationPicker
-                  countries={COUNTRIES}
-                  values={destinationSlugs}
-                  onChange={setDestinationSlugs}
-                  max={4}
-                  className="w-full"
-                />
-                {/* The picks, listed back in bold as soon as there are any —
-                    confirms the selection right above the pricing cards
-                    that update from it. */}
-                {selectedCountries.length > 0 && (
-                  <p className="text-sm font-bold text-primary">
-                    {selectedCountries.map((c) => c.name).join(', ')}
-                  </p>
-                )}
-                <p className="text-xs text-muted-foreground">
-                  Not the right countries? You can change your selection at any time.
+            <Reveal
+              delay={150}
+              className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-border bg-card p-6 text-left shadow-sm sm:p-8"
+            >
+              <div id="destination-select">
+                <h3 className="text-xl font-bold text-primary">Select Your Destination(s)</h3>
+                <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+                  Select one or more countries — up to 4. Then choose a service below.
                 </p>
+
+                <CountrySelectGrid
+                  values={destinationSlugs}
+                  onChange={(next) => {
+                    setSelectionError('')
+                    setDestinationSlugs(next)
+                  }}
+                  max={4}
+                  error={selectionError}
+                  ariaLabel="Destinations"
+                  className="mt-6"
+                />
+              </div>
+
+              {/* The picks, listed back as soon as there are any — confirms
+                  the selection right above the service cards that carry it. */}
+              <div className="mt-6 border-t border-border pt-5 text-sm text-muted-foreground">
+                {selectedCountries.length === 0 ? (
+                  <span className="italic">No countries selected yet.</span>
+                ) : (
+                  <>
+                    <span className="font-bold text-primary">{selectedCountries.length}</span>{' '}
+                    {selectedCountries.length === 1 ? 'country' : 'countries'} selected —{' '}
+                    <span className="font-bold text-copper">
+                      {selectedCountries.map((c) => c.name).join(', ')}
+                    </span>
+                  </>
+                )}
               </div>
             </Reveal>
           )}
@@ -258,6 +291,8 @@ export function TravelPlanner() {
                 requestHref={requestHref}
                 beforeYouBookHref={beforeYouBookHref}
                 travelAuditHref={travelAuditHref}
+                needsSelection={needsSelection}
+                onNeedSelection={onNeedSelection}
                 delay={i * 100}
               />
             ))}

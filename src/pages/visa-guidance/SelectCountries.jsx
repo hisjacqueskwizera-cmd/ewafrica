@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { COUNTRIES } from '../../data/siteContent.js'
 import { FLAGS } from '../../data/countryFlags.js'
 import { VISA_PRICING_PER_COUNTRY } from '../../data/visaGuidanceData.js'
+import { CountrySelectGrid } from '../../components/CountrySelectGrid.jsx'
 import { PlannerBackground } from '../../components/travel-planner/PlannerBackground.jsx'
 import { Reveal } from '../../components/Reveal.jsx'
 import { PhoneConsultationModal } from '../../components/visa-guidance/PhoneConsultationModal.jsx'
@@ -11,7 +12,7 @@ import { useVisaGuidanceFlow } from '../../context/VisaGuidanceFlowContext.jsx'
 
 export function SelectCountries() {
   const navigate = useNavigate()
-  const { destinationSlugs, toggleDestination, removeDestination, setDestinationSlugs } = useVisaGuidanceFlow()
+  const { destinationSlugs, removeDestination, setDestinationSlugs } = useVisaGuidanceFlow()
   const [showPhoneModal, setShowPhoneModal] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -31,15 +32,6 @@ export function SelectCountries() {
     }
     setErrorMsg('')
     navigate(`/personal-visa-guidance/multi/overview?destinations=${destinationSlugs.join(',')}`)
-  }
-
-  const handleToggle = (slug) => {
-    if (!destinationSlugs.includes(slug) && selectedCount >= MAX_COUNTRIES) {
-      setErrorMsg(`You can select up to ${MAX_COUNTRIES} countries at a time.`)
-      return
-    }
-    if (errorMsg) setErrorMsg('')
-    toggleDestination(slug)
   }
 
   const steps = [
@@ -143,54 +135,17 @@ export function SelectCountries() {
                   </span>
                 </div>
 
-                {errorMsg && (
-                  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">
-                    {errorMsg}
-                  </div>
-                )}
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {COUNTRIES.map((c) => {
-                    const isSelected = destinationSlugs.includes(c.slug)
-                    const isDisabled = !isSelected && selectedCount >= MAX_COUNTRIES
-                    return (
-                      <button
-                        key={c.slug}
-                        type="button"
-                        onClick={() => handleToggle(c.slug)}
-                        disabled={isDisabled}
-                        className={`group flex items-center justify-between rounded-2xl border-2 p-3.5 sm:p-4 text-left transition-all ${
-                          isSelected
-                            ? 'border-copper bg-copper/5 shadow-sm'
-                            : isDisabled
-                            ? 'border-border bg-card opacity-40 cursor-not-allowed'
-                            : 'border-border bg-card hover:border-copper/40 hover:bg-sand/30'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={FLAGS[c.slug]}
-                            alt=""
-                            aria-hidden="true"
-                            className="h-5 w-7 shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10"
-                          />
-                          <span className={`text-sm font-bold transition-colors ${isSelected ? 'text-copper' : 'text-primary group-hover:text-copper'}`}>
-                            {c.name}
-                          </span>
-                        </div>
-                        <span
-                          className={`grid size-5 shrink-0 place-items-center rounded-full border-2 transition-all ${
-                            isSelected
-                              ? 'border-copper bg-copper text-white'
-                              : 'border-border bg-card group-hover:border-copper'
-                          }`}
-                        >
-                          {isSelected && <Check className="size-3.5 stroke-[3]" />}
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
+                <CountrySelectGrid
+                  values={destinationSlugs}
+                  onChange={(next) => {
+                    setErrorMsg('')
+                    setDestinationSlugs(next)
+                  }}
+                  max={MAX_COUNTRIES}
+                  error={errorMsg}
+                  ariaLabel="Destinations"
+                  className="mt-6"
+                />
               </Reveal>
 
               {/* Optional Phone Consultation Card */}

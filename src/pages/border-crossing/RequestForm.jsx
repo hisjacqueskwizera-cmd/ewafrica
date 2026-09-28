@@ -1,7 +1,8 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { BORDER_CROSSING_FLOW, COUNTRIES } from '../../data/siteContent.js'
+import { BORDER_CROSSING_FLOW } from '../../data/siteContent.js'
+import { CountrySelectField } from '../../components/CountrySelectGrid.jsx'
 import { PlannerBackground } from '../../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../../components/travel-planner/PlannerSidebar.jsx'
 import { PlannerStepHero } from '../../components/travel-planner/PlannerStepHero.jsx'
@@ -87,8 +88,23 @@ export function RequestForm() {
 
   const years = [new Date().getFullYear(), new Date().getFullYear() + 1, new Date().getFullYear() + 2]
 
+  const [routeErrors, setRouteErrors] = useState({ from: '', to: '' })
+
   const handleSubmit = (event) => {
     event.preventDefault()
+    // The country tiles aren't form inputs, so the browser's own required
+    // check can't cover them — same notice Personal Visa Guidance shows.
+    const errors = {
+      from: request.fromCountrySlug ? '' : "Please select the country you're traveling from.",
+      to: request.toCountrySlug ? '' : "Please select the country you're traveling to.",
+    }
+    if (errors.from || errors.to) {
+      setRouteErrors(errors)
+      document
+        .getElementById(errors.from ? 'from-country-field' : 'to-country-field')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
     navigate('/travel-planner/border-crossing-guide/review')
   }
 
@@ -178,62 +194,50 @@ export function RequestForm() {
                   </select>
                 </Field>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Field label="Where are you traveling from?" required>
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <select
-                        required
-                        aria-label="Country traveling from"
-                        value={request.fromCountrySlug}
-                        onChange={(e) => updateRequest({ fromCountrySlug: e.target.value })}
-                        className={inputClass}
-                      >
-                        <option value="" disabled>
-                          Select country
-                        </option>
-                        {COUNTRIES.map((c) => (
-                          <option key={c.slug} value={c.slug}>
-                            {c.name}
-                          </option>
-                        ))}
-                      </select>
-                      <input
-                        value={request.fromCity}
-                        onChange={(e) => updateRequest({ fromCity: e.target.value })}
-                        placeholder="City / area (optional)"
-                        aria-label="City or area traveling from"
-                        className={inputClass}
-                      />
-                    </div>
-                  </Field>
+                <div>
+                  <CountrySelectField
+                    id="from-country-field"
+                    label="Where are you traveling from?"
+                    required
+                    hint="Select one country."
+                    values={request.fromCountrySlug ? [request.fromCountrySlug] : []}
+                    onChange={(slugs) => {
+                      setRouteErrors((prev) => ({ ...prev, from: '' }))
+                      updateRequest({ fromCountrySlug: slugs[0] ?? '' })
+                    }}
+                    max={1}
+                    error={routeErrors.from}
+                  />
+                  <input
+                    value={request.fromCity}
+                    onChange={(e) => updateRequest({ fromCity: e.target.value })}
+                    placeholder="City / area (optional)"
+                    aria-label="City or area traveling from"
+                    className={`${inputClass} mt-3`}
+                  />
+                </div>
 
-                  <Field label="Where are you traveling to?" required>
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <select
-                        required
-                        aria-label="Country traveling to"
-                        value={request.toCountrySlug}
-                        onChange={(e) => updateRequest({ toCountrySlug: e.target.value })}
-                        className={inputClass}
-                      >
-                        <option value="" disabled>
-                          Select country
-                        </option>
-                        {COUNTRIES.map((c) => (
-                          <option key={c.slug} value={c.slug}>
-                            {c.name}
-                          </option>
-                        ))}
-                      </select>
-                      <input
-                        value={request.toCity}
-                        onChange={(e) => updateRequest({ toCity: e.target.value })}
-                        placeholder="City / area (optional)"
-                        aria-label="City or area traveling to"
-                        className={inputClass}
-                      />
-                    </div>
-                  </Field>
+                <div>
+                  <CountrySelectField
+                    id="to-country-field"
+                    label="Where are you traveling to?"
+                    required
+                    hint="Select one country."
+                    values={request.toCountrySlug ? [request.toCountrySlug] : []}
+                    onChange={(slugs) => {
+                      setRouteErrors((prev) => ({ ...prev, to: '' }))
+                      updateRequest({ toCountrySlug: slugs[0] ?? '' })
+                    }}
+                    max={1}
+                    error={routeErrors.to}
+                  />
+                  <input
+                    value={request.toCity}
+                    onChange={(e) => updateRequest({ toCity: e.target.value })}
+                    placeholder="City / area (optional)"
+                    aria-label="City or area traveling to"
+                    className={`${inputClass} mt-3`}
+                  />
                 </div>
               </SectionCard>
 

@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BEFORE_YOU_BOOK_FLOW, COUNTRIES } from '../../data/siteContent.js'
-import { DestinationPicker } from '../../components/DestinationPicker.jsx'
+import { CountrySelectField } from '../../components/CountrySelectGrid.jsx'
 import { PlannerBackground } from '../../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../../components/travel-planner/PlannerSidebar.jsx'
 import { PlannerStepHero } from '../../components/travel-planner/PlannerStepHero.jsx'
@@ -101,7 +101,7 @@ export function RequestForm() {
   // inline picker below (arrivedWithSelection === false) and switch them
   // over to the read-only summary mid-selection.
   const [arrivedWithSelection] = useState(() => request.destinationSlugs.length > 0)
-  const [countChoice, setCountChoice] = useState('')
+  const [destinationError, setDestinationError] = useState('')
 
   const destinationNames = request.destinationSlugs
     .map((slug) => COUNTRIES.find((c) => c.slug === slug)?.name)
@@ -111,6 +111,13 @@ export function RequestForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    // The country tiles aren't form inputs, so the browser's own required
+    // check can't cover them — same notice Personal Visa Guidance shows.
+    if (request.destinationSlugs.length === 0) {
+      setDestinationError('Please select at least one country to continue.')
+      document.getElementById('destinations-field')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
     navigate('/travel-planner/before-you-book-check/review')
   }
 
@@ -181,48 +188,21 @@ export function RequestForm() {
                 {arrivedWithSelection ? (
                   <DestinationSummary destinationNames={destinationNames} />
                 ) : (
-                  <>
-                    <Field
-                      label="How many countries are you planning to visit?"
-                      required
-                      hint="Choose 1, 2, 3, or 4 countries."
-                    >
-                      <select
-                        required
-                        value={countChoice}
-                        onChange={(e) => {
-                          const next = Number(e.target.value)
-                          setCountChoice(next)
-                          if (request.destinationSlugs.length > next) {
-                            updateRequest({ destinationSlugs: request.destinationSlugs.slice(0, next) })
-                          }
-                        }}
-                        className={inputClass}
-                      >
-                        <option value="" disabled>
-                          Select number of countries
-                        </option>
-                        {[1, 2, 3, 4].map((n) => (
-                          <option key={n} value={n}>
-                            {n} {n === 1 ? 'country' : 'countries'}
-                          </option>
-                        ))}
-                      </select>
-                    </Field>
-
-                    <Field
-                      label="Select your destination(s)"
-                      required
-                      hint={`You can select up to ${countChoice || 4} ${countChoice === 1 ? 'country' : 'countries'}.`}
-                    >
-                      <DestinationPicker
-                        countries={COUNTRIES}
-                        values={request.destinationSlugs}
-                        onChange={(slugs) => updateRequest({ destinationSlugs: slugs })}
-                        max={countChoice || 4}
-                      />
-                    </Field>
-                  </>
+                  // The number of countries is simply however many are
+                  // ticked — pricing already follows the selection.
+                  <CountrySelectField
+                    id="destinations-field"
+                    label="Select your destination(s)"
+                    required
+                    hint="Select one or more countries — up to 4."
+                    values={request.destinationSlugs}
+                    onChange={(slugs) => {
+                      setDestinationError('')
+                      updateRequest({ destinationSlugs: slugs })
+                    }}
+                    max={4}
+                    error={destinationError}
+                  />
                 )}
               </SectionCard>
 

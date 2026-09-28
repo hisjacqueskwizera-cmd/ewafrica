@@ -2155,13 +2155,10 @@ export const TRAVEL_PLANNER_PAGE = {
 
 // The Travel Planner service's own details page —
 // /travel-planner/service-details. Reached from the Travel Planner card's
-// "View Details" (carrying forward whatever the landing page's picker had
-// selected, same ?destinations= convention as every other card). If
-// nothing was carried over, this is where a visitor picks how many
-// countries they're planning — the same "always give them a place to
-// choose, never dead-end them" logic Before You Book Check uses in its own
-// request form, just one step earlier here since the reference design
-// puts the count tiles on this page rather than inside the request form.
+// "View Details", carrying the countries picked on the landing page (same
+// ?destinations= convention as every other card). Countries are only
+// chosen on the landing page, which requires at least one before any card
+// continues; this page just confirms them and shows their price.
 export const TRAVEL_PLANNER_DETAILS_PAGE = {
   hero: {
     badge: 'Travel Planner',
@@ -2191,9 +2188,9 @@ export const TRAVEL_PLANNER_DETAILS_PAGE = {
       'You tell us where you want to go, your travel dates, interests, preferred pace, transportation preferences, and the type of experience you are looking for. We then help you turn those ideas into a practical journey that works on the ground.',
     ],
   },
-  countPicker: {
-    heading: 'How many countries are you planning to visit?',
-    subtext: 'Select an option below to see the price.',
+  yourDestinations: {
+    heading: 'Your Destination(s)',
+    subtext: "You're planning to visit:",
   },
   whatWeHelpPlan: {
     heading: 'What We Help You Plan',

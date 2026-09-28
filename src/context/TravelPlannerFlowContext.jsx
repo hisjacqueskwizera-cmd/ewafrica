@@ -81,12 +81,12 @@ export function TravelPlannerFlowProvider({ children }) {
       .slice(0, 4)
     return { ...DEFAULT_REQUEST, destinationSlugs: slugs }
   })
-  // Reached from the Service Details page's country-count tiles
-  // (?count=1..4) when nothing was picked yet — a promise about how many
-  // countries to expect, used for pricing/question-set wording until real
-  // destinationSlugs exist below, and as the DestinationPicker's cap once
-  // RequestForm asks for the specific countries inline. Read once, same as
-  // destinationSlugs above; irrelevant once real picks exist.
+  // A ?count=1..4 link (Service Details used to send one from its old
+  // country-count tiles; it now carries real ?destinations= instead) — a
+  // promise about how many countries to expect, used for pricing/question-
+  // set wording until real destinationSlugs exist below, and as the country
+  // tiles' cap once RequestForm asks for the specific countries inline. Read
+  // once, same as destinationSlugs above; irrelevant once real picks exist.
   const [plannedCount] = useState(() => {
     const n = Number(searchParams.get('count'))
     return n >= 1 && n <= 4 ? n : null
@@ -134,6 +134,7 @@ export function TravelPlannerFlowProvider({ children }) {
     setDaysForCountry,
     resetRequest,
     count,
+    plannedCount,
     tier,
     paid,
     setPaid,

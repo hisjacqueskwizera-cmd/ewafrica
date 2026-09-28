@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { COUNTRIES, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
-import { DestinationPicker } from '../../components/DestinationPicker.jsx'
+import { CountrySelectField } from '../../components/CountrySelectGrid.jsx'
 import { PlannerBackground } from '../../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../../components/travel-planner/PlannerSidebar.jsx'
 import { PlannerStepHero } from '../../components/travel-planner/PlannerStepHero.jsx'
@@ -86,17 +86,23 @@ function DestinationSummary({ label, destinationNames }) {
   )
 }
 
-// Shown instead of DestinationSummary when nothing was carried over from
-// either the landing page's picker or the Service Details page's own
-// summary — mirrors Before You Book Check's own request form, which asks
-// inline rather than leaving the visitor stuck with no way to proceed.
-// `max` is the count already promised on Service Details (or 4 for a
-// direct/bookmarked visit with no promise at all).
-function DestinationPickerField({ label, hint, values, onChange, max }) {
+// Shown instead of DestinationSummary only when nothing was carried over
+// from the landing page's country tiles (a bookmarked or typed URL) —
+// mirrors Before You Book Check's own request form, which asks inline
+// rather than leaving the visitor stuck with no way to proceed. `max` is
+// the count already promised by a ?count= link (or 4 with no promise).
+function DestinationPickerField({ label, hint, values, onChange, max, error }) {
   return (
-    <Field label={label} required hint={hint}>
-      <DestinationPicker countries={COUNTRIES} values={values} onChange={onChange} max={max} />
-    </Field>
+    <CountrySelectField
+      id="destinations-field"
+      label={label}
+      required
+      hint={hint}
+      values={values}
+      onChange={onChange}
+      max={max}
+      error={error}
+    />
   )
 }
 
@@ -116,6 +122,9 @@ function PdfRequestSections({
   destinationNames,
   count,
   arrivedWithSelection,
+  destinationMax,
+  destinationError,
+  onDestinationsChange,
 }) {
   const destinationQuestion =
     count === 1
@@ -137,11 +146,14 @@ function PdfRequestSections({
           <DestinationSummary label={destinationQuestion} destinationNames={destinationNames} />
         ) : (
           <DestinationPickerField
-            label={destinationQuestion}
-            hint={`You can select up to ${count} ${count === 1 ? 'country' : 'countries'}.`}
+            // The count-specific wording only fits once a count was
+            // promised; with none, up to 4 can still be picked here.
+            label={destinationMax === count ? destinationQuestion : 'Which countries are you planning to visit?'}
+            hint={`You can select up to ${destinationMax} ${destinationMax === 1 ? 'country' : 'countries'}.`}
             values={request.destinationSlugs}
-            onChange={(slugs) => updateRequest({ destinationSlugs: slugs })}
-            max={count}
+            onChange={onDestinationsChange}
+            max={destinationMax}
+            error={destinationError}
           />
         )}
 
@@ -539,6 +551,8 @@ function LegacyRequestSections({
   toggleListValue,
   destinationNames,
   arrivedWithSelection,
+  destinationError,
+  onDestinationsChange,
 }) {
   return (
     <>
@@ -550,8 +564,9 @@ function LegacyRequestSections({
             label="Your Destination(s)"
             hint="You can select up to 4 countries."
             values={request.destinationSlugs}
-            onChange={(slugs) => updateRequest({ destinationSlugs: slugs })}
+            onChange={onDestinationsChange}
             max={4}
+            error={destinationError}
           />
         )}
 
@@ -780,7 +795,7 @@ export function RequestForm() {
   }, [])
 
   const navigate = useNavigate()
-  const { request, updateRequest, toggleListValue, setDaysForCountry, tier, count } =
+  const { request, updateRequest, toggleListValue, setDaysForCountry, tier, count, plannedCount } =
     useTravelPlannerFlow()
   const copy = TRAVEL_PLANNER_FLOW.steps.request
   const destinationNames = request.destinationSlugs
@@ -793,9 +808,23 @@ export function RequestForm() {
   // inline picker below and switch them over to the read-only summary
   // mid-selection. Mirrors Before You Book Check's own RequestForm.
   const [arrivedWithSelection] = useState(() => request.destinationSlugs.length > 0)
+  const destinationMax = plannedCount ?? 4
+  const [destinationError, setDestinationError] = useState('')
+
+  const onDestinationsChange = (slugs) => {
+    setDestinationError('')
+    updateRequest({ destinationSlugs: slugs })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    // The country tiles aren't form inputs, so the browser's own required
+    // check can't cover them — same notice Personal Visa Guidance shows.
+    if (request.destinationSlugs.length === 0) {
+      setDestinationError('Please select at least one country to continue.')
+      document.getElementById('destinations-field')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
     navigate('/travel-planner/review')
   }
 
@@ -869,6 +898,9 @@ export function RequestForm() {
                   destinationNames={destinationNames}
                   count={count}
                   arrivedWithSelection={arrivedWithSelection}
+                  destinationMax={destinationMax}
+                  destinationError={destinationError}
+                  onDestinationsChange={onDestinationsChange}
                 />
               ) : (
                 <LegacyRequestSections
@@ -877,6 +909,8 @@ export function RequestForm() {
                   toggleListValue={toggleListValue}
                   destinationNames={destinationNames}
                   arrivedWithSelection={arrivedWithSelection}
+                  destinationError={destinationError}
+                  onDestinationsChange={onDestinationsChange}
                 />
               )}
 

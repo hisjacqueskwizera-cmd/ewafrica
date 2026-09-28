@@ -14,6 +14,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COUNTRIES, followUpForCountry } from '../data/siteContent.js'
 import { FLAGS } from '../data/countryFlags.js'
 import { VISA_PRICING_PER_COUNTRY } from '../data/visaGuidanceData.js'
+import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
@@ -50,18 +51,6 @@ export function PersonalVisaGuidance() {
     { icon: 'Mail', text: 'Delivered by email (typically 3–5 business days)' },
     { icon: 'Phone', text: followUp },
   ]
-
-  const toggleCountry = (cSlug) => {
-    setErrorMsg('')
-    setSelected((prev) => {
-      if (prev.includes(cSlug)) return prev.filter((s) => s !== cSlug)
-      if (prev.length >= MAX_COUNTRIES) {
-        setErrorMsg(`You can select up to ${MAX_COUNTRIES} countries at a time.`)
-        return prev
-      }
-      return [...prev, cSlug]
-    })
-  }
 
   const handleContinue = () => {
     if (selected.length === 0) {
@@ -121,52 +110,17 @@ export function PersonalVisaGuidance() {
                     </span>
                   </div>
 
-                  {errorMsg && (
-                    <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">
-                      {errorMsg}
-                    </div>
-                  )}
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {COUNTRIES.map((c) => {
-                      const isSelected = selected.includes(c.slug)
-                      const isDisabled = !isSelected && selectedCount >= MAX_COUNTRIES
-                      return (
-                        <button
-                          key={c.slug}
-                          type="button"
-                          onClick={() => toggleCountry(c.slug)}
-                          disabled={isDisabled}
-                          className={`group flex items-center justify-between rounded-2xl border-2 p-3.5 text-left transition-all ${
-                            isSelected
-                              ? 'border-copper bg-copper/5 shadow-sm'
-                              : isDisabled
-                              ? 'border-border bg-card opacity-40 cursor-not-allowed'
-                              : 'border-border bg-card hover:border-copper/50 hover:bg-sand/30'
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <img
-                              src={FLAGS[c.slug]}
-                              alt=""
-                              aria-hidden="true"
-                              className="h-4 w-6 shrink-0 rounded-[2px] object-cover ring-1 ring-inset ring-black/10"
-                            />
-                            <span className={`text-sm font-bold transition-colors ${isSelected ? 'text-copper' : 'text-primary group-hover:text-copper'}`}>
-                              {c.name}
-                            </span>
-                          </div>
-                          <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 transition-all ${isSelected ? 'border-copper bg-copper text-white' : 'border-border bg-card group-hover:border-copper/60'}`}>
-                            {isSelected && (
-                              <svg viewBox="0 0 12 10" fill="none" className="size-3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="1 5 4.5 9 11 1" />
-                              </svg>
-                            )}
-                          </span>
-                        </button>
-                      )
-                    })}
-                  </div>
+                  <CountrySelectGrid
+                    values={selected}
+                    onChange={(next) => {
+                      setErrorMsg('')
+                      setSelected(next)
+                    }}
+                    max={MAX_COUNTRIES}
+                    error={errorMsg}
+                    ariaLabel="Destinations"
+                    className="mt-6"
+                  />
 
                   <div className="mt-6 flex flex-col gap-4 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
                     <div className="text-sm text-muted-foreground">

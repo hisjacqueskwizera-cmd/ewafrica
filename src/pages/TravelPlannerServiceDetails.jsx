@@ -1,7 +1,6 @@
 import {
   Bus,
   CalendarClock,
-  Check,
   ChevronRight,
   ClipboardCheck,
   Clock,
@@ -14,8 +13,8 @@ import {
   Route,
   ShieldCheck,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import {
   CONTACT_INFO,
   COUNTRIES,
@@ -43,7 +42,7 @@ const ICONS = {
   ShieldCheck,
 }
 
-// Same flag treatment as DestinationPicker's own rows (real SVG flags, not
+// Same flag treatment as the country tiles (real SVG flags, not
 // emoji — see the note on countryFlags.js), paired with the country name in
 // bold so the selection reads clearly at a glance.
 function CountryChip({ slug, name }) {
@@ -60,45 +59,15 @@ function CountryChip({ slug, name }) {
   )
 }
 
-function CountTile({ n, price, selected, onSelect }) {
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={selected}
-      className={`flex flex-1 flex-col items-center gap-2 rounded-2xl border-2 px-4 py-5 text-center transition-colors ${
-        selected
-          ? 'border-forest bg-forest text-primary-foreground'
-          : 'border-border bg-card text-primary hover:border-forest/40'
-      }`}
-    >
-      <span
-        className={`grid size-6 place-items-center rounded-full border-2 ${
-          selected ? 'border-primary-foreground' : 'border-copper'
-        }`}
-      >
-        {selected && <Check className="size-3.5" aria-hidden="true" />}
-      </span>
-      <span className="text-sm font-bold">
-        {n} {n === 1 ? 'Country' : 'Countries'}
-      </span>
-      <span className="text-lg font-bold">${price}</span>
-    </button>
-  )
-}
-
 export function TravelPlannerServiceDetails() {
   useEffect(() => {
     document.title = 'Travel Planner Service Details | East-West Africa Link'
   }, [])
 
-  // Carried over from the Travel Planner landing page's picker (its "View
-  // Details" link on this card) — never re-picked here. If nothing was
-  // carried over, the count tiles below let the visitor choose how many
-  // countries they're planning before moving on; the specific countries
-  // themselves are then picked inline on the request step if still
-  // unknown — same "always give them a place to choose" logic Before You
-  // Book Check's own request form uses.
+  // Destinations are only ever chosen on the Travel Planner landing page
+  // (its "View Details" link on this card carries them here) — never
+  // re-picked on this page. Arriving with none (a bookmark or typed URL)
+  // sends the visitor back there to choose at least one.
   const [searchParams] = useSearchParams()
   const destinationSlugs = (searchParams.get('destinations') ?? '')
     .split(',')
@@ -107,20 +76,15 @@ export function TravelPlannerServiceDetails() {
   const destinationNames = destinationSlugs
     .map((slug) => COUNTRIES.find((c) => c.slug === slug)?.name)
     .filter(Boolean)
-  const arrivedWithSelection = destinationSlugs.length > 0
 
-  const [selectedCount, setSelectedCount] = useState(1)
   const { travelPlannerTiers } = TRAVEL_PLANNER_PAGE
-  const count = arrivedWithSelection ? destinationSlugs.length : selectedCount
-  const price = travelPlannerTiers.find((t) => t.countries === count)?.price
-  const requestHref = arrivedWithSelection
-    ? `/travel-planner/request?destinations=${destinationSlugs.join(',')}`
-    : `/travel-planner/request?count=${selectedCount}`
+  const price = travelPlannerTiers.find((t) => t.countries === destinationSlugs.length)?.price
+  const requestHref = `/travel-planner/request?destinations=${destinationSlugs.join(',')}`
 
   const {
     hero,
     intro,
-    countPicker,
+    yourDestinations,
     whatWeHelpPlan,
     whatYouReceive,
     followUpSupport,
@@ -130,6 +94,8 @@ export function TravelPlannerServiceDetails() {
     stats,
     closing,
   } = TRAVEL_PLANNER_DETAILS_PAGE
+
+  if (destinationSlugs.length === 0) return <Navigate to="/travel-planner" replace />
 
   return (
     <>
@@ -167,43 +133,27 @@ export function TravelPlannerServiceDetails() {
               </Reveal>
 
               <Reveal delay={100} className="mt-10 rounded-3xl bg-cream p-6 sm:p-8">
-                <h2 className="text-lg font-bold text-primary">{countPicker.heading}</h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {arrivedWithSelection ? "You're planning to visit:" : countPicker.subtext}
-                </p>
+                <h2 className="text-lg font-bold text-primary">{yourDestinations.heading}</h2>
+                <p className="mt-1 text-sm text-muted-foreground">{yourDestinations.subtext}</p>
 
-                {arrivedWithSelection ? (
-                  <div className="mt-6 flex flex-col items-start gap-4">
-                    <div className="flex flex-wrap gap-2">
-                      {destinationSlugs.map((slug) => (
-                        <CountryChip
-                          key={slug}
-                          slug={slug}
-                          name={COUNTRIES.find((c) => c.slug === slug)?.name}
-                        />
-                      ))}
-                    </div>
-                    <p className="text-3xl font-bold text-primary">${price}</p>
-                    <Link
-                      to="/travel-planner"
-                      className="text-xs font-semibold text-copper hover:underline"
-                    >
-                      Change destinations
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                    {travelPlannerTiers.map((t) => (
-                      <CountTile
-                        key={t.countries}
-                        n={t.countries}
-                        price={t.price}
-                        selected={selectedCount === t.countries}
-                        onSelect={() => setSelectedCount(t.countries)}
+                <div className="mt-6 flex flex-col items-start gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {destinationSlugs.map((slug) => (
+                      <CountryChip
+                        key={slug}
+                        slug={slug}
+                        name={COUNTRIES.find((c) => c.slug === slug)?.name}
                       />
                     ))}
                   </div>
-                )}
+                  <p className="text-3xl font-bold text-primary">${price}</p>
+                  <Link
+                    to="/travel-planner"
+                    className="text-xs font-semibold text-copper hover:underline"
+                  >
+                    Change destinations
+                  </Link>
+                </div>
               </Reveal>
 
               <Reveal delay={125} className="mt-10">

@@ -18,6 +18,7 @@ import { HashLink } from './HashLink.jsx'
 import { PhotoGallerySection } from './PhotoGallery.jsx'
 import { OverlandRoutesSection } from './RouteCard.jsx'
 import { Reveal } from './Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 
 const ICONS = {
   FileText,
@@ -57,11 +58,10 @@ function CardCta({ to, children }) {
  * siteContent.js, shaped like TANZANIA_PAGE) plus the bits that vary by
  * name: the document title, the country's display name (used in route
  * card headings) and its siteContent.js `COUNTRIES` slug (used to deep-link
- * the Travel Planner card to the right destination). Pass `heroVideos`
- * (an array in HERO_VIDEOS' shape) for a page that rotates its own
- * dedicated clips instead of a static photo — Tanzania's the only one
- * that has any right now; everyone else's `hero` carries a plain
- * `backgroundImage`. Pass `gallery` for a "Gallery" section right under
+ * the Travel Planner card to the right destination, and to pick the hero's
+ * backdrop from COUNTRY_HEROES — e.g. Tanzania's own rotating clips —
+ * falling back to `hero.backgroundImage` for a country not listed there).
+ * Pass `gallery` for a "Gallery" section right under
  * the hero — omit it for a country with no dedicated photo set yet. It's
  * either a data object (shape: { heading, subheading, tiles, variant },
  * see PhotoGallery.jsx) rendered through the shared PhotoGallerySection,
@@ -75,7 +75,6 @@ export function DestinationPage({
   overlandCountryName,
   slug,
   data,
-  heroVideos,
   gallery,
   practicalGuideTo,
 }) {
@@ -92,9 +91,10 @@ export function DestinationPage({
       <DestinationHero
         heading={`${hero.titleLine1} ${hero.titleAccent}`}
         description={hero.description}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
-        backgroundVideos={heroVideos}
+        {...(COUNTRY_HEROES[slug] ?? {
+          backgroundImage: hero.backgroundImage,
+          backgroundImageAlt: hero.backgroundImageAlt,
+        })}
       />
 
       <CountrySubNav slug={slug} countryName={countryName} practicalGuideTo={practicalGuideTo} />

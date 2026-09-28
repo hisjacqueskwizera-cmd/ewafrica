@@ -7,6 +7,7 @@ import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { RWANDA_PAGE_BACKGROUND_STYLE } from '../components/RwandaPageBackground.jsx'
 import { RwandaSubNav } from '../components/RwandaSubNav.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { RWANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Map, Signpost, Users, ShieldCheck, Mail, Plane }
@@ -41,8 +42,7 @@ export function Rwanda() {
       <DestinationHero
         heading="Explore Rwanda"
         description={`${hero.subheading}. ${hero.description}`}
-        backgroundImage={hero.image}
-        backgroundImageAlt={hero.imageAlt}
+        {...COUNTRY_HEROES.rwanda}
       />
 
       <RwandaSubNav />

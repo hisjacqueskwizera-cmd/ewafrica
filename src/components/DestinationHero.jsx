@@ -39,8 +39,12 @@ function AccentHeading({ text }) {
  * photo like Ghana's Cape Coast Castle hero) — it adds a soft dark fade
  * behind the header (top of the hero) and behind the heading/description
  * (left side, where they sit) without darkening the rest of the photo.
+ *
+ * `eyebrow` is an optional line above the heading — the Travel Planner uses
+ * it for the country's flag and name when it reuses a country's hero.
  */
 export function DestinationHero({
+  eyebrow,
   heading,
   headingClassName,
   description,
@@ -80,6 +84,7 @@ export function DestinationHero({
       >
         <Reveal delay={150} blur>
           <div className="mt-9 max-w-3xl">
+            {eyebrow && <div className="mb-6">{eyebrow}</div>}
             <h1 className={headingClassName ?? HEADING}>
               <AccentHeading text={heading} />
             </h1>

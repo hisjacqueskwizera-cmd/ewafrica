@@ -2058,6 +2058,15 @@ export const TRAVEL_PLANNER_PAGE = {
       { icon: 'Users', title: 'Real Local Connections', text: 'Authentic. Trusted. Meaningful.' },
     ],
   },
+  // Shown instead of `hero` when a country page links here
+  // (?destination=<slug>) — over that country's own hero backdrop and in its
+  // hero's design (see COUNTRY_HEROES). "{country}" is filled in with the
+  // country's name.
+  countryHero: {
+    heading: 'Plan Your {country} Journey',
+    description:
+      'One country or multiple countries, travel with confidence. Get personalized, practical guidance to help you build a smoother, smarter trip to {country}.',
+  },
   intro: {
     heading: 'Choose the Support That Fits Your Trip',
     description:

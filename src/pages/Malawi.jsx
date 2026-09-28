@@ -26,6 +26,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection, RouteCardButton } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { MALAWI_PAGE } from '../data/siteContent.js'
 
 const MALAWI_GALLERY_TILES = [
@@ -127,8 +128,7 @@ export function Malawi() {
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
+        {...COUNTRY_HEROES.malawi}
       />
 
       <CountrySubNav slug="malawi" countryName="Malawi" />

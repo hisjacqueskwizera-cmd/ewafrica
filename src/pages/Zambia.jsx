@@ -16,6 +16,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { ZAMBIA_DATA } from '../data/zambiaContent.js'
 
 const ZAMBIA_GALLERY_TILES = [
@@ -79,10 +80,8 @@ export function Zambia() {
            other destination page (Ghana, Uganda, Malawi, etc.). */}
       <DestinationHero
         heading={`${hero.eyebrow} — ${hero.title}`}
-        headingClassName="font-display text-[1.65rem] font-normal leading-[1.05] text-balance text-white sm:text-[2.2rem] lg:text-[3rem]"
         description={hero.description}
-        backgroundImage={hero.image}
-        backgroundImageAlt="Victoria Falls, Zambia"
+        {...COUNTRY_HEROES.zambia}
       />
 
       <CountrySubNav slug="zambia" countryName="Zambia" practicalGuideTo="/zambia/practical-guide" />

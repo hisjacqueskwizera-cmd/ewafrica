@@ -19,7 +19,10 @@ import {
   TRAVEL_AUDIT_FLOW,
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
+import { FLAGS } from '../data/countryFlags.js'
 import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { PlaceholderArt } from '../components/PlaceholderArt.jsx'
@@ -158,11 +161,33 @@ function ServiceCard({
   )
 }
 
-export function TravelPlanner() {
-  useEffect(() => {
-    document.title = 'Travel Planner | East-West Africa Link'
-  }, [])
+// The flag + country name shown above a country's Travel Planner hero —
+// the same pill as the site's other hero badges (see PageIntro), but on a
+// dark glass fill: country heroes have no scrim, and the gold label would
+// wash out over bright backdrops like Tanzania's sunset or Victoria Falls.
+function CountryHeroBadge({ country }) {
+  return (
+    // Two rows on phones (flag + name, then the label) so a long name like
+    // "Tanzania & Zanzibar" never breaks mid-pill; one row from sm up.
+    <span className="inline-flex flex-col items-start gap-1.5 rounded-2xl border border-primary-foreground/30 bg-black/35 px-4 py-3 font-bold uppercase text-gold backdrop-blur-sm sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6">
+      <span className="flex items-center gap-3">
+        <img
+          src={FLAGS[country.slug]}
+          alt=""
+          aria-hidden="true"
+          className="h-6 w-9 shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10 sm:h-8 sm:w-12"
+        />
+        <span className="text-base tracking-[0.1em] text-primary-foreground sm:text-2xl">
+          {country.name}
+        </span>
+      </span>
+      <span className="hidden h-6 w-px bg-primary-foreground/40 sm:block" aria-hidden="true" />
+      <span className="text-xs tracking-[0.16em] sm:text-sm">Travel Planner</span>
+    </span>
+  )
+}
 
+export function TravelPlanner() {
   // Arriving from a country page's "Plan My Route"-style link (e.g.
   // /travel-planner?destination=tanzania) locks the page to that one
   // country — the picker doesn't even render, pricing is for 1 country
@@ -177,6 +202,14 @@ export function TravelPlanner() {
     return COUNTRIES.some((c) => c.slug === param) ? param : null
   })()
   const isLocked = Boolean(lockedSlug)
+  const lockedCountry = COUNTRIES.find((c) => c.slug === lockedSlug)
+
+  useEffect(() => {
+    document.title = lockedCountry
+      ? `Travel Planner — ${lockedCountry.name} | East-West Africa Link`
+      : 'Travel Planner | East-West Africa Link'
+  }, [lockedCountry])
+
   const [destinationSlugs, setDestinationSlugs] = useState(() => (lockedSlug ? [lockedSlug] : []))
   const selectedCountries = destinationSlugs
     .map((slug) => COUNTRIES.find((c) => c.slug === slug))
@@ -198,7 +231,11 @@ export function TravelPlanner() {
   const requestHref = `/travel-planner/service-details?destinations=${destinationSlugs.join(',')}`
   const beforeYouBookHref = `/travel-planner/before-you-book-check?destinations=${destinationSlugs.join(',')}`
   const travelAuditHref = `/travel-planner/travel-audit?destinations=${destinationSlugs.join(',')}`
-  const { hero, intro, services, helpBand, trust } = TRAVEL_PLANNER_PAGE
+  const { hero, countryHero, intro, services, helpBand, trust } = TRAVEL_PLANNER_PAGE
+  // "The Gambia" reads as "Plan Your Gambia Journey" in the heading; the
+  // badge above it keeps the full name.
+  const fillCountry = (text) =>
+    text.replaceAll('{country}', lockedCountry?.name.replace(/^The /, '') ?? '')
   // hero.trustItems stores icon names (data stays framework-agnostic);
   // resolve them to actual components here since PageIntro expects real
   // icon components, not strings — see the note on PageIntro's trustItems.
@@ -212,12 +249,21 @@ export function TravelPlanner() {
           own photo since that's opaque either way. */}
       <PlannerBackground />
 
-      {/* Hero — the same shared PageIntro used on Home/About/Tanzania (same
-          min-height, right-aligned copy, badge/heading/tagline/description
-          grammar), just with this page's own static photo via
-          backgroundImage instead of the site's rotating video, and its own
-          copy — see the comment on TRAVEL_PLANNER_PAGE.hero. */}
-      <PageIntro {...hero} trustItems={heroTrustItems} />
+      {/* Hero — arriving from a country page, that country's own hero
+          (same backdrop, same design — see COUNTRY_HEROES) with its flag and
+          name and the Travel Planner copy. Otherwise the shared PageIntro
+          used on Home/About (badge/heading/tagline/description grammar),
+          with this page's own photo and copy — see TRAVEL_PLANNER_PAGE.hero. */}
+      {lockedCountry && COUNTRY_HEROES[lockedCountry.slug] ? (
+        <DestinationHero
+          eyebrow={<CountryHeroBadge country={lockedCountry} />}
+          heading={fillCountry(countryHero.heading)}
+          description={fillCountry(countryHero.description)}
+          {...COUNTRY_HEROES[lockedCountry.slug]}
+        />
+      ) : (
+        <PageIntro {...hero} trustItems={heroTrustItems} />
+      )}
 
       {/* Choose the Support That Fits Your Trip */}
       <section className="py-16 lg:py-20">

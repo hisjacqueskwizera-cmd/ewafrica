@@ -22,6 +22,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { GAMBIA_PAGE } from '../data/siteContent.js'
 
 const GAMBIA_GALLERY_TILES = [
@@ -101,8 +102,7 @@ export function Gambia() {
       <DestinationHero
         heading="Explore The Gambia"
         description={`${hero.subheading[0]} ${hero.subheading[1]} ${hero.description}`}
-        backgroundImage={hero.image}
-        backgroundImageAlt={hero.imageAlt}
+        {...COUNTRY_HEROES.gambia}
       />
 
       <CountrySubNav slug="gambia" countryName="The Gambia" />

@@ -21,6 +21,7 @@ import { Accordion } from '../components/Accordion.jsx'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
 import { CountrySubNav } from '../components/CountrySubNav.jsx'
 import { DestinationHero } from '../components/DestinationHero.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { GHANA_PAGE } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
@@ -125,9 +126,7 @@ export function Ghana() {
       <DestinationHero
         heading={`${hero.titleLine1} ${hero.titleAccent}`}
         description={`${hero.subheading} ${hero.description}`}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
-        mist
+        {...COUNTRY_HEROES.ghana}
       />
 
       <CountrySubNav

@@ -4,7 +4,6 @@ import { MediaLightbox, MediaTile } from '../components/MediaGallery.jsx'
 import { GALLERY_TILE_HEIGHT } from '../components/PhotoGallery.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { TANZANIA_PAGE } from '../data/siteContent.js'
-import { TZ_HERO_VIDEOS } from '../data/tanzaniaHeroVideos.js'
 
 // One flat list, video first — the Lightbox steps through this same order
 // regardless of which item a visitor opens first.
@@ -132,7 +131,6 @@ export function Tanzania() {
       overlandCountryName="Tanzania"
       slug="tanzania"
       data={TANZANIA_PAGE}
-      heroVideos={TZ_HERO_VIDEOS}
       gallery={<TanzaniaGallery />}
       practicalGuideTo="/tanzania/practical-guide#guide-overview"
     />

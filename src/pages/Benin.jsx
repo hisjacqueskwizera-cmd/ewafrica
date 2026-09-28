@@ -25,6 +25,7 @@ import { MediaLightbox, MediaTile } from '../components/MediaGallery.jsx'
 import { GALLERY_TILE_HEIGHT } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { BENIN_PAGE } from '../data/siteContent.js'
 
 const ICONS = {
@@ -190,8 +191,7 @@ export function Benin() {
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
+        {...COUNTRY_HEROES.benin}
       />
 
       <CountrySubNav slug="benin" countryName="Benin" />

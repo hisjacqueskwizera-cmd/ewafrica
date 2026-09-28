@@ -6,6 +6,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { UGANDA_PAGE } from '../data/siteContent.js'
 
 const ICONS = { FileText, Bus, Car, Users }
@@ -72,8 +73,7 @@ export function Uganda() {
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
+        {...COUNTRY_HEROES.uganda}
       />
 
       <CountrySubNav

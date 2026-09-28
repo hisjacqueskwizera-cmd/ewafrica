@@ -23,6 +23,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { PhotoGallerySection } from '../components/PhotoGallery.jsx'
 import { OverlandRoutesSection } from '../components/RouteCard.jsx'
 import { Reveal } from '../components/Reveal.jsx'
+import { COUNTRY_HEROES } from '../data/countryHeroes.js'
 import { SENEGAL_PAGE } from '../data/siteContent.js'
 
 const SENEGAL_GALLERY_TILES = [
@@ -117,8 +118,7 @@ export function Senegal() {
       <DestinationHero
         heading={hero.heading}
         description={hero.description}
-        backgroundImage={hero.backgroundImage}
-        backgroundImageAlt={hero.backgroundImageAlt}
+        {...COUNTRY_HEROES.senegal}
       />
 
       <CountrySubNav slug="senegal" countryName="Senegal" />

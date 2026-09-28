@@ -18,6 +18,8 @@ import {
   TRAVEL_AUDIT_PAGE,
   priceForTravelAudit,
 } from '../data/siteContent.js'
+import { heroCountrySlug } from '../data/countryHeroes.js'
+import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
@@ -64,7 +66,13 @@ export function TravelAudit() {
   return (
     <>
       <PlannerBackground />
-      <PageIntro {...hero} />
+      {/* For one country, that country's own hero with this page's copy
+          (see CountryServiceHero); for several, this page's own hero. */}
+      {heroCountrySlug(destinationSlugs) ? (
+        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} />
+      ) : (
+        <PageIntro {...hero} />
+      )}
 
       {/* Breadcrumb */}
       <div className="border-b border-border">

@@ -9,6 +9,8 @@ import {
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { BORDER_CROSSING_FLOW, BORDER_CROSSING_PAGE, CONTACT_INFO, COUNTRIES } from '../data/siteContent.js'
+import { heroCountrySlug } from '../data/countryHeroes.js'
+import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
@@ -53,7 +55,13 @@ export function BorderCrossingGuide() {
   return (
     <>
       <PlannerBackground />
-      <PageIntro {...hero} />
+      {/* Reached from a country page, that country's own hero with this
+          page's copy (see CountryServiceHero); otherwise this page's own. */}
+      {fromCountry && heroCountrySlug([fromCountry.slug]) ? (
+        <CountryServiceHero slug={fromCountry.slug} pageHero={hero} />
+      ) : (
+        <PageIntro {...hero} />
+      )}
 
       {/* Breadcrumb */}
       <div className="border-b border-border">

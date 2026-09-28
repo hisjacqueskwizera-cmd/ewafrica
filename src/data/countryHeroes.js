@@ -57,3 +57,9 @@ export const COUNTRY_HEROES = {
     backgroundImageAlt: GAMBIA_PAGE.hero.imageAlt,
   },
 }
+
+// The country a Travel Planner service page should take its hero from:
+// set only when the page is for exactly one country that has a hero here.
+// With several countries (or none), the page keeps its own hero.
+export const heroCountrySlug = (slugs) =>
+  slugs.length === 1 && COUNTRY_HEROES[slugs[0]] ? slugs[0] : null

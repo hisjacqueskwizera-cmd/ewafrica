@@ -1,6 +1,7 @@
 import { Mail, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { heroCountrySlug } from '../data/countryHeroes.js'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
 import { ExploreMenu } from './ExploreMenu.jsx'
 import { HashLink } from './HashLink.jsx'
@@ -54,9 +55,30 @@ const TRANSPARENT_HERO_ROUTES = [
   '/contact',
 ]
 
+// Travel Planner service pages that switch to a country's own full-bleed
+// hero (see CountryServiceHero) when they're for one country — mapped to the
+// query parameter that carries the country, so the header only goes
+// transparent when that country hero is actually showing.
+const COUNTRY_HERO_ROUTES = {
+  '/travel-planner/service-details': 'destinations',
+  '/travel-planner/before-you-book-check': 'destinations',
+  '/travel-planner/travel-audit': 'destinations',
+  '/travel-planner/border-crossing-guide': 'from',
+}
+
+function showsCountryHero({ pathname, search }) {
+  const param = COUNTRY_HERO_ROUTES[pathname]
+  if (!param) return false
+  const slugs = (new URLSearchParams(search).get(param) ?? '')
+    .split(',')
+    .filter((slug) => COUNTRIES.some((c) => c.slug === slug))
+  return Boolean(heroCountrySlug(slugs))
+}
+
 export function Header() {
   const location = useLocation()
-  const hasTransparentHero = TRANSPARENT_HERO_ROUTES.includes(location.pathname)
+  const hasTransparentHero =
+    TRANSPARENT_HERO_ROUTES.includes(location.pathname) || showsCountryHero(location)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 12)
   const [menuOpen, setMenuOpen] = useState(false)
   // Forces the Explore mega-menu shut the instant a country card (or its

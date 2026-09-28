@@ -21,12 +21,14 @@ import {
   TRAVEL_PLANNER_DETAILS_PAGE,
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
+import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
 import { FLAGS } from '../data/countryFlags.js'
+import { heroCountrySlug } from '../data/countryHeroes.js'
 
 const ICONS = {
   Map,
@@ -100,7 +102,13 @@ export function TravelPlannerServiceDetails() {
   return (
     <>
       <PlannerBackground />
-      <PageIntro {...hero} />
+      {/* For one country, that country's own hero with this page's copy
+          (see CountryServiceHero); for several, this page's own hero. */}
+      {heroCountrySlug(destinationSlugs) ? (
+        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} />
+      ) : (
+        <PageIntro {...hero} />
+      )}
 
       {/* Breadcrumb */}
       <div className="border-b border-border">

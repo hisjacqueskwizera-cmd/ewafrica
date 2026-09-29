@@ -3360,6 +3360,14 @@ export const BORDER_CROSSING_PAGE = {
   sidebar: {
     title: 'Border Crossing Guide',
     tagline: 'Cross with confidence. Travel prepared.',
+    // Sidebar photo for a page reached from a country (?from=<slug>),
+    // keyed by COUNTRIES slug; any other visit shows the sidebar's default.
+    photos: {
+      rwanda: {
+        src: '/images/services/border-crossing/rwanda.webp',
+        alt: "Rwanda's Rusizi II One Stop Border Post, under its \"Welcome to the Republic of Rwanda\" sign",
+      },
+    },
   },
   stats: [
     { icon: 'Clock', title: 'Typical Delivery', text: '3–5 business days' },

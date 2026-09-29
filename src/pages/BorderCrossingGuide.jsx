@@ -196,6 +196,10 @@ export function BorderCrossingGuide() {
 
             <PlannerSidebar
               heading={sidebar.title}
+              {...(sidebar.photos[fromCountry?.slug] && {
+                photo: sidebar.photos[fromCountry.slug].src,
+                photoAlt: sidebar.photos[fromCountry.slug].alt,
+              })}
               includes={BORDER_CROSSING_FLOW.includes}
               includesHeading={sidebar.tagline}
               caption={[sidebar.tagline]}

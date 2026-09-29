@@ -1999,8 +1999,9 @@ export const GHANA_PAGE = {
       },
       {
         image: '/images/explore/yours-to-explore.webp',
-        alt: 'Cape Coast Castle on the Ghanaian coast',
-        label: 'Nzulezu stilt village lake tadane',
+        alt: 'Aerial view of Nzulezo, the stilt village built over Lake Tadane in Ghana, at sunset',
+        label: 'Lake Tadane',
+        subtitle: 'Nzulezo Stilt Village',
       },
     ],
   },

@@ -519,9 +519,12 @@ export function Ghana() {
                   className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-cocoa/10 to-transparent"
                   aria-hidden="true"
                 />
-                <p className="absolute inset-x-0 bottom-0 p-5 text-base font-semibold text-primary-foreground">
-                  {photo.label}
-                </p>
+                <div className="absolute inset-x-0 bottom-0 p-5 text-primary-foreground">
+                  <p className="text-base font-semibold">{photo.label}</p>
+                  {photo.subtitle && (
+                    <p className="mt-0.5 text-sm text-primary-foreground/80">{photo.subtitle}</p>
+                  )}
+                </div>
               </Reveal>
             ))}
           </div>

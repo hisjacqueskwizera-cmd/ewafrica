@@ -268,7 +268,7 @@ export const GHANA_DATA = {
         description:
           'Most travelers need a visa to enter Ghana. Requirements vary by nationality and purpose of travel.',
         buttonText: 'Get Personal Visa Guidance',
-        image: '/images/ghana/ghana-landing-hero.webp',
+        image: '/images/services/visa-guidance/cards/ghana.webp',
         imageAlt: 'Independence Arch in Accra, marking Ghana’s 1957 independence',
         details: {
           overview:
@@ -293,7 +293,7 @@ export const GHANA_DATA = {
         description:
           'Yellow fever vaccination is required for most travelers entering Ghana',
         buttonText: 'See Tips',
-        image: '/images/ghana/ghana-featured.webp',
+        image: '/images/ghana/Health.PNG',
         imageAlt: 'The Kwame Nkrumah statue at the Memorial Park in Accra',
         details: {
           overview:

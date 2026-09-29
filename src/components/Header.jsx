@@ -1,5 +1,5 @@
 import { Mail, Menu, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
 import { ExploreMenu } from './ExploreMenu.jsx'
@@ -52,6 +52,25 @@ export function Header() {
   // Every other route keeps the solid header from the first paint.
   const solid = scrolled || !hasTransparentHero
 
+  // Only scrolling fades between the transparent and solid header. When a
+  // page loads or changes, the header snaps straight to the right state —
+  // a fade there would play a cream flash across the top of the hero — so
+  // its transitions are switched off for the two frames around the switch.
+  const headerRef = useRef(null)
+  const gradientRef = useRef(null)
+  useLayoutEffect(() => {
+    const layers = [headerRef.current, gradientRef.current].filter(Boolean)
+    layers.forEach((el) => (el.style.transition = 'none'))
+    let inner = 0
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => layers.forEach((el) => (el.style.transition = '')))
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
+  }, [hasTransparentHero])
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => {
@@ -87,6 +106,7 @@ export function Header() {
   return (
     <header
       data-site-header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-[100] transition-[background-color,box-shadow] duration-300 ${
         solid ? 'border-b border-border bg-background' : 'border-b border-transparent bg-transparent'
       } ${scrolled ? 'shadow-[0_12px_30px_-24px_rgba(20,14,8,0.6)]' : ''}`}
@@ -97,6 +117,7 @@ export function Header() {
           over on scroll. */}
       <div
         aria-hidden="true"
+        ref={gradientRef}
         className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[165%] bg-gradient-to-b from-black/70 via-black/35 to-transparent transition-opacity duration-300 ${
           solid ? 'opacity-0' : 'opacity-100'
         }`}

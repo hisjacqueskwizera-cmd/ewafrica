@@ -208,7 +208,7 @@ export function Uganda() {
                 className="absolute inset-0 -z-10 size-full object-cover"
               />
               <div
-                className="absolute inset-0 -z-10 bg-gradient-to-t from-cocoa/90 via-cocoa/40 to-transparent"
+                className="absolute inset-0 -z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
                 aria-hidden="true"
               />
               <div className="relative flex h-full flex-col justify-end p-8 sm:p-10">

@@ -6,10 +6,14 @@ import { Reveal } from './Reveal.jsx'
 import { RevealText } from './RevealText.jsx'
 import { SectionMark } from './SectionMark.jsx'
 
-// A landscape, full-bleed photo card: image fills the frame, a bottom-up
-// gradient carries the title so it stays legible over any photo, corners
-// stay sharp. Same card language across the whole row — services and the
-// umbrella card alike — just with different content in the overlay.
+// A portrait, full-bleed photo card — the same size and shape as the
+// country cards in "Explore our Destinations" (DestinationsTicker) on every
+// screen size: 3:4 plus 50px, scaling with the viewport from lg up. Image
+// fills the frame, a bottom-up gradient carries the title so it stays
+// legible over any photo, corners stay sharp. Same card language across the
+// whole row — services and the umbrella card alike — just with different
+// content in the overlay. `imagePosition` shifts which part of the image
+// the portrait frame keeps when it has to trim one (CSS object-position).
 //
 // The hover state is the reference site's own recipe, lifted straight from
 // its CSS: the photo zooms to 1.08 (.6s), a second flat black layer fades
@@ -22,14 +26,14 @@ import { SectionMark } from './SectionMark.jsx'
 // AutoScrollTrack, which renders `items` twice for a seamless loop) so
 // assistive tech only ever hears each card once, and its link drops out of
 // the tab order.
-function PhotoCard({ to, image, hidden, children }) {
+function PhotoCard({ to, image, imagePosition, hidden, children }) {
   return (
     <HashLink
       to={to}
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
       draggable={false}
-      className="group relative block h-[350px] w-72 shrink-0 overflow-hidden bg-cocoa sm:h-[390px] sm:w-80 lg:w-[clamp(18rem,22vw-1rem,26rem)]"
+      className="group relative block h-[391px] w-64 shrink-0 overflow-hidden bg-cocoa sm:h-[434px] sm:w-72 lg:h-[calc(clamp(20rem,25vw-1rem,36rem)*4/3+50px)] lg:w-[clamp(20rem,25vw-1rem,36rem)]"
     >
       <img
         src={image}
@@ -37,6 +41,7 @@ function PhotoCard({ to, image, hidden, children }) {
         aria-hidden="true"
         loading="lazy"
         draggable={false}
+        style={imagePosition ? { objectPosition: imagePosition } : undefined}
         className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
       />
       <div
@@ -87,7 +92,7 @@ function CardReveal({
 
 function ServiceCard({ s, hidden }) {
   return (
-    <PhotoCard to={s.to} image={s.image} hidden={hidden}>
+    <PhotoCard to={s.to} image={s.image} imagePosition={s.imagePosition} hidden={hidden}>
       <CardTitle className="text-2xl font-semibold text-primary-foreground">{s.title}</CardTitle>
       <CardReveal>
         <p className="pt-2 text-sm leading-relaxed text-primary-foreground/80">{s.description}</p>
@@ -102,7 +107,7 @@ function ServiceCard({ s, hidden }) {
 
 function UmbrellaCard({ hidden }) {
   return (
-    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/images/services/travel-planner/travel-planner-umbrella-card.webp" hidden={hidden}>
+    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/images/home/services/travel-planner.webp" hidden={hidden}>
       <Umbrella className="size-6 text-gold" aria-hidden="true" />
       <CardTitle className="mt-3 text-2xl font-semibold leading-snug text-primary-foreground">
         {TRAVEL_PLANNER_UMBRELLA.title}

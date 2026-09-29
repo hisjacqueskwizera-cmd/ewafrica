@@ -150,7 +150,7 @@ export const SERVICES = [
     // to a destination, so it lands on the version with the destination
     // chooser rather than assuming one country (see PersonalVisaGuidance.jsx).
     to: '/personal-visa-guidance',
-    image: '/images/services/visa-guidance/visa-entry.webp',
+    image: '/images/home/services/personal-visa-guidance.webp',
   },
   {
     icon: 'Home',
@@ -171,14 +171,18 @@ export const SERVICES = [
     title: 'Ghana Right of Abode',
     description: 'Market insight, setup support and local connections to start, invest and grow.',
     to: '/ghana/right-of-abode-guidance',
-    image: '/images/services/business/investment-opportunities.webp',
+    image: '/images/home/services/ghana-right-of-abode.webp',
+    // Its title sits top-left: when the portrait card trims the sides, take
+    // the trim from the right so the title stays whole — even on hover,
+    // when the photo zooms in.
+    imagePosition: 'left center',
   },
   {
     icon: 'Users',
     title: 'Find a Local Guide',
     description: "Connect with trusted, vetted local guides who know the places and the people.",
     to: '/independent-tour-guide',
-    image: '/images/services/tour-guides/local-guide.webp',
+    image: '/images/home/services/find-a-local-guide.webp',
   },
 ]
 

@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   CheckCircle2,
   ChevronRight,
   Clock,
@@ -320,7 +321,7 @@ export function PersonalVisaGuidance() {
                 <div>
                   <h2 className="text-base font-bold text-primary">Optional 20-Minute Phone Consultation</h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    Before you submit your {country.name} visa application, you can schedule a 20-minute phone consultation to discuss your questions and review your plans.
+                    Before you submit your {country.name} visa application, you can schedule a 20-minute phone consultation to discuss your questions and review your Visa Application.
                   </p>
                 </div>
               </Reveal>
@@ -427,8 +428,9 @@ export function PersonalVisaGuidance() {
           </Reveal>
 
           <Reveal delay={150} className="mt-12 text-center">
-            <Link to={country.to} className="text-sm font-semibold text-primary hover:text-copper">
-              ← Back to {country.name}
+            <Link to={country.to} className="btn-outline-dark">
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to {country.name}
             </Link>
             <p className="mt-6 text-base italic text-muted-foreground">
               Explore {country.name} with confidence. We&apos;re here to help.

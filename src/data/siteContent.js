@@ -950,7 +950,7 @@ export const MALAWI_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Crossing Guide',
-      image: '/images/explore/east-africa/12.webp',
+      image: '/images/services/border-crossing/malawi.webp',
     },
   ],
   routes: [
@@ -1350,7 +1350,7 @@ export const SENEGAL_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/images/explore/west-africa/3.webp',
+      image: '/images/services/border-crossing/senegal.webp',
     },
   ],
   routes: [
@@ -1487,7 +1487,7 @@ export const BENIN_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: '/images/benin/benin-hero.webp',
+      image: '/images/services/border-crossing/benin.webp',
     },
     {
       icon: 'Users',
@@ -1667,7 +1667,7 @@ export const GAMBIA_PAGE = {
         'Approx. travel times',
       ],
       cta: 'Get Border Guide',
-      image: encodeURI('/images/countries/the-gambia.webp'),
+      image: '/images/services/border-crossing/the-gambia.webp',
     },
   ],
   routes: [

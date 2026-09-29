@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COUNTRIES, followUpForCountry } from '../data/siteContent.js'
 import { FLAGS } from '../data/countryFlags.js'
-import { VISA_PRICING_PER_COUNTRY } from '../data/visaGuidanceData.js'
+import { VISA_HERO_VIDEOS, VISA_PRICING_PER_COUNTRY } from '../data/visaGuidanceData.js'
 import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
@@ -253,7 +253,12 @@ export function PersonalVisaGuidance() {
     )
   }
 
-  // Per-country service page (slug provided)
+  // Per-country service page (slug provided). A country with its own hero
+  // footage (VISA_HERO_VIDEOS) gets the home page's hero experience: the
+  // video looping behind the copy, plus the same pair of buttons; the rest
+  // keep their country photo.
+  const heroVideos = VISA_HERO_VIDEOS[country.slug]
+  const requestTo = `/personal-visa-guidance/${country.slug}/request`
   return (
     <>
       <PlannerBackground />
@@ -263,8 +268,19 @@ export function PersonalVisaGuidance() {
         titleAccent="Guidance"
         tagline={[`Get clear, personalized guidance for your ${country.name} visa application.`]}
         description="Practical information to help you understand requirements, prepare your application, and avoid common delays."
-        backgroundImage={country.image}
-        backgroundImageAlt={`A scenic view of ${country.name}`}
+        {...(heroVideos
+          ? {
+              backgroundVideos: heroVideos,
+              primaryCta: { label: 'Start Your Request', to: requestTo },
+              secondaryCta: { label: `Explore ${country.name}`, to: country.to },
+              // Country footage is often brighter than the home reel (Stone
+              // Town's pale walls) — keep the header and copy readable.
+              mist: true,
+            }
+          : {
+              backgroundImage: country.image,
+              backgroundImageAlt: `A scenic view of ${country.name}`,
+            })}
         overlay={false}
       />
 
@@ -381,7 +397,7 @@ export function PersonalVisaGuidance() {
               caption={[`${country.name}, Africa`]}
               primaryCta={{
                 label: 'Start Your Request',
-                to: `/personal-visa-guidance/${country.slug}/request`,
+                to: requestTo,
               }}
             />
           </div>

@@ -2,6 +2,15 @@ import { COUNTRIES } from './siteContent.js'
 
 export const VISA_PRICING_PER_COUNTRY = 45
 
+// Country Personal Visa Guidance pages with their own hero footage, keyed
+// by COUNTRIES slug, in HERO_VIDEOS' shape (see heroVideos.js). A country
+// listed here gets the home page's hero experience — video backdrop,
+// call-to-action buttons and the transparent header over it (Header.jsx
+// checks this list too); the rest keep their country photo.
+export const VISA_HERO_VIDEOS = {
+  tanzania: [{ src: '/videos/services/visa-guidance/tanzania-hero.mp4', capSeconds: null }],
+}
+
 export const VISA_PURPOSE_OPTIONS = [
   'Tourism',
   'Business',

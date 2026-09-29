@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { heroCountrySlug } from '../data/countryHeroes.js'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
+import { VISA_HERO_VIDEOS } from '../data/visaGuidanceData.js'
 import { ExploreMenu } from './ExploreMenu.jsx'
 import { HashLink } from './HashLink.jsx'
 import { SiteSearch } from './SiteSearch.jsx'
@@ -75,10 +76,20 @@ function showsCountryHero({ pathname, search }) {
   return Boolean(heroCountrySlug(slugs))
 }
 
+// A country's Personal Visa Guidance page with its own hero footage gets the
+// home page's full-bleed video hero (see VISA_HERO_VIDEOS), so the same
+// transparent header over it too.
+function showsVisaHeroVideo(pathname) {
+  const slug = pathname.match(/^\/personal-visa-guidance\/([^/]+)$/)?.[1]
+  return Boolean(slug && VISA_HERO_VIDEOS[slug])
+}
+
 export function Header() {
   const location = useLocation()
   const hasTransparentHero =
-    TRANSPARENT_HERO_ROUTES.includes(location.pathname) || showsCountryHero(location)
+    TRANSPARENT_HERO_ROUTES.includes(location.pathname) ||
+    showsCountryHero(location) ||
+    showsVisaHeroVideo(location.pathname)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 12)
   const [menuOpen, setMenuOpen] = useState(false)
   // Forces the Explore mega-menu shut the instant a country card (or its

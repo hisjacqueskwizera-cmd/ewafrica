@@ -188,7 +188,7 @@ export const SERVICES = [
 
 export const TRAVEL_PLANNER_UMBRELLA = {
   title: 'Travel Planner',
-  subtitle: '(Umbrella)',
+  subtitle: '',
   description:
     'Our Travel Planner service provides practical, personalized guidance to help you organize your trip with greater confidence. Whether you are planning a short visit, an extended journey, or travel across multiple destinations, we help you think through the important details based on your dates, interests, priorities, and travel style.',
   tag: 'Services Under This Umbrella',

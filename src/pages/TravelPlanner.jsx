@@ -19,7 +19,7 @@ import {
   TRAVEL_AUDIT_FLOW,
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
-import { COUNTRY_HEROES } from '../data/countryHeroes.js'
+import { COUNTRY_HEROES, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
 import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
@@ -235,6 +235,7 @@ export function TravelPlanner() {
       {lockedCountry && COUNTRY_HEROES[lockedCountry.slug] ? (
         <CountryServiceHero
           slug={lockedCountry.slug}
+          mark={TRAVEL_PLANNER_MARK}
           label="Travel Planner"
           heading={fillCountry(countryHero.heading)}
           description={fillCountry(countryHero.description)}

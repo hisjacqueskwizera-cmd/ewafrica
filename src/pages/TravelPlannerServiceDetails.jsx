@@ -28,7 +28,7 @@ import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
 import { FLAGS } from '../data/countryFlags.js'
-import { heroCountrySlug } from '../data/countryHeroes.js'
+import { heroCountrySlug, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
 
 const ICONS = {
   Map,
@@ -105,7 +105,11 @@ export function TravelPlannerServiceDetails() {
       {/* For one country, that country's own hero with this page's copy
           (see CountryServiceHero); for several, this page's own hero. */}
       {heroCountrySlug(destinationSlugs) ? (
-        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} />
+        <CountryServiceHero
+          slug={heroCountrySlug(destinationSlugs)}
+          pageHero={hero}
+          mark={TRAVEL_PLANNER_MARK}
+        />
       ) : (
         <PageIntro {...hero} />
       )}

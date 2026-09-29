@@ -56,6 +56,14 @@ export const COUNTRY_HEROES = {
   },
 }
 
+// The Travel Planner's umbrella mark — pass as CountryServiceHero's `mark`
+// to show it at the front of the country badge in place of the label text
+// (the Travel Planner's own pages only).
+export const TRAVEL_PLANNER_MARK = {
+  src: '/images/services/travel-planner/umbrella-badge.webp',
+  alt: 'Travel Planner',
+}
+
 // The country a Travel Planner service page should take its hero from:
 // set only when the page is for exactly one country that has a hero here.
 // With several countries (or none), the page keeps its own hero.

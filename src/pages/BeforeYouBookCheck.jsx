@@ -67,9 +67,10 @@ export function BeforeYouBookCheck() {
     <>
       <PlannerBackground />
       {/* For one country, that country's own hero with this page's copy
-          (see CountryServiceHero); for several, this page's own hero. */}
+          (see CountryServiceHero) — its badge just the country's name and
+          flag, no service label; for several, this page's own hero. */}
       {heroCountrySlug(destinationSlugs) ? (
-        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} />
+        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} label={null} />
       ) : (
         <PageIntro {...hero} />
       )}

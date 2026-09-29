@@ -3,29 +3,78 @@ import { FLAGS } from '../data/countryFlags.js'
 import { COUNTRIES } from '../data/siteContent.js'
 import { DestinationHero } from './DestinationHero.jsx'
 
-// The flag + country name shown above a country's service hero, followed
-// by the service's label — the same pill as the site's other hero badges
-// (see PageIntro), but on a dark glass fill: country heroes have no scrim,
-// and the gold label would wash out over bright backdrops like Tanzania's
-// sunset or Victoria Falls.
-function CountryHeroBadge({ country, label }) {
+const PILL =
+  'inline-flex border border-gold/70 bg-black/55 font-bold uppercase shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md'
+
+function CountryName({ country }) {
   return (
-    // Two rows on phones (flag + name, then the label) so a long name like
-    // "Tanzania & Zanzibar" never breaks mid-pill; one row from sm up.
-    <span className="inline-flex flex-col items-start gap-1.5 rounded-2xl border border-gold/70 bg-black/55 px-4 py-3 font-bold uppercase text-gold shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6">
-      <span className="flex items-center gap-3">
+    <span className="tracking-[0.1em] text-primary-foreground">{country.name}</span>
+  )
+}
+
+function Flag({ country, className }) {
+  return (
+    <img
+      src={FLAGS[country.slug]}
+      alt=""
+      aria-hidden="true"
+      className={`shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10 ${className}`}
+    />
+  )
+}
+
+// The badge above a country's service hero, in this order: the service
+// (its `mark` when given — the Travel Planner's umbrella — else its name;
+// neither when `label` is null), then the country's name, then its flag —
+// on dark glass with a gold edge, so it reads over bright backdrops like
+// Tanzania's sunset or Victoria Falls.
+function CountryHeroBadge({ country, label, mark }) {
+  if (!mark && !label) {
+    return (
+      <span
+        className={`${PILL} items-center gap-3 rounded-full px-5 py-2.5 text-base sm:px-6 sm:py-3 sm:text-2xl`}
+      >
+        <CountryName country={country} />
+        <Flag country={country} className="h-6 w-9 sm:h-8 sm:w-12" />
+      </span>
+    )
+  }
+
+  if (mark) {
+    // The mark is a standalone graphic (an umbrella over its own outlined
+    // "TRAVEL PLANNER" pill), so it stands at full size rather than
+    // squeezed into a pill. The country pill beside it is half its height,
+    // which lines it up with the mark's own pill; on phones it drops below.
+    return (
+      <span className="flex flex-wrap items-end gap-x-4 gap-y-3">
         <img
-          src={FLAGS[country.slug]}
-          alt=""
-          aria-hidden="true"
-          className="h-6 w-9 shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10 sm:h-8 sm:w-12"
+          src={mark.src}
+          alt={mark.alt}
+          className="h-[72px] w-auto shrink-0 sm:h-[88px] lg:h-24"
         />
-        <span className="text-base tracking-[0.1em] text-primary-foreground sm:text-2xl">
-          {country.name}
+        <span
+          className={`${PILL} h-9 items-center gap-3 rounded-full px-4 text-base sm:h-11 sm:px-5 sm:text-xl lg:h-12 lg:text-2xl`}
+        >
+          <CountryName country={country} />
+          <Flag country={country} className="h-5 w-[30px] sm:h-6 sm:w-9 lg:h-7 lg:w-[42px]" />
         </span>
       </span>
+    )
+  }
+
+  return (
+    // Two rows on phones (the service name, then country + flag) so a long
+    // name like "Tanzania & Zanzibar" never breaks mid-pill; one row from
+    // sm up.
+    <span
+      className={`${PILL} flex-col items-start gap-1.5 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6`}
+    >
+      <span className="text-xs tracking-[0.16em] text-gold sm:text-sm">{label}</span>
       <span className="hidden h-6 w-px bg-primary-foreground/40 sm:block" aria-hidden="true" />
-      <span className="text-xs tracking-[0.16em] sm:text-sm">{label}</span>
+      <span className="flex items-center gap-3 text-base sm:text-2xl">
+        <CountryName country={country} />
+        <Flag country={country} className="h-6 w-9 sm:h-8 sm:w-12" />
+      </span>
     </span>
   )
 }
@@ -42,11 +91,15 @@ function CountryHeroBadge({ country, label }) {
  * as-is — its badge as the label, its title and accent as the heading, its
  * tagline and description as the paragraph — or give those directly.
  * `backdrop` swaps in a page's own media (DestinationHero's backdrop props)
- * in place of the country page's; `primaryCta`/`secondaryCta` add buttons.
+ * in place of the country page's; `primaryCta`/`secondaryCta` add buttons;
+ * `mark` (e.g. TRAVEL_PLANNER_MARK) shows a service's mark in the badge in
+ * place of its label text; `label={null}` leaves the badge as just the
+ * country's name and flag.
  */
 export function CountryServiceHero({
   slug,
   pageHero,
+  mark,
   label = pageHero?.badge,
   heading = pageHero?.titleLine1,
   headingAccent = pageHero?.titleAccent || undefined,
@@ -59,7 +112,7 @@ export function CountryServiceHero({
   const country = COUNTRIES.find((c) => c.slug === slug)
   return (
     <DestinationHero
-      eyebrow={<CountryHeroBadge country={country} label={label} />}
+      eyebrow={<CountryHeroBadge country={country} label={label} mark={mark} />}
       heading={heading}
       headingAccent={headingAccent}
       tagline={tagline}

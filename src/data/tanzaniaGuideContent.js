@@ -45,7 +45,7 @@ export const TANZANIA_DATA = {
         id: 'arusha',
         name: 'Arusha',
         description: 'Gateway to northern Tanzania and safari adventures.',
-        image: '/images/tanzania/img-4452.webp',
+        image: '/images/tanzania/IMG_5490.JPG',
         tag: 'Safari Gateway',
         details: {
           highlight:
@@ -87,7 +87,7 @@ export const TANZANIA_DATA = {
         id: 'mount-kilimanjaro',
         name: 'Mount Kilimanjaro',
         description: "Africa's highest peak and a bucket-list experience.",
-        image: '/images/tanzania/img-4453.webp',
+        image: '/images/tanzania/IMG_6516.JPG',
         tag: 'Highest Peak',
         details: {
           highlight:
@@ -181,7 +181,7 @@ export const TANZANIA_DATA = {
         description:
           'Entry requirements depend on your nationality and travel plans. Some travelers may need a visa before arrival.',
         buttonText: 'Get Personal Visa Guidance',
-        image: '/images/tanzania/img-3462.webp',
+        image: '/images/tanzania/IMG_5623.jpg',
         imageAlt: 'Stone Town waterfront, Zanzibar, Tanzania',
         details: {
           overview:
@@ -206,7 +206,7 @@ export const TANZANIA_DATA = {
         description:
           'Health safety is important when traveling in Tanzania. Vaccinations such as yellow fever may be required, and malaria is present in many areas.',
         buttonText: 'See Tips',
-        image: '/images/tanzania/img-4452.webp',
+        image: '/images/tanzania/IMG_3503.JPG',
         imageAlt: 'A Maasai traveler watching zebras on the savannah',
         details: {
           overview:
@@ -230,7 +230,7 @@ export const TANZANIA_DATA = {
         description:
           'The Tanzanian shilling (TZS) is the local currency. ATMs are available in cities and towns, and credit cards are accepted in many hotels and larger businesses.',
         buttonText: 'Read More',
-        image: '/images/tanzania/img-4233.webp',
+        image: '/images/tanzania/IMG_6517.PNG',
         imageAlt: 'Stone Town waterfront with dhows moored offshore',
         details: {
           overview:
@@ -254,7 +254,7 @@ export const TANZANIA_DATA = {
         description:
           'Local SIM cards are widely available from Vodacom, Tigo and Airtel. Data is affordable and useful for navigation and communication.',
         buttonText: 'Read More',
-        image: '/images/tanzania/img-4453.webp',
+        image: '/images/tanzania/IMG_6520.JPG',
         imageAlt: 'A Maasai community procession in traditional dress',
         details: {
           overview:
@@ -278,7 +278,7 @@ export const TANZANIA_DATA = {
         description:
           'Travel options include domestic flights, buses, private drivers, taxis and rideshare, connecting cities, parks and the islands.',
         buttonText: 'Travel Planner',
-        image: '/images/tanzania/gallery/img-5073.webp',
+        image: '/images/tanzania/IMG_6511.JPG',
         imageAlt: "A tented camp along Lake Victoria's shore near Mwanza",
         details: {
           overview:

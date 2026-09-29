@@ -268,7 +268,7 @@ export const GHANA_DATA = {
         description:
           'Most travelers need a visa to enter Ghana. Requirements vary by nationality and purpose of travel.',
         buttonText: 'Get Personal Visa Guidance',
-        image: '/images/services/visa-guidance/cards/ghana.webp',
+        image: '/images/ghana/Ghana_Personal_Visa.PNG',
         imageAlt: 'Independence Arch in Accra, marking Ghana’s 1957 independence',
         details: {
           overview:

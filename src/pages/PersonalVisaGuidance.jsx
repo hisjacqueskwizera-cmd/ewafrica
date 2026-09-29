@@ -13,7 +13,11 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COUNTRIES, followUpForCountry } from '../data/siteContent.js'
 import { FLAGS } from '../data/countryFlags.js'
-import { VISA_HERO_VIDEOS, VISA_PRICING_PER_COUNTRY } from '../data/visaGuidanceData.js'
+import {
+  VISA_HERO_VIDEOS,
+  VISA_PRICING_PER_COUNTRY,
+  VISA_SIDE_IMAGES,
+} from '../data/visaGuidanceData.js'
 import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
@@ -159,7 +163,7 @@ export function PersonalVisaGuidance() {
                     <div>
                       <h3 className="text-base font-bold text-primary">Optional 20-Minute Phone Consultation</h3>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                        Before you submit your visa request, you can schedule a 20-minute phone consultation to discuss your questions and review your plans.
+                        Before you submit your visa request, you can schedule a 20-minute phone consultation to discuss your questions and review your Visa Application.
                       </p>
                     </div>
                   </div>
@@ -273,9 +277,6 @@ export function PersonalVisaGuidance() {
               backgroundVideos: heroVideos,
               primaryCta: { label: 'Start Your Request', to: requestTo },
               secondaryCta: { label: `Explore ${country.name}`, to: country.to },
-              // Country footage is often brighter than the home reel (Stone
-              // Town's pale walls) — keep the header and copy readable.
-              mist: true,
             }
           : {
               backgroundImage: country.image,
@@ -376,7 +377,7 @@ export function PersonalVisaGuidance() {
                     'This service provides independent research and practical guidance.',
                     'We do not submit applications on your behalf.',
                     'We do not provide legal representation or immigration filing services.',
-                    `For official decisions, please consult the appropriate authorities in ${country.name}.`,
+                    `For official decisions, please consult the appropriate Tanzanian immigration authorities.`,
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
                       <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-forest" aria-hidden="true" />
@@ -389,8 +390,9 @@ export function PersonalVisaGuidance() {
 
             <PlannerSidebar
               heading="Service Price"
-              photo={country.image}
-              photoAlt={`A scenic view of ${country.name}`}
+              photo={VISA_SIDE_IMAGES[country.slug]?.src ?? country.image}
+              photoAlt={VISA_SIDE_IMAGES[country.slug]?.alt ?? `A scenic view of ${country.name}`}
+              photoZoomable
               price={VISA_PRICING_PER_COUNTRY}
               includes={includesWithFollowUp}
               includesHeading="What's Included"

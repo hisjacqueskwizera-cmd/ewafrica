@@ -51,9 +51,6 @@ const HEADING =
  * is enough over the darker scenic photos most pages use. Pass `overlay`
  * for a backdrop that's too bright or busy for that alone (a light stock
  * graphic, say), which lays a cocoa wash between the image and the copy.
- * Or pass `mist` for DestinationHero's lighter touch (e.g. bright footage
- * like Stone Town's pale walls): a soft black fade behind the header and
- * the copy on the left, easing out to the full backdrop on the right.
  */
 export function PageIntro({
   id,
@@ -71,7 +68,6 @@ export function PageIntro({
   backgroundImageAlt,
   backgroundVideos,
   overlay = false,
-  mist = false,
 }) {
   return (
     <section
@@ -92,21 +88,6 @@ export function PageIntro({
 
       {overlay && (
         <div className="absolute inset-0 z-[2] bg-cocoa/65" aria-hidden="true" />
-      )}
-
-      {/* Same two layers as DestinationHero's `mist`, above the video's own
-          stacked clips (z-[1]/z-[2]) and below the copy (z-[4]). */}
-      {mist && (
-        <>
-          <div
-            className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-r from-black/50 via-black/50 to-transparent"
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-[3] w-full bg-gradient-to-r from-black/50 via-black/50 to-transparent sm:w-[72%] lg:w-[65%]"
-            aria-hidden="true"
-          />
-        </>
       )}
 
       <div
@@ -134,7 +115,11 @@ export function PageIntro({
                   className="h-[67px] w-auto sm:h-[78px] lg:h-[90px]"
                 />
               ) : (
-                <span className="inline-flex items-center rounded-full border border-primary-foreground/30 bg-primary-foreground/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-gold">
+                // Dark frosted glass with white text and a gold edge, so the
+                // country/service name reads over any backdrop — bright
+                // footage (Stone Town's pale walls) as well as dark photos.
+                <span className="inline-flex items-center gap-2.5 rounded-full border border-gold/70 bg-black/55 py-2 pl-3.5 pr-5 text-sm font-bold uppercase tracking-[0.14em] text-white shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md">
+                  <span className="size-2 shrink-0 rounded-full bg-gold ring-4 ring-gold/25" aria-hidden="true" />
                   {badge}
                 </span>
               )}

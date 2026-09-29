@@ -11,6 +11,16 @@ export const VISA_HERO_VIDEOS = {
   tanzania: [{ src: '/videos/services/visa-guidance/tanzania-hero.mp4', capSeconds: null }],
 }
 
+// Country Personal Visa Guidance pages with their own "Service Price"
+// sidebar photo, keyed by COUNTRIES slug; the rest show the country's
+// general photo there.
+export const VISA_SIDE_IMAGES = {
+  tanzania: {
+    src: '/images/services/visa-guidance/tanzania-side.webp',
+    alt: 'A traditional dhow under full sail in the turquoise shallows off Zanzibar',
+  },
+}
+
 export const VISA_PURPOSE_OPTIONS = [
   'Tourism',
   'Business',

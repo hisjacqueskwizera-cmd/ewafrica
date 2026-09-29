@@ -95,6 +95,9 @@ export function MediaLightbox({ items, index, onClose, onNext, onPrev }) {
 
   if (index === null) return null
   const item = items[index]
+  // A single photo (e.g. a sidebar image opened full screen) has nothing
+  // to step to — no arrows or "1 / 1" counter.
+  const multiple = items.length > 1
 
   const handleTouchStart = (event) => {
     touchStartX.current = event.touches[0].clientX
@@ -126,28 +129,32 @@ export function MediaLightbox({ items, index, onClose, onNext, onPrev }) {
 
       {/* Previous/Next — desktop-only; touch devices use the swipe
           gesture instead (see handleTouchStart/handleTouchEnd above). */}
-      <button
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation()
-          onPrev()
-        }}
-        aria-label="Previous"
-        className="absolute left-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:left-6 sm:grid"
-      >
-        <ChevronLeft className="size-6" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation()
-          onNext()
-        }}
-        aria-label="Next"
-        className="absolute right-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:right-6 sm:grid"
-      >
-        <ChevronRight className="size-6" aria-hidden="true" />
-      </button>
+      {multiple && (
+        <>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation()
+              onPrev()
+            }}
+            aria-label="Previous"
+            className="absolute left-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:left-6 sm:grid"
+          >
+            <ChevronLeft className="size-6" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation()
+              onNext()
+            }}
+            aria-label="Next"
+            className="absolute right-4 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full border border-white/30 p-2.5 text-white transition-colors hover:bg-white/10 sm:right-6 sm:grid"
+          >
+            <ChevronRight className="size-6" aria-hidden="true" />
+          </button>
+        </>
+      )}
 
       {item.type === 'video' ? (
         <video
@@ -177,9 +184,11 @@ export function MediaLightbox({ items, index, onClose, onNext, onPrev }) {
       >
         <p className="font-display text-lg font-bold text-white sm:text-xl">{item.title}</p>
         <p className="mt-1 text-xs text-white/80 sm:text-sm">{item.subtitle}</p>
-        <p className="mt-2 text-[11px] uppercase tracking-wider text-white/50">
-          {index + 1} / {items.length}
-        </p>
+        {multiple && (
+          <p className="mt-2 text-[11px] uppercase tracking-wider text-white/50">
+            {index + 1} / {items.length}
+          </p>
+        )}
       </div>
     </div>
   )

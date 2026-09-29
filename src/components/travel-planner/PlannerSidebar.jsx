@@ -4,6 +4,7 @@ import {
   FileText,
   Mail,
   Map,
+  Maximize2,
   Phone,
   Route as RouteIcon,
   Search,
@@ -11,8 +12,11 @@ import {
   Shield,
   Users,
 } from 'lucide-react'
+import { useCallback, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
 import { HashLink } from '../HashLink.jsx'
+import { MediaLightbox } from '../MediaGallery.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
 
 const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon, Phone }
@@ -31,11 +35,15 @@ const ICONS = { Map, Settings2, Mail, Users, Clock, Search, FileText, RouteIcon,
  * (e.g. "Custom Quote") for Border Crossing Guide's 5+-crossings tier,
  * which has no fixed number — pass it alongside `price` so the "Secure &
  * Encrypted" note underneath still renders.
+ *
+ * `photoZoomable` makes the top photo a button that opens it full screen
+ * (the galleries' MediaLightbox) on click or tap.
  */
 export function PlannerSidebar({
   heading = 'Your Travel Planner',
   photo = '/images/services/travel-planner/sidebar-coastal-fort.webp',
   photoAlt = 'Aerial view of a coastal fort on the Ghanaian coast',
+  photoZoomable = false,
   caption,
   price,
   priceLabel,
@@ -48,26 +56,71 @@ export function PlannerSidebar({
   secondaryPhotoAlt,
   secondaryCaption,
 }) {
+  const [photoOpen, setPhotoOpen] = useState(false)
+  const closePhoto = useCallback(() => setPhotoOpen(false), [])
+  const noop = useCallback(() => {}, [])
+
+  const photoFrame = (
+    <>
+      <img
+        src={photo}
+        alt={photoAlt}
+        loading="lazy"
+        className={`aspect-4/3 size-full object-cover ${
+          photoZoomable ? 'transition-transform duration-500 ease-out group-hover:scale-105' : ''
+        }`}
+      />
+      <div
+        className="absolute inset-0 bg-linear-to-t from-cocoa/85 via-cocoa/10 to-transparent"
+        aria-hidden="true"
+      />
+      {photoZoomable && (
+        <span
+          className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-colors group-hover:bg-black/65"
+          aria-hidden="true"
+        >
+          <Maximize2 className="size-4" />
+        </span>
+      )}
+      {caption && (
+        <p className="absolute inset-x-0 bottom-3 px-4 text-center text-sm italic leading-snug text-primary-foreground">
+          {caption.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </p>
+      )}
+    </>
+  )
+
   return (
     <aside className="space-y-6">
       <div>
         <h2 className="text-lg font-bold text-primary">{heading}</h2>
-        <div className="relative mt-3 overflow-hidden rounded-2xl shadow-card">
-          <img src={photo} alt={photoAlt} loading="lazy" className="aspect-4/3 size-full object-cover" />
-          <div
-            className="absolute inset-0 bg-linear-to-t from-cocoa/85 via-cocoa/10 to-transparent"
-            aria-hidden="true"
-          />
-          {caption && (
-            <p className="absolute inset-x-0 bottom-3 px-4 text-center text-sm italic leading-snug text-primary-foreground">
-              {caption.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </p>
+        {photoZoomable ? (
+          <button
+            type="button"
+            onClick={() => setPhotoOpen(true)}
+            aria-label={`View photo full screen: ${photoAlt}`}
+            className="group relative mt-3 block w-full cursor-zoom-in overflow-hidden rounded-2xl shadow-card"
+          >
+            {photoFrame}
+          </button>
+        ) : (
+          <div className="relative mt-3 overflow-hidden rounded-2xl shadow-card">{photoFrame}</div>
+        )}
+        {photoZoomable &&
+          createPortal(
+            <MediaLightbox
+              items={[{ type: 'photo', src: photo, alt: photoAlt, title: caption?.join(' ') ?? heading, subtitle: photoAlt }]}
+              index={photoOpen ? 0 : null}
+              onClose={closePhoto}
+              onNext={noop}
+              onPrev={noop}
+            />,
+            document.body,
           )}
-        </div>
       </div>
 
       <div className="rounded-2xl bg-cream p-5">

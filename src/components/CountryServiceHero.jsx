@@ -12,7 +12,7 @@ function CountryHeroBadge({ country, label }) {
   return (
     // Two rows on phones (flag + name, then the label) so a long name like
     // "Tanzania & Zanzibar" never breaks mid-pill; one row from sm up.
-    <span className="inline-flex flex-col items-start gap-1.5 rounded-2xl border border-primary-foreground/30 bg-black/35 px-4 py-3 font-bold uppercase text-gold backdrop-blur-sm sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6">
+    <span className="inline-flex flex-col items-start gap-1.5 rounded-2xl border border-gold/70 bg-black/55 px-4 py-3 font-bold uppercase text-gold shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6">
       <span className="flex items-center gap-3">
         <img
           src={FLAGS[country.slug]}

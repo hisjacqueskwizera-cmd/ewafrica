@@ -1824,7 +1824,7 @@ export const GHANA_PAGE = {
         'Practical tips',
       ],
       cta: 'Get Border Guide',
-      image: '/images/explore/ghana-card-background.webp',
+      image: '/images/services/border-crossing/ghana.webp',
     },
     {
       icon: 'Users',

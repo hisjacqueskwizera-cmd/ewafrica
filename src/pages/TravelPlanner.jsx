@@ -94,13 +94,18 @@ function ServiceCard({
   return (
     <Reveal delay={delay}>
       <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
-        <div className="relative aspect-4/3 overflow-hidden rounded-t-3xl">
+        {/* The card art is shown whole: full card width, at its own height
+            (4:3 or 3:2), so nothing in the design is cropped. Only the
+            placeholder for a service without art needs a fixed shape. */}
+        <div
+          className={`relative overflow-hidden rounded-t-3xl ${service.image ? '' : 'aspect-4/3'}`}
+        >
           {service.image ? (
             <img
               src={service.image}
               alt={service.imageAlt}
               loading="lazy"
-              className="size-full object-cover"
+              className="block h-auto w-full"
             />
           ) : (
             <PlaceholderArt icon={Icon} tone={service.accent === 'forest' ? 'forest' : 'copper'} fill />

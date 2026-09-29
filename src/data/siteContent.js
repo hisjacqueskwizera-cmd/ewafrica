@@ -2095,8 +2095,9 @@ export const TRAVEL_PLANNER_PAGE = {
       icon: 'Route',
       accent: 'copper',
       title: 'Travel Planner',
-      image: '/images/services/travel-planner/sidebar-coastal-fort.webp',
-      imageAlt: 'Aerial view of a coastal fort on the Ghanaian coast',
+      image: '/images/services/travel-planner/services/travel-planner.webp',
+      imageAlt:
+        'Travel Planner — Plan Your Africa Journey: a map of Africa and a compass on a veranda table overlooking Mount Kilimanjaro',
       description:
         'Personalized planning support based on your travel dates, interests, destinations and preferred way of travelling.',
       items: [
@@ -2114,7 +2115,9 @@ export const TRAVEL_PLANNER_PAGE = {
       icon: 'Search',
       accent: 'forest',
       title: 'Before You Book Check',
-      image: null,
+      image: '/images/services/travel-planner/services/before-you-book-check.webp',
+      imageAlt:
+        'Before You Book Check — review your Africa trip details before you confirm and pay: a traveler checking her itinerary in an airport lounge',
       description:
         'For travelers who have not yet booked and want a knowledgeable review before committing to flights, accommodation, transportation or other major parts of the trip.',
       items: [
@@ -2130,8 +2133,9 @@ export const TRAVEL_PLANNER_PAGE = {
       icon: 'FileText',
       accent: 'copper',
       title: 'Travel Audit',
-      image: '/images/countries/tanzania.webp',
-      imageAlt: 'Safari vehicle on the Tanzanian savanna',
+      image: '/images/services/travel-planner/services/travel-audit.webp',
+      imageAlt:
+        'Travel Audit — a ferry, a train and a safari vehicle over a map of Africa, for reviewing how a booked journey fits together',
       description:
         'For travelers who have already booked or partially booked their trip and want an independent review of how the journey fits together.',
       items: [

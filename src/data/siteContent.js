@@ -549,7 +549,7 @@ export const TANZANIA_PAGE = {
       'Practical travel tips',
     ],
     cta: { label: 'Read the Tanzania & Zanzibar Travel Guide', to: '/tanzania/practical-guide#guide-overview' },
-    image: '/images/countries/tanzania.webp',
+    image: '/images/tanzania/Side_images/Tanzania_Side_Image.jpg',
     imageAlt: 'Safari vehicle and lions on the Tanzanian savanna',
   },
   // Unlike the reference (which fell back to an unrelated stock photo for

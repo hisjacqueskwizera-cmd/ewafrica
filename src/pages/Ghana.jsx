@@ -169,12 +169,11 @@ export function Ghana() {
               return (
                 <Reveal key={service.title} delay={i * 90}>
                   <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                    {/* Every card's image box takes the Travel Planner art's own
-                        landscape ratio, so all of them line up at the same
-                        height: the art fills its box edge to edge with
-                        nothing cropped, and the sibling photos cover theirs.
-                        (Malawi and Zambia's art is 3:2 rather than 16:9, so
-                        object-contain keeps those uncropped too.) */}
+                    {/* Every card's image box has the same landscape ratio, so they all
+                        line up at the same height, and each image covers its box. The
+                        Travel Planner and Personal Visa Guidance card art carries its
+                        title at the top, so those two crop from the bottom rather than
+                        the middle. */}
                     <div className="aspect-[16/9] overflow-hidden rounded-t-3xl bg-sand">
                       <img
                         src={service.image}
@@ -182,12 +181,10 @@ export function Ghana() {
                         aria-hidden="true"
                         loading="lazy"
                         className={
-                          service.title === 'Travel Planner'
-                            ? 'size-full object-contain'
-                            : service.title === 'Personal Visa Guidance'
-                              ? // Its card art carries the title at the top — crop from the bottom.
-                                'size-full object-cover object-top'
-                              : 'size-full object-cover'
+                          service.title === 'Travel Planner' ||
+                          service.title === 'Personal Visa Guidance'
+                            ? 'size-full object-cover object-top'
+                            : 'size-full object-cover'
                         }
                       />
                     </div>

@@ -15,11 +15,12 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COUNTRIES, followUpForCountry } from '../data/siteContent.js'
 import { FLAGS } from '../data/countryFlags.js'
 import {
-  VISA_HERO_VIDEOS,
+  VISA_HEROES,
   VISA_PRICING_PER_COUNTRY,
   VISA_SIDE_IMAGES,
 } from '../data/visaGuidanceData.js'
 import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
+import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
@@ -84,7 +85,6 @@ export function PersonalVisaGuidance() {
           description="Practical information to help you understand requirements, prepare your application, and avoid common delays."
           backgroundImage={GENERIC_IMAGE}
           backgroundImageAlt="A veranda table with a map of Africa overlooking Mount Kilimanjaro"
-          overlay={false}
         />
 
         <div className="border-b border-border bg-card/60 backdrop-blur-sm">
@@ -258,32 +258,24 @@ export function PersonalVisaGuidance() {
     )
   }
 
-  // Per-country service page (slug provided). A country with its own hero
-  // footage (VISA_HERO_VIDEOS) gets the home page's hero experience: the
-  // video looping behind the copy, plus the same pair of buttons; the rest
-  // keep their country photo.
-  const heroVideos = VISA_HERO_VIDEOS[country.slug]
+  // Per-country service page (slug provided): the country's own hero, with
+  // its flag and name (see CountryServiceHero) — over the page's own media
+  // where it has some (VISA_HEROES: Tanzania's footage, Malawi's photo),
+  // else the country page's hero backdrop.
   const requestTo = `/personal-visa-guidance/${country.slug}/request`
   return (
     <>
       <PlannerBackground />
-      <PageIntro
-        badge={country.name}
-        titleLine1="Personal Visa"
-        titleAccent="Guidance"
+      <CountryServiceHero
+        slug={country.slug}
+        label="Personal Visa Guidance"
+        heading="Personal Visa"
+        headingAccent="Guidance"
         tagline={[`Get clear, personalized guidance for your ${country.name} visa application.`]}
         description="Practical information to help you understand requirements, prepare your application, and avoid common delays."
-        {...(heroVideos
-          ? {
-              backgroundVideos: heroVideos,
-              primaryCta: { label: 'Start Your Request', to: requestTo },
-              secondaryCta: { label: `Explore ${country.name}`, to: country.to },
-            }
-          : {
-              backgroundImage: country.image,
-              backgroundImageAlt: `A scenic view of ${country.name}`,
-            })}
-        overlay={false}
+        backdrop={VISA_HEROES[country.slug]}
+        primaryCta={{ label: 'Start Your Request', to: requestTo }}
+        secondaryCta={{ label: `Explore ${country.name}`, to: country.to }}
       />
 
       <div className="border-b border-border bg-card/60 backdrop-blur-sm">

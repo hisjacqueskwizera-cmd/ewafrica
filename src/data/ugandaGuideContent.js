@@ -55,7 +55,7 @@ export const UGANDA_DATA = {
           'Keep digital and printed copies of important documents.',
           'It’s a good idea to check the latest entry requirements before you go.',
         ],
-        image: '/images/uganda/gallery/murchison-elephant.webp',
+        image: '/images/uganda/gallery/Elleee.jpg',
         imageAlt: 'An elephant with egrets and a kob antelope along the Nile in Murchison Falls National Park',
       },
       {
@@ -68,7 +68,7 @@ export const UGANDA_DATA = {
           'Travelers visiting Uganda, Rwanda and Kenya may explore the East Africa Tourist Visa and should confirm eligibility and entry conditions.',
         ],
         cta: { label: 'Get Personal Visa Guidance', to: '/personal-visa-guidance/uganda' },
-        image: '/images/uganda/img-5457.webp',
+        image: '/images/uganda/Visa_Gudance.PNG',
         imageAlt: 'The Gaddafi National Mosque above the rooftops of Kampala, Uganda',
       },
       {

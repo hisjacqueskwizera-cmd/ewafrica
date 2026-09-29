@@ -315,9 +315,8 @@ export function RwandaGallery() {
 
   return (
     <div className="bg-background min-h-screen" style={RWANDA_PAGE_BACKGROUND_STYLE}>
-      {/* Hero — the same full-viewport hero every destination page shares;
-          the global Header goes transparent on top of it (see
-          TRANSPARENT_HERO_ROUTES in Header.jsx). */}
+      {/* Hero — the site's one hero design (DestinationHero); the global
+          Header goes transparent over it until the visitor scrolls. */}
       <DestinationHero
         heading="Explore Rwanda"
         description="A closer look at the landscapes, wildlife and culture that make Rwanda unforgettable."

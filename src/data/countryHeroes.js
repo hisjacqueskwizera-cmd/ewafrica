@@ -19,8 +19,6 @@ export const COUNTRY_HEROES = {
   ghana: {
     backgroundImage: GHANA_PAGE.hero.backgroundImage,
     backgroundImageAlt: GHANA_PAGE.hero.backgroundImageAlt,
-    // Bright white castle photo — needs the soft dark fade to read over.
-    mist: true,
   },
   tanzania: {
     // The only destination with its own footage.

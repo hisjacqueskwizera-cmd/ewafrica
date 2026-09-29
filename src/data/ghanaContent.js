@@ -142,7 +142,7 @@ export const GHANA_DATA = {
         name: 'Lake Volta',
         description:
           "One of the world's largest artificial lakes, Lake Volta is surrounded by towns and communities where travelers can experience a slower pace of life.",
-        image: '/images/ghana/ghana-card-background.webp',
+        image: '/images/ghana/Lake_Volta.JPG',
         tag: 'Lakeside Scenery',
         details: {
           highlight:

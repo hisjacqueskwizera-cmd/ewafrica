@@ -31,31 +31,42 @@ function CountryHeroBadge({ country, label }) {
 }
 
 /**
- * A country's own hero — the same backdrop and design as its country page
- * (see COUNTRY_HEROES) — carrying a service page's heading and copy, with
- * the country's flag and name and the service's `label` in a badge above.
- * Used by the Travel Planner and its service pages when they're for one
- * country (see heroCountrySlug).
+ * A country's own hero — the same backdrop as its country page (see
+ * COUNTRY_HEROES), in the site's one hero design — carrying a service
+ * page's heading and copy, with the country's flag and name and the
+ * service's `label` in a badge above. Used by the Travel Planner and its
+ * service pages when they're for one country (see heroCountrySlug), and by
+ * every country's Personal Visa Guidance and Independent Tour Guide pages.
  *
  * Pass a service page's own PageIntro-shaped `pageHero` to reuse its copy
- * as-is — its badge as the label, its title as the heading, its tagline and
- * description as the paragraph — or give `label`/`heading`/`description`
- * directly.
+ * as-is — its badge as the label, its title and accent as the heading, its
+ * tagline and description as the paragraph — or give those directly.
+ * `backdrop` swaps in a page's own media (DestinationHero's backdrop props)
+ * in place of the country page's; `primaryCta`/`secondaryCta` add buttons.
  */
 export function CountryServiceHero({
   slug,
   pageHero,
   label = pageHero?.badge,
-  heading = `${pageHero?.titleLine1 ?? ''} ${pageHero?.titleAccent ?? ''}`.trim(),
-  description = [...(pageHero?.tagline ?? []), pageHero?.description].filter(Boolean).join(' '),
+  heading = pageHero?.titleLine1,
+  headingAccent = pageHero?.titleAccent || undefined,
+  tagline = pageHero?.tagline,
+  description = pageHero?.description,
+  backdrop,
+  primaryCta,
+  secondaryCta,
 }) {
   const country = COUNTRIES.find((c) => c.slug === slug)
   return (
     <DestinationHero
       eyebrow={<CountryHeroBadge country={country} label={label} />}
       heading={heading}
+      headingAccent={headingAccent}
+      tagline={tagline}
       description={description}
-      {...COUNTRY_HEROES[slug]}
+      primaryCta={primaryCta}
+      secondaryCta={secondaryCta}
+      {...(backdrop ?? COUNTRY_HEROES[slug])}
     />
   )
 }

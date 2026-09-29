@@ -1,11 +1,10 @@
 import { Mail, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { heroCountrySlug } from '../data/countryHeroes.js'
 import { CONTACT_INFO, COUNTRIES, NAV_LINKS } from '../data/siteContent.js'
-import { VISA_HERO_VIDEOS } from '../data/visaGuidanceData.js'
 import { ExploreMenu } from './ExploreMenu.jsx'
 import { HashLink } from './HashLink.jsx'
+import { useHasFullBleedHero } from './heroPresence.js'
 import { SiteSearch } from './SiteSearch.jsx'
 import { WhatsAppIcon } from './social-icons.jsx'
 
@@ -23,73 +22,20 @@ const EXPLORE_MENU_COUNTRIES = EXPLORE_MENU_SLUGS.map((slug) =>
   COUNTRIES.find((country) => country.slug === slug),
 ).filter(Boolean)
 
-// Routes whose hero opens on a full-bleed dark photo/video, edge-to-edge
-// behind the fixed header — the same transparent, light-on-dark header
-// treatment as Home before scrolling makes sense there too, rather than a
-// solid bar sitting awkwardly on top of the dark hero from first paint.
-// Every destination page shares the same DestinationHero now (see
-// src/components/DestinationHero.jsx), so all of them are listed here.
-const TRANSPARENT_HERO_ROUTES = [
-  '/',
-  '/about',
-  '/explore',
-  '/travel-planner',
-  '/tanzania',
-  '/tanzania/practical-guide',
-  '/tanzania/zanzibar-guide',
-  '/ghana',
-  '/ghana/practical-guide',
-  '/ghana/practical-guide/experience',
-  '/ghana/practical-guide/travel-smarter',
-  '/malawi',
-  '/zambia',
-  '/zambia/practical-guide',
-  '/uganda',
-  '/uganda/practical-guide',
-  '/rwanda',
-  '/rwanda/gallery',
-  '/rwanda/practical-guide',
-  '/gambia',
-  '/senegal',
-  '/benin',
-  '/independent-tour-guide',
-  '/contact',
-]
-
-// Travel Planner service pages that switch to a country's own full-bleed
-// hero (see CountryServiceHero) when they're for one country — mapped to the
-// query parameter that carries the country, so the header only goes
-// transparent when that country hero is actually showing.
-const COUNTRY_HERO_ROUTES = {
-  '/travel-planner/service-details': 'destinations',
-  '/travel-planner/before-you-book-check': 'destinations',
-  '/travel-planner/travel-audit': 'destinations',
-  '/travel-planner/border-crossing-guide': 'from',
-}
-
-function showsCountryHero({ pathname, search }) {
-  const param = COUNTRY_HERO_ROUTES[pathname]
-  if (!param) return false
-  const slugs = (new URLSearchParams(search).get(param) ?? '')
-    .split(',')
-    .filter((slug) => COUNTRIES.some((c) => c.slug === slug))
-  return Boolean(heroCountrySlug(slugs))
-}
-
-// A country's Personal Visa Guidance page with its own hero footage gets the
-// home page's full-bleed video hero (see VISA_HERO_VIDEOS), so the same
-// transparent header over it too.
-function showsVisaHeroVideo(pathname) {
-  const slug = pathname.match(/^\/personal-visa-guidance\/([^/]+)$/)?.[1]
-  return Boolean(slug && VISA_HERO_VIDEOS[slug])
+// The nav link for the section of the site the visitor is in — Home only on
+// the home page itself; every other link on its own page and everything
+// under it (e.g. Travel Planner on /travel-planner/travel-audit).
+function isActiveLink(link, pathname) {
+  const path = link.to.split('#')[0] || '/'
+  if (path === '/') return pathname === '/'
+  return pathname === path || pathname.startsWith(`${path}/`)
 }
 
 export function Header() {
   const location = useLocation()
-  const hasTransparentHero =
-    TRANSPARENT_HERO_ROUTES.includes(location.pathname) ||
-    showsCountryHero(location) ||
-    showsVisaHeroVideo(location.pathname)
+  // Any page opening on a full-screen hero (DestinationHero, PageIntro, the
+  // Ghana guide banner) declares itself — see heroPresence.js.
+  const hasTransparentHero = useHasFullBleedHero()
   const [scrolled, setScrolled] = useState(() => window.scrollY > 12)
   const [menuOpen, setMenuOpen] = useState(false)
   // Forces the Explore mega-menu shut the instant a country card (or its
@@ -115,9 +61,22 @@ export function Header() {
 
   const closeMenu = () => setMenuOpen(false)
 
-  const navLinkClass = `text-sm font-medium tracking-wide transition-colors hover:underline underline-offset-4 ${
-    solid ? 'text-muted-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-white'
-  }`
+  // The current section's link is set in full strength with a copper
+  // underline beneath it.
+  const navLinkClass = (link) => {
+    const active = isActiveLink(link, location.pathname)
+    return `relative text-sm tracking-wide transition-colors after:absolute after:-bottom-2.5 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-copper after:transition-opacity ${
+      active ? 'font-semibold after:opacity-100' : 'font-medium after:opacity-0 hover:after:opacity-60'
+    } ${
+      solid
+        ? active
+          ? 'text-primary'
+          : 'text-muted-foreground hover:text-primary'
+        : active
+          ? 'text-white'
+          : 'text-primary-foreground/90 hover:text-white'
+    }`
+  }
 
   const iconBtnClass = `hidden size-10 items-center justify-center rounded-full border transition-colors lg:inline-flex ${
     solid
@@ -132,6 +91,17 @@ export function Header() {
         solid ? 'border-b border-border bg-background' : 'border-b border-transparent bg-transparent'
       } ${scrolled ? 'shadow-[0_12px_30px_-24px_rgba(20,14,8,0.6)]' : ''}`}
     >
+      {/* Over a hero, the bar sits on a black-to-transparent gradient that
+          runs a little past its bottom edge, so the white links and logo
+          read over any photo; it fades out as the solid background takes
+          over on scroll. */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[165%] bg-gradient-to-b from-black/70 via-black/35 to-transparent transition-opacity duration-300 ${
+          solid ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+
       {/* Three-column bar — nav / logo / contact — so the logo stays dead
           centre regardless of how much the side groups hold. */}
       <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6 lg:px-8">
@@ -151,7 +121,7 @@ export function Header() {
                 >
                   <HashLink
                     to={link.to}
-                    className={navLinkClass}
+                    className={navLinkClass(link)}
                     // Clicking the trigger itself (it navigates to /explore)
                     // snaps the panel shut too, same as clicking a card in it.
                     onClick={(event) => {
@@ -173,11 +143,11 @@ export function Header() {
               )
             }
             return link.isRoute ? (
-              <Link key={link.label} to={link.to} className={navLinkClass}>
+              <Link key={link.label} to={link.to} className={navLinkClass(link)}>
                 {link.label}
               </Link>
             ) : (
-              <HashLink key={link.label} to={link.to} className={navLinkClass}>
+              <HashLink key={link.label} to={link.to} className={navLinkClass(link)}>
                 {link.label}
               </HashLink>
             )

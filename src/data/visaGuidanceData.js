@@ -2,13 +2,21 @@ import { COUNTRIES } from './siteContent.js'
 
 export const VISA_PRICING_PER_COUNTRY = 45
 
-// Country Personal Visa Guidance pages with their own hero footage, keyed
-// by COUNTRIES slug, in HERO_VIDEOS' shape (see heroVideos.js). A country
-// listed here gets the home page's hero experience — video backdrop,
-// call-to-action buttons and the transparent header over it (Header.jsx
-// checks this list too); the rest keep their country photo.
-export const VISA_HERO_VIDEOS = {
-  tanzania: [{ src: '/videos/services/visa-guidance/tanzania-hero.mp4', capSeconds: null }],
+// Country Personal Visa Guidance pages with their own hero backdrop, keyed
+// by COUNTRIES slug, in PageIntro's own prop names: `backgroundVideos` (in
+// HERO_VIDEOS' shape, see heroVideos.js) for footage, or `backgroundImage`
+// + `backgroundImageAlt` for a photo. A country listed here shows that media
+// in its visa page's hero; the rest use their country page's hero backdrop
+// (see CountryServiceHero).
+export const VISA_HEROES = {
+  tanzania: {
+    backgroundVideos: [{ src: '/videos/services/visa-guidance/tanzania-hero.mp4', capSeconds: null }],
+  },
+  malawi: {
+    backgroundImage: '/images/services/visa-guidance/malawi-hero.webp',
+    backgroundImageAlt:
+      'Jacaranda trees in purple bloom across the tea fields below Mount Mulanje, Malawi',
+  },
 }
 
 // Country Personal Visa Guidance pages with their own "Service Price"
@@ -18,6 +26,10 @@ export const VISA_SIDE_IMAGES = {
   tanzania: {
     src: '/images/services/visa-guidance/tanzania-side.webp',
     alt: 'A traditional dhow under full sail in the turquoise shallows off Zanzibar',
+  },
+  malawi: {
+    src: '/images/services/visa-guidance/malawi-side.webp',
+    alt: 'Sunset over Lake Malawi, framed by overhanging acacia branches',
   },
 }
 

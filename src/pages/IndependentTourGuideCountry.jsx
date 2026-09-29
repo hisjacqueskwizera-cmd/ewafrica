@@ -16,7 +16,7 @@ import { useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { CONTACT_INFO, TOUR_GUIDE_PAGES } from '../data/siteContent.js'
 import { HashLink } from '../components/HashLink.jsx'
-import { PageIntro } from '../components/PageIntro.jsx'
+import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 
@@ -43,7 +43,9 @@ export function IndependentTourGuideCountry() {
 
   return (
     <>
-      <PageIntro {...hero} />
+      {/* The country's own hero, with its flag and name, carrying this
+          page's copy (see CountryServiceHero). */}
+      <CountryServiceHero slug={slug} pageHero={hero} />
 
       {/* Stats row */}
       <section className="border-b border-border py-10 lg:py-12">

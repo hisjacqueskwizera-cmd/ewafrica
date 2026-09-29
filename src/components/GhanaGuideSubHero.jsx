@@ -1,46 +1,44 @@
+import { AccentHeading, Haze, HeroBadge } from './DestinationHero.jsx'
+import { useFullBleedHero } from './heroPresence.js'
+
 /**
- * The shorter banner hero used on pages 2 and 3 of the Ghana Practical
- * Guide — page 1 keeps the full-viewport DestinationHero (it's the entry
- * point most visitors land on from the sub-nav or Ghana's own page), but a
- * second and third full-screen hero back to back inside the same flow
- * would be heavy. This is a compact photo strip instead, carrying the
- * "Page N of 3" context so it's clear which step of the guide this is.
+ * The shorter banner hero on each page of the Ghana Practical Guide — a
+ * full-screen hero on every page of one flow would be heavy, so this is a
+ * compact photo strip instead, carrying the "Page N of 3" context so it's
+ * clear which step of the guide this is.
  *
- * Carries the same soft black fade as Ghana's own hero (DestinationHero's
- * `mist`): dark on the left behind the text, easing out to the full photo
- * on the right.
+ * Same design as the site's full-screen heroes (DestinationHero), just
+ * shorter: the page label in the site's hero pill, the heading (accent
+ * word in italic copper) and the tagline each on their own soft black
+ * haze, and the header transparent over its dark top gradient.
  */
 export function GhanaGuideSubHero({ page, heading, tagline, image, imageAlt }) {
+  useFullBleedHero()
+
   return (
-    <section className="relative isolate flex min-h-[360px] items-end overflow-hidden text-primary-foreground sm:min-h-[420px]">
+    <section className="relative isolate flex min-h-[380px] items-end overflow-hidden text-primary-foreground sm:min-h-[440px]">
       <img
         src={image}
         alt={imageAlt ?? ''}
         loading="eager"
         className="absolute inset-0 size-full object-cover"
       />
+      {/* Same side margins as DestinationHero, so the copy lines up with
+          every full-screen hero's. */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-full bg-gradient-to-r from-black/50 via-black/50 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full bg-gradient-to-r from-black/50 via-black/50 to-transparent sm:w-[72%] lg:w-[65%]"
-        aria-hidden="true"
-      />
-      <div
-        className="relative z-[4] mx-auto w-full max-w-7xl px-4 pb-10 pt-32 sm:px-6 lg:px-8"
+        className="relative z-[4] w-full px-6 pb-12 pt-32 sm:px-10 lg:px-16"
         style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
       >
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
-          Ghana Practical Guide · Page {page} of 3
-        </p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-          {heading}
-        </h1>
+        <HeroBadge>Ghana Practical Guide · Page {page} of 3</HeroBadge>
+        <Haze className="mt-6 w-fit">
+          <h1 className="font-display text-4xl font-normal leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+            <AccentHeading text={heading} />
+          </h1>
+        </Haze>
         {tagline && (
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
-            {tagline}
-          </p>
+          <Haze strong className="mt-6 max-w-xl">
+            <p className="text-base leading-relaxed text-white/90">{tagline}</p>
+          </Haze>
         )}
       </div>
     </section>

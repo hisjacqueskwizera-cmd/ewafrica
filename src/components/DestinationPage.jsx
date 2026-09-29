@@ -89,7 +89,8 @@ export function DestinationPage({
       {/* Hero — the same full-viewport hero every destination page shares,
           lifted from About Us (see the comment on DestinationHero.jsx). */}
       <DestinationHero
-        heading={`${hero.titleLine1} ${hero.titleAccent}`}
+        heading={hero.titleLine1}
+        headingAccent={hero.titleAccent}
         description={hero.description}
         {...(COUNTRY_HEROES[slug] ?? {
           backgroundImage: hero.backgroundImage,

@@ -455,13 +455,11 @@ export const ABOUT_PAGE = {
 // repeated photo in the reference too, so this isn't a step down, just a
 // different repeated photo.
 export const TANZANIA_PAGE = {
-  // Shaped to spread straight into PageIntro — same shared hero as
-  // Home/About/Travel Planner (right-aligned copy, two-line accent
-  // heading, transparent-until-scroll header — see TRANSPARENT_HERO_ROUTES
-  // in Header.jsx). backgroundVideos isn't set here — Tanzania.jsx passes
-  // its own TZ_HERO_VIDEOS playlist directly as a prop (video playlists
-  // live in their own small data files, imported by the component that
-  // uses them, same as the site-wide HERO_VIDEOS).
+  // The hero's copy — shown in the site's one hero design (DestinationHero),
+  // `titleAccent` as the heading's italic accent. Its backdrop isn't set
+  // here: Tanzania's own TZ_HERO_VIDEOS playlist comes from COUNTRY_HEROES
+  // (video playlists live in their own small data files, same as the
+  // site-wide HERO_VIDEOS).
   hero: {
     titleLine1: 'Explore',
     titleAccent: 'Tanzania & Zanzibar',

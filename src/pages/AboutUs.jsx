@@ -2,8 +2,8 @@ import { ArrowRight, FileText, Globe2, Handshake, ShieldCheck } from 'lucide-rea
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ABOUT_PAGE } from '../data/siteContent.js'
+import { DestinationHero } from '../components/DestinationHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
-import { HeroVideoBackground } from '../components/HeroVideoBackground.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 
 const ICONS = { Globe2, FileText, Handshake, ShieldCheck }
@@ -58,32 +58,12 @@ export function AboutUs() {
 
   return (
     <>
-      {/* Hero — full-screen video with just a breadcrumb and the page title,
-          centered. The header sits transparent over it (see
-          TRANSPARENT_HERO_ROUTES in Header.jsx). */}
-      <section className="relative isolate flex h-svh min-h-[600px] items-center overflow-hidden px-10 text-left text-primary-foreground lg:px-16">
-        <HeroVideoBackground />
-        <div
-          className="relative z-[4] w-full max-w-5xl"
-          style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
-        >
-          <Reveal delay={150} blur>
-            <div className="mt-9 max-w-3xl">
-              <AccentHeading
-                as="h1"
-                text={hero.titleLine1}
-                className="font-display text-[3rem] font-normal leading-[1.1] text-balance text-white sm:text-[4rem] lg:text-[5.375rem]"
-              />
-              <p className="mt-6 max-w-[640px] text-base leading-[1.7] text-primary-foreground/90 md:text-lg">
-                East-West Africa Link was founded from decades of firsthand travel and experience
-                across the African continent from North Africa to West, East, Central and Southern
-                Africa, with a focus on practical guidance, trusted local connections, and helping
-                people navigate Africa with confidence.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* Hero — the site's one hero design (DestinationHero) over the
+          site-wide video reel. */}
+      <DestinationHero
+        heading={hero.titleLine1}
+        description="East-West Africa Link was founded from decades of firsthand travel and experience across the African continent from North Africa to West, East, Central and Southern Africa, with a focus on practical guidance, trusted local connections, and helping people navigate Africa with confidence."
+      />
 
       {/* Our Mission — tall photo left, copy right (photo first on mobile). */}
       <section className="px-[30px] pt-[120px] lg:pt-[200px]">

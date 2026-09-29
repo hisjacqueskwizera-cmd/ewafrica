@@ -152,7 +152,10 @@ export function Gambia() {
                         className={
                           service.title === 'Travel Planner'
                             ? 'size-full object-contain'
-                            : 'size-full object-cover'
+                            : service.title === 'Personal Visa Guidance'
+                              ? // Its card art carries the title at the top — crop from the bottom.
+                                'size-full object-cover object-top'
+                              : 'size-full object-cover'
                         }
                       />
                     </div>

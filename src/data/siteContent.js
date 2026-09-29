@@ -529,6 +529,7 @@ export const TANZANIA_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
+      image: '/images/services/tour-guides/find-a-local-guide-tanzania.webp',
     },
   ],
   guide: {
@@ -1366,12 +1367,12 @@ export const SENEGAL_PAGE = {
     },
     {
       to: 'Mauritania',
-      image: '/images/explore/west-africa/3.webp',
+      image: '/images/senegal/IMG_6415.WEBP',
       text: 'Overland route via Rosso with regular transport.',
     },
     {
       to: 'Guinea',
-      image: '/images/explore/west-africa/4.webp',
+      image: '/images/senegal/IMG_6417.jpg',
       text: 'Route via Kolda or Mako with shared transport.',
     },
   ],
@@ -1502,7 +1503,7 @@ export const BENIN_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
-      image: '/images/benin/benin-landing-hero.webp',
+      image: '/images/services/tour-guides/find-a-local-guide-benin.webp',
     },
   ],
   places: [
@@ -1839,7 +1840,7 @@ export const GHANA_PAGE = {
         'Custom itineraries',
       ],
       cta: 'Find a Local Guide',
-      image: '/images/about/mission-nkrumah-statue.webp',
+      image: '/images/services/tour-guides/find-a-local-guide-ghana.webp',
     },
   ],
   residency: {
@@ -2995,15 +2996,18 @@ export const TOUR_GUIDE_LANDING_PAGE = {
     {
       slug: 'ghana',
       description: 'Explore vibrant cities, rich history, and warm hospitality with a local guide.',
+      image: '/images/services/tour-guides/find-a-local-guide-ghana.webp',
     },
     {
       slug: 'benin',
       description: 'Discover history, culture, and unique traditions with a local guide.',
+      image: '/images/services/tour-guides/find-a-local-guide-benin.webp',
     },
     {
       slug: 'tanzania',
       label: 'Tanzania / Zanzibar',
       description: 'From wildlife adventures to island escapes, explore with a local guide.',
+      image: '/images/services/tour-guides/find-a-local-guide-tanzania.webp',
     },
   ],
   comingSoon: {

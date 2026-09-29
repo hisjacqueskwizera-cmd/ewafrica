@@ -66,8 +66,12 @@ export function IndependentTourGuide() {
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
                     <div className="aspect-4/3 overflow-hidden">
                       <img
-                        src={country?.image}
-                        alt={dest.label ?? country?.name ?? ''}
+                        src={dest.image ?? country?.image}
+                        alt={
+                          dest.image
+                            ? `Find a Local Guide in ${dest.label ?? country?.name}: a local guide beside a safari vehicle on the savanna`
+                            : (dest.label ?? country?.name ?? '')
+                        }
                         loading="lazy"
                         className="size-full object-cover"
                       />

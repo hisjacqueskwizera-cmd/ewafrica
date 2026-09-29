@@ -171,9 +171,9 @@ export function Ghana() {
                   <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                     {/* Every card's image box has the same landscape ratio, so they all
                         line up at the same height, and each image covers its box. The
-                        Travel Planner and Personal Visa Guidance card art carries its
-                        title at the top, so those two crop from the bottom rather than
-                        the middle. */}
+                        Travel Planner, Personal Visa Guidance and Independent Tour Guides
+                        card art carries its title at the top, so those crop from the
+                        bottom rather than the middle. */}
                     <div className="aspect-[16/9] overflow-hidden rounded-t-3xl bg-sand">
                       <img
                         src={service.image}
@@ -182,7 +182,8 @@ export function Ghana() {
                         loading="lazy"
                         className={
                           service.title === 'Travel Planner' ||
-                          service.title === 'Personal Visa Guidance'
+                          service.title === 'Personal Visa Guidance' ||
+                          service.title === 'Independent Tour Guides'
                             ? 'size-full object-cover object-top'
                             : 'size-full object-cover'
                         }

@@ -238,8 +238,8 @@ export function IndependentTourGuide() {
 
       <section className="relative overflow-hidden bg-cocoa text-primary-foreground">
         <img
-          src="/images/countries/rwanda.webp"
-          alt="Rwanda landscape"
+          src="/images/BG_On_TourGuide.JPG"
+          alt="Travel guide background"
           className="absolute inset-0 size-full object-cover opacity-80"
         />
         <div className="absolute inset-0 bg-linear-to-r from-cocoa/80 via-cocoa/60 to-cocoa/30" aria-hidden="true" />

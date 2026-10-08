@@ -90,9 +90,12 @@ export function Footer() {
           <ul className="grid grid-cols-1 items-start gap-6 text-sm sm:grid-cols-2">
             {REGIONS.map((region) => (
               <li key={region.id} className="flex min-w-0 flex-col gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.06em] text-primary-foreground/85">
+                <HashLink
+                  to={region.to}
+                  className="text-xs font-semibold uppercase tracking-[0.06em] text-primary-foreground/85 transition-colors hover:text-gold"
+                >
                   {region.name}
-                </span>
+                </HashLink>
                 <ul className="flex flex-col gap-2 pl-0.5">
                   {region.countries.map((country) =>
                     country.link ? (

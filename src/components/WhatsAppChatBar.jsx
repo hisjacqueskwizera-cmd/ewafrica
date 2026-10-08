@@ -85,7 +85,7 @@ export function WhatsAppChatBar() {
       <form
         onSubmit={handleSubmit}
         className={`flex max-w-[calc(100vw-2rem)] items-center rounded-full border border-border/60 bg-card/60 p-1.5 shadow-[0_16px_40px_-18px_rgba(21,25,33,0.45)] backdrop-blur-md transition-[width,gap,padding] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          open ? 'w-[360px] gap-1.5 pl-1.5' : 'w-[168px] gap-0 pl-1.5'
+          open ? 'w-[430px] gap-1.5 pl-1.5' : 'w-[168px] gap-0 pl-1.5'
         }`}
       >
         <div

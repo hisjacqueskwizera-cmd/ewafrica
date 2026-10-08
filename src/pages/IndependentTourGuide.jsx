@@ -245,7 +245,7 @@ export function IndependentTourGuide() {
         <div className="absolute inset-0 bg-linear-to-r from-cocoa/80 via-cocoa/60 to-cocoa/30" aria-hidden="true" />
         <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-16">
           <div className="max-w-2xl">
-            <p className="text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-[3rem]">
+            <p className="text-3xl font-[family-name:var(--font-display)] font-semibold text-primary-foreground sm:text-4xl lg:text-[3rem]">
               Ready to Find a Local Guide?
             </p>
             <p className="mt-3 text-base text-primary-foreground/80 sm:text-lg">

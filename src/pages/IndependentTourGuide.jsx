@@ -56,7 +56,7 @@ const GUIDE_MATCH_STEPS = [
 const GUIDE_BENEFITS = [
   {
     title: 'Vetted Guides',
-    text: 'Experienced, independent guides we trust.',
+    text: 'Experienced, independent guides carefully screened by EWAL.',
     icon: 'ShieldCheck',
   },
   {
@@ -113,7 +113,7 @@ export function IndependentTourGuide() {
         </div>
       </section>
 
-      <section className="bg-[#f7f3ee] py-16 lg:py-20">
+      <section className="bg-[#f7f3ee] py-10 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <Reveal>
             <h1 className="text-3xl font-bold text-primary sm:text-4xl lg:text-[3.25rem]">
@@ -124,7 +124,7 @@ export function IndependentTourGuide() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 text-left sm:grid-cols-2 md:grid-cols-4">
+          <div className="mt-10 grid gap-8 text-left sm:grid-cols-2 md:grid-cols-4">
             {destinations.map((dest, i) => {
               const country = COUNTRIES.find((c) => c.slug === dest.slug)
               const destPath = `/independent-tour-guide/${dest.slug}`
@@ -175,7 +175,7 @@ export function IndependentTourGuide() {
         </div>
       </section>
 
-      <section className="bg-[#f7f3ee] py-16 lg:py-20">
+      <section className="bg-[#f7f3ee] pt-2 pb-8 lg:pt-4 lg:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <h2 className="text-3xl font-bold text-primary sm:text-4xl lg:text-[3rem]">
@@ -186,7 +186,7 @@ export function IndependentTourGuide() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-5">
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-5">
             {GUIDE_MATCH_STEPS.map((step, index) => {
               const Icon = GUIDE_MATCH_ICONS[step.icon]
               return (

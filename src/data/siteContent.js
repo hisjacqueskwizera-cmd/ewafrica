@@ -3,6 +3,7 @@
 export const NAV_LINKS = [
   { label: 'Home', to: '/#home' },
   { label: 'Explore', to: '/explore', isRoute: true },
+  { label: 'Find A Guide', to: '/independent-tour-guide', isRoute: true },
   { label: 'Ghana', to: '/ghana', isRoute: true },
   { label: 'Travel Planner', to: '/travel-planner', isRoute: true },
   { label: 'About Us', to: '/about', isRoute: true },
@@ -59,7 +60,7 @@ export const COUNTRIES = [
     name: 'Tanzania & Zanzibar',
     region: 'east',
     note: 'Land of Kilimanjaro, Serengeti and Zanzibar',
-    displayName: 'Tanzania (Zanzibar)',
+    displayName: 'Tanzania & Zanzibar',
     to: '/tanzania',
     tone: 'forest',
     image: '/images/countries/tanzania.webp',
@@ -3031,7 +3032,7 @@ export const TOUR_GUIDE_LANDING_PAGE = {
     },
     {
       slug: 'tanzania',
-      label: 'Tanzania / Zanzibar',
+      label: 'Tanzania & Zanzibar',
       description: 'From wildlife adventures to island escapes, explore with a local guide.',
       image: '/images/services/tour-guides/find-a-local-guide-tanzania.webp',
     },
@@ -3054,7 +3055,7 @@ export const TOUR_GUIDE_LANDING_PAGE = {
 // COUNTRIES slug used everywhere else (ghana/benin/tanzania). Tanzania's
 // own copy talks about "Zanzibar" specifically (matching how the guide
 // service is already scoped on /explore — "local guide services available
-// in Zanzibar" — and COUNTRIES' own `displayName: 'Tanzania (Zanzibar)'")
+// in Zanzibar" — and COUNTRIES' own `displayName: 'Tanzania & Zanzibar'")
 // even though its route/slug stays "tanzania" for consistency with every
 // other Tanzania link on the site.
 export const TOUR_GUIDE_PAGES = {

@@ -13,7 +13,9 @@ import { WhatsAppIcon } from './social-icons.jsx'
 // drops out of the desktop row (the CTA is the contact path) while the
 // mobile panel still lists everything for full discoverability. Home stays
 // in the desktop row, ahead of Explore, as an explicit link alongside the logo.
-const PRIMARY_NAV = NAV_LINKS.filter((link) => link.label !== 'Contact')
+const PRIMARY_NAV = NAV_LINKS.filter((link) => !['Contact', 'Find A Guide', 'Travel Planner', 'About Us'].includes(link.label))
+const LEADING_NAV = NAV_LINKS.filter((link) => link.label === 'Find A Guide')
+const AFTER_LOGO_NAV = NAV_LINKS.filter((link) => ['Travel Planner', 'About Us'].includes(link.label))
 
 // A small, balanced sample for the Explore mega-menu — two west, two east —
 // rather than just the first four in COUNTRIES, which would skew east.
@@ -84,7 +86,7 @@ export function Header() {
   // underline beneath it.
   const navLinkClass = (link) => {
     const active = isActiveLink(link, location.pathname)
-    return `relative text-sm tracking-wide transition-colors after:absolute after:-bottom-2.5 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-copper after:transition-opacity ${
+    return `relative whitespace-nowrap text-sm tracking-wide transition-colors after:absolute after:-bottom-2.5 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-copper after:transition-opacity ${
       active ? 'font-semibold after:opacity-100' : 'font-medium after:opacity-0 hover:after:opacity-60'
     } ${
       solid
@@ -125,7 +127,7 @@ export function Header() {
 
       {/* Three-column bar — nav / logo / contact — so the logo stays dead
           centre regardless of how much the side groups hold. */}
-      <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_auto_1fr] items-center justify-items-center gap-4 px-4 sm:px-6 lg:px-8">
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
           {PRIMARY_NAV.map((link) => {
             if (link.label === 'Explore') {
@@ -175,19 +177,45 @@ export function Header() {
           })}
         </nav>
 
-        <Link
-          to="/"
-          className="col-start-2 flex shrink-0 items-center justify-self-center"
-          aria-label="East-West Africa Link home"
-        >
-          <img
-            src={solid ? '/brand/logo-dark.webp' : '/brand/logo-white.webp'}
-            alt="East-West Africa Link"
-            className="h-[78px] w-auto transition-opacity duration-300"
-          />
-        </Link>
+        <div className="col-start-2 hidden items-center justify-center gap-6 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Leading links">
+            {LEADING_NAV.map((link) =>
+              link.isRoute ? (
+                <Link key={link.label} to={link.to} className={navLinkClass(link)}>
+                  {link.label}
+                </Link>
+              ) : (
+                <HashLink key={link.label} to={link.to} className={navLinkClass(link)}>
+                  {link.label}
+                </HashLink>
+              ),
+            )}
+          </nav>
 
-        <div className="flex items-center justify-end gap-3">
+          <Link to="/" className="flex shrink-0 items-center justify-self-center" aria-label="East-West Africa Link home">
+            <img
+              src={solid ? '/brand/logo-dark.webp' : '/brand/logo-white.webp'}
+              alt="East-West Africa Link"
+              className="h-[78px] w-auto transition-opacity duration-300"
+            />
+          </Link>
+
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="After logo links">
+            {AFTER_LOGO_NAV.map((link) =>
+              link.isRoute ? (
+                <Link key={link.label} to={link.to} className={navLinkClass(link)}>
+                  {link.label}
+                </Link>
+              ) : (
+                <HashLink key={link.label} to={link.to} className={navLinkClass(link)}>
+                  {link.label}
+                </HashLink>
+              ),
+            )}
+          </nav>
+        </div>
+
+        <div className="flex items-center justify-center gap-3 lg:col-start-4">
           <SiteSearch triggerClassName={iconBtnClass} />
 
           <a href={CONTACT_INFO.emailHref} className={iconBtnClass} aria-label="Email us">

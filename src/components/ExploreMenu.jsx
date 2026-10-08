@@ -54,8 +54,11 @@ export function ExploreMenu({ countries, forceClosed, onNavigate }) {
                   aria-hidden="true"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h3 className="text-lg font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover/card:-translate-y-1">
-                    {country.displayName ?? country.name}
+                  <h3 className="flex items-center gap-2 text-lg font-semibold text-primary-foreground transition-transform duration-[450ms] ease-out group-hover/card:-translate-y-1">
+                    <span aria-hidden="true" className="text-base leading-none">
+                      {country.flag ?? '🌍'}
+                    </span>
+                    <span>{country.displayName ?? country.name}</span>
                   </h3>
                   {country.note && (
                     <p className="mt-0.5 truncate text-xs text-primary-foreground/75">

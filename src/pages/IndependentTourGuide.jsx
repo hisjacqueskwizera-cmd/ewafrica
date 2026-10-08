@@ -191,7 +191,7 @@ export function IndependentTourGuide() {
               const Icon = GUIDE_MATCH_ICONS[step.icon]
               return (
                 <Reveal key={step.title} delay={index * 100} className="h-full">
-                  <div className="flex h-full min-w-0 flex-col rounded-2xl border border-border bg-[#f7f3ee] p-4 shadow-sm">
+                  <div className="flex h-full min-w-0 flex-col rounded-2xl border border-border bg-[#EFE1C4] p-4 shadow-sm">
                     <div className="mb-4 flex items-center gap-2 text-copper">
                       <span className="grid size-8 place-items-center rounded-full bg-cocoa text-sm font-bold text-primary-foreground">
                         {index + 1}
@@ -222,7 +222,7 @@ export function IndependentTourGuide() {
           {GUIDE_BENEFITS.map((item) => {
             const Icon = GUIDE_MATCH_ICONS[item.icon] ?? ICONS[item.icon]
             return (
-              <Reveal key={item.title} className="rounded-2xl border border-border bg-[#f7f3ee] p-5 text-left shadow-sm">
+              <Reveal key={item.title} className="rounded-2xl border border-border bg-[#EFE1C4] p-5 text-left shadow-sm">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="grid size-10 place-items-center rounded-full bg-forest/10 text-forest">
                     <Icon className="size-4" aria-hidden="true" />

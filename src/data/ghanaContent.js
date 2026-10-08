@@ -506,6 +506,37 @@ export const GHANA_DATA = {
           ],
         },
       },
+      {
+        id: 'electricity-plugs-adapters',
+        icon: 'Zap',
+        title: 'Electricity, Plugs & Adapters',
+        description:
+          'Keep your devices charged in Ghana. Learn which plug adapters to bring and what to check before using electrical appliances.',
+        image: '/images/ghana/practical_guide/image.PNG',
+        imageAlt: 'Travel adapters and charging devices for Ghana',
+        details: {
+          overview:
+            'Charging your phone, tablet, laptop, or camera in Ghana is usually straightforward. Most modern chargers support international voltage — you simply need an adapter that fits the socket.',
+          points: [
+            {
+              label: 'Which plug adapters should you bring?',
+              text: 'Ghana uses two socket types: Type D and Type G. Bring adapters for both types, or check with your accommodation before traveling. If choosing a universal travel adapter, confirm that it supports both Type D and Type G.',
+            },
+            {
+              label: 'Phones, laptops & other electronics',
+              text: 'Ghana’s electricity supply is 230V at 50Hz. Most modern phone, tablet, laptop, and camera chargers are marked “100–240V, 50/60Hz.” These can be plugged into Ghana’s electricity supply using a suitable plug adapter, without a voltage converter. Check the label on your charger to confirm.',
+            },
+            {
+              label: 'Hair dryers & other electrical appliances',
+              text: 'Some hair dryers, curling irons, electric shavers, and other appliances support international voltage; others are designed only for 110–120V. An appliance rated only for 110–120V cannot be used in Ghana with a plug adapter alone. Check the manufacturer’s instructions — you may need a suitable voltage converter or an appliance designed for 230V. If your appliance has a voltage selector, set it correctly before use.',
+            },
+            {
+              label: 'Important reminder',
+              text: 'A plug adapter makes your plug fit the socket. It does not change the voltage.',
+            },
+          ],
+        },
+      },
     ],
   },
 

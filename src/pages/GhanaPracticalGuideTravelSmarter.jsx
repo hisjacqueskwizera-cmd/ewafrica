@@ -6,6 +6,7 @@ import {
   RouteIcon,
   Shield,
   Users,
+  Zap,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { BottomSheetModal } from '../components/BottomSheetModal.jsx'
@@ -17,7 +18,7 @@ import { HashLink } from '../components/HashLink.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { GHANA_DATA } from '../data/ghanaContent.js'
 
-const ICONS = { Shield, RouteIcon, Lightbulb, Users, Handshake }
+const ICONS = { Shield, RouteIcon, Lightbulb, Users, Handshake, Zap }
 
 // Page 3 of 3 in the Ghana Practical Guide — "Travel Smarter": staying
 // safe, overland connections, first-timer tips, packing, and responsible

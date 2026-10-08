@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { CONTACT_INFO, COUNTRIES, TOUR_GUIDE_LANDING_PAGE } from '../data/siteContent.js'
+import { FLAGS } from '../data/countryFlags.js'
 import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
@@ -147,12 +148,17 @@ export function IndependentTourGuide() {
                       <div className="flex flex-1 flex-col p-5">
                         <div className="flex items-center gap-2">
                           <img
-                            src={country?.flag || country?.image}
-                            alt=""
-                            className="h-5 w-auto rounded-[4px] object-cover ring-1 ring-border"
+                            src={country ? FLAGS[country.slug] : country?.image}
+                            alt={country?.name || dest.label || 'Country flag'}
+                            className="h-6 w-8 rounded-[4px] object-cover ring-1 ring-border bg-white"
                           />
-                          <h2 className="text-xl font-bold text-primary">
-                            {dest.label ?? country?.name}
+                        </div>
+                        <div className="mt-3">
+                          <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-[#8b3e2b]">
+                            Local Guide
+                          </span>
+                          <h2 className="mt-1 text-xl font-bold text-primary">
+                            {country?.name || dest.label}
                           </h2>
                         </div>
                         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
@@ -162,7 +168,7 @@ export function IndependentTourGuide() {
                           {destinationBadge}
                         </span>
                         <span className="btn-copper mt-5 w-full justify-center">
-                          {dest.label ?? country?.name}
+                          {country?.name || dest.label}
                           <ArrowRight className="size-4" aria-hidden="true" />
                         </span>
                       </div>

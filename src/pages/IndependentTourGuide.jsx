@@ -33,7 +33,7 @@ const GUIDE_MATCH_STEPS = [
   },
   {
     title: 'Optional 20-Minute Phone Conversation',
-    description: 'After reviewing your request, we may offer an optional 20-minute phone conversation to clarify your needs.',
+    description: 'After reviewing your request, we offer an optional 20-minute phone conversation to clarify your needs.',
     icon: 'Phone',
   },
   {
@@ -186,12 +186,12 @@ export function IndependentTourGuide() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-5">
             {GUIDE_MATCH_STEPS.map((step, index) => {
               const Icon = GUIDE_MATCH_ICONS[step.icon]
               return (
                 <Reveal key={step.title} delay={index * 100} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-4 shadow-sm">
+                  <div className="flex h-full min-w-0 flex-col rounded-2xl border border-border bg-[#fff9e0] p-4 shadow-sm">
                     <div className="mb-4 flex items-center gap-2 text-copper">
                       <span className="grid size-8 place-items-center rounded-full bg-cocoa text-sm font-bold text-primary-foreground">
                         {index + 1}
@@ -222,7 +222,7 @@ export function IndependentTourGuide() {
           {GUIDE_BENEFITS.map((item) => {
             const Icon = GUIDE_MATCH_ICONS[item.icon] ?? ICONS[item.icon]
             return (
-              <Reveal key={item.title} className="rounded-2xl border border-border bg-card p-5 text-left shadow-sm">
+              <Reveal key={item.title} className="rounded-2xl border border-border bg-[#fff9e0] p-5 text-left shadow-sm">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="grid size-10 place-items-center rounded-full bg-forest/10 text-forest">
                     <Icon className="size-4" aria-hidden="true" />
@@ -245,20 +245,24 @@ export function IndependentTourGuide() {
         <div className="absolute inset-0 bg-linear-to-r from-cocoa/80 via-cocoa/60 to-cocoa/30" aria-hidden="true" />
         <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-16">
           <div className="max-w-2xl">
-            <p className="text-4xl font-black leading-none sm:text-5xl lg:text-[4rem]">
+            <p className="text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-[3rem]">
               Ready to Find a Local Guide?
             </p>
             <p className="mt-3 text-base text-primary-foreground/80 sm:text-lg">
               Choose a destination above to meet our guides and start your request.
             </p>
           </div>
-          <HashLink
-            to="#top"
+          <a
+            href="#top"
+            onClick={(event) => {
+              event.preventDefault()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
             className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-6 py-3 text-base font-semibold text-cocoa transition hover:-translate-y-0.5"
           >
             Explore Guide Destinations
             <ArrowRight className="size-4" aria-hidden="true" />
-          </HashLink>
+          </a>
         </div>
       </section>
 

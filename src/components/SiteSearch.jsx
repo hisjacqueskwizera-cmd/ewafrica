@@ -11,6 +11,45 @@ const CATEGORY_ICONS = {
   Page: Compass,
 }
 
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function highlightMatch(text, query) {
+  const trimmed = query.trim()
+  if (!trimmed) return text
+
+  const terms = trimmed
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((term) => escapeRegex(term))
+    .filter(Boolean)
+
+  if (terms.length === 0) return text
+
+  const pattern = new RegExp(`(${terms.join('|')})`, 'ig')
+  const parts = text.split(pattern)
+
+  return parts.map((part, index) => {
+    if (!part) return null
+    const isMatch = pattern.test(part)
+    pattern.lastIndex = 0
+
+    if (isMatch) {
+      return (
+        <mark
+          key={`${part}-${index}`}
+          className="rounded bg-copper/20 px-0.5 text-primary"
+        >
+          {part}
+        </mark>
+      )
+    }
+
+    return <span key={`${part}-${index}`}>{part}</span>
+  })
+}
+
 // A handful of popular destinations shown before the visitor types
 // anything — search should feel alive and useful the moment it opens,
 // not just once there's a query to react to.
@@ -154,13 +193,13 @@ export function SiteSearch({ triggerClassName, iconClassName = 'size-4' }) {
                 {!query.trim() && (
                   <p className="flex items-center gap-1.5 px-3 pb-2 pt-3 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
                     <Sparkles className="size-3.5 text-copper" aria-hidden="true" />
-                    Popular destinations
+                    destinations
                   </p>
                 )}
 
                 {query.trim() && results.length === 0 && (
                   <p className="px-4 py-8 text-center text-sm text-muted-foreground">
-                    No results for &ldquo;{query}&rdquo; — try a country, a service, or a guide.
+                    No related results found.
                   </p>
                 )}
 
@@ -186,14 +225,15 @@ export function SiteSearch({ triggerClassName, iconClassName = 'size-4' }) {
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-2">
                           <span className="truncate text-sm font-semibold text-primary">
-                            {result.title}
+                            {highlightMatch(result.title, query)}
                           </span>
                           <span className="shrink-0 rounded-full bg-border/60 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
                             {result.category}
                           </span>
                         </span>
-                        {result.description && (
+                        {(result.country || result.description) && (
                           <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                            {result.country ? `${result.country} · ` : ''}
                             {result.description}
                           </span>
                         )}

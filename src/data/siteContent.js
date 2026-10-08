@@ -10,10 +10,10 @@ export const NAV_LINKS = [
 ]
 
 export const CONTACT_INFO = {
-  phone: '+1 (255) 555-0147',
-  phoneHref: 'tel:+12555550147',
+  phone: '+1 (206) 807-7557',
+  phoneHref: 'tel:+12068077557',
   whatsappHref:
-    'https://wa.me/12555550147?text=Hello%2C%20I%27m%20interested%20in%20your%20services%20and%20would%20like%20more%20information.',
+    'https://wa.me/12068077557?text=Hello%2C%20I%27m%20interested%20in%20your%20services%20and%20would%20like%20more%20information.',
   email: 'info@eastwestafricalink.com',
   emailHref: 'mailto:info@eastwestafricalink.com',
   address: 'Seattle, Washington, USA',

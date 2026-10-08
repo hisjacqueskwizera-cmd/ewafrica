@@ -218,7 +218,7 @@ export function IndependentTourGuide() {
       </section>
 
       <section className="border-t border-border bg-[#f7f3ee] py-12 lg:py-16">
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 md:grid-cols-2 xl:grid-cols-4 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 md:grid-cols-4 xl:grid-cols-4 lg:px-8">
           {GUIDE_BENEFITS.map((item) => {
             const Icon = GUIDE_MATCH_ICONS[item.icon] ?? ICONS[item.icon]
             return (

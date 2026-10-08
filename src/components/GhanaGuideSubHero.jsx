@@ -23,21 +23,19 @@ export function GhanaGuideSubHero({ page, heading, tagline, image, imageAlt }) {
         loading="eager"
         className="absolute inset-0 size-full object-cover"
       />
+      <div className="hero-scrim pointer-events-none absolute inset-0 z-[3]" aria-hidden="true" />
       {/* Same side margins as DestinationHero, so the copy lines up with
           every full-screen hero's. */}
-      <div
-        className="relative z-[4] w-full px-6 pb-12 pt-32 sm:px-10 lg:px-16"
-        style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
-      >
+      <div className="hero-copy relative z-[4] w-full px-6 pb-12 pt-32 sm:px-10 lg:px-16">
         <HeroBadge>Ghana Practical Guide · Page {page} of 3</HeroBadge>
         <Haze className="mt-6 w-fit">
-          <h1 className="font-display text-4xl font-normal leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-4xl font-semibold leading-[1.1] text-primary-foreground sm:text-5xl lg:text-6xl">
             <AccentHeading text={heading} />
           </h1>
         </Haze>
         {tagline && (
-          <Haze strong className="mt-6 max-w-xl">
-            <p className="text-base leading-relaxed text-white/90">{tagline}</p>
+          <Haze className="mt-6 max-w-xl">
+            <p className="text-base leading-relaxed text-primary-foreground">{tagline}</p>
           </Haze>
         )}
       </div>

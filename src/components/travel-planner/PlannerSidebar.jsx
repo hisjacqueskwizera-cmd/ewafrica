@@ -14,7 +14,8 @@ import {
 } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { CONTACT_INFO, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
+import { CONTACT_INFO, COUNTRIES, TRAVEL_PLANNER_FLOW } from '../../data/siteContent.js'
+import { FLAGS } from '../../data/countryFlags.js'
 import { HashLink } from '../HashLink.jsx'
 import { MediaLightbox } from '../MediaGallery.jsx'
 import { WhatsAppIcon } from '../social-icons.jsx'
@@ -49,6 +50,9 @@ export function PlannerSidebar({
   priceLabel,
   includes = TRAVEL_PLANNER_FLOW.includes,
   includesHeading = 'Your Travel Planner Includes',
+  // A country page's slug shows that country's name and flag under the
+  // includes checklist; leave it off on pages that aren't for one country.
+  countrySlug,
   primaryCta,
   helpHeading = 'Need Help?',
   helpText = 'General questions about our services, pricing, or how the website works can be sent through WhatsApp or email at no charge.',
@@ -59,6 +63,7 @@ export function PlannerSidebar({
   const [photoOpen, setPhotoOpen] = useState(false)
   const closePhoto = useCallback(() => setPhotoOpen(false), [])
   const noop = useCallback(() => {}, [])
+  const country = COUNTRIES.find((c) => c.slug === countrySlug)
 
   const photoFrame = (
     <>
@@ -71,7 +76,7 @@ export function PlannerSidebar({
         }`}
       />
       <div
-        className="absolute inset-0 bg-linear-to-t from-cocoa/85 via-cocoa/10 to-transparent"
+        className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent"
         aria-hidden="true"
       />
       {photoZoomable && (
@@ -142,6 +147,20 @@ export function PlannerSidebar({
           })}
         </ul>
 
+        {country && (
+          // The country this page is for — its flag with its name — closing
+          // the includes checklist the way the hero's country badge does.
+          <div className="mt-4 flex items-center gap-2.5 border-t border-border pt-4">
+            <img
+              src={FLAGS[country.slug]}
+              alt=""
+              aria-hidden="true"
+              className="h-6 w-8 shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10"
+            />
+            <span className="text-sm font-bold text-primary">{country.name}</span>
+          </div>
+        )}
+
         {(price != null || priceLabel) && (
           <>
             <p className="mt-4 text-3xl font-bold text-primary">
@@ -155,15 +174,23 @@ export function PlannerSidebar({
           </>
         )}
 
-        {primaryCta && (
-          <HashLink
-            to={primaryCta.to}
-            className="btn-copper mt-4 w-full justify-center"
-          >
-            {primaryCta.label}
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </HashLink>
-        )}
+        {primaryCta &&
+          (primaryCta.disabled ? (
+            // E.g. no destination chosen yet — the service pages ask for
+            // countries after the service is picked, so the CTA waits.
+            <span
+              aria-disabled="true"
+              className="btn-copper mt-4 w-full cursor-not-allowed justify-center opacity-50"
+            >
+              {primaryCta.label}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </span>
+          ) : (
+            <HashLink to={primaryCta.to} className="btn-copper mt-4 w-full justify-center">
+              {primaryCta.label}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </HashLink>
+          ))}
       </div>
 
       <div className="rounded-2xl border border-border bg-card p-5">
@@ -208,7 +235,7 @@ export function PlannerSidebar({
             className="aspect-4/3 size-full object-cover"
           />
           <div
-            className="absolute inset-0 bg-linear-to-t from-cocoa/85 via-cocoa/10 to-transparent"
+            className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent"
             aria-hidden="true"
           />
           {secondaryCaption && (

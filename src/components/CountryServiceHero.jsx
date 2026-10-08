@@ -1,14 +1,14 @@
-import { COUNTRY_HEROES } from '../data/countryHeroes.js'
+import { COUNTRY_HEROES, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
 import { FLAGS } from '../data/countryFlags.js'
 import { COUNTRIES } from '../data/siteContent.js'
 import { DestinationHero } from './DestinationHero.jsx'
 
 const PILL =
-  'inline-flex border border-gold/70 bg-black/55 font-bold uppercase shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md'
+  'inline-flex font-display font-semibold text-hero-accent'
 
 function CountryName({ country }) {
   return (
-    <span className="tracking-[0.1em] text-primary-foreground">{country.name}</span>
+    <span className="text-hero-accent">{country.name}</span>
   )
 }
 
@@ -32,10 +32,10 @@ function CountryHeroBadge({ country, label, mark }) {
   if (!mark && !label) {
     return (
       <span
-        className={`${PILL} items-center gap-3 rounded-full px-5 py-2.5 text-base sm:px-6 sm:py-3 sm:text-2xl`}
+        className={`${PILL} items-center gap-3 text-lg sm:text-xl`}
       >
         <CountryName country={country} />
-        <Flag country={country} className="h-6 w-9 sm:h-8 sm:w-12" />
+        <Flag country={country} className="h-7 w-[42px] sm:h-9 sm:w-[54px]" />
       </span>
     )
   }
@@ -43,8 +43,9 @@ function CountryHeroBadge({ country, label, mark }) {
   if (mark) {
     // The mark is a standalone graphic (an umbrella over its own outlined
     // "TRAVEL PLANNER" pill), so it stands at full size rather than
-    // squeezed into a pill. The country pill beside it is half its height,
-    // which lines it up with the mark's own pill; on phones it drops below.
+    // squeezed into a pill. The country pill beside it is fixed to the
+    // same height as the mark's own pill and bottom-aligned with it, so
+    // both pills sit level on one line; on phones it drops below.
     return (
       <span className="flex flex-wrap items-end gap-x-4 gap-y-3">
         <img
@@ -53,10 +54,10 @@ function CountryHeroBadge({ country, label, mark }) {
           className="h-[72px] w-auto shrink-0 sm:h-[88px] lg:h-24"
         />
         <span
-          className={`${PILL} h-9 items-center gap-3 rounded-full px-4 text-base sm:h-11 sm:px-5 sm:text-xl lg:h-12 lg:text-2xl`}
+          className={`${PILL} h-9 items-center gap-3 text-lg sm:h-10 sm:text-xl lg:h-11`}
         >
           <CountryName country={country} />
-          <Flag country={country} className="h-5 w-[30px] sm:h-6 sm:w-9 lg:h-7 lg:w-[42px]" />
+          <Flag country={country} className="h-6 w-9 sm:h-7 sm:w-[42px] lg:h-8 lg:w-12" />
         </span>
       </span>
     )
@@ -67,14 +68,45 @@ function CountryHeroBadge({ country, label, mark }) {
     // name like "Tanzania & Zanzibar" never breaks mid-pill; one row from
     // sm up.
     <span
-      className={`${PILL} flex-col items-start gap-1.5 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:gap-4 sm:rounded-full sm:px-6`}
+      className={`${PILL} flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-3`}
     >
-      <span className="text-xs tracking-[0.16em] text-gold sm:text-sm">{label}</span>
-      <span className="hidden h-6 w-px bg-primary-foreground/40 sm:block" aria-hidden="true" />
-      <span className="flex items-center gap-3 text-base sm:text-2xl">
+      <span className="text-lg sm:text-xl">{label}</span>
+      <span className="hidden h-5 w-px bg-primary-foreground/60 sm:block" aria-hidden="true" />
+      <span className="flex items-center gap-3 text-lg sm:text-xl">
         <CountryName country={country} />
-        <Flag country={country} className="h-6 w-9 sm:h-8 sm:w-12" />
+        <Flag country={country} className="h-7 w-[42px] sm:h-9 sm:w-[54px]" />
       </span>
+    </span>
+  )
+}
+
+/**
+ * The Travel Planner's badge on its service pages: the umbrella mark with
+ * the chosen countries' pills beside it — one pill for one country, a pill
+ * each for several, and the mark alone before any country is picked. Used
+ * by the Travel Planner service pages' fallback hero (see PageIntro's
+ * `eyebrow`) so the mark shows on every state of the page.
+ */
+export function TravelPlannerBadge({ countrySlugs }) {
+  const countries = countrySlugs
+    .map((slug) => COUNTRIES.find((c) => c.slug === slug))
+    .filter(Boolean)
+  return (
+    <span className="flex flex-wrap items-end gap-x-4 gap-y-3">
+      <img
+        src={TRAVEL_PLANNER_MARK.src}
+        alt={TRAVEL_PLANNER_MARK.alt}
+        className="h-[72px] w-auto shrink-0 sm:h-[88px] lg:h-24"
+      />
+      {countries.map((country) => (
+        <span
+          key={country.slug}
+          className={`${PILL} h-9 items-center gap-3 text-lg sm:h-10 sm:text-xl lg:h-11`}
+        >
+          <CountryName country={country} />
+          <Flag country={country} className="h-6 w-9 sm:h-7 sm:w-[42px] lg:h-8 lg:w-12" />
+        </span>
+      ))}
     </span>
   )
 }

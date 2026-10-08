@@ -383,6 +383,7 @@ export function PersonalVisaGuidance() {
 
             <PlannerSidebar
               heading="Service Price"
+              countrySlug={country.slug}
               photo={VISA_SIDE_IMAGES[country.slug]?.src ?? country.image}
               photoAlt={VISA_SIDE_IMAGES[country.slug]?.alt ?? `A scenic view of ${country.name}`}
               photoZoomable

@@ -81,7 +81,7 @@ export function WhatsAppChatBar() {
   }
 
   return (
-    <div ref={containerRef} className="fixed bottom-5 right-4 z-[90] sm:right-6">
+    <div ref={containerRef} className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-[90] sm:right-6">
       <form
         onSubmit={handleSubmit}
         className={`flex max-w-[calc(100vw-2rem)] items-center rounded-full border border-border/60 bg-card/60 p-1.5 shadow-[0_16px_40px_-18px_rgba(21,25,33,0.45)] backdrop-blur-md transition-[width,gap,padding] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -98,7 +98,7 @@ export function WhatsAppChatBar() {
             onClick={() => setOpen(false)}
             aria-label="Close chat"
             tabIndex={open ? 0 : -1}
-            className="grid size-8 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-sand hover:text-primary"
+            className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-sand hover:text-primary"
           >
             <X className="size-4" aria-hidden="true" />
           </button>

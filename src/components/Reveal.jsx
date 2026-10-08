@@ -72,7 +72,7 @@ export function Reveal({
   return (
     <div
       ref={ref}
-      className={`transition-all ${big ? 'duration-1000' : blur ? 'duration-[1100ms]' : 'duration-700'} ease-out ${
+      className={`min-w-0 transition-all ${big ? 'duration-1000' : blur ? 'duration-[1100ms]' : 'duration-700'} ease-out ${
         visible ? visibleState : hiddenState
       } ${blur ? (visible ? 'blur-none' : 'blur-[6px]') : ''} ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}

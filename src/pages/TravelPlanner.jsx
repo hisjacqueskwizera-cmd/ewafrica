@@ -10,7 +10,7 @@ import {
   User,
   Users,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
   BEFORE_YOU_BOOK_FLOW,
@@ -20,7 +20,6 @@ import {
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
 import { COUNTRY_HEROES, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
-import { CountrySelectGrid } from '../components/CountrySelectGrid.jsx'
 import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
 import { HashLink } from '../components/HashLink.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
@@ -42,15 +41,13 @@ const ACCENT = {
 // count/hasGhana still drive what the price *would* be; isLocked+
 // lockedCountryName override the caption with the one country the visitor
 // arrived with (see the comment on TravelPlanner() below for when each case
-// applies). requestHref/beforeYouBookHref/travelAuditHref each carry the
-// selection into that service's own flow. Every card's "View Details" is
-// always clickable — none of them dead-end a visitor who hasn't picked
-// anything: each service's own details/request page picks up from there
-// and lets them choose a country count if nothing was carried over. None
-// of the three cards show a price on this page any more (showPrice below)
-// — pricing only appears once a visitor is inside a service's own flow —
-// but each service's own tiered-plus-Ghana-surcharge computation stays in
-// place here so it's a one-line flip to bring it back.
+// applies). Countries are chosen AFTER the service, on the service's own
+// page — so every card's "View Details" always links straight through and
+// none of them gate on a selection made here. None of the three cards show
+// a price on this page any more (showPrice below) — pricing only appears
+// once a visitor is inside a service's own flow — but each service's own
+// tiered-plus-Ghana-surcharge computation stays in place here so it's a
+// one-line flip to bring it back.
 function ServiceCard({
   service,
   isLocked,
@@ -60,8 +57,6 @@ function ServiceCard({
   requestHref,
   beforeYouBookHref,
   travelAuditHref,
-  needsSelection,
-  onNeedSelection,
   delay,
 }) {
   const Icon = ICONS[service.icon]
@@ -89,23 +84,24 @@ function ServiceCard({
         : service.key === 'travelAudit'
           ? travelAuditHref
           : '/#contact'
-  const ctaClass = `mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${accent.button}`
+  const ctaClass = `mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${accent.button} after:absolute after:inset-0 after:z-20 after:content-['']`
 
   return (
-    <Reveal delay={delay}>
-      <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-card">
-        {/* The card art is shown whole: full card width, at its own height
-            (4:3 or 3:2), so nothing in the design is cropped. Only the
-            placeholder for a service without art needs a fixed shape. */}
-        <div
-          className={`relative overflow-hidden rounded-t-3xl ${service.image ? '' : 'aspect-4/3'}`}
-        >
+    <Reveal delay={delay} className="h-full">
+      <article className="relative flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl bg-card shadow-card transition-transform hover:-translate-y-1">
+        {/* Every card art gets the same fixed 4:3 frame so all images line
+            up at the same height and the titles below sit on one level. */}
+        <div className="relative aspect-4/3 overflow-hidden rounded-t-3xl">
           {service.image ? (
             <img
               src={service.image}
               alt={service.imageAlt}
               loading="lazy"
-              className="block h-auto w-full"
+              // imagePosition lets a card nudge its photo inside the shared
+              // 4:3 frame (e.g. travelPlanner shifts right to keep the
+              // photo's own on-image text from being clipped).
+              style={service.imagePosition ? { objectPosition: service.imagePosition } : undefined}
+              className="block h-full w-full object-cover"
             />
           ) : (
             <PlaceholderArt icon={Icon} tone={service.accent === 'forest' ? 'forest' : 'copper'} fill />
@@ -146,19 +142,10 @@ function ServiceCard({
             ))}
           </ul>
 
-          {needsSelection ? (
-            // Nothing picked yet: point the visitor back up to the country
-            // tiles rather than continuing without a destination.
-            <button type="button" onClick={onNeedSelection} className={ctaClass}>
-              View Details
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </button>
-          ) : (
-            <HashLink to={href} className={ctaClass}>
-              View Details
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </HashLink>
-          )}
+          <HashLink to={href} className={ctaClass}>
+            View Details
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </HashLink>
         </div>
       </article>
     </Reveal>
@@ -188,27 +175,16 @@ export function TravelPlanner() {
       : 'Travel Planner | East-West Africa Link'
   }, [lockedCountry])
 
-  const [destinationSlugs, setDestinationSlugs] = useState(() => (lockedSlug ? [lockedSlug] : []))
-  const selectedCountries = destinationSlugs
-    .map((slug) => COUNTRIES.find((c) => c.slug === slug))
-    .filter(Boolean)
+  // Countries are picked after the service, on the service's own page —
+  // the cards link straight through. Only a locked arrival (from a country
+  // page) carries a destination along.
+  const destinationSlugs = lockedSlug ? [lockedSlug] : []
   const count = Math.max(destinationSlugs.length, 1)
   const hasGhana = destinationSlugs.includes('ghana')
-  // This page is the one place destinations are chosen, so every card's
-  // "View Details" needs at least one country picked first — the same rule
-  // as Personal Visa Guidance's Continue. With none, it shows that page's
-  // notice and scrolls back up to the tiles instead of continuing.
-  const [selectionError, setSelectionError] = useState('')
-  const needsSelection = destinationSlugs.length === 0
-  const onNeedSelection = () => {
-    setSelectionError('Please select at least one country to continue.')
-    document
-      .getElementById('destination-select')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }
-  const requestHref = `/travel-planner/service-details?destinations=${destinationSlugs.join(',')}`
-  const beforeYouBookHref = `/travel-planner/before-you-book-check?destinations=${destinationSlugs.join(',')}`
-  const travelAuditHref = `/travel-planner/travel-audit?destinations=${destinationSlugs.join(',')}`
+  const query = lockedSlug ? `?destinations=${lockedSlug}` : ''
+  const requestHref = `/travel-planner/service-details${query}`
+  const beforeYouBookHref = `/travel-planner/before-you-book-check${query}`
+  const travelAuditHref = `/travel-planner/travel-audit${query}`
   const { hero, countryHero, intro, services, helpBand, trust } = TRAVEL_PLANNER_PAGE
   // "The Gambia" reads as "Plan Your Gambia Journey" in the heading; the
   // badge above it keeps the full name.
@@ -256,48 +232,8 @@ export function TravelPlanner() {
             </p>
           </Reveal>
 
-          {/* The same country selection card as Personal Visa Guidance. */}
-          {!isLocked && (
-            <Reveal
-              delay={150}
-              className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-border bg-card p-6 text-left shadow-sm sm:p-8"
-            >
-              <div id="destination-select">
-                <h3 className="text-xl font-bold text-primary">Select Your Destination(s)</h3>
-                <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-                  Select one or more countries — up to 4. Then choose a service below.
-                </p>
-
-                <CountrySelectGrid
-                  values={destinationSlugs}
-                  onChange={(next) => {
-                    setSelectionError('')
-                    setDestinationSlugs(next)
-                  }}
-                  max={4}
-                  error={selectionError}
-                  ariaLabel="Destinations"
-                  className="mt-6"
-                />
-              </div>
-
-              {/* The picks, listed back as soon as there are any — confirms
-                  the selection right above the service cards that carry it. */}
-              <div className="mt-6 border-t border-border pt-5 text-sm text-muted-foreground">
-                {selectedCountries.length === 0 ? (
-                  <span className="italic">No countries selected yet.</span>
-                ) : (
-                  <>
-                    <span className="font-bold text-primary">{selectedCountries.length}</span>{' '}
-                    {selectedCountries.length === 1 ? 'country' : 'countries'} selected —{' '}
-                    <span className="font-bold text-copper">
-                      {selectedCountries.map((c) => c.name).join(', ')}
-                    </span>
-                  </>
-                )}
-              </div>
-            </Reveal>
-          )}
+          {/* Countries are chosen after the service, on each service's own
+              page — no picker here. */}
         </div>
       </section>
 
@@ -310,14 +246,12 @@ export function TravelPlanner() {
                 key={service.key}
                 service={service}
                 isLocked={isLocked}
-                lockedCountryName={selectedCountries[0]?.name ?? ''}
+                lockedCountryName={lockedCountry?.name ?? ''}
                 count={count}
                 hasGhana={hasGhana}
                 requestHref={requestHref}
                 beforeYouBookHref={beforeYouBookHref}
                 travelAuditHref={travelAuditHref}
-                needsSelection={needsSelection}
-                onNeedSelection={onNeedSelection}
                 delay={i * 100}
               />
             ))}

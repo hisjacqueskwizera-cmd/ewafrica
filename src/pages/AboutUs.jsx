@@ -10,7 +10,7 @@ const ICONS = { Globe2, FileText, Handshake, ShieldCheck }
 
 // Shared type scale for the page's editorial layout: light-weight display
 // headings (36px → 50px) and generous 18px body copy on desktop.
-const HEADING = 'font-display text-[2.25rem] font-normal leading-[1.2] lg:text-[3.125rem]'
+const HEADING = 'font-display text-[2rem] font-normal leading-[1.2] sm:text-[2.25rem] lg:text-[3.125rem]'
 const BODY = 'text-base leading-[1.6] lg:text-lg lg:leading-[1.5]'
 
 // Every section heading sets its last word in italic — the roman/italic
@@ -34,7 +34,7 @@ function AccentHeading({ as: Tag = 'h2', text, className = '' }) {
 // single outline CTA on the right (stacked on small screens).
 function Band({ heading, cta, children }) {
   return (
-    <section className="bg-cocoa px-[30px] py-[120px] text-primary-foreground lg:py-[100px]">
+    <section className="bg-cocoa px-5 py-16 text-primary-foreground sm:px-[30px] sm:py-20 lg:py-[100px]">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-5">
         <Reveal className="lg:w-1/2">
           <AccentHeading text={heading} className={`${HEADING} max-w-[544px]`} />
@@ -66,7 +66,7 @@ export function AboutUs() {
       />
 
       {/* Our Mission — tall photo left, copy right (photo first on mobile). */}
-      <section className="px-[30px] pt-[120px] lg:pt-[200px]">
+      <section className="px-5 pt-16 sm:px-[30px] sm:pt-24 lg:pt-[200px]">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <img
             src={mission.image}
@@ -96,7 +96,7 @@ export function AboutUs() {
       {/* Our Approach — copy with a wide photo beneath it on the left, one
           tall photo filling the right column (desktop only). The cocoa band
           follows straight on from the bottom of the photos. */}
-      <section className="px-[30px] pt-[120px] lg:pt-[200px]">
+      <section className="px-5 pt-16 sm:px-[30px] sm:pt-24 lg:pt-[200px]">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-[50px]">
           <div className="flex flex-col">
             <Reveal>
@@ -132,7 +132,7 @@ export function AboutUs() {
           "Read The Full Bio" button links here (/about#founder). The photo
           keeps its own wide shape on desktop (and stays in view beside the
           bio) rather than being enlarged into a tall crop. */}
-      <section id="founder" className="px-[30px] py-[120px] lg:pt-[200px]">
+      <section id="founder" className="px-5 py-16 sm:px-[30px] sm:py-24 lg:pt-[200px]">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-[50px]">
           <img
             src={founder.photo}
@@ -161,7 +161,7 @@ export function AboutUs() {
       
       {/* Full-bleed photo feature — copy anchored bottom-left, CTA
           bottom-right. */}
-      <section className="relative isolate flex min-h-[800px] items-end overflow-hidden px-[30px] lg:px-10">
+      <section className="relative isolate flex min-h-[min(800px,100svh)] items-end overflow-hidden px-5 sm:min-h-[800px] sm:px-[30px] lg:px-10">
         <img
           src={styleOfTravel.image}
           alt={styleOfTravel.imageAlt}
@@ -172,7 +172,7 @@ export function AboutUs() {
           className="absolute inset-0 -z-10 bg-linear-to-t from-cocoa/85 via-cocoa/40 to-cocoa/10"
           aria-hidden="true"
         />
-        <div className="flex w-full flex-col gap-10 pb-[100px] text-primary-foreground lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex w-full flex-col gap-10 pb-16 text-primary-foreground sm:pb-[100px] lg:flex-row lg:items-end lg:justify-between">
           <Reveal className="max-w-[564px]">
             <AccentHeading
               text={styleOfTravel.title}

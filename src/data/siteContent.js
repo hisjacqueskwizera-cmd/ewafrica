@@ -151,6 +151,11 @@ export const SERVICES = [
     // chooser rather than assuming one country (see PersonalVisaGuidance.jsx).
     to: '/personal-visa-guidance',
     image: '/images/home/services/personal-visa-guidance.webp',
+    // The words printed on this photo sit low in it. Frame it (scale +
+    // width-based upward shift, see PhotoCard in Services.jsx) so its printed
+    // title lands at the same height as "Find a Local Guide"'s. The photo
+    // itself is untouched; a blurred copy fills the space it no longer covers.
+    imageFrame: { scale: 1.04, shift: '-36.9%' },
   },
   {
     icon: 'Home',
@@ -183,6 +188,9 @@ export const SERVICES = [
     description: "Connect with trusted, vetted local guides who know the places and the people.",
     to: '/independent-tour-guide',
     image: '/images/home/services/find-a-local-guide.webp',
+    // The reference card: its printed title sets the level the Travel
+    // Planner and Personal Visa Guidance cards are framed to match.
+    imagePosition: 'center top',
   },
 ]
 
@@ -194,6 +202,9 @@ export const TRAVEL_PLANNER_UMBRELLA = {
   tag: 'Services Under This Umbrella',
   items: ['Ask a Question', 'Before You Book Check', 'Travel Planner'],
   to: '/travel-planner',
+  // Framed so the photo's printed title lines up with "Find a Local Guide"'s
+  // (see imageFrame on SERVICES and PhotoCard in Services.jsx).
+  imageFrame: { scale: 1.3, shift: '-7.5%' },
 }
 
 export const GHANA_FEATURES = [
@@ -2096,6 +2107,10 @@ export const TRAVEL_PLANNER_PAGE = {
       accent: 'copper',
       title: 'Travel Planner',
       image: '/images/services/travel-planner/services/travel-planner.webp',
+      // The photo's own headline text ("Plan Your Africa Journey") hugs its
+      // left edge; the centered 4:3 crop clipped it. A low object-position
+      // X shifts the photo right inside the frame so that text stays whole.
+      imagePosition: '22% center',
       imageAlt:
         'Travel Planner — Plan Your Africa Journey: a map of Africa and a compass on a veranda table overlooking Mount Kilimanjaro',
       description:

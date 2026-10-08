@@ -14,20 +14,20 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useEffect } from 'react'
-import { Link, Navigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import {
   CONTACT_INFO,
   COUNTRIES,
   TRAVEL_PLANNER_DETAILS_PAGE,
   TRAVEL_PLANNER_PAGE,
 } from '../data/siteContent.js'
-import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
+import { CountryServiceHero, TravelPlannerBadge } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
+import { DestinationPicker } from '../components/travel-planner/DestinationPicker.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
-import { FLAGS } from '../data/countryFlags.js'
 import { heroCountrySlug, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
 
 const ICONS = {
@@ -44,32 +44,17 @@ const ICONS = {
   ShieldCheck,
 }
 
-// Same flag treatment as the country tiles (real SVG flags, not
-// emoji — see the note on countryFlags.js), paired with the country name in
-// bold so the selection reads clearly at a glance.
-function CountryChip({ slug, name }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-card">
-      <img
-        src={FLAGS[slug]}
-        alt=""
-        aria-hidden="true"
-        className="h-4 w-[21.33px] shrink-0 rounded-[3px] object-cover ring-1 ring-inset ring-black/10"
-      />
-      <span className="text-sm font-bold text-primary">{name}</span>
-    </span>
-  )
-}
-
 export function TravelPlannerServiceDetails() {
   useEffect(() => {
     document.title = 'Travel Planner Service Details | East-West Africa Link'
   }, [])
 
-  // Destinations are only ever chosen on the Travel Planner landing page
-  // (its "View Details" link on this card carries them here) — never
-  // re-picked on this page. Arriving with none (a bookmark or typed URL)
-  // sends the visitor back there to choose at least one.
+  // Countries are chosen here, after the service — the landing page's
+  // cards link straight through with no selection. Arriving with none is
+  // fine: the picker below waits for a pick, and the request CTA stays
+  // disabled until at least one country is chosen. Picks live in the URL
+  // query (see DestinationPicker), so the price, hero and request link all
+  // follow without leaving the page.
   const [searchParams] = useSearchParams()
   const destinationSlugs = (searchParams.get('destinations') ?? '')
     .split(',')
@@ -97,8 +82,6 @@ export function TravelPlannerServiceDetails() {
     closing,
   } = TRAVEL_PLANNER_DETAILS_PAGE
 
-  if (destinationSlugs.length === 0) return <Navigate to="/travel-planner" replace />
-
   return (
     <>
       <PlannerBackground />
@@ -111,7 +94,10 @@ export function TravelPlannerServiceDetails() {
           mark={TRAVEL_PLANNER_MARK}
         />
       ) : (
-        <PageIntro {...hero} />
+        <PageIntro
+          {...hero}
+          eyebrow={<TravelPlannerBadge countrySlugs={destinationSlugs} />}
+        />
       )}
 
       {/* Breadcrumb */}
@@ -144,27 +130,13 @@ export function TravelPlannerServiceDetails() {
                 </div>
               </Reveal>
 
-              <Reveal delay={100} className="mt-10 rounded-3xl bg-cream p-6 sm:p-8">
+              <Reveal delay={100} className="relative z-20 mt-10 rounded-3xl bg-cream p-6 sm:p-8">
                 <h2 className="text-lg font-bold text-primary">{yourDestinations.heading}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{yourDestinations.subtext}</p>
 
-                <div className="mt-6 flex flex-col items-start gap-4">
-                  <div className="flex flex-wrap gap-2">
-                    {destinationSlugs.map((slug) => (
-                      <CountryChip
-                        key={slug}
-                        slug={slug}
-                        name={COUNTRIES.find((c) => c.slug === slug)?.name}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-3xl font-bold text-primary">${price}</p>
-                  <Link
-                    to="/travel-planner"
-                    className="text-xs font-semibold text-copper hover:underline"
-                  >
-                    Change destinations
-                  </Link>
+                <div className="mt-6 flex flex-col items-start gap-5">
+                  <DestinationPicker />
+                  {price != null && <p className="text-3xl font-bold text-primary">${price}</p>}
                 </div>
               </Reveal>
 
@@ -267,10 +239,15 @@ export function TravelPlannerServiceDetails() {
 
             <PlannerSidebar
               heading={sidebar.title}
+              countrySlug={heroCountrySlug(destinationSlugs) || undefined}
               price={price}
               includesHeading="Your Travel Planner Includes"
               caption={destinationNames.length > 0 ? [destinationNames.join(', ')] : [sidebar.tagline]}
-              primaryCta={{ label: 'Start Your Request', to: requestHref }}
+              primaryCta={{
+                label: 'Start Your Request',
+                to: requestHref,
+                disabled: destinationSlugs.length === 0,
+              }}
             />
           </div>
 

@@ -4,59 +4,34 @@ import { HeroVideoBackground } from './HeroVideoBackground.jsx'
 import { Reveal } from './Reveal.jsx'
 import { useFullBleedHero } from './heroPresence.js'
 
-// Every hero's heading: large editorial serif, capped in width so longer
-// titles break onto a second line the way the reference design does
-// ("Travel & / Relocation in Ghana").
 const HEADING =
-  'max-w-[40rem] font-display text-[3rem] font-normal leading-[1.1] text-balance text-white sm:text-[3.75rem] lg:text-[4.5rem]'
+  'max-w-[42rem] font-display text-[2.75rem] font-semibold leading-[1.04] text-balance text-primary-foreground sm:text-[3.25rem] lg:text-[3.5rem]'
 
-// Heading with its accent set in italic, lighter copper — `accent` when the
-// content names one ("Africa Journey"), otherwise the heading's last word.
+// Named accent phrases occupy their own line; unnamed last words stay inline.
 export function AccentHeading({ text, accent }) {
   if (accent) {
     return (
       <>
-        {text} <em className="font-medium text-copper-light">{accent}</em>
+        {text} <em className="block font-medium text-hero-accent">{accent}</em>
       </>
     )
   }
   const split = text.lastIndexOf(' ')
-  if (split === -1) return <em className="font-medium text-copper-light">{text}</em>
+  if (split === -1) return <em className="font-medium text-hero-accent">{text}</em>
   return (
     <>
-      {text.slice(0, split)} <em className="font-medium text-copper-light">{text.slice(split + 1)}</em>
+      {text.slice(0, split)} <em className="font-medium text-hero-accent">{text.slice(split + 1)}</em>
     </>
   )
 }
 
-// A soft black haze behind one block of hero copy, so it reads over any
-// photo or video — bright or dark — without darkening the rest of the
-// backdrop. The title and the paragraph each get their own: a wide, soft
-// one behind the title, and a denser one (`strong`) behind the paragraph,
-// whose smaller text needs more contrast.
-export function Haze({ children, className = '', strong = false }) {
-  return (
-    <div className={`relative isolate ${className}`}>
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none absolute -z-10 rounded-[2.5rem] ${
-          strong
-            ? '-inset-x-6 -inset-y-5 bg-black/55 blur-xl sm:-inset-x-8'
-            : '-inset-x-8 -inset-y-5 bg-black/45 blur-2xl sm:-inset-x-12 sm:-inset-y-6'
-        }`}
-      />
-      {children}
-    </div>
-  )
+export function Haze({ children, className = '' }) {
+  return <div className={className}>{children}</div>
 }
 
-// The pill above a heading when a page has a plain text label (country or
-// service name): dark frosted glass, white text and a gold edge, so it
-// reads over any backdrop.
 export function HeroBadge({ children }) {
   return (
-    <span className="inline-flex items-center gap-2.5 rounded-full border border-gold/70 bg-black/55 py-2 pl-3.5 pr-5 text-sm font-bold uppercase tracking-[0.14em] text-white shadow-[0_6px_24px_-6px_rgba(0,0,0,0.6)] backdrop-blur-md">
-      <span className="size-2 shrink-0 rounded-full bg-gold ring-4 ring-gold/25" aria-hidden="true" />
+    <span className="hero-label-pill">
       {children}
     </span>
   )
@@ -102,7 +77,7 @@ export function DestinationHero({
   return (
     <section
       id={id}
-      className="relative isolate flex min-h-[max(100svh,600px)] items-center overflow-hidden px-6 pb-16 pt-28 text-left text-primary-foreground sm:px-10 lg:px-16"
+      className="relative isolate flex min-h-[min(100svh,760px)] items-center overflow-hidden px-6 pb-12 pt-28 text-left text-primary-foreground sm:px-10 lg:px-16"
     >
       {backgroundImage ? (
         <img
@@ -115,14 +90,12 @@ export function DestinationHero({
       ) : (
         <HeroVideoBackground videos={backgroundVideos} />
       )}
+      <div className="hero-scrim pointer-events-none absolute inset-0 z-[3]" aria-hidden="true" />
 
-      <div
-        className="relative z-[4] w-full max-w-5xl"
-        style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
-      >
+      <div className="hero-copy relative z-[4] w-full min-w-0 max-w-5xl">
         <Reveal delay={150} blur>
           <div className="max-w-3xl">
-            {eyebrow && <div className="mb-7">{eyebrow}</div>}
+            {eyebrow && <div className="mb-3">{eyebrow}</div>}
 
             <Haze className="w-fit">
               <h1 className={headingClassName ?? HEADING}>
@@ -131,7 +104,7 @@ export function DestinationHero({
             </Haze>
 
             {(tagline || description) && (
-              <Haze strong className="mt-8 max-w-[36rem]">
+              <Haze className="mt-5 max-w-[31rem]">
                 {tagline && (
                   <p className="mb-3 flex flex-wrap items-center gap-2 text-base font-bold text-primary-foreground">
                     {tagline.map((word, i) => (
@@ -147,7 +120,7 @@ export function DestinationHero({
                   </p>
                 )}
                 {description && (
-                  <p className="text-base leading-[1.7] text-primary-foreground/95 md:text-[1.0625rem]">
+                  <p className="text-sm leading-[1.5] text-primary-foreground md:text-base">
                     {description}
                   </p>
                 )}
@@ -170,9 +143,9 @@ export function DestinationHero({
                     <span className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-gold text-gold">
                       <item.icon className="size-5" strokeWidth={2.5} aria-hidden="true" />
                     </span>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-sm font-bold text-primary-foreground">{item.title}</p>
-                      <p className="text-xs text-primary-foreground/75">{item.text}</p>
+                      <p className="text-xs text-primary-foreground/75 break-words">{item.text}</p>
                     </div>
                   </div>
                 ))}
@@ -183,7 +156,7 @@ export function DestinationHero({
 
         {(primaryCta || secondaryCta) && (
           <Reveal delay={450} blur>
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-5 flex flex-wrap gap-3">
               {primaryCta && (
                 <HashLink to={primaryCta.to} className="btn-copper">
                   {primaryCta.label}
@@ -193,7 +166,7 @@ export function DestinationHero({
               {secondaryCta && (
                 <HashLink
                   to={secondaryCta.to}
-                  className="btn-outline-light bg-black/25 uppercase backdrop-blur-sm"
+                  className="btn-outline-light uppercase"
                 >
                   {secondaryCta.label}
                 </HashLink>

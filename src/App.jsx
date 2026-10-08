@@ -282,7 +282,7 @@ function App() {
     <>
       <ScrollManager />
       <Header />
-      <main>
+      <main className="overflow-x-clip">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />

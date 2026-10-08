@@ -63,13 +63,13 @@ export function SelectCountries() {
       {/* Stepper matching Image 4 */}
       <div className="border-b border-border bg-card/40">
         <div className="mx-auto max-w-4xl py-6 px-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-start justify-between">
             {steps.map((st, i) => {
               const num = i + 1
               const isDone = num === 1
               const isActive = num === 2
               return (
-                <div key={st.label} className="flex flex-1 items-center last:flex-none">
+                <div key={st.label} className="flex min-w-0 flex-1 items-start last:flex-none">
                   <div className="flex flex-col items-center text-center">
                     <span
                       className={`grid size-7 sm:size-8 shrink-0 place-items-center rounded-full text-xs font-bold ${
@@ -95,7 +95,7 @@ export function SelectCountries() {
                   </div>
                   {num < steps.length && (
                     <div
-                      className={`mx-2 sm:mx-4 -mt-5 sm:-mt-6 h-0.5 flex-1 ${
+                      className={`mx-1.5 mt-[13px] h-0.5 min-w-2 flex-1 sm:mx-4 sm:mt-[15px] ${
                         isDone ? 'bg-copper' : 'bg-border'
                       }`}
                     />
@@ -192,7 +192,7 @@ export function SelectCountries() {
                 <div className="p-5 bg-card">
                   {/* Selected countries list */}
                   <div className="border-b border-border pb-4">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <h3 className="text-sm font-bold text-primary">Your Selected Countries</h3>
                       <span className="text-xs font-semibold text-copper">
                         {selectedCount} {selectedCount === 1 ? 'country' : 'countries'} selected
@@ -208,19 +208,19 @@ export function SelectCountries() {
                             key={slug}
                             className="flex items-center justify-between rounded-xl bg-cream/70 px-3 py-2 text-xs font-medium text-primary"
                           >
-                            <div className="flex items-center gap-2.5">
+                            <div className="flex min-w-0 items-center gap-2.5">
                               <img
                                 src={FLAGS[slug]}
                                 alt=""
                                 className="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10"
                               />
-                              <span className="font-bold">{item.name}</span>
+                              <span className="min-w-0 break-words font-bold">{item.name}</span>
                             </div>
                             <button
                               type="button"
                               onClick={() => removeDestination(slug)}
                               aria-label={`Remove ${item.name}`}
-                              className="text-muted-foreground hover:text-red-600 transition-colors p-0.5"
+                              className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-copper/10 hover:text-copper"
                             >
                               <X className="size-3.5" />
                             </button>

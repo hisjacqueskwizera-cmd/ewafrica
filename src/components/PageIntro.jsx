@@ -18,6 +18,9 @@ import { DestinationHero, HeroBadge } from './DestinationHero.jsx'
  */
 export function PageIntro({
   id,
+  // Pre-built eyebrow node (e.g. the Travel Planner mark badge) — wins
+  // over `badge`/`badgeImage` when given.
+  eyebrow: eyebrowOverride,
   badge,
   badgeImage,
   badgeImageAlt,
@@ -32,15 +35,17 @@ export function PageIntro({
   backgroundImageAlt,
   backgroundVideos,
 }) {
-  const eyebrow = badgeImage ? (
-    <img
-      src={badgeImage}
-      alt={badgeImageAlt ?? badge ?? ''}
-      className="h-[67px] w-auto sm:h-[78px] lg:h-[90px]"
-    />
-  ) : badge ? (
-    <HeroBadge>{badge}</HeroBadge>
-  ) : null
+  const eyebrow =
+    eyebrowOverride ??
+    (badgeImage ? (
+      <img
+        src={badgeImage}
+        alt={badgeImageAlt ?? badge ?? ''}
+        className="h-[67px] w-auto sm:h-[78px] lg:h-[90px]"
+      />
+    ) : badge ? (
+      <HeroBadge>{badge}</HeroBadge>
+    ) : null)
 
   return (
     <DestinationHero

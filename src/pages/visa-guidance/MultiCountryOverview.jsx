@@ -256,7 +256,7 @@ export function MultiCountryOverview() {
                 <div className="p-5 bg-card">
                   {/* Selected countries list */}
                   <div className="border-b border-border pb-4">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <h3 className="text-sm font-bold text-primary">Your Selected Countries</h3>
                       <span className="text-xs font-semibold text-copper">
                         {count} countries selected
@@ -272,19 +272,19 @@ export function MultiCountryOverview() {
                             key={slug}
                             className="flex items-center justify-between rounded-xl bg-cream/70 px-3 py-2 text-xs font-medium text-primary"
                           >
-                            <div className="flex items-center gap-2.5">
+                            <div className="flex min-w-0 items-center gap-2.5">
                               <img
                                 src={FLAGS[slug]}
                                 alt=""
                                 className="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10"
                               />
-                              <span className="font-bold">{item.name}</span>
+                              <span className="min-w-0 break-words font-bold">{item.name}</span>
                             </div>
                             <button
                               type="button"
                               onClick={() => removeDestination(slug)}
                               aria-label={`Remove ${item.name}`}
-                              className="text-muted-foreground hover:text-red-600 transition-colors p-0.5"
+                              className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-copper/10 hover:text-copper"
                             >
                               <X className="size-3.5" />
                             </button>

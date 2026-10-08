@@ -126,7 +126,7 @@ export function Header() {
       {/* Three-column bar — nav / logo / contact — so the logo stays dead
           centre regardless of how much the side groups hold. */}
       <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
           {PRIMARY_NAV.map((link) => {
             if (link.label === 'Explore') {
               // A hover/focus mega-menu, CSS-driven (group-hover /
@@ -206,7 +206,7 @@ export function Header() {
 
           <button
             type="button"
-            className={`inline-flex size-10 items-center justify-center rounded-lg border transition-colors md:hidden ${
+            className={`inline-flex size-11 items-center justify-center rounded-lg border transition-colors lg:hidden ${
               solid ? 'border-border text-primary' : 'border-primary-foreground/30 text-primary-foreground'
             }`}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -219,8 +219,8 @@ export function Header() {
       </div>
 
       <div
-        className={`overflow-hidden border-t transition-[max-height] duration-300 md:hidden ${
-          menuOpen ? 'max-h-125 border-border' : 'max-h-0 border-transparent'
+        className={`overflow-y-auto border-t transition-[max-height] duration-300 lg:hidden ${
+          menuOpen ? 'max-h-[calc(100svh-84px)] border-border' : 'max-h-0 border-transparent'
         }`}
       >
         <nav className="flex flex-col gap-1 bg-card px-4 pb-4 pt-4 sm:px-6" aria-label="Mobile">

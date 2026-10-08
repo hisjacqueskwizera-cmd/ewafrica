@@ -275,7 +275,7 @@ export function HowItWorks() {
               </div>
 
               <div className="flex w-full flex-col items-center justify-center">
-                <h3 className="whitespace-nowrap text-2xl font-semibold text-primary sm:text-[28px]">
+                <h3 className="text-2xl font-semibold text-primary sm:text-[28px]">
                   {step.title}
                 </h3>
               </div>

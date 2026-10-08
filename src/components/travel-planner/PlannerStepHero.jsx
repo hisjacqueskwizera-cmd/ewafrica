@@ -46,7 +46,7 @@ export function PlannerStepHero({
       />
       <div
         className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-8 pt-28 sm:px-6 lg:px-8"
-        style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55)' }}
+        style={{ textShadow: 'var(--shadow-hero-text)' }}
       >
         {badgeImage && (
           <img

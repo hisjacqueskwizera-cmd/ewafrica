@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 export function VisaGuidanceStepper({ steps, currentStep }) {
   return (
     <div className="mx-auto w-full max-w-4xl py-6 px-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         {steps.map((step, idx) => {
           const stepNum = idx + 1
           const isDone = stepNum < currentStep
@@ -14,7 +14,7 @@ export function VisaGuidanceStepper({ steps, currentStep }) {
           const subLabel = typeof step === 'object' ? step.subLabel : null
 
           return (
-            <div key={label} className="flex flex-1 items-center last:flex-none">
+            <div key={label} className="flex min-w-0 flex-1 items-start last:flex-none">
               <div className="flex flex-col items-center gap-1.5 text-center sm:gap-2">
                 <span
                   className={`grid size-7 sm:size-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-colors ${
@@ -50,7 +50,7 @@ export function VisaGuidanceStepper({ steps, currentStep }) {
 
               {stepNum < steps.length && (
                 <div
-                  className={`mx-2 sm:mx-4 mt-[-22px] sm:mt-[-26px] h-0.5 flex-1 transition-colors ${
+                  className={`mx-1.5 mt-[13px] h-0.5 min-w-2 flex-1 transition-colors sm:mx-4 sm:mt-[15px] ${
                     isDone ? 'bg-copper' : 'bg-border'
                   }`}
                   aria-hidden="true"

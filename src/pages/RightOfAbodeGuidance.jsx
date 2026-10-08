@@ -165,6 +165,7 @@ export function RightOfAbodeGuidance() {
 
             <PlannerSidebar
               heading={sidebar.title}
+              countrySlug="ghana"
               photo="/images/services/relocation/right-of-abode-side.webp"
               photoAlt="The &quot;Door of Return&quot; sign above the arched gateway at Cape Coast Castle, Ghana"
               price={GHANA_RIGHT_OF_ABODE_FLOW.price}

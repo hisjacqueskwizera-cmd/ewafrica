@@ -14,7 +14,7 @@ export function PlannerStepper({ steps, current }) {
         const done = step < current
         const active = step === current
         return (
-          <div key={label} className="flex flex-1 items-center last:flex-none">
+          <div key={label} className="flex min-w-0 flex-1 items-start last:flex-none">
             <div className="flex flex-col items-center gap-2 text-center">
               <span
                 className={`grid size-8 shrink-0 place-items-center rounded-full text-xs font-bold sm:size-9 ${
@@ -35,7 +35,7 @@ export function PlannerStepper({ steps, current }) {
             </div>
             {step < steps.length && (
               <span
-                className={`mx-2 mt-[-18px] h-px flex-1 sm:mt-[-20px] ${
+                className={`mx-1.5 mt-4 h-px min-w-2 flex-1 sm:mx-2 sm:mt-[18px] ${
                   done ? 'bg-cocoa' : 'bg-primary-foreground/20'
                 }`}
                 aria-hidden="true"

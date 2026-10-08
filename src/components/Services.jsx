@@ -26,7 +26,14 @@ import { SectionMark } from './SectionMark.jsx'
 // AutoScrollTrack, which renders `items` twice for a seamless loop) so
 // assistive tech only ever hears each card once, and its link drops out of
 // the tab order.
-function PhotoCard({ to, image, imagePosition, hidden, children }) {
+//
+// `imageFrame` ({ scale, shift }) is for photos with words printed on them
+// that sit at a different height than "Find a Local Guide"'s: the photo is
+// drawn `scale` × the card width, centred, and pulled up by `shift` (a
+// margin-top percentage, which CSS measures against the card's *width*, so
+// the printed title lands at the same spot on every screen size). A blurred
+// copy of the same photo sits behind it to fill any space left at the bottom.
+function PhotoCard({ to, image, imagePosition, imageFrame, hidden, children }) {
   return (
     <HashLink
       to={to}
@@ -35,15 +42,47 @@ function PhotoCard({ to, image, imagePosition, hidden, children }) {
       draggable={false}
       className="group relative block h-[391px] w-64 shrink-0 overflow-hidden bg-cocoa sm:h-[434px] sm:w-72 lg:h-[calc(clamp(20rem,25vw-1rem,36rem)*4/3+50px)] lg:w-[clamp(20rem,25vw-1rem,36rem)]"
     >
-      <img
-        src={image}
-        alt=""
+      <div
+        className="absolute inset-0 overflow-hidden transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
         aria-hidden="true"
-        loading="lazy"
-        draggable={false}
-        style={imagePosition ? { objectPosition: imagePosition } : undefined}
-        className="absolute inset-0 size-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
-      />
+      >
+        {imageFrame ? (
+          <>
+            <img
+              src={image}
+              alt=""
+              loading="lazy"
+              draggable={false}
+              className="absolute inset-0 size-full scale-110 object-cover object-bottom blur-xl"
+            />
+            <img
+              src={image}
+              alt=""
+              loading="lazy"
+              draggable={false}
+              style={{
+                width: `${imageFrame.scale * 100}%`,
+                left: `${(100 - imageFrame.scale * 100) / 2}%`,
+                marginTop: imageFrame.shift,
+                // Soft bottom edge so the photo melts into its blurred fill.
+                maskImage: 'linear-gradient(to bottom, #000 82%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to bottom, #000 82%, transparent)',
+              }}
+              className="absolute top-0 block h-auto max-w-none"
+            />
+          </>
+        ) : (
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            draggable={false}
+            style={imagePosition ? { objectPosition: imagePosition } : undefined}
+            className="absolute inset-0 size-full object-cover"
+          />
+        )}
+      </div>
+
       <div
         className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent"
         aria-hidden="true"
@@ -92,7 +131,7 @@ function CardReveal({
 
 function ServiceCard({ s, hidden }) {
   return (
-    <PhotoCard to={s.to} image={s.image} imagePosition={s.imagePosition} hidden={hidden}>
+    <PhotoCard to={s.to} image={s.image} imagePosition={s.imagePosition} imageFrame={s.imageFrame} hidden={hidden}>
       <CardTitle className="text-2xl font-semibold text-primary-foreground">{s.title}</CardTitle>
       <CardReveal>
         <p className="pt-2 text-sm leading-relaxed text-primary-foreground/80">{s.description}</p>
@@ -107,7 +146,7 @@ function ServiceCard({ s, hidden }) {
 
 function UmbrellaCard({ hidden }) {
   return (
-    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/images/home/services/travel-planner.webp" hidden={hidden}>
+    <PhotoCard to={TRAVEL_PLANNER_UMBRELLA.to} image="/images/home/services/travel-planner.webp" imageFrame={TRAVEL_PLANNER_UMBRELLA.imageFrame} hidden={hidden}>
       <Umbrella className="size-6 text-gold" aria-hidden="true" />
       <CardTitle className="mt-3 text-2xl font-semibold leading-snug text-primary-foreground">
         {TRAVEL_PLANNER_UMBRELLA.title}

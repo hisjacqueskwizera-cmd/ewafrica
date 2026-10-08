@@ -2,7 +2,7 @@ import { Plus, Trash2, Upload } from 'lucide-react'
 import { Reveal } from '../Reveal.jsx'
 
 export const inputClass =
-  'w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-primary placeholder:text-muted-foreground/70 focus-visible:outline-2 focus-visible:outline-copper'
+  'min-h-11 w-full min-w-0 rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-primary placeholder:text-muted-foreground/70 focus-visible:outline-2 focus-visible:outline-copper'
 
 /** One numbered card per step, matching the site's existing request-form look. */
 export function SectionCard({ title, subtitle, children }) {
@@ -73,9 +73,9 @@ export function Select({ value, onChange, options, placeholder = 'Select…' }) 
 
 export function RadioGroup({ name, value, onChange, options }) {
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2">
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
       {options.map((opt) => (
-        <label key={opt} className="flex items-center gap-2 text-sm text-primary">
+        <label key={opt} className="flex min-h-11 items-center gap-2 text-sm text-primary sm:min-h-0">
           <input
             type="radio"
             name={name}
@@ -98,7 +98,7 @@ export function CheckboxGroup({ value = [], onChange, options }) {
   return (
     <div className="grid gap-2 sm:grid-cols-2">
       {options.map((opt) => (
-        <label key={opt} className="flex items-center gap-2 text-sm text-primary">
+        <label key={opt} className="flex min-h-11 items-center gap-2 text-sm text-primary sm:min-h-0">
           <input
             type="checkbox"
             checked={value.includes(opt)}
@@ -219,7 +219,7 @@ export function RepeatableGroup({ entries, onChange, max, emptyEntry, min = 1, r
               <button
                 type="button"
                 onClick={() => removeEntry(i)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-red-700"
+                className="inline-flex min-h-11 items-center gap-1 rounded-lg px-2 text-xs font-semibold text-muted-foreground hover:bg-copper/10 hover:text-copper"
               >
                 <Trash2 className="size-3.5" aria-hidden="true" />
                 Remove
@@ -235,7 +235,7 @@ export function RepeatableGroup({ entries, onChange, max, emptyEntry, min = 1, r
         <button
           type="button"
           onClick={addEntry}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-copper hover:underline"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-semibold text-copper hover:underline"
         >
           <Plus className="size-4" aria-hidden="true" />
           Add another

@@ -18,11 +18,12 @@ import {
   TRAVEL_AUDIT_PAGE,
   priceForTravelAudit,
 } from '../data/siteContent.js'
-import { heroCountrySlug } from '../data/countryHeroes.js'
-import { CountryServiceHero } from '../components/CountryServiceHero.jsx'
+import { heroCountrySlug, TRAVEL_PLANNER_MARK } from '../data/countryHeroes.js'
+import { CountryServiceHero, TravelPlannerBadge } from '../components/CountryServiceHero.jsx'
 import { PageIntro } from '../components/PageIntro.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { WhatsAppIcon } from '../components/social-icons.jsx'
+import { DestinationPicker } from '../components/travel-planner/DestinationPicker.jsx'
 import { PlannerBackground } from '../components/travel-planner/PlannerBackground.jsx'
 import { PlannerSidebar } from '../components/travel-planner/PlannerSidebar.jsx'
 
@@ -33,11 +34,11 @@ export function TravelAudit() {
     document.title = 'Travel Audit | East-West Africa Link'
   }, [])
 
-  // Carried over from the Travel Planner landing page's picker (its "View
-  // Details" link on this service's card) — never re-picked here, only
-  // forwarded on to the request step. See RequestForm for what happens
-  // when nothing was carried over: it asks inline instead of leaving the
-  // visitor stuck with no way to price the service.
+  // Countries are chosen here, after the service — the landing page's
+  // cards link straight through with no selection. Picks live in the URL
+  // query (see DestinationPicker), so the price, hero and request link all
+  // follow without leaving the page; the request CTA stays disabled until
+  // at least one country is chosen.
   const [searchParams] = useSearchParams()
   const destinationSlugs = (searchParams.get('destinations') ?? '')
     .split(',')
@@ -67,12 +68,21 @@ export function TravelAudit() {
     <>
       <PlannerBackground />
       {/* For one country, that country's own hero with this page's copy
-          (see CountryServiceHero) — its badge just the country's name and
-          flag, no service label; for several, this page's own hero. */}
+          (see CountryServiceHero) — the same Travel Planner mark + country
+          badge as the Travel Planner's service-details hero; for several,
+          this page's own hero. */}
       {heroCountrySlug(destinationSlugs) ? (
-        <CountryServiceHero slug={heroCountrySlug(destinationSlugs)} pageHero={hero} label={null} />
+        <CountryServiceHero
+          slug={heroCountrySlug(destinationSlugs)}
+          pageHero={hero}
+          label={null}
+          mark={TRAVEL_PLANNER_MARK}
+        />
       ) : (
-        <PageIntro {...hero} />
+        <PageIntro
+          {...hero}
+          eyebrow={<TravelPlannerBadge countrySlugs={destinationSlugs} />}
+        />
       )}
 
       {/* Breadcrumb */}
@@ -102,6 +112,18 @@ export function TravelAudit() {
                   {intro.paragraphs.map((p) => (
                     <p key={p}>{p}</p>
                   ))}
+                </div>
+              </Reveal>
+
+              {/* Choose your destinations — picked here, after the service. */}
+              <Reveal delay={100} className="relative z-20 mt-10 rounded-3xl bg-cream p-6 sm:p-8">
+                <h2 className="text-lg font-bold text-primary">Your Destination(s)</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Select one or more countries — up to 4.
+                </p>
+                <div className="mt-6 flex flex-col items-start gap-5">
+                  <DestinationPicker />
+                  {price != null && <p className="text-3xl font-bold text-primary">${price}</p>}
                 </div>
               </Reveal>
 
@@ -207,11 +229,16 @@ export function TravelAudit() {
 
             <PlannerSidebar
               heading={sidebar.title}
+              countrySlug={heroCountrySlug(destinationSlugs) || undefined}
               price={price}
               includes={TRAVEL_AUDIT_FLOW.includes}
               includesHeading={sidebar.tagline}
               caption={destinationNames.length > 0 ? [destinationNames.join(', ')] : [sidebar.tagline]}
-              primaryCta={{ label: 'Start Your Request', to: requestHref }}
+              primaryCta={{
+                label: 'Start Your Request',
+                to: requestHref,
+                disabled: destinationSlugs.length === 0,
+              }}
             />
           </div>
 

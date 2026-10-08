@@ -118,8 +118,8 @@ export function PhotoGallerySection({
       {variant === 'single' && <SingleLayout tiles={tiles} onOpenAt={setLightboxIndex} />}
 
       {variant === 'mosaic' && extraTiles?.length > 0 && (
-        <div className="mx-auto mt-px w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
-          <div className={`grid gap-px ${extraTiles.length > 1 ? 'sm:grid-cols-2' : ''}`}>
+        <div className="mx-auto mt-3 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
+          <div className={`grid gap-3 ${extraTiles.length > 1 ? 'sm:grid-cols-2' : ''}`}>
             {extraTiles.map((tile, index) => (
               <Reveal key={tile.src} once={false} delay={450 + index * 100} className="group">
                 <GalleryTile
@@ -175,7 +175,7 @@ function MosaicLayout({ tiles, onOpenAt }) {
 
   return (
     <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
-      <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Reveal once={false} big className="group sm:col-span-2" from="left">
           <GalleryTile {...feature} onOpen={() => onOpenAt(0)} className={TILE_HEIGHT} />
         </Reveal>
@@ -201,7 +201,7 @@ function DuoLayout({ tiles, onOpenAt }) {
 
   return (
     <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[80%]">
-      <div className="grid gap-px sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2">
         <Reveal once={false} big className="group" from="left">
           <GalleryTile {...hero} onOpen={() => onOpenAt(0)} className={duoHeight} />
         </Reveal>

@@ -84,7 +84,7 @@ function TanzaniaGallery() {
         </Reveal>
       </div>
 
-      <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]">
+      <div className="mx-auto mt-10 w-[96%] max-w-none sm:w-[92%] lg:w-[88%] xl:w-[85%]"> 
         <div className="grid gap-3">
           {/* Same fixed tile height as every other gallery (see
               GALLERY_TILE_HEIGHT): the feature is wide rather than tall, and

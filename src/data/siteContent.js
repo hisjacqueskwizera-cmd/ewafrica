@@ -3373,7 +3373,7 @@ export const TOUR_GUIDE_PAGES = {
     guideRecruit: {
       eyebrow: 'Join Our Independent Guide Network',
       description:
-        'East-West Africa Link is building a network of experienced independent tour guides. If you have at least three years of professional guiding experience and meet applicable local licensing or registration requirements, we invite you to apply.',
+        'Are You a Professional Tour Guide or Local Tour Company in Zanzibar?\nEast-West Africa Link is building a selective network of experienced local tourism professionals. We welcome applications from qualified independent tour guides as well as established local tour companies or tour operators that work with experienced professional guides.',
       requirements: ["3+ Years' Experience", 'Strong Local Knowledge', 'Professional References'],
       cta: 'Apply to Join Our Guide Network',
       subtext: 'Applications are reviewed individually. Submission does not guarantee acceptance or customer referrals.',

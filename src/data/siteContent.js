@@ -1257,6 +1257,18 @@ export const RWANDA_PAGE = {
       ],
       image: '/images/services/border-crossing/rwanda.webp',
     },
+    {
+      icon: 'Users',
+      title: 'Independent Tour Guides',
+      text: 'Connect with trusted local guides to explore Rwanda with local insight, better context, and a more personal travel experience.',
+      items: [
+        'Local guide matching',
+        'Culture and heritage insight',
+        'Wildlife and nature experiences',
+        'Private guidance for your trip',
+      ],
+      image: '/images/countries/rwanda.webp',
+    },
   ],
   routes: [
     {
@@ -3023,6 +3035,12 @@ export const TOUR_GUIDE_LANDING_PAGE = {
       description: 'From wildlife adventures to island escapes, explore with a local guide.',
       image: '/images/services/tour-guides/find-a-local-guide-tanzania.webp',
     },
+    {
+      slug: 'rwanda',
+      label: 'Rwanda',
+      description: 'Experience mountains, wildlife, and unforgettable culture with a local guide.',
+      image: '/images/countries/rwanda.webp',
+    },
   ],
   comingSoon: {
     heading: 'Our Guide Network is Coming Soon',
@@ -3113,6 +3131,85 @@ export const TOUR_GUIDE_PAGES = {
       body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
       cta: 'Contact Us for Updates',
       subtext: 'Be the first to know when our Ghana Guide Match service is available.',
+    },
+    guideRecruit: {
+      eyebrow: 'Join Our Independent Guide Network',
+      description:
+        'East-West Africa Link is building a network of experienced independent tour guides. If you have at least three years of professional guiding experience and meet applicable local licensing or registration requirements, we invite you to apply.',
+      requirements: ["3+ Years' Experience", 'Strong Local Knowledge', 'Professional References'],
+      cta: 'Apply to Join Our Guide Network',
+      subtext: 'Applications are reviewed individually. Submission does not guarantee acceptance or customer referrals.',
+    },
+  },
+  rwanda: {
+    countryLabel: 'Rwanda',
+    hero: {
+      badge: 'Independent Tour Guides',
+      titleLine1: 'Find a Local Guide',
+      titleAccent: 'in Rwanda',
+      tagline: ['Local People. Deeper Experiences.'],
+      description:
+        'From mountain gorillas to vibrant cities and lakeside communities, explore Rwanda with a trusted independent local guide.',
+      backgroundImage: '/images/countries/rwanda.webp',
+      backgroundImageAlt: 'Rolling hills and lake views in Rwanda',
+    },
+    stats: [
+      { icon: 'Landmark', title: 'Rich Culture', text: 'Living Heritage' },
+      { icon: 'Leaf', title: 'Wildlife', text: 'Meaningful Encounters' },
+      { icon: 'Palmtree', title: 'Beautiful Landscapes', text: 'Scenic Adventures' },
+      { icon: 'Users', title: 'Local Guides', text: 'A Deeper Rwanda' },
+    ],
+    intro: {
+      eyebrow: 'Independent Guide Network in Development',
+      heading:
+        'We are currently building and vetting our network of independent local guides in Rwanda.',
+      body: "Our goal is to connect travelers with experienced local guides who offer strong local knowledge, reliable communication, professionalism, and a deeper understanding of Rwanda's history, culture, communities, and everyday life.",
+      image: '/images/countries/rwanda.webp',
+      imageAlt: 'A scenic landscape view across Rwanda',
+    },
+    offer: {
+      heading: 'What the Service Will Offer',
+      intro:
+        'When available, our Guide Match service will help connect travelers with independent local guides based on their interests and the type of experience you are looking for.',
+      lead: 'The service may include:',
+      items: [
+        { icon: 'Users', text: 'Local guide matching based on your interests' },
+        { icon: 'Landmark', text: 'City and heritage experiences' },
+        { icon: 'Leaf', text: 'Nature, parks, and wildlife experiences' },
+        { icon: 'Store', text: 'Local markets, food, and communities' },
+        { icon: 'Waves', text: 'Lake and countryside experiences' },
+        { icon: 'Handshake', text: 'Community-based and responsible travel' },
+        { icon: 'ClipboardCheck', text: 'Guide profiles to review before deciding whether to proceed' },
+      ],
+    },
+    vetting: {
+      heading: 'Our Vetting Approach',
+      intro: 'Guides considered for the East-West Africa Link network are reviewed for:',
+      items: [
+        'Relevant guiding experience',
+        'Local knowledge',
+        'Communication skills',
+        'Professionalism and reliability',
+        'References',
+        'Understanding of independent travelers and their needs',
+        'English language ability and familiarity with international travelers',
+        'Compliance with applicable government requirements, including licenses, permits, registrations, or other credentials where required',
+      ],
+    },
+    howItWorks: {
+      heading: 'How Guide Match Will Work',
+      paragraphs: [
+        'When the service becomes available, you will tell us what you would like to experience in Rwanda and the type of guide you are looking for.',
+        'We will then identify suitable independent guides from our network and provide you with matching options.',
+      ],
+      feeNoteLead: 'The East-West Africa Link Guide Match fee is',
+      feeNoteRest: "separate from the guide's own guiding fee. The guide's fee will be agreed separately.",
+    },
+    comingSoon: {
+      title: 'Our Rwanda Guide Match service is currently in development.',
+      body: 'Guide profiles and the full request process will be added as our vetted guide network becomes available.',
+      cta: 'Contact Us for Updates',
+      subtext: 'Be the first to know when our Rwanda Guide Match service is available.',
     },
     guideRecruit: {
       eyebrow: 'Join Our Independent Guide Network',

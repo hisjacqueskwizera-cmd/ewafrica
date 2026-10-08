@@ -80,7 +80,7 @@ export function Rwanda() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service, i) => {
               const Icon = ICONS[service.icon]
               return (
@@ -139,7 +139,9 @@ export function Rwanda() {
                               ? '/travel-planner/border-crossing-guide?from=rwanda'
                               : service.title === 'Personal Visa Guidance'
                                 ? '/personal-visa-guidance/rwanda'
-                                : '/#contact'
+                                : service.title === 'Independent Tour Guides'
+                                  ? '/independent-tour-guide/rwanda'
+                                  : '/#contact'
                         }
                         className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-cocoa px-4 py-2.5 text-sm font-semibold text-primary-foreground after:absolute after:inset-0 after:z-20"
                       >

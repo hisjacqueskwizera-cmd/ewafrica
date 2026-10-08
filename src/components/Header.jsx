@@ -13,9 +13,8 @@ import { WhatsAppIcon } from './social-icons.jsx'
 // drops out of the desktop row (the CTA is the contact path) while the
 // mobile panel still lists everything for full discoverability. Home stays
 // in the desktop row, ahead of Explore, as an explicit link alongside the logo.
-const PRIMARY_NAV = NAV_LINKS.filter((link) => !['Contact', 'Find A Guide', 'Travel Planner', 'About Us'].includes(link.label))
-const LEADING_NAV = NAV_LINKS.filter((link) => link.label === 'Find A Guide')
-const AFTER_LOGO_NAV = NAV_LINKS.filter((link) => ['Travel Planner', 'About Us'].includes(link.label))
+const LEFT_OF_LOGO_NAV = NAV_LINKS.filter((link) => ['Home', 'Explore', 'Ghana', 'Find A Guide'].includes(link.label))
+const RIGHT_OF_LOGO_NAV = NAV_LINKS.filter((link) => ['Travel Planner', 'About Us'].includes(link.label))
 
 // A small, balanced sample for the Explore mega-menu — two west, two east —
 // rather than just the first four in COUNTRIES, which would skew east.
@@ -127,60 +126,40 @@ export function Header() {
 
       {/* Three-column bar — nav / logo / contact — so the logo stays dead
           centre regardless of how much the side groups hold. */}
-      <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_auto_1fr] items-center justify-items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
-          {PRIMARY_NAV.map((link) => {
-            if (link.label === 'Explore') {
-              // A hover/focus mega-menu, CSS-driven (group-hover /
-              // group-focus-within) rather than React state — the trigger
-              // and its panel share one group, and the panel sits flush
-              // against the header's bottom edge with no gap, so the
-              // pointer never has to cross empty space between them.
-              return (
-                <div
-                  key={link.label}
-                  className="group relative"
-                  onMouseLeave={() => setExploreForceClosed(false)}
-                >
-                  <HashLink
-                    to={link.to}
-                    className={navLinkClass(link)}
-                    // Clicking the trigger itself (it navigates to /explore)
-                    // snaps the panel shut too, same as clicking a card in it.
-                    onClick={(event) => {
-                      setExploreForceClosed(true)
-                      event.currentTarget.blur()
-                    }}
+      <div className="mx-auto grid h-[84px] max-w-7xl grid-cols-[1fr_auto_auto_1fr] items-center justify-items-center gap-7 px-4 sm:px-6 lg:px-8">
+        <div className="col-start-2 hidden items-center justify-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Left of logo links">
+            {LEFT_OF_LOGO_NAV.map((link) => {
+              if (link.label === 'Explore') {
+                return (
+                  <div
+                    key={link.label}
+                    className="group relative"
+                    onMouseLeave={() => setExploreForceClosed(false)}
                   >
-                    {link.label}
-                  </HashLink>
-                  <ExploreMenu
-                    countries={EXPLORE_MENU_COUNTRIES}
-                    forceClosed={exploreForceClosed}
-                    onNavigate={(event) => {
-                      setExploreForceClosed(true)
-                      event.currentTarget.blur()
-                    }}
-                  />
-                </div>
-              )
-            }
-            return link.isRoute ? (
-              <Link key={link.label} to={link.to} className={navLinkClass(link)}>
-                {link.label}
-              </Link>
-            ) : (
-              <HashLink key={link.label} to={link.to} className={navLinkClass(link)}>
-                {link.label}
-              </HashLink>
-            )
-          })}
-        </nav>
+                    <HashLink
+                      to={link.to}
+                      className={navLinkClass(link)}
+                      onClick={(event) => {
+                        setExploreForceClosed(true)
+                        event.currentTarget.blur()
+                      }}
+                    >
+                      {link.label}
+                    </HashLink>
+                    <ExploreMenu
+                      countries={EXPLORE_MENU_COUNTRIES}
+                      forceClosed={exploreForceClosed}
+                      onNavigate={(event) => {
+                        setExploreForceClosed(true)
+                        event.currentTarget.blur()
+                      }}
+                    />
+                  </div>
+                )
+              }
 
-        <div className="col-start-2 hidden items-center justify-center gap-6 lg:flex">
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Leading links">
-            {LEADING_NAV.map((link) =>
-              link.isRoute ? (
+              return link.isRoute ? (
                 <Link key={link.label} to={link.to} className={navLinkClass(link)}>
                   {link.label}
                 </Link>
@@ -188,8 +167,8 @@ export function Header() {
                 <HashLink key={link.label} to={link.to} className={navLinkClass(link)}>
                   {link.label}
                 </HashLink>
-              ),
-            )}
+              )
+            })}
           </nav>
 
           <Link to="/" className="flex shrink-0 items-center justify-self-center" aria-label="East-West Africa Link home">
@@ -200,8 +179,8 @@ export function Header() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="After logo links">
-            {AFTER_LOGO_NAV.map((link) =>
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Right of logo links">
+            {RIGHT_OF_LOGO_NAV.map((link) =>
               link.isRoute ? (
                 <Link key={link.label} to={link.to} className={navLinkClass(link)}>
                   {link.label}

@@ -78,7 +78,7 @@ export function FeaturedGhana() {
                   </span>
                   <div className="min-w-0">
                     <h3 className="text-sm font-bold text-primary-foreground">{f.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-primary-foreground/65">
+                    <p className="mt-1 text-xs leading-relaxed text-primary-foreground/100">
                       {f.text}
                     </p>
                   </div>

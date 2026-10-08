@@ -80,7 +80,7 @@ export function IndependentTourGuideCountry() {
                 {intro.body}
               </p>
               <HashLink to={`/independent-tour-guide/${slug}/apply`} className="btn-copper mt-6">
-                Become a Tour Guide
+                Join Our Guide Network
               </HashLink>
             </Reveal>
             <Reveal delay={100}>

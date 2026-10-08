@@ -10,6 +10,7 @@ export function makeDefaultApplication(primaryCountry = '') {
   return {
     // Step 1 — Applicant information
     fullLegalName: '',
+    applicantType: '',
     businessName: '',
     isAdult: '',
     nationality: '',

@@ -38,6 +38,7 @@ export function Step1ApplicantInfo({ onNext }) {
     }
     const next = {}
     if (!data.fullLegalName.trim()) next.fullLegalName = 'Full legal name is required.'
+    if (!data.applicantType) next.applicantType = 'Please select the type of applicant.'
     if (!data.isAdult) next.isAdult = 'Please confirm you are at least 18 years old.'
     if (!data.nationality.trim()) next.nationality = 'Nationality is required.'
     if (!data.countryOfResidence) next.countryOfResidence = 'Country of residence is required.'
@@ -54,6 +55,14 @@ export function Step1ApplicantInfo({ onNext }) {
       <SectionCard title="Identity">
         <Field label="Full legal name" required error={errors.fullLegalName}>
           <TextInput value={data.fullLegalName} onChange={(v) => update({ fullLegalName: v })} />
+        </Field>
+        <Field label="I am applying as:" required error={errors.applicantType}>
+          <RadioGroup
+            name="applicantType"
+            value={data.applicantType}
+            onChange={(v) => update({ applicantType: v })}
+            options={['Independent Tour Guide', 'Tour Company / Tour Operator']}
+          />
         </Field>
         <Field label="Professional or business name" hint="Optional">
           <TextInput value={data.businessName} onChange={(v) => update({ businessName: v })} />

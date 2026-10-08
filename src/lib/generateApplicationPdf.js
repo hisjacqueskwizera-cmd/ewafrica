@@ -38,6 +38,7 @@ export function buildApplicationSections(data) {
       title: '1. Applicant Information',
       rows: [
         ['Full legal name', yn(data.fullLegalName)],
+        ['I am applying as', yn(data.applicantType)],
         ['Professional or business name', yn(data.businessName)],
         ['At least 18 years old', yn(data.isAdult)],
         ['Nationality', yn(data.nationality)],
@@ -184,6 +185,7 @@ function buildPdfParts(data) {
       title: 'PART 1 — APPLICANT INFORMATION',
       rows: [
         ['Full Legal Name', yn(data.fullLegalName)],
+        ['I am applying as', yn(data.applicantType)],
         ['Professional/Business Name', yn(data.businessName)],
         ['At least 18 years old', yn(data.isAdult)],
         ['Nationality', yn(data.nationality)],

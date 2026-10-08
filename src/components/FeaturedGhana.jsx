@@ -19,7 +19,7 @@ const ICONS = {
 // photo pinned to a narrow side column.
 export function FeaturedGhana() {
   return (
-    <section className="relative overflow-hidden bg-cocoa text-primary-foreground">
+    <section className="relative h-[600px] overflow-hidden bg-cocoa text-primary-foreground">
       <Reveal big className="absolute inset-0">
         <img
           src="/images/ghana/ghana-featured.webp"
@@ -37,7 +37,7 @@ export function FeaturedGhana() {
           visible with reduced opacity, keeping the content readable. */}
       
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div className="relative mx-auto flex h-full max-w-7xl items-center px-4 py-4 sm:px-6 lg:px-8">
         <div className="lg:max-w-xl">
           <Reveal>
             <SectionMark light />
@@ -62,21 +62,9 @@ export function FeaturedGhana() {
             </h2>
           </Reveal>
 
-          <Reveal delay={150} className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed text-primary-foreground/80 sm:text-base">
+          <Reveal delay={150} className="mt-5 max-w-xl text-sm leading-relaxed text-primary-foreground/80 sm:text-base">
             <p>
-              Ghana is one of West Africa's most welcoming and culturally rich destinations,
-              where vibrant cities, historic coastal towns, beautiful beaches, traditional
-              communities, and a powerful sense of heritage come together.
-            </p>
-            <p>
-              Explore the energy of Accra, the history of Cape Coast and Elmina, the beauty
-              of Ghana's coastline and countryside, and the traditions that make the country
-              such a distinctive place to visit, live, and explore new opportunities.
-            </p>
-            <p>
-              For many travelers especially members of the African diaspora Ghana offers
-              something deeper: a chance to reconnect with history and heritage, build
-              meaningful connections, and experience West Africa in a more personal way.
+              Discover Ghana's coastal towns, vibrant cities, and rich cultural heritage—with practical guidance for your visit or a longer stay.
             </p>
           </Reveal>
 
